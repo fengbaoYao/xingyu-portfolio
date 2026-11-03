@@ -15,6 +15,7 @@
   <!-- Favicon: 头像版（黑底正脸点云），多尺寸 PNG / ICO 兜底 -->
 
   <link rel="icon" type="image/png" href="portfolio-assets/portrait.png" />
+  <link rel="preload" as="image" href="portfolio-assets/portrait-work-point-cloud-loose-v2.webp" type="image/webp" fetchpriority="high" />
   <!-- Fonts -->
   <link rel="dns-prefetch" href="https://fengbaoyao.github.io">
   <link rel="preconnect" href="https://fengbaoyao.github.io" crossorigin>
@@ -8753,7 +8754,38 @@ function Hero(_ref6) {
       return obs.disconnect();
     };
   }, []);
-  var portraits = ["portfolio-assets/portrait.png", "portfolio-assets/portrait-point-cloud-original-face-v6.png"];
+  var portraits = ["portfolio-assets/portrait-work-point-cloud-loose-v2.webp", "portfolio-assets/portrait-point-cloud-original-face-v6.webp"];
+  // Prefetch suit portrait on idle / first hover so click swap is instant
+  var suitPrefetchRef = useRef(false);
+  var prefetchSuitPortrait = function prefetchSuitPortrait() {
+    if (suitPrefetchRef.current || !portraits[1]) return;
+    suitPrefetchRef.current = true;
+    try {
+      var link = document.createElement("link");
+      link.rel = "prefetch";
+      link.as = "image";
+      link.href = portraits[1];
+      document.head.appendChild(link);
+    } catch (e) {}
+    try {
+      var img = new Image();
+      img.decoding = "async";
+      img.src = portraits[1];
+    } catch (e2) {}
+  };
+  useEffect(function () {
+    var idleId = null;
+    var timerId = null;
+    if (typeof requestIdleCallback === "function") {
+      idleId = requestIdleCallback(function () { prefetchSuitPortrait(); }, { timeout: 2500 });
+    } else {
+      timerId = setTimeout(prefetchSuitPortrait, 1200);
+    }
+    return function () {
+      if (idleId != null && typeof cancelIdleCallback === "function") cancelIdleCallback(idleId);
+      if (timerId != null) clearTimeout(timerId);
+    };
+  }, []);
   var togglePortrait = function togglePortrait() {
     return setPortraitView(function (v) {
       return (v + 1) % portraits.length;
@@ -8988,6 +9020,8 @@ function Hero(_ref6) {
     ref: portraitRef,
     onMouseMove: onPortraitMove,
     onMouseLeave: onPortraitLeave,
+    onMouseEnter: prefetchSuitPortrait,
+    onTouchStart: prefetchSuitPortrait,
     className: "portrait-fig col-span-12 lg:col-span-4 lg:self-end relative",
     style: {
       width: "100%",
@@ -8996,11 +9030,11 @@ function Hero(_ref6) {
     }
   }, /*#__PURE__*/React.createElement("img", {
     src: portraits[portraitView],
-    alt: portraitView === 0 ? "星宇日常正面肖像" : "星宇西装正装肖像",
+    alt: portraitView === 0 ? "星宇生活场景桌前肖像" : "星宇西装正装肖像",
     onClick: togglePortrait,
     role: "button",
     tabIndex: 0,
-    "aria-label": portraitView === 0 ? "切换到西装正装" : "切换到日常正面",
+    "aria-label": portraitView === 0 ? "切换到西装正装" : "切换到生活场景桌前",
     onKeyDown: function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePortrait(); } },
     "data-cur": "link",
     "data-curlabel": "CLICK",
