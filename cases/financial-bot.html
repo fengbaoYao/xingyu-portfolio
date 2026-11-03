@@ -5,15 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Financial Bot · Case</title>
   <style>
-    :root { color-scheme: dark; font-family: "Noto Sans SC", system-ui, sans-serif; }
-    body { margin: 0; background: #0b0d10; color: #e8eaed; line-height: 1.6; }
+    :root { color-scheme: light; --bg:#f7f6f1; --fg:#252621; --muted:#777870; --line:#d8d8d0; --accent:#173e37; --teal:#0f8a7b; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: "PingFang SC","Noto Sans SC",sans-serif; line-height: 1.65; }
     main { max-width: 760px; margin: 0 auto; padding: 48px 20px 80px; }
-    a { color: #6ea8fe; }
-    .back { color: #9aa3b2; text-decoration: none; }
-    h1 { letter-spacing: -0.02em; }
-    .cta { display: inline-block; margin-top: 18px; padding: 12px 16px; border-radius: 10px; background: #6ea8fe; color: #081018; font-weight: 600; text-decoration: none; }
-    .meta { color: #9aa3b2; font-size: 14px; }
-    ul { padding-left: 1.2em; }
+    a { color: var(--teal); }
+    .back { color: var(--muted); text-decoration: none; }
+    .back:hover { color: var(--accent); }
+    h1 { letter-spacing: -0.03em; font-weight: 600; font-size: clamp(32px,5vw,44px); line-height: 1.15; }
+    .cta { display: inline-flex; gap: 10px; align-items: center; margin-top: 22px; padding: 12px 18px; border-radius: 8px; background: var(--accent); color: #fbfaf6; font-weight: 600; text-decoration: none; }
+    .cta:hover { background: var(--teal); }
+    .meta { color: var(--muted); font-size: 14px; }
+    ul { padding-left: 1.2em; color: #52534e; }
+    .note { margin-top: 28px; padding: 16px 18px; background: #efeee8; border: 1px solid var(--line); border-radius: 10px; font-size: 14px; color: var(--muted); }
   </style>
 </head>
 <body>
@@ -21,13 +25,14 @@
     <p><a class="back" href="../index.html">← 作品集</a></p>
     <p class="meta">AI · 金融研究助手 · 公开展示</p>
     <h1>Financial Bot</h1>
-    <p>把不可靠的 Agent 做成可信研究工具：回答暴露来源、缺口与能否行动。前端静态托管在 GitHub Pages，API 跑在硅谷服务器。</p>
+    <p>把不可靠的 Agent 做成可信研究工具：回答暴露来源、缺口与能否行动。产品层级与本地一致：主页 → 使用（/bot） / 经典研究台（/work）。</p>
     <ul>
-      <li>主路径：对话式研究（Quick）；Deep 公测暂停</li>
-      <li>架构：Pages 静态壳 → Cloudflare Tunnel → 硅谷 FastAPI</li>
-      <li>CORS 仅允许 <code>fengbaoyao.github.io</code></li>
+      <li>入口也放在 FinSearch-X 案例页全景图右下</li>
+      <li>GitHub Pages 托管产品主页；完整工作台优先走硅谷 Next 前端</li>
+      <li>API：硅谷 VM + Cloudflare Tunnel；CORS 允许 fengbaoyao.github.io</li>
     </ul>
-    <a class="cta" href="https://fengbaoyao.github.io/financial-bot/">打开 Financial Bot</a>
+    <a class="cta" href="https://fengbaoyao.github.io/financial-bot/">打开 Financial Bot 主页</a>
+    <p class="note">FinSearch-X 是早期财报证据探索；Financial Bot 是当前演进的研究工作台产品。</p>
   </main>
 </body>
 </html>
