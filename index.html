@@ -16,6 +16,8 @@
 
   <link rel="icon" type="image/png" href="portfolio-assets/portrait.png" />
   <!-- Fonts -->
+  <link rel="dns-prefetch" href="https://fengbaoyao.github.io">
+  <link rel="preconnect" href="https://fengbaoyao.github.io" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -8751,7 +8753,7 @@ function Hero(_ref6) {
       return obs.disconnect();
     };
   }, []);
-  var portraits = ["portfolio-assets/portrait-point-cloud-original-face-v6.png", "portfolio-assets/portrait-work-point-cloud-loose-v2.png"];
+  var portraits = ["portfolio-assets/portrait.png", "portfolio-assets/portrait-point-cloud-original-face-v6.png"];
   var togglePortrait = function togglePortrait() {
     return setPortraitView(function (v) {
       return (v + 1) % portraits.length;
@@ -8994,11 +8996,11 @@ function Hero(_ref6) {
     }
   }, /*#__PURE__*/React.createElement("img", {
     src: portraits[portraitView],
-    alt: portraitView === 0 ? "星宇的点云风格肖像" : "星宇坐在电脑桌前的点云场景",
+    alt: portraitView === 0 ? "星宇日常正面肖像" : "星宇西装正装肖像",
     onClick: togglePortrait,
     role: "button",
     tabIndex: 0,
-    "aria-label": portraitView === 0 ? "切换到工作场景人像" : "切换到正面人像",
+    "aria-label": portraitView === 0 ? "切换到西装正装" : "切换到日常正面",
     onKeyDown: function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePortrait(); } },
     "data-cur": "link",
     "data-curlabel": "CLICK",
