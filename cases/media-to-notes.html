@@ -1,3 +1,367 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Media to Notes — 星宇的项目案例</title><style>
 :root{color-scheme:light;--bg:#f7f6f1;--fg:#252621;--muted:#777870;--line:#d8d8d0;--accent:#698d63;--surface:#efeee8}*{box-sizing:border-box}html{scroll-behavior:smooth;scrollbar-width:none}html::-webkit-scrollbar{display:none}body{margin:0;background:var(--bg);color:var(--fg);font-family:"PingFang SC","Noto Sans SC",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit}a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}.wrap{width:min(1180px,calc(100% - 80px));margin:auto}.bar{display:flex;justify-content:space-between;align-items:center;height:88px;border-bottom:1px solid var(--line);font:11px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}.brand{text-decoration:none}.brand:before{content:'●';color:var(--accent);margin-right:8px}.back{text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}.hero{padding:95px 0 65px}.eyebrow,.num,.label{font:11px ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}h1,h2,h3,p{margin:0}.hero h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(48px,8vw,96px);font-weight:400;letter-spacing:-.045em;line-height:1.02;margin:30px 0 22px}.hero h1 em{font-weight:400;color:var(--accent)}.lead{font-size:clamp(19px,2.1vw,27px);line-height:1.65;max-width:800px;font-weight:400}.facts{display:flex;flex-wrap:wrap;gap:28px 70px;margin-top:50px}.facts div{display:grid;gap:9px}.facts strong{font-size:13px;font-weight:500}.cover{background:var(--surface);border:1px solid var(--line);padding:clamp(14px,3vw,40px);display:flex;align-items:center;justify-content:center}.cover img{width:100%;max-height:650px;object-fit:contain;display:block}.caption{color:var(--muted);font-size:12px;line-height:1.8;margin-top:12px}.section{border-top:1px solid var(--line);display:grid;grid-template-columns:200px 1fr;gap:36px;padding:65px 0}.section h2{font-family:Georgia,"Songti SC",serif;font-size:clamp(27px,3vw,40px);font-weight:400;line-height:1.3;margin-bottom:22px}.section p{font-size:16px;line-height:2;color:#52534e;max-width:760px}.section p+p{margin-top:18px}.steps,.cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid var(--line);border-left:1px solid var(--line)}.tile{padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.tile h3{font-size:16px;font-weight:500;margin:15px 0 10px}.tile p{font-size:13px;line-height:1.8}.quote{margin:27px 0;padding:22px 26px;border-left:2px solid var(--accent);background:var(--surface);font-size:18px;line-height:1.7}.next{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:45px 0 60px;gap:20px;font-size:13px}.next a{text-decoration:none}.next a:hover{color:var(--accent)}@media(max-width:700px){.wrap{width:calc(100% - 40px)}.bar{height:68px}.hero{padding:65px 0 45px}.hero h1{font-size:50px}.facts{gap:25px 35px;margin-top:35px}.section{grid-template-columns:1fr;gap:20px;padding:45px 0}.steps,.cards{grid-template-columns:1fr}.tile{padding:20px}.section p{font-size:15px}.next{align-items:flex-start;flex-direction:column}}
-</style></head><body><main class="wrap"><nav class="bar" aria-label="导航"><a class="brand" href="../index.html#work">xingyu.run</a><a class="back" href="../index.html#work">← 返回作品</a></nav><header class="hero"><div class="eyebrow">05 / project case study</div><h1>Media to Notes<br><em>音视频笔记.</em></h1><p class="lead">让音视频成为可以回看的知识。</p><div class="facts"><div><span class="label">role / 角色</span><strong>个人项目 · Agent Skill</strong></div><div><span class="label">focus / 方向</span><strong>音视频 · 内容整理</strong></div><div><span class="label">status / 状态</span><strong>Skill 初稿 · 验证中</strong></div></div></header><div class="cover"><img src="../portfolio-assets/media-to-notes.webp" alt="一边看课程视频，一边手写笔记的桌面"></div><p class="caption">场景照片，用来说明边看音视频边整理笔记。不是产品界面。当前为 Skill 初稿，仍在验证。</p><div style="height:75px"></div><section class="section"><div class="label">01 / 问题</div><div><h2>真正留下来的往往只有一条链接。</h2><p>我们每天会收藏很多视频、播客和课程。它们可能讲清楚了一个概念，也可能包含一段值得反复琢磨的访谈。但看完之后，真正留下来的往往只有一条链接。过段时间再想找某个观点、例子或画面，就得重新拖动进度条。</p><p>我想解决的问题是：<strong>能不能把音视频里的内容，整理成一份以后能读、能查、也能继续使用的笔记？</strong></p><p>Media to Notes 是我围绕这个问题设计的一套 Agent Skill。它把素材获取、语音转写、内容整理、视频截图和资料补充连接起来，目标是让 Agent 从一条链接、一份音视频文件，或一份已有逐字稿出发，生成符合用户需求的 Markdown 笔记。</p></div></section><section class="section"><div class="label">02 / 流程</div><div><h2>从逐字稿到真正可读的笔记。</h2><p>这套流程最初来自我自己的使用经验。</p><p>我会把视频和播客下载到 NAS 上，用本地模型完成语音转写。但逐字稿只能解决“把声音变成文字”的问题：它可能没有标点，专有名词会识别错，一段完整的解释也可能被切成很多碎句。</p><p>更重要的是，视频里有些信息并不在声音里。一张模型架构图、一段代码演示，或者讲者用来解释概念的公式，单靠逐字稿很难还原。</p><p>所以我后来会把逐字稿交给 Codex，让它梳理内容，再回到原视频中寻找有价值的画面，把截图放进笔记对应的位置。遇到技术课程，还会查阅论文、官方文档等资料，为难理解的概念补充背景。</p><p>Media to Notes 就是对这套反复使用、不断调整的流程的一次整理：既保留自动化处理的效率，也让 Agent 负责理解内容、判断重点和核对图文。</p></div></section><section class="section"><div class="label">03 / 能力</div><div><h2>它能做什么。</h2><p>用户可以根据自己的目的选择成果形式：保留原话的逐字稿、内容完整的详细整理、快速阅读的重点摘要、围绕特定问题的专题笔记，或包含议题、决定和待办的会议纪要。</p><p>Skill 会根据选择调整整理方式。课程笔记侧重概念、例子和推导；访谈与播客关注观点、论据和讨论中的分歧；会议纪要则需要区分已经作出的决定和尚未确定的事项。对于没有可靠依据的发言者、负责人或期限，不应该自行猜测。</p><p>对于视频，Agent 会查看原画面，挑选真正有助于理解的图表、公式、代码或演示步骤，放到相关文字附近，并说明图片的作用。截图数量由内容决定，不为了配图而配图。</p><p>对于学习类内容，Agent 还可以查询外部资料，解释概念并补充相关背景。笔记会区分原素材的内容与外部补充，让读者知道信息从哪里来。</p><p>最终成果默认使用普通 Markdown，图片作为附件保存，方便阅读、编辑和迁移到其他笔记工具中。</p></div></section><section class="section"><div class="label">04 / 复用</div><div><h2>让经验可以被复用。</h2><p>在摸索过程中，我逐渐积累了不同平台的处理经验：例如抖音视频和合集的获取、小宇宙音频与节目简介的整理，以及小红书浏览器登录与素材获取过程中的问题排查。</p><p>这些经验会作为分平台资料加入 Skill，而不是写死成一套只适用于我自己 NAS 的操作。Skill 的核心负责描述工作方法，具体的下载工具、转写模型和运行环境则可以按用户条件选择。</p><p>转写环节优先引导使用合适的本地模型。如果本地能力不足，也可以由用户选择云端服务，并了解需要上传哪些内容以及可能产生的费用。</p></div></section><section class="section"><div class="label">05 / 进展</div><div><h2>当前进展。</h2><p>目前，Media to Notes 已完成 Skill 初稿，涵盖通用流程、不同笔记类型、视频配图、资料查询，以及抖音、小宇宙、小红书的历史经验。</p><p>它仍处于验证阶段：平台获取方式和不同 Agent 的兼容性需要继续用真实素材测试；可移植的下载和截图工具也还在规划中。接下来，我希望把这套自己反复使用的工作方式打磨成更多人可以自行安装、按需组合的工具。</p></div></section><footer class="next"><a href="../index.html#work">← 返回所有作品</a><span class="label">xingyu · product &amp; interaction</span></footer></main></body></html>
+</style><style>
+.cover picture{display:block;width:100%}
+.cover-actions{margin-top:18px}
+.cta{appearance:none;background:transparent;color:var(--fg);border:1px solid var(--fg);min-height:44px;padding:0 16px;font:13px/1 "PingFang SC","Noto Sans SC",sans-serif;letter-spacing:.04em;cursor:pointer}
+.cta:hover{color:var(--accent);border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.prompt{max-width:760px;margin-top:26px;border:1px solid var(--line);background:var(--surface)}
+.prompt-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line)}
+#copy-prompt{appearance:none;border:0;background:var(--fg);color:var(--bg);min-height:36px;padding:0 12px;cursor:pointer;font:13px/1 "PingFang SC","Noto Sans SC",sans-serif;letter-spacing:.04em}
+#copy-prompt:hover,#copy-prompt:focus-visible{background:var(--accent)}
+.prompt-body{margin:0;padding:16px 14px 18px;white-space:pre-wrap;word-break:break-word;font:13px/1.75 ui-monospace,SFMono-Regular,monospace;color:var(--fg)}
+.section .install-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;max-width:760px}
+.section .install-links a{color:var(--accent);font-size:14px;text-underline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.backdrop{position:fixed;inset:0;background:rgba(37,38,33,.42);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility 0s linear .28s;z-index:40}
+.backdrop.open{opacity:1;visibility:visible;transition:opacity .28s ease,visibility 0s linear 0s}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(680px,100%);background:var(--bg);border-left:1px solid var(--line);z-index:50;display:flex;flex-direction:column;transform:translateX(100%);visibility:hidden;transition:transform .34s cubic-bezier(.2,.75,.2,1),visibility 0s linear .34s;box-shadow:-16px 0 48px rgba(37,38,33,.08)}
+.drawer.open{transform:translateX(0);visibility:visible;transition:transform .34s cubic-bezier(.2,.75,.2,1),visibility 0s linear 0s}
+.drawer-bar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:22px 22px 16px;border-bottom:1px solid var(--line);flex:none}
+.drawer-bar h2{font-family:Georgia,"Songti SC",serif;font-weight:400;font-size:28px;letter-spacing:-.03em;line-height:1.2;margin:8px 0 0}
+.drawer-close{appearance:none;background:transparent;color:var(--fg);border:1px solid var(--line);min-height:44px;padding:0 14px;cursor:pointer;font:13px/1 "PingFang SC","Noto Sans SC",sans-serif;flex:none}
+.drawer-close:hover{color:var(--accent);border-color:var(--accent)}
+.drawer-body{overflow:auto;overscroll-behavior:contain;padding:28px 28px 72px;-webkit-overflow-scrolling:touch}
+.note{color:#52534e;font-size:15.5px;line-height:1.85}
+.note h1{font-family:Georgia,"Songti SC",serif;font-weight:400;font-size:clamp(26px,4vw,34px);color:var(--fg);letter-spacing:-.03em;line-height:1.25;margin:0 0 16px}
+.note h2{font-family:Georgia,"Songti SC",serif;font-weight:400;font-size:22px;color:var(--fg);line-height:1.35;margin:30px 0 10px}
+.note h3{font-size:16px;font-weight:500;color:var(--fg);margin:22px 0 8px}
+.note p{margin:0 0 14px}
+.note blockquote{margin:0 0 20px;padding:14px 16px;border-left:2px solid var(--accent);background:var(--surface);color:var(--fg)}
+.note blockquote p{margin:0}
+.note ol,.note ul{margin:0 0 16px;padding-left:1.25em}
+.note li{margin:5px 0}
+.note li::marker{color:var(--muted)}
+.note hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.note a{color:var(--accent);text-underline-offset:3px}
+.note code{font-family:ui-monospace,SFMono-Regular,monospace;font-size:.88em;background:var(--surface);padding:.05em .35em;border:1px solid var(--line)}
+.note pre{margin:0 0 16px;padding:14px;overflow:auto;background:var(--surface);border:1px solid var(--line)}
+.note pre code{border:0;padding:0;background:transparent}
+.note .math{font-family:Georgia,"Songti SC",serif;font-style:italic;padding:0 .08em}
+.note .math .op{font-style:normal;font-family:"PingFang SC","Noto Sans SC",sans-serif}
+.note strong{color:var(--fg);font-weight:600}
+.note-status{color:var(--muted);font-size:14px}
+html.drawer-open,body.drawer-open{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.drawer,.backdrop{transition:none}}
+@media(max-width:700px){.drawer{width:100%;border-left:0}.drawer-bar{padding:16px 16px 14px}.drawer-bar h2{font-size:24px}.drawer-body{padding:20px 16px max(48px,env(safe-area-inset-bottom))}.prompt-bar{align-items:flex-start}}
+</style></head><body><main class="wrap"><nav class="bar" aria-label="导航"><a class="brand" href="../index.html#work">xingyu.run</a><a class="back" href="../index.html#work">← 返回作品</a></nav><header class="hero"><div class="eyebrow">05 / project case study</div><h1>Media to Notes<br><em>音视频笔记.</em></h1><p class="lead">让音视频成为可以回看的知识。</p><div class="facts"><div><span class="label">role / 角色</span><strong>个人项目 · Agent Skill</strong></div><div><span class="label">focus / 方向</span><strong>音视频 · 内容整理</strong></div><div><span class="label">status / 状态</span><strong>Skill 已完成并发布 GitHub</strong></div></div></header><div class="cover"><picture><source srcset="../portfolio-assets/media-to-notes-demo-growth.webp" type="image/webp"><img src="../portfolio-assets/media-to-notes-demo-growth.gif" alt="知识图谱从中心向外展开的工作流演示" width="720" height="622"></picture></div><p class="caption">工作流演示：整理这集课程时，知识图谱从核心概念向外展开，并循环播放。</p><div class="cover-actions"><button type="button" class="cta" id="open-sample" aria-haspopup="dialog" aria-controls="note-drawer" aria-expanded="false">查看笔记样例</button></div><noscript><p class="caption"><a href="media-to-notes-sample.md">打开笔记样例 Markdown</a></p></noscript><div style="height:75px"></div><section class="section"><div class="label">01 / 问题</div><div><h2>真正留下来的往往只有一条链接。</h2><p>我们每天会收藏很多视频、播客和课程。它们可能讲清楚了一个概念，也可能包含一段值得反复琢磨的访谈。但看完之后，真正留下来的往往只有一条链接。过段时间再想找某个观点、例子或画面，就得重新拖动进度条。</p><p>我想解决的问题是：<strong>能不能把音视频里的内容，整理成一份以后能读、能查、也能继续使用的笔记？</strong></p><p>Media to Notes 是我围绕这个问题设计的一套 Agent Skill。它把素材获取、语音转写、内容整理、视频截图和资料补充连接起来，目标是让 Agent 从一条链接、一份音视频文件，或一份已有逐字稿出发，生成符合用户需求的 Markdown 笔记。</p></div></section><section class="section"><div class="label">02 / 流程</div><div><h2>从逐字稿到真正可读的笔记。</h2><p>这套流程最初来自我自己的使用经验。</p><p>我会把视频和播客下载到 NAS 上，用本地模型完成语音转写。但逐字稿只能解决“把声音变成文字”的问题：它可能没有标点，专有名词会识别错，一段完整的解释也可能被切成很多碎句。</p><p>更重要的是，视频里有些信息并不在声音里。一张模型架构图、一段代码演示，或者讲者用来解释概念的公式，单靠逐字稿很难还原。</p><p>所以我后来会把逐字稿交给 Codex，让它梳理内容，再回到原视频中寻找有价值的画面，把截图放进笔记对应的位置。遇到技术课程，还会查阅论文、官方文档等资料，为难理解的概念补充背景。</p><p>Media to Notes 就是对这套反复使用、不断调整的流程的一次整理：既保留自动化处理的效率，也让 Agent 负责理解内容、判断重点和核对图文。</p></div></section><section class="section"><div class="label">03 / 能力</div><div><h2>它能做什么。</h2><p>用户可以根据自己的目的选择成果形式：保留原话的逐字稿、内容完整的详细整理、快速阅读的重点摘要、围绕特定问题的专题笔记，或包含议题、决定和待办的会议纪要。</p><p>Skill 会根据选择调整整理方式。课程笔记侧重概念、例子和推导；访谈与播客关注观点、论据和讨论中的分歧；会议纪要则需要区分已经作出的决定和尚未确定的事项。对于没有可靠依据的发言者、负责人或期限，不应该自行猜测。</p><p>对于视频，Agent 会查看原画面，挑选真正有助于理解的图表、公式、代码或演示步骤，放到相关文字附近，并说明图片的作用。截图数量由内容决定，不为了配图而配图。</p><p>对于学习类内容，Agent 还可以查询外部资料，解释概念并补充相关背景。笔记会区分原素材的内容与外部补充，让读者知道信息从哪里来。</p><p>最终成果默认使用普通 Markdown，图片作为附件保存，方便阅读、编辑和迁移到其他笔记工具中。</p></div></section><section class="section"><div class="label">04 / 复用</div><div><h2>让经验可以被复用。</h2><p>在摸索过程中，我逐渐积累了不同平台的处理经验：例如抖音视频和合集的获取、小宇宙音频与节目简介的整理，以及小红书浏览器登录与素材获取过程中的问题排查。</p><p>这些经验会作为分平台资料加入 Skill，而不是写死成一套只适用于我自己 NAS 的操作。Skill 的核心负责描述工作方法，具体的下载工具、转写模型和运行环境则可以按用户条件选择。</p><p>转写环节优先引导使用合适的本地模型。如果本地能力不足，也可以由用户选择云端服务，并了解需要上传哪些内容以及可能产生的费用。</p></div></section><section class="section"><div class="label">05 / 进展</div><div><h2>当前进展。</h2><p>目前，Media to Notes 已完成，涵盖通用流程、不同笔记类型、视频配图、资料查询，以及抖音、小宇宙、小红书的下载历史经验。</p><p>它仍处于验证阶段：平台获取方式和不同 Agent 的兼容性需要继续用真实素材测试；可移植的下载和截图工具也还在规划中。接下来，我希望把这套自己反复使用的工作方式打磨成更多人可以自行安装、按需组合的工具。</p></div></section><section class="section" id="install"><div class="label">06 / 安装</div><div><h2>安装到你的 Agent。</h2><p>把下面这段提示交给你的 Agent。它会下载完整的 media-to-notes 目录，并安装到当前环境的 skills 文件夹。</p><div class="prompt"><div class="prompt-bar"><span class="label">prompt</span><button type="button" id="copy-prompt">复制</button></div><pre id="install-prompt" class="prompt-body">请帮我安装 Media to Notes 这个 Agent Skill。
+
+源码：https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes
+压缩包：https://fengbaoyao.github.io/xingyu-portfolio/portfolio-assets/media-to-notes-skill.zip
+
+请下载整个 media-to-notes 目录（保留 SKILL.md 与 references/ 结构），安装到当前 Agent 的 skills 目录（Codex 常见路径：~/.codex/skills/；Claude Code：~/.claude/skills/；其他 Agent 按各自约定），然后刷新或重启技能列表。安装完成后，用它把我给出的视频、音频、播客、会议录音或已有逐字稿，整理成可阅读的 Markdown 笔记。</pre></div><p id="copy-status" class="sr" role="status"></p><p class="install-links"><a href="https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes">在 GitHub 查看源码</a><a href="https://fengbaoyao.github.io/xingyu-portfolio/portfolio-assets/media-to-notes-skill.zip">下载压缩包</a></p></div></section><footer class="next"><a href="../index.html#work">← 返回所有作品</a><span class="label">xingyu · product &amp; interaction</span></footer></main><div class="backdrop" id="note-backdrop" hidden></div><aside id="note-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="note-title" aria-hidden="true" inert tabindex="-1"><header class="drawer-bar"><div><div class="label">note sample</div><h2 id="note-title">笔记样例</h2></div><button type="button" class="drawer-close" id="close-note" aria-label="关闭笔记样例">关闭</button></header><div class="drawer-body" id="note-body" tabindex="0" aria-label="笔记正文"><p class="note-status">正在打开笔记…</p></div></aside><script id="mtn">
+function esc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function matchBrace(s, openIdx) {
+  var depth = 0;
+  for (var i = openIdx; i < s.length; i++) {
+    if (s[i] === "{") depth++;
+    else if (s[i] === "}") {
+      depth--;
+      if (depth === 0) return i;
+    }
+  }
+  return s.length - 1;
+}
+function mathHtml(src) {
+  function walk(s) {
+    var parts = [];
+    var buf = "";
+    function pushText(t) { if (t) parts.push(esc(t)); }
+    for (var i = 0; i < s.length; i++) {
+      var c = s[i];
+      if (c === "\\") {
+        var j = i + 1, cmd = "";
+        while (j < s.length && /[A-Za-z]/.test(s[j])) { cmd += s[j]; j++; }
+        if ((cmd === "mathbb" || cmd === "mathrm" || cmd === "text" || cmd === "operatorname" || cmd === "sqrt") && s[j] === "{") {
+          var end = matchBrace(s, j);
+          var inner = s.slice(j + 1, end);
+          pushText(buf); buf = "";
+          if (cmd === "mathbb" && inner === "R") parts.push("ℝ");
+          else if (cmd === "sqrt") parts.push("√(" + walk(inner) + ")");
+          else parts.push(walk(inner));
+          i = end;
+          continue;
+        }
+        if (cmd === "in") { pushText(buf); buf = ""; parts.push('<span class="op">∈</span>'); i = j - 1; continue; }
+        if (cmd === "times") { pushText(buf); buf = ""; parts.push('<span class="op">×</span>'); i = j - 1; continue; }
+        if (cmd === "cdot") { pushText(buf); buf = ""; parts.push('<span class="op">·</span>'); i = j - 1; continue; }
+        buf += cmd;
+        i = j - 1;
+        continue;
+      }
+      if ((c === "^" || c === "_") && s[i + 1] === "{") {
+        var endB = matchBrace(s, i + 1);
+        pushText(buf); buf = "";
+        var tag = c === "^" ? "sup" : "sub";
+        parts.push("<" + tag + ">" + walk(s.slice(i + 2, endB)) + "</" + tag + ">");
+        i = endB;
+        continue;
+      }
+      if ((c === "^" || c === "_") && i + 1 < s.length && /[A-Za-z0-9]/.test(s[i + 1])) {
+        pushText(buf); buf = "";
+        var tag2 = c === "^" ? "sup" : "sub";
+        parts.push("<" + tag2 + ">" + esc(s[i + 1]) + "</" + tag2 + ">");
+        i += 1;
+        continue;
+      }
+      buf += c;
+    }
+    pushText(buf);
+    return parts.join("");
+  }
+  return '<span class="math">' + walk(src) + "</span>";
+}
+function inline(text) {
+  var slots = [];
+  function hold(html) {
+    slots.push(html);
+    return "\u0000" + (slots.length - 1) + "\u0000";
+  }
+  var work = String(text).replace(/`([^`]+)`/g, function (_, c) {
+    return hold("<code>" + esc(c) + "</code>");
+  });
+  work = work.replace(/\$([^$\n]+)\$/g, function (_, m) {
+    return hold(mathHtml(m));
+  });
+  work = esc(work);
+  work = work.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, function (_, label, url) {
+    return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + label + "</a>";
+  });
+  work = work.replace(/(^|[^"'>=])(https?:\/\/[^\s<]+)/g, function (_, pre, url) {
+    var clean = url.replace(/(?:[.,;:!?)>]|[。，、；：）】》])+$/g, "");
+    return pre + '<a href="' + clean + '" target="_blank" rel="noopener noreferrer">' + clean + "</a>" + url.slice(clean.length);
+  });
+  work = work.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  work = work.replace(/\u0000(\d+)\u0000/g, function (_, n) { return slots[Number(n)]; });
+  return work;
+}
+function isBlock(line) {
+  return /^(#{1,6}\s|```|>\s?|---+$|\*\*\*+$|\d+\.\s|[-*]\s)/.test(line);
+}
+function renderMarkdown(md) {
+  md = String(md || "").replace(/\r\n/g, "\n");
+  md = md.replace(/!\[[\s\S]*?\]\([^)]*\)/g, "");
+  md = md.replace(/<img\b[^>]*>/gi, "");
+  var lines = md.split("\n");
+  var i = 0;
+  var out = [];
+  while (i < lines.length) {
+    var line = lines[i];
+    if (!line.trim()) { i++; continue; }
+    if (/^```/.test(line.trim())) {
+      var fence = [];
+      i++;
+      while (i < lines.length && !/^```/.test(lines[i].trim())) { fence.push(lines[i]); i++; }
+      if (i < lines.length) i++;
+      out.push("<pre><code>" + esc(fence.join("\n")) + "</code></pre>");
+      continue;
+    }
+    if (/^(-{3,}|\*{3,})$/.test(line.trim())) { out.push("<hr>"); i++; continue; }
+    var hm = /^(#{1,6})\s+(.*)$/.exec(line);
+    if (hm) {
+      var level = Math.min(hm[1].length, 6);
+      out.push("<h" + level + ">" + inline(hm[2].trim()) + "</h" + level + ">");
+      i++;
+      continue;
+    }
+    if (/^>/.test(line)) {
+      var quoted = [];
+      while (i < lines.length && /^>/.test(lines[i])) {
+        quoted.push(lines[i].replace(/^>\s?/, ""));
+        i++;
+      }
+      var qhtml = [];
+      var qp = [];
+      function flushQ() {
+        if (!qp.length) return;
+        qhtml.push("<p>" + qp.map(function (part) { return inline(part); }).join("<br>") + "</p>");
+        qp = [];
+      }
+      for (var qi = 0; qi < quoted.length; qi++) {
+        if (!quoted[qi].trim()) flushQ();
+        else qp.push(quoted[qi]);
+      }
+      flushQ();
+      out.push("<blockquote>" + qhtml.join("") + "</blockquote>");
+      continue;
+    }
+    if (/^\d+\.\s+/.test(line)) {
+      var items = [];
+      while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^\d+\.\s+/, ""));
+        i++;
+      }
+      out.push("<ol>" + items.map(function (it) { return "<li>" + inline(it) + "</li>"; }).join("") + "</ol>");
+      continue;
+    }
+    if (/^[-*]\s+/.test(line)) {
+      var bullets = [];
+      while (i < lines.length && /^[-*]\s+/.test(lines[i])) {
+        bullets.push(lines[i].replace(/^[-*]\s+/, ""));
+        i++;
+      }
+      out.push("<ul>" + bullets.map(function (it) { return "<li>" + inline(it) + "</li>"; }).join("") + "</ul>");
+      continue;
+    }
+    var para = [line.trim()];
+    i++;
+    while (i < lines.length && lines[i].trim() && !isBlock(lines[i])) {
+      para.push(lines[i].trim());
+      i++;
+    }
+    out.push("<p>" + inline(para.join(" ")) + "</p>");
+  }
+  return out.join("\n");
+}
+function bootMediaToNotes() {
+  var trigger = document.getElementById("open-sample");
+  var drawer = document.getElementById("note-drawer");
+  var backdrop = document.getElementById("note-backdrop");
+  var closeBtn = document.getElementById("close-note");
+  var noteBody = document.getElementById("note-body");
+  var copyBtn = document.getElementById("copy-prompt");
+  var promptEl = document.getElementById("install-prompt");
+  var copyStatus = document.getElementById("copy-status");
+  var lastFocus = null;
+  var noteHtml = "";
+  var noteState = "idle";
+  var copyTimer = 0;
+
+  function focusable() {
+    return Array.prototype.filter.call(
+      drawer.querySelectorAll("a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])"),
+      function (el) { return !el.hasAttribute("disabled"); }
+    );
+  }
+  function openNote() {
+    lastFocus = document.activeElement;
+    drawer.removeAttribute("inert");
+    drawer.setAttribute("aria-hidden", "false");
+    backdrop.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+    document.documentElement.classList.add("drawer-open");
+    document.body.classList.add("drawer-open");
+    document.querySelector("main").setAttribute("aria-hidden", "true");
+    requestAnimationFrame(function () {
+      backdrop.classList.add("open");
+      drawer.classList.add("open");
+      closeBtn.focus();
+    });
+    ensureNote();
+  }
+  function closeNote() {
+    if (drawer.getAttribute("aria-hidden") === "true") return;
+    drawer.classList.remove("open");
+    backdrop.classList.remove("open");
+    trigger.setAttribute("aria-expanded", "false");
+    document.documentElement.classList.remove("drawer-open");
+    document.body.classList.remove("drawer-open");
+    document.querySelector("main").removeAttribute("aria-hidden");
+    drawer.setAttribute("aria-hidden", "true");
+    drawer.setAttribute("inert", "");
+    window.setTimeout(function () {
+      if (!drawer.classList.contains("open")) backdrop.hidden = true;
+    }, 360);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function ensureNote() {
+    if (noteState === "ready") {
+      noteBody.innerHTML = noteHtml;
+      return;
+    }
+    if (noteState === "loading") return;
+    noteState = "loading";
+    noteBody.innerHTML = '<p class="note-status">正在打开笔记…</p>';
+    fetch("media-to-notes-sample.md")
+      .then(function (res) {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.text();
+      })
+      .then(function (text) {
+        var html = renderMarkdown(text).replace(/<img\b[^>]*>/gi, "");
+        if (!html.trim()) throw new Error("empty");
+        noteHtml = '<article class="note">' + html + "</article>";
+        noteState = "ready";
+        if (drawer.getAttribute("aria-hidden") === "false") noteBody.innerHTML = noteHtml;
+      })
+      .catch(function () {
+        noteState = "idle";
+        noteBody.innerHTML = '<p class="note-status">笔记样例暂时打不开。可以稍后重试。</p>';
+      });
+  }
+  function copyPrompt() {
+    var text = promptEl.textContent.replace(/^\n/, "").replace(/\n$/, "");
+    var done = function () {
+      copyBtn.textContent = "已复制";
+      copyStatus.textContent = "已复制到剪贴板";
+      window.clearTimeout(copyTimer);
+      copyTimer = window.setTimeout(function () {
+        copyBtn.textContent = "复制";
+        copyStatus.textContent = "";
+      }, 1600);
+    };
+    var fail = function () {
+      copyBtn.textContent = "请手动选择";
+      copyStatus.textContent = "没有复制成功，请手动选择提示文字";
+      var range = document.createRange();
+      range.selectNodeContents(promptEl);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    };
+    var legacy = function () {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      if (ok) done(); else fail();
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done).catch(legacy);
+    } else legacy();
+  }
+  trigger.addEventListener("click", openNote);
+  closeBtn.addEventListener("click", closeNote);
+  backdrop.addEventListener("click", closeNote);
+  copyBtn.addEventListener("click", copyPrompt);
+  document.addEventListener("keydown", function (e) {
+    if (drawer.getAttribute("aria-hidden") === "true") return;
+    if (e.key === "Escape") {
+      e.preventDefault();
+      closeNote();
+      return;
+    }
+    if (e.key !== "Tab") return;
+    var nodes = focusable();
+    if (!nodes.length) {
+      e.preventDefault();
+      drawer.focus();
+      return;
+    }
+    var first = nodes[0];
+    var last = nodes[nodes.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    } else if (nodes.indexOf(document.activeElement) === -1) {
+      e.preventDefault();
+      (e.shiftKey ? last : first).focus();
+    }
+  });
+}
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", bootMediaToNotes);
+}
+</script></body></html>
