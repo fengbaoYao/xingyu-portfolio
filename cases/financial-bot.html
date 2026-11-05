@@ -3,11 +3,140 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FinSearch-X · Financial Bot 项目案例</title>
-  <meta http-equiv="refresh" content="0;url=finsearch-x.html" />
-  <link rel="canonical" href="https://fengbaoyao.github.io/xingyu-portfolio/cases/finsearch-x.html" />
+  <title>financial-bot — 星宇的项目案例</title>
+  <style>
+
+:root{color-scheme:light;--bg:#f7f6f1;--fg:#252621;--muted:#777870;--line:#d8d8d0;--accent:#698d63;--surface:#efeee8}*{box-sizing:border-box}html{scroll-behavior:smooth;scrollbar-width:none}html::-webkit-scrollbar{display:none}body{margin:0;background:var(--bg);color:var(--fg);font-family:"PingFang SC","Noto Sans SC",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit}a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}.wrap{width:min(1180px,calc(100% - 80px));margin:auto}.bar{display:flex;justify-content:space-between;align-items:center;height:88px;border-bottom:1px solid var(--line);font:11px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}.brand{text-decoration:none}.brand:before{content:'●';color:var(--accent);margin-right:8px}.back{text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}.hero{padding:95px 0 65px}.eyebrow,.num,.label{font:11px ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}h1,h2,h3,p{margin:0}.hero h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(48px,8vw,96px);font-weight:400;letter-spacing:-.045em;line-height:1.02;margin:30px 0 22px}.hero h1 em{font-weight:400;color:var(--accent)}.lead{font-size:clamp(19px,2.1vw,27px);line-height:1.65;max-width:800px;font-weight:400}.facts{display:flex;flex-wrap:wrap;gap:28px 70px;margin-top:50px}.facts div{display:grid;gap:9px}.facts strong{font-size:13px;font-weight:500}.cover{background:var(--surface);border:1px solid var(--line);padding:clamp(14px,3vw,40px);display:flex;align-items:center;justify-content:center}.cover img{width:100%;max-height:650px;object-fit:contain;display:block}.caption{color:var(--muted);font-size:12px;line-height:1.8;margin-top:12px}.section{border-top:1px solid var(--line);display:grid;grid-template-columns:200px 1fr;gap:36px;padding:65px 0}.section h2{font-family:Georgia,"Songti SC",serif;font-size:clamp(27px,3vw,40px);font-weight:400;line-height:1.3;margin-bottom:22px}.section p{font-size:16px;line-height:2;color:#52534e;max-width:760px}.section p+p{margin-top:18px}.steps,.cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid var(--line);border-left:1px solid var(--line)}.tile{padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.tile h3{font-size:16px;font-weight:500;margin:15px 0 10px}.tile p{font-size:13px;line-height:1.8}.quote{margin:27px 0;padding:22px 26px;border-left:2px solid var(--accent);background:var(--surface);font-size:18px;line-height:1.7}.next{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:45px 0 60px;gap:20px;font-size:13px}.next a{text-decoration:none}.next a:hover{color:var(--accent)}@media(max-width:700px){.wrap{width:calc(100% - 40px)}.bar{height:68px}.hero{padding:65px 0 45px}.hero h1{font-size:50px}.facts{gap:25px 35px;margin-top:35px}.section{grid-template-columns:1fr;gap:20px;padding:45px 0}.steps,.cards{grid-template-columns:1fr}.tile{padding:20px}.section p{font-size:15px}.next{align-items:flex-start;flex-direction:column}}
+
+.brief{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:12px;max-width:720px}
+.brief li{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:baseline;font-size:15px;line-height:1.65;color:#52534e}
+.brief b{font:11px ui-monospace,monospace;letter-spacing:.14em;font-weight:400;color:var(--muted)}
+.answer{margin-top:28px;border:1px solid var(--line);background:var(--surface);padding:22px 22px 6px;max-width:760px}
+.answer h3{font-family:Georgia,"Songti SC",serif;font-weight:400;font-size:clamp(22px,2.4vw,30px);line-height:1.35;margin:8px 0 16px;color:var(--fg)}
+.answer dl{margin:0}
+.answer dl>div{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.answer dt{font:11px ui-monospace,monospace;letter-spacing:.12em;color:var(--muted);padding-top:4px}
+.answer dd{margin:0;font-size:15px;line-height:1.7;color:#52534e}
+.entries{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.entries a{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;background:#173e37;color:#fbfaf6;text-decoration:none;font-size:14px}
+.entries a span{font:11px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.72}
+.entries a.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.flow{list-style:none;margin:28px 0 0;padding:0;max-width:680px}
+.flow>li{padding:16px 18px;border:1px solid var(--line);background:#fff}
+.flow>li+li{border-top:0}
+.flow b{display:block;font-size:15px;font-weight:500;color:var(--fg)}
+.flow li>span,.flow .split span{display:block;margin-top:4px;font-size:13px;line-height:1.65;color:#52534e;font-weight:400}
+.flow .split{display:grid;grid-template-columns:1fr 1fr;padding:0;background:transparent;border:0}
+.flow .split>div{padding:16px 18px;border:1px solid var(--line);background:var(--surface)}
+.flow .split>div+div{border-left:0}
+.compare{display:grid;grid-template-columns:1fr 1fr;margin-top:22px;border-top:1px solid var(--line);border-left:1px solid var(--line);max-width:760px}
+.compare article{padding:22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.compare h3{font-size:16px;font-weight:500;margin:0 0 12px;color:var(--fg)}
+.compare p{font-size:14px;line-height:1.75;margin:0 0 10px;max-width:none}
+.compare p b{color:var(--fg);font-weight:600}
+.cta-second{margin-top:8px}
+.cta-second a{color:var(--accent);text-underline-offset:3px}
+@media(max-width:700px){
+.brief li,.answer dl>div{grid-template-columns:1fr;gap:4px}
+.flow .split,.compare{grid-template-columns:1fr}
+.flow .split>div+div{border-left:1px solid var(--line);border-top:0}
+}
+
+</style>
 </head>
 <body>
-  <p>Financial Bot 已合并到 FinSearch-X 项目案例。<a href="finsearch-x.html">查看合并后的项目页</a></p>
+<main class="wrap">
+  <nav class="bar" aria-label="导航"><a class="brand" href="../index.html#work">xingyu.run</a><a class="back" href="../index.html#work">← 返回作品</a></nav>
+  <header class="hero">
+    <div class="eyebrow">01 / project case study</div>
+    <h1>financial-bot<br><em>金融研究助手.</em></h1>
+    <p class="lead">让金融研究答案带上来源、缺口和可用范围，也能沿着问题继续追问。</p>
+    <ul class="brief">
+      <li><b>问题</b><span>答案看起来顺，却难以快速确认数字来自哪里、口径是否一致、还缺哪些材料。</span></li>
+      <li><b>取舍</b><span>事实、计算和解释分开处理；材料没有支持的内容，不补成确定结论。</span></li>
+      <li><b>凭什么信</b><span>回答同时呈现来源、数据时间、信息缺口和当前可用范围。</span></li>
+    </ul>
+    <div class="facts">
+      <div><span class="label">role / 角色</span><strong>个人项目 · AI 产品与交互</strong></div>
+      <div><span class="label">focus / 方向</span><strong>金融研究 · Agent 工作流 · 可信回答</strong></div>
+      <div><span class="label">status / 状态</span><strong>公开体验 · 持续迭代</strong></div>
+    </div>
+  </header>
+  <section class="section">
+    <div class="label">01 / 问题</div>
+    <div>
+      <h2>顺口的回答，不等于可用的研究。</h2>
+      <p>财报研究经常同时涉及公司主体、报告期、币种、指标口径和计算方式。模型可能答对数字却选错期间，也可能把材料没有写出的原因讲得很确定。研究者仍得打开原文重查，结论也难以复用。</p>
+      <p>项目从 FinSearch-X 的财报研究探索发展而来：先解决事实、计算和出处如何对应，再把同一套研究方式延伸到网页 Agent 工作台。它们是同一个 financial-bot 项目的演进，不是两个独立项目。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="label">02 / 标准</div>
+    <div>
+      <h2>来源、缺口、能否行动。</h2>
+      <div class="cards">
+        <article class="tile"><div class="num">01</div><h3>来源</h3><p>数字对应到披露文件、具体报表或数据源，并标明数据时间。</p></article>
+        <article class="tile"><div class="num">02</div><h3>缺口</h3><p>期间、口径或材料缺失时明确说明，不把推测写成事实。</p></article>
+        <article class="tile"><div class="num">03</div><h3>可用范围</h3><p>区分可以核对的信息与尚不足以支持投资判断的部分。</p></article>
+      </div>
+      <p>财务事实和计算过程尽量由确定性流程提供；模型负责整理问题、检索相关材料并组织解释。同比、利润率等数值计算需要保留口径和过程，不能只展示一个没有来路的结果。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="label">03 / 一则回答</div>
+    <div>
+      <h2>一张研究卡，交代答案能不能用。</h2>
+      <article class="answer">
+        <p class="label">研究卡 · 内容示意</p>
+        <h3>这份年报的营业收入，能不能和上年直接比较？</h3>
+        <dl>
+          <div><dt>结论</dt><dd>可以比较：两期都取合并利润表的营业收入，币种一致。</dd></div>
+          <div><dt>数字</dt><dd>列出本期、上期数值和同比计算，并保留计算口径。</dd></div>
+          <div><dt>来源</dt><dd>标明年度报告、合并利润表及对应报告期。</dd></div>
+          <div><dt>缺口</dt><dd>若报告正文未披露地区拆分，就提示需要查看分部附注。</dd></div>
+          <div><dt>可用范围</dt><dd>可用于核对同比口径；不能据此单独形成买卖结论。</dd></div>
+        </dl>
+      </article>
+      <p class="caption">以上为交互内容示意，不代表某家公司的真实财报数据。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="label">04 / 体验</div>
+    <div>
+      <h2>从单次问答，走到可继续研究的工作台。</h2>
+      <p>Financial Bot 把研究入口放在网页对话中。用户可以从公司、财报、行情或新闻问题开始；工作台结合研究上下文提供来源和数据面板，研究助手则通过 Agent 方式组织任务与工具。</p>
+      <ul class="flow">
+        <li><b>提出研究问题</b><span>明确公司、期间和想核对的事实；条件不足时继续澄清。</span></li>
+        <li><b>整理证据与计算</b><span>展示已找到的来源、数据时间及尚未覆盖的信息。</span></li>
+        <li><b>形成结论并追问</b><span>把事实与解释分开，让用户查看依据后继续追问。</span></li>
+      </ul>
+      <p>项目仍在持续迭代。演示页面展示当前可访问的产品入口，不代表所有计划中的数据源、记忆和评测能力都已经完成。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="label">05 / 评测</div>
+    <div>
+      <h2>把“答错了”拆成可定位的问题。</h2>
+      <div class="compare">
+        <article><h3>检索错误</h3><p>问题问 2024 年，回答引用了 2023 年的数据。</p><p><b>检查：</b>公司、报告期和来源是否对应。</p></article>
+        <article><h3>计算错误</h3><p>本期和上期数据都找对了，同比公式或口径却用错。</p><p><b>检查：</b>输入值、单位、公式和结果是否能复算。</p></article>
+        <article><h3>无依据解释</h3><p>材料只显示指标变化，回答却补出资料没有写的原因。</p><p><b>检查：</b>每个原因是否能回到明确来源。</p></article>
+        <article><h3>信息缺口</h3><p>当前数据延迟、覆盖不全或报告没有披露所需维度。</p><p><b>检查：</b>是否明确提示缺口，而不是假装资料齐全。</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="label">06 / 试用</div>
+    <div>
+      <h2>打开当前产品入口。</h2>
+      <p>financial-work 提供研究工作台；研究助手 bot 提供对话式 Agent 入口。实际数据的来源、时间和覆盖情况以页面标注为准。</p>
+      <div class="entries">
+        <a href="https://fengbaoyao.github.io/financial-bot/work" target="_blank" rel="noopener noreferrer">financial-work <span>work</span></a>
+        <a class="alt" href="https://fengbaoyao.github.io/financial-bot/bot" target="_blank" rel="noopener noreferrer">研究助手 <span>bot</span></a>
+      </div>
+    </div>
+  </section>
+  <footer class="next"><a href="../index.html#work">← 返回所有作品</a><span class="label">xingyu · product &amp; interaction</span></footer>
+</main>
 </body>
 </html>
