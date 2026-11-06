@@ -9451,6 +9451,8 @@ function Products() {
   var wrapRef = useRef(null);
   var activeIdxRef = useRef(0);
   var modeRef = useRef("grid");
+  var suppressWheelGestureRef = useRef(false);
+  var suppressWheelTimerRef = useRef(0);
   useEffect(function () {
     activeIdxRef.current = activeIdx;
   }, [activeIdx]);
@@ -9472,10 +9474,15 @@ function Products() {
   useEffect(function () {
     var wrap = wrapRef.current;
     if (!wrap) return;
-    var lastSwitch = 0;
-    var COOLDOWN = 900;
+    var wheelGestureTimer = 0;
+    var wheelStepConsumed = false;
+    var touchStepConsumed = false;
     var touchStartY = null;
+    var touchStartedInLock = false;
     var TOUCH_THRESHOLD = 40;
+    var WHEEL_GESTURE_QUIET_MS = 300;
+    var CARD_TRANSITION_MS = 1300;
+    var acceptSwitchAfter = 0;
     var isInLock = function isInLock() {
       // 矮屏中卡片高度超过视口，保持页面可自由滚动。
       if (window.innerWidth <= 768 && window.innerHeight <= 520) return false;
@@ -9494,25 +9501,45 @@ function Products() {
       return dy > 0 && curr >= ps.length - 1 || dy < 0 && curr <= 0;
     };
     var onWheel = function onWheel(e) {
-      if (!isInLock()) return;
+      var inLock = isInLock();
+      if (suppressWheelGestureRef.current) {
+        if (inLock && !isReleaseDirection(e.deltaY)) e.preventDefault();
+        wheelStepConsumed = true;
+        clearTimeout(suppressWheelTimerRef.current);
+        suppressWheelTimerRef.current = setTimeout(function () {
+          wheelStepConsumed = false;
+          suppressWheelGestureRef.current = false;
+        }, WHEEL_GESTURE_QUIET_MS);
+        return;
+      }
+      if (!inLock) return;
       // 边界 + 同向：直接放行（不 preventDefault），page 自然滚出 wrap
       if (isReleaseDirection(e.deltaY)) return;
       e.preventDefault();
+      clearTimeout(wheelGestureTimer);
+      wheelGestureTimer = setTimeout(function () {
+        wheelStepConsumed = false;
+      }, WHEEL_GESTURE_QUIET_MS);
+      if (wheelStepConsumed) return;
+      wheelStepConsumed = true;
       var now = performance.now();
-      if (now - lastSwitch < COOLDOWN) return;
-      lastSwitch = now;
+      if (now < acceptSwitchAfter) return;
       var curr = activeIdxRef.current;
       setActiveIdx(e.deltaY > 0 ? curr + 1 : curr - 1);
+      acceptSwitchAfter = now + CARD_TRANSITION_MS;
     };
     var onTouchStart = function onTouchStart(e) {
-      if (!isInLock()) {
-        touchStartY = null;
-        return;
-      }
       touchStartY = e.touches[0].clientY;
+      touchStartedInLock = isInLock();
+      touchStepConsumed = false;
     };
     var onTouchMove = function onTouchMove(e) {
       if (touchStartY === null || !isInLock()) return;
+      // 触摸从扇形模式开始、滚动中途进入翻页区时，吞掉当前手势余量。
+      if (!touchStartedInLock) {
+        e.preventDefault();
+        return;
+      }
       var dy = touchStartY - e.touches[0].clientY;
       // 边界 + 同向：直接放行 page，让 user 滑到下一区
       if (isReleaseDirection(dy)) return;
@@ -9521,12 +9548,18 @@ function Products() {
         return;
       }
       e.preventDefault();
+      if (touchStepConsumed) return;
+      touchStepConsumed = true;
       var now = performance.now();
-      if (now - lastSwitch < COOLDOWN) return;
-      lastSwitch = now;
+      if (now < acceptSwitchAfter) return;
       var curr = activeIdxRef.current;
       setActiveIdx(dy > 0 ? curr + 1 : curr - 1);
-      touchStartY = e.touches[0].clientY;
+      acceptSwitchAfter = now + CARD_TRANSITION_MS;
+    };
+    var onTouchEnd = function onTouchEnd() {
+      touchStartY = null;
+      touchStartedInLock = false;
+      touchStepConsumed = false;
     };
     window.addEventListener("wheel", onWheel, {
       passive: false
@@ -9537,10 +9570,14 @@ function Products() {
     window.addEventListener("touchmove", onTouchMove, {
       passive: false
     });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
     return function () {
+      clearTimeout(wheelGestureTimer);
+      clearTimeout(suppressWheelTimerRef.current);
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
     };
   }, [ps.length]);
 
@@ -9572,6 +9609,13 @@ function Products() {
           return;
         }
         if (accum > THRESHOLD) {
+          if (modeRef.current !== "grid") {
+            suppressWheelGestureRef.current = true;
+            clearTimeout(suppressWheelTimerRef.current);
+            suppressWheelTimerRef.current = setTimeout(function () {
+              suppressWheelGestureRef.current = false;
+            }, 300);
+          }
           setMode("grid");
           accum = 0;
         } else if (accum < -THRESHOLD) {
