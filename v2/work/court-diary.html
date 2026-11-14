@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Court Diary — 星宇</title>
+<meta name="description" content="让人专心打球，赛后也能很快找到想留下的那几球。概念设计与交互说明。">
+<link rel="canonical" href="https://fengbaoyao.github.io/xingyu-portfolio/v2/work/court-diary.html">
+<link rel="icon" type="image/png" sizes="512x512" href="../../portfolio-assets/portrait.png">
+<link rel="apple-touch-icon" href="../../portfolio-assets/portrait.png">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="星宇">
+<meta property="og:title" content="Court Diary — 星宇">
+<meta property="og:description" content="让人专心打球，赛后也能很快找到想留下的那几球。概念设计与交互说明。">
+<meta property="og:url" content="https://fengbaoyao.github.io/xingyu-portfolio/v2/work/court-diary.html">
+<meta property="og:image" content="https://fengbaoyao.github.io/xingyu-portfolio/portfolio-assets/court-diary-hero-v2.webp">
+<meta property="og:locale" content="zh_CN">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Court Diary — 星宇">
+<meta name="twitter:description" content="让人专心打球，赛后也能很快找到想留下的那几球。概念设计与交互说明。">
+<meta name="twitter:image" content="https://fengbaoyao.github.io/xingyu-portfolio/portfolio-assets/court-diary-hero-v2.webp">
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="c-nav">
+  <div class="l-wrap c-nav__inner">
+    <a class="c-nav__brand" href="../">
+      <span class="c-nav__dot" aria-hidden="true"></span>
+      <span>星宇 / Xingyu</span>
+    </a>
+    <nav class="c-nav__links" aria-label="主导航">
+      <a href="../#work"><span data-zh>作品</span><span data-en>Work</span></a>
+      <a href="../#contact" data-optional><span data-zh>联系</span><span data-en>Contact</span></a>
+      <button class="c-lang" type="button" data-lang-toggle aria-label="Switch to English">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<header class="l-wrap c-case-head">
+  <p class="c-casenext__back">
+    <a href="../#work">&larr; <span data-zh>返回作品</span><span data-en>All work</span></a>
+  </p>
+
+  <div class="c-case-head__top">
+    <span class="c-state c-state--concept">
+      <span class="c-state__mark" aria-hidden="true">○</span>
+      <span data-zh>概念设计</span><span data-en>Concept</span>
+    </span>
+    <span class="u-label">iOS · Apple Watch</span>
+  </div>
+
+  <h1 class="c-case-head__title">Court Diary</h1>
+  <p class="c-case-head__lead">
+    <span data-zh>让人专心打球，赛后也能很快找到想留下的那几球。</span><span data-en>Stay in the match; find the points worth keeping afterwards.</span>
+  </p>
+
+  <div class="c-case-head__actions">
+    
+    <a class="c-btn c-btn--ghost" href="#s01"><span data-zh>看决策记录 &darr;</span><span data-en>Read the decisions &darr;</span></a>
+  </div>
+</header>
+
+<div class="l-wrap">
+  <div class="c-notice" role="note">
+    <span data-zh><strong>这是概念设计与交互说明。</strong>没有可安装的 iOS / Apple Watch 版本，也没有可在线试用的 Demo。</span><span data-en><strong>This is a concept and interaction spec.</strong> There is no installable iOS / Apple Watch build and no online demo.</span>
+  </div>
+
+  <div class="c-facts">
+        <div class="c-facts__cell">
+      <div class="c-facts__label"><span data-zh>交付形态</span><span data-en>Form</span></div>
+      <div class="c-facts__value"><span data-zh>iOS · Apple Watch 概念</span><span data-en>iOS · Apple Watch concept</span></div>
+    </div>
+    <div class="c-facts__cell">
+      <div class="c-facts__label"><span data-zh>我的角色</span><span data-en>My role</span></div>
+      <div class="c-facts__value"><span data-zh>个人产品 · 交互设计</span><span data-en>Solo · interaction design</span></div>
+    </div>
+    <div class="c-facts__cell">
+      <div class="c-facts__label"><span data-zh>当前状态</span><span data-en>Status</span></div>
+      <div class="c-facts__value"><span data-zh>概念设计</span><span data-en>Concept</span></div>
+    </div>
+    <div class="c-facts__cell">
+      <div class="c-facts__label"><span data-zh>可运行</span><span data-en>Runnable</span></div>
+      <div class="c-facts__value"><span data-zh>否 · 无可安装版本</span><span data-en>No · nothing to install</span></div>
+    </div>
+  </div>
+
+  <figure class="c-heroimg">
+    <img src="../../portfolio-assets/court-diary-hero-v2.webp" alt="Court Diary 概念主图" width="1600" height="686" loading="eager" decoding="async">
+  </figure>
+</div>
+
+<div class="l-wrap">
+
+  <section class="c-sec" id="s1">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">1</span>
+        <span class="c-sec__title">
+          <span data-zh>问题</span><span data-en>Problem</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p>打球时手机架在球场边，人不会去看屏幕。</p><p>但赛后一段完整录像让「挑出好球」变成苦差：从头拉到尾，反复对时间点。资料里确认的两个卡点很具体——<strong>录完不知道干嘛</strong>，和<strong>挑球累</strong>。</p><p>所以问题不是「怎么录下来」，是「录完之后怎么让人愿意再看一遍」。</p></div>
+        <div data-en><p>During a match the phone sits by the court and nobody looks at it.</p><p>Afterwards a full recording makes &ldquo;find the good points&rdquo; a chore: scrub, guess, re-scrub. Two frictions came out of the research &mdash; <strong>recording finishes and you don't know what next</strong>, and <strong>picking is tiring</strong>.</p><p>So the question isn't &ldquo;how do we record&rdquo;. It's &ldquo;how do we make someone want to watch it again&rdquo;.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s2">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">2</span>
+        <span class="c-sec__title">
+          <span data-zh>我的判断</span><span data-en>My call</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p>主任务只有一个：打球。任何在场上要求看屏幕的设计都是错的。</p><p>我把流程按「是否打断打球」分两半：场上只允许一个动作——标记；所有挑选、剪辑、分享全推到赛后。</p><p>第二个判断是<strong>录制状态必须可信</strong>。开始后短暂保留画面，让人一眼确认「录上了」；中断时说明已录下的内容和下一步。</p></div>
+        <div data-en><p>There is one primary task: playing. Any design that asks you to look at a screen mid-match is wrong.</p><p>I split the flow on a single axis &mdash; does it interrupt play. On court, one action only: mark. Picking, trimming and sharing all move after the match.</p><p>The second call: <strong>recording state must be trustworthy</strong>. Keep the frame briefly after start so you can confirm it's running; on an interruption, say what was already captured and what happens next.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s3">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">3</span>
+        <span class="c-sec__title">
+          <span data-zh>取舍与代价</span><span data-en>Trade-offs</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p><strong>放弃了「场上功能丰富」的想象。</strong></p><p>很容易想到在场上做集锦、加语音备注、实时统计。每加一个，都在跟打球抢注意力。</p><p>代价：场上能做的事变少，产品看起来「不智能」。换来的是主任务不被打断——这是这个产品的全部价值。</p></div>
+        <div data-en><p><strong>I gave up the fantasy of a feature-rich courtside app.</strong></p><p>It's easy to imagine highlights, voice notes, live stats. Each one competes with playing for attention.</p><p>The cost: less you can do on court, and the product looks less clever. What it buys: the primary task stays uninterrupted &mdash; which is the whole point.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s4">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">4</span>
+        <span class="c-sec__title">
+          <span data-zh>怎么验证</span><span data-en>How I verified</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p>三个可观察的信号：</p><ol><li>开始录制后，用户能否立刻确认「在录」</li><li>赛后从打开到看到第一个标记片段，需要几次操作</li><li>中断发生后，用户是否知道已有内容和下一步</li></ol><p>第 2 条是关键：如果挑选仍需翻长视频，整个设计就没成立。</p></div>
+        <div data-en><p>Three observable signals:</p><ol><li>After start, can the user immediately confirm it's recording?</li><li>From opening to first marked point, how many interactions?</li><li>After an interruption, does the user know what was captured and what's next?</li></ol><p>The second is the load-bearing one. If picking still means scrubbing a long video, the design failed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s5">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">5</span>
+        <span class="c-sec__title">
+          <span data-zh>结果与边界</span><span data-en>What works, what doesn't</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p><strong>已完成</strong>：完整旅程的交互设计、录制状态的可信表达、收工时刻的下一步、单球页信息结构（速度、旋转、轨迹放在一起决定留不留）。</p><p><strong>还不存在</strong>：可安装的 iOS / Apple Watch 版本，可在线试用的 Demo。速度、旋转、轨迹是概念描述，不是已实现能力。</p><p>本页是概念设计与交互说明，不是上架产品。</p></div>
+        <div data-en><p><strong>Done</strong>: the full journey, a trustworthy recording state, the &ldquo;finish&rdquo; moment with a clear next step, and the single-point page structure (speed, spin, trajectory together, so you can decide to keep or drop).</p><p><strong>Not built</strong>: no installable iOS / Apple Watch build, no online demo. Speed, spin and trajectory are concept descriptions, not shipped capability.</p><p>This page is a concept and interaction spec, not a released product.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s6">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">6</span>
+        <span class="c-sec__title">
+          <span data-zh>如果重来</span><span data-en>If I did it again</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p>我会先做一个只有「录 + 标记」的可运行原型，在真实球场上用一次。</p><p>因为整个设计赌在一个假设上：<strong>人会在打球间隙点一下手机</strong>。这个假设没被真实验证。如果实际没人愿意点，后面所有赛后体验都不重要。</p><p>用真机验证这一个动作，比继续完善赛后的信息层级更有价值。</p></div>
+        <div data-en><p>I'd build a prototype with only record and mark, and use it on a real court once.</p><p>The whole design bets on one assumption: <strong>that someone will tap a phone between points</strong>. That hasn't been tested. If nobody taps, none of the post-match experience matters.</p><p>Validating that single action on device is worth more than polishing the post-match hierarchy.</p></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="l-wrap">
+  <nav class="c-casenext" aria-label="案例导航">
+    <a href="../#work">&larr; <span data-zh>返回作品</span><span data-en>All work</span></a>
+    <a href="image-routing.html">
+      <span data-zh>下一个：理赔影像智能分流 &rarr;</span><span data-en>Next: Claims Image Routing &rarr;</span>
+    </a>
+  </nav>
+</div>
+
+</main>
+
+<footer class="l-wrap c-foot">
+  <span>© 2026 <span data-zh>星宇</span><span data-en>Xingyu</span></span>
+  <span class="c-foot__links">
+    <a href="../#work"><span data-zh>全部作品</span><span data-en>All work</span></a>
+    <a href="https://github.com/fengbaoYao" target="_blank" rel="noopener noreferrer"><span data-zh>源码</span><span data-en>Source</span> ↗</a>
+  </span>
+</footer>
+
+<script src="../site.js"></script>
+</body>
+</html>

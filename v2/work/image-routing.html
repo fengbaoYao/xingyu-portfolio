@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>理赔影像智能分流 — 星宇</title>
+<meta name="description" content="先判断每张影像要不要读字，再把模型调用用在该读的那一批。用漏检而不是准确率做验收口径。">
+<link rel="canonical" href="https://fengbaoyao.github.io/xingyu-portfolio/v2/work/image-routing.html">
+<link rel="icon" type="image/png" sizes="512x512" href="../../portfolio-assets/portrait.png">
+<link rel="apple-touch-icon" href="../../portfolio-assets/portrait.png">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="星宇">
+<meta property="og:title" content="理赔影像智能分流 — 星宇">
+<meta property="og:description" content="先判断每张影像要不要读字，再把模型调用用在该读的那一批。用漏检而不是准确率做验收口径。">
+<meta property="og:url" content="https://fengbaoyao.github.io/xingyu-portfolio/v2/work/image-routing.html">
+<meta property="og:image" content="https://fengbaoyao.github.io/xingyu-portfolio/portfolio-assets/claims-image-routing-hero-light-v1.webp">
+<meta property="og:locale" content="zh_CN">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="理赔影像智能分流 — 星宇">
+<meta name="twitter:description" content="先判断每张影像要不要读字，再把模型调用用在该读的那一批。用漏检而不是准确率做验收口径。">
+<meta name="twitter:image" content="https://fengbaoyao.github.io/xingyu-portfolio/portfolio-assets/claims-image-routing-hero-light-v1.webp">
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="c-nav">
+  <div class="l-wrap c-nav__inner">
+    <a class="c-nav__brand" href="../">
+      <span class="c-nav__dot" aria-hidden="true"></span>
+      <span>星宇 / Xingyu</span>
+    </a>
+    <nav class="c-nav__links" aria-label="主导航">
+      <a href="../#work"><span data-zh>作品</span><span data-en>Work</span></a>
+      <a href="../#contact" data-optional><span data-zh>联系</span><span data-en>Contact</span></a>
+      <button class="c-lang" type="button" data-lang-toggle aria-label="Switch to English">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<header class="l-wrap c-case-head">
+  <p class="c-casenext__back">
+    <a href="../#work">&larr; <span data-zh>返回作品</span><span data-en>All work</span></a>
+  </p>
+
+  <div class="c-case-head__top">
+    <span class="c-state c-state--concept">
+      <span class="c-state__mark" aria-hidden="true">○</span>
+      <span data-zh>产品设计 · 内部上线观察</span><span data-en>Product design · rollout observed</span>
+    </span>
+    <span class="u-label">业务系统 · AI 决策</span>
+  </div>
+
+  <h1 class="c-case-head__title">理赔影像智能分流</h1>
+  <p class="c-case-head__lead">
+    <span data-zh>先判断每张影像要不要读字，再把调用用在该读的那一批。</span><span data-en>Decide which images need OCR first; spend model calls only on those.</span>
+  </p>
+
+  <div class="c-case-head__actions">
+    
+    <a class="c-btn c-btn--ghost" href="#s01"><span data-zh>看决策记录 &darr;</span><span data-en>Read the decisions &darr;</span></a>
+  </div>
+</header>
+
+<div class="l-wrap">
+  <div class="c-notice" role="note">
+    <span data-zh><strong>这是产品设计与评价口径说明。</strong>没有图片上传或 OCR 分流 Demo 可现场试用。</span><span data-en><strong>This is a product design and evaluation write-up.</strong> There is no image upload or OCR routing demo to try.</span>
+  </div>
+
+  <div class="c-facts">
+        <div class="c-facts__cell">
+      <div class="c-facts__label"><span data-zh>交付形态</span><span data-en>Form</span></div>
+      <div class="c-facts__value"><span data-zh>业务系统 · AI 决策</span><span data-en>Business system · AI decisioning</span></div>
+    </div>
+    <div class="c-facts__cell">
+      <div class="c-facts__label"><span data-zh>我的角色</span><span data-en>My role</span></div>
+      <div class="c-facts__value"><span data-zh>需求发起 · 产品负责人</span><span data-en>Requirement owner · product lead</span></div>
+    </div>
+    <div class="c-facts__cell">
+      <div class="c-facts__label"><span data-zh>当前状态</span><span data-en>Status</span></div>
+      <div class="c-facts__value"><span data-zh>产品设计 · 团队内已上线观察</span><span data-en>Product design · rolled out internally</span></div>
+    </div>
+    <div class="c-facts__cell">
+      <div class="c-facts__label"><span data-zh>可运行</span><span data-en>Runnable</span></div>
+      <div class="c-facts__value"><span data-zh>否 · 无公开试用入口</span><span data-en>No · no public demo</span></div>
+    </div>
+  </div>
+
+  <figure class="c-heroimg">
+    <img src="../../portfolio-assets/claims-image-routing-hero-light-v1.webp" alt="理赔影像智能分流示意" width="1600" height="686" loading="eager" decoding="async">
+  </figure>
+</div>
+
+<div class="l-wrap">
+
+  <section class="c-sec" id="s1">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">1</span>
+        <span class="c-sec__title">
+          <span data-zh>问题</span><span data-en>Problem</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p>理赔流程里，证件、票据这类标准影像已走现成 OCR。剩下的照片要先进视觉大模型，判断「这张图要不要读字」。</p><p>问题在于，很多照片根本不需要读字——一张现场破损照、一个室内全景。它们仍占着一次模型调用。</p><p>但直接砍掉调用也不行：真正需要读字的影像被漏掉，损失的是业务信息。</p></div>
+        <div data-en><p>In claims, structured images &mdash; IDs, invoices &mdash; already go through existing OCR. The rest hit a vision model first, to decide whether this image needs text read at all.</p><p>The problem: plenty of photos never need it. A damage close-up, a room overview. They still spend a call.</p><p>But cutting calls blindly is worse: the image that did need reading gets skipped, and the loss is business information.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s2">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">2</span>
+        <span class="c-sec__title">
+          <span data-zh>我的判断</span><span data-en>My call</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p>两类错误不等价。</p><ul><li>把不需要 OCR 的影像送去后续环节 → 多一次调用，成本可算</li><li>漏掉需要 OCR 的影像 → 丢失业务信息，代价不可逆</li></ul><p>所以评价口径必须是<strong>需 OCR 影像的召回率</strong>，不是整体分类准确率。</p><p>还有一个更基础的判断：<strong>分类回答「这张图是什么」，路由回答「下一步怎么处理」</strong>。用分类准确率评价路由，是在答错题。</p></div>
+        <div data-en><p>The two errors are not equivalent.</p><ul><li>Sending a no-OCR image downstream &rarr; one extra call, a countable cost</li><li>Missing an image that needed OCR &rarr; lost business information, not recoverable</li></ul><p>So the success metric has to be <strong>recall on images that need OCR</strong>, not overall classification accuracy.</p><p>A more basic distinction: <strong>classification answers &ldquo;what is this image&rdquo;; routing answers &ldquo;what happens next&rdquo;</strong>. Judging routing by classification accuracy is answering the wrong exam.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s3">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">3</span>
+        <span class="c-sec__title">
+          <span data-zh>取舍与代价</span><span data-en>Trade-offs</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p><strong>放弃了「整体准确率」这个更漂亮的指标。</strong></p><p>整体准确率通常更高、更好汇报。但它会把两类错误混在一起，掩盖漏检。</p><p>代价：验收要做专门的漏检标注，比跑一次整体准确率费事得多；汇报时数字也没那么漂亮。</p><p>换来的是：评价口径和真实损失对齐。</p></div>
+        <div data-en><p><strong>I gave up overall accuracy &mdash; the prettier number.</strong></p><p>Overall accuracy reads higher and reports better. It also blends the two error types and hides the misses.</p><p>The cost: acceptance needs dedicated miss-labelling, far more work than one accuracy run, and the reported figure looks worse.</p><p>What it buys: the metric lines up with the actual loss.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s4">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">4</span>
+        <span class="c-sec__title">
+          <span data-zh>怎么验证</span><span data-en>How I verified</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p>上线后看两件事，不看第三件：</p><ol><li><strong>该读的字有没有漏</strong> — 需 OCR 影像的召回率</li><li><strong>调用次数降了多少</strong> — 视觉大模型调用量</li><li>（不看）整体分类准确率 — 只作辅助参考</li></ol><p>因为路由的目标是「下一步处理对不对」，不是「这张图认得多准」。</p></div>
+        <div data-en><p>Two things watched after launch, one deliberately not:</p><ol><li><strong>Did we miss text that needed reading</strong> &mdash; recall on OCR-required images</li><li><strong>How far did calls drop</strong> &mdash; vision model call volume</li><li>(Not watched) overall classification accuracy &mdash; auxiliary only</li></ol><p>Because routing is judged on &ldquo;is the next step right&rdquo;, not &ldquo;how well is this image classified&rdquo;.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s5">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">5</span>
+        <span class="c-sec__title">
+          <span data-zh>结果与边界</span><span data-en>What works, what doesn't</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p><strong>观察到</strong>：视觉大模型调用量下降约 25%。</p><p><strong>这个数字的边界</strong>：这是<strong>调用次数</strong>，不是账单金额。调用量下降不等于费用同比下降——不同分辨率、不同模型档位的单价不同。</p><p><strong>还不可对外验证</strong>：没有公开试用入口；系统在团队内运行，不是公开产品；没有委托方或客户名称可披露。</p></div>
+        <div data-en><p><strong>Observed</strong>: vision model call volume fell roughly 25%.</p><p><strong>What that number is not</strong>: it is <strong>call count</strong>, not billing. Fewer calls does not mean proportionally lower cost &mdash; unit price varies by resolution and model tier.</p><p><strong>Not externally verifiable</strong>: no public demo; the system runs inside a team, not as a public product; no client or business unit can be named.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-sec" id="s6">
+    <div class="l-split">
+      <div class="c-sec__label">
+        <span class="c-sec__num">6</span>
+        <span class="c-sec__title">
+          <span data-zh>如果重来</span><span data-en>If I did it again</span>
+        </span>
+      </div>
+      <div class="c-sec__body">
+        <div data-zh><p>我会在需求阶段就把「漏检样本怎么收集」定下来，而不是等到验收。</p><p>因为召回率成立的前提，是能拿到足够多「该读但没读」的样本。这需要业务方从一开始就参与标注。事后补，样本质量和数量都不够。</p><p>更早把这件事写进协作约定，比事后解释「为什么这个指标更重要」有用。</p></div>
+        <div data-en><p>I'd settle how miss-samples get collected during requirements, not at acceptance.</p><p>Recall only works if you have enough &ldquo;should have been read but wasn't&rdquo; examples. That needs the business side labelling from day one. Collected afterwards, both quality and volume fall short.</p><p>Writing that into the collaboration agreement early beats explaining later why the metric matters.</p></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="l-wrap">
+  <nav class="c-casenext" aria-label="案例导航">
+    <a href="../#work">&larr; <span data-zh>返回作品</span><span data-en>All work</span></a>
+    <a href="media-to-notes.html">
+      <span data-zh>下一个：Media to Notes &rarr;</span><span data-en>Next: Media to Notes &rarr;</span>
+    </a>
+  </nav>
+</div>
+
+</main>
+
+<footer class="l-wrap c-foot">
+  <span>© 2026 <span data-zh>星宇</span><span data-en>Xingyu</span></span>
+  <span class="c-foot__links">
+    <a href="../#work"><span data-zh>全部作品</span><span data-en>All work</span></a>
+    <a href="https://github.com/fengbaoYao" target="_blank" rel="noopener noreferrer"><span data-zh>源码</span><span data-en>Source</span> ↗</a>
+  </span>
+</footer>
+
+<script src="../site.js"></script>
+</body>
+</html>
