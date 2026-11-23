@@ -306,7 +306,7 @@ code {
   max-width: 34em; margin: 0 0 28px;
 }
 
-/* Portrait (borderless, blended into paper background) */
+/* Portrait (borderless dual-view, blended into paper background) */
 .portrait {
   margin: 0;
   background: transparent;
@@ -314,11 +314,53 @@ code {
   padding: 0;
   box-shadow: none;
 }
-.portrait .p-img {
-  display: block;
+.portrait-frame {
+  position: relative;
+  aspect-ratio: 10 / 9;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+}
+.portrait-frame .p-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
   mix-blend-mode: multiply;
+  transition: opacity .5s var(--ease);
+}
+.portrait-frame .p-work { opacity: 1; }
+.portrait-frame .p-life { opacity: 0; }
+.portrait[data-view="life"] .p-work { opacity: 0; }
+.portrait[data-view="life"] .p-life { opacity: 1; }
+.portrait-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 0;
+}
+.portrait-switch {
+  display: inline-flex;
+  padding: 3px;
+  background: rgba(21, 23, 20, .06);
+  border-radius: 999px;
+}
+.portrait-switch button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: 500 var(--fs-micro)/1 var(--sans);
+  padding: 6px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease, box-shadow .18s ease;
+}
+.portrait-switch button[aria-pressed="true"] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(21, 23, 20, .10);
 }
 
 /* ---------- HOMEPAGE: PROOF STRIP (3 HARD NUMBERS) ---------- */
@@ -1269,6 +1311,22 @@ tbody tr:last-child td { border-bottom: 0; }
   border:1px solid rgba(243, 241, 235, .14);
   padding:5px 10px;
   border-radius:999px;
+}
+.skill-tech-footer {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  padding:14px 26px;
+  background:rgba(28, 35, 31, .75);
+  border-top:1px solid var(--night-line);
+}
+.skill-tech-label {
+  font-family:var(--mono);
+  font-size:.75rem;
+  letter-spacing:.04em;
+  color:var(--night-muted);
 }
 .feature-project { border:1px solid var(--line); background:var(--surface); padding:clamp(22px,3vw,42px); margin-bottom:24px; }
 .feature-top { display:grid; grid-template-columns:1fr .8fr; gap:32px; align-items:center; }

@@ -101,6 +101,14 @@
       });
     });
 
+    var pFrame = fig.querySelector('.portrait-frame');
+    if (pFrame) {
+      pFrame.addEventListener('click', function () {
+        var cur = fig.getAttribute('data-view') === 'life' ? 'work' : 'life';
+        setView(cur, true);
+      });
+    }
+
     window.addEventListener('wheel', function (e) { if (e.deltaY > 0) intent = true; }, { passive: true });
     window.addEventListener('touchstart', function (e) { touchY = e.touches[0].clientY; }, { passive: true });
     window.addEventListener('touchmove', function (e) {
