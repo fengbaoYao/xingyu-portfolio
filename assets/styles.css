@@ -1193,7 +1193,10 @@ tbody tr:last-child td { border-bottom: 0; }
   .js-reveal .reveal { opacity: 1; transform: none; }
 }
 
-/* AI / Agent 产品主页：浅色建筑感五维闭环架构 + 动态流程 */
+/* AI / Agent 产品主页：浅色建筑感五维闭环架构 + 点击触发粒子流转动效 */
+#work {
+  border-top: 1px solid var(--line);
+}
 .sec-skills {
   background:
     radial-gradient(ellipse 88% 42% at 50% 0%, rgba(27, 77, 56, .055), transparent 72%),
@@ -1217,6 +1220,22 @@ tbody tr:last-child td { border-bottom: 0; }
     0 1px 0 rgba(255, 255, 255, .9) inset,
     0 18px 40px -24px rgba(21, 35, 26, .18);
   overflow: hidden;
+}
+.arch-fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+}
+.skill-arch-bar,
+.arch-feedback-arc,
+.arch-flow,
+.arch-bus,
+.arch-base {
+  position: relative;
+  z-index: 2;
 }
 .skill-arch::before {
   content: "";
@@ -1243,8 +1262,10 @@ tbody tr:last-child td { border-bottom: 0; }
   height: 8px;
   border-radius: 50%;
   background: #1f8a5b;
-  box-shadow: 0 0 0 0 rgba(31, 138, 91, .45);
-  animation: archBeacon 2.4s ease-out infinite;
+  transition: transform .25s var(--ease);
+}
+.arch-live-dot.is-pinging {
+  animation: archBeacon .68s ease-out 1;
 }
 .arch-hint {
   font-family: var(--mono);
@@ -1253,7 +1274,6 @@ tbody tr:last-child td { border-bottom: 0; }
 }
 
 .arch-feedback-arc {
-  position: relative;
   height: 44px;
   margin: 0 6px 2px;
 }
@@ -1271,12 +1291,21 @@ tbody tr:last-child td { border-bottom: 0; }
 .arc-pulse {
   fill: none;
   stroke: #1e8257;
-  stroke-width: 2.2;
+  stroke-width: 2.5;
   stroke-linecap: round;
-  stroke-dasharray: 46 210;
-  animation: archLoopBack 4.2s linear infinite;
+  stroke-dasharray: 120 960;
+  stroke-dashoffset: 120;
+  opacity: 0;
+}
+.arch-feedback-arc.is-flowing .arc-pulse {
+  opacity: 1;
+  animation: archLoopOnce .82s var(--ease) forwards;
 }
 .arc-arrow {
+  fill: rgba(27, 77, 56, .45);
+  transition: fill .25s ease, transform .25s ease;
+}
+.arch-feedback-arc.is-flowing .arc-arrow {
   fill: #1e8257;
 }
 .arch-loop-pill {
@@ -1294,6 +1323,13 @@ tbody tr:last-child td { border-bottom: 0; }
   box-shadow: 0 4px 12px -6px rgba(27, 77, 56, .25);
   padding: 3px 12px;
   border-radius: 999px;
+  transition: border-color .25s ease, background .25s ease, box-shadow .25s ease, transform .25s var(--ease);
+}
+.arch-feedback-arc.is-flowing .arch-loop-pill {
+  border-color: var(--accent);
+  background: #eaf5ef;
+  box-shadow: 0 8px 18px -8px rgba(27, 77, 56, .42);
+  transform: translateX(-50%) translateY(-1px);
 }
 
 .arch-flow {
@@ -1427,12 +1463,21 @@ tbody tr:last-child td { border-bottom: 0; }
 }
 .flow-pulse {
   stroke: #1f8a5b;
-  stroke-width: 2.2;
+  stroke-width: 2.5;
   stroke-linecap: round;
-  stroke-dasharray: 8 18;
-  animation: archFlowFwd 1.5s linear infinite;
+  stroke-dasharray: 22 44;
+  stroke-dashoffset: 66;
+  opacity: 0;
+}
+.arch-arrow.is-flowing .flow-pulse {
+  opacity: 1;
+  animation: archFlowOnce .52s var(--ease) forwards;
 }
 .flow-head {
+  stroke: rgba(27, 77, 56, .48);
+  transition: stroke .22s ease;
+}
+.arch-arrow.is-flowing .flow-head {
   stroke: #1f8a5b;
 }
 
@@ -1453,10 +1498,15 @@ tbody tr:last-child td { border-bottom: 0; }
 .bus-pulse {
   fill: none;
   stroke: #1f8a5b;
-  stroke-width: 2;
+  stroke-width: 2.3;
   stroke-linecap: round;
-  stroke-dasharray: 28 140;
-  animation: archBusRise 3.2s linear infinite;
+  stroke-dasharray: 84 360;
+  stroke-dashoffset: 84;
+  opacity: 0;
+}
+.arch-bus.is-flowing .bus-pulse {
+  opacity: 1;
+  animation: archBusOnce .68s var(--ease) forwards;
 }
 
 .arch-base {
@@ -1481,26 +1531,65 @@ tbody tr:last-child td { border-bottom: 0; }
   margin-left: auto;
 }
 
+.arch-node.is-passing {
+  border-color: rgba(31, 138, 91, .62);
+  background: #f4faf6;
+}
+.arch-node.is-passing .arch-ico {
+  background: rgba(27, 77, 56, .16);
+  transform: scale(1.06);
+}
+.arch-node.is-arriving,
+.arch-base.is-arriving {
+  animation: archArriveHalo .64s var(--ease) 1;
+}
+.arch-node.is-arriving .arch-ico,
+.arch-base.is-arriving .arch-ico {
+  animation: archIconPop .48s var(--ease) 1;
+}
+
 @keyframes archBeacon {
-  0% { box-shadow: 0 0 0 0 rgba(31, 138, 91, .45); }
-  70% { box-shadow: 0 0 0 7px rgba(31, 138, 91, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(31, 138, 91, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(31, 138, 91, .52); transform: scale(1.2); }
+  75% { box-shadow: 0 0 0 9px rgba(31, 138, 91, 0); transform: scale(1); }
+  100% { box-shadow: 0 0 0 0 rgba(31, 138, 91, 0); transform: scale(1); }
 }
-@keyframes archFlowFwd {
-  from { stroke-dashoffset: 26; }
-  to { stroke-dashoffset: 0; }
+@keyframes archFlowOnce {
+  0% { stroke-dashoffset: 34; opacity: .2; }
+  45% { opacity: 1; }
+  100% { stroke-dashoffset: -30; opacity: 0; }
 }
-@keyframes archLoopBack {
-  from { stroke-dashoffset: 0; }
-  to { stroke-dashoffset: -256; }
+@keyframes archLoopOnce {
+  0% { stroke-dashoffset: 120; opacity: .2; }
+  35% { opacity: 1; }
+  100% { stroke-dashoffset: -920; opacity: 0; }
 }
-@keyframes archBusRise {
-  from { stroke-dashoffset: 0; }
-  to { stroke-dashoffset: -168; }
+@keyframes archBusOnce {
+  0% { stroke-dashoffset: 84; opacity: .2; }
+  40% { opacity: 1; }
+  100% { stroke-dashoffset: -360; opacity: 0; }
+}
+@keyframes archArriveHalo {
+  0% { box-shadow: 0 0 0 0 rgba(31, 138, 91, .34), 0 14px 28px -14px rgba(27, 77, 56, .34); }
+  100% { box-shadow: 0 0 0 14px rgba(31, 138, 91, 0), 0 14px 28px -14px rgba(27, 77, 56, .34); }
+}
+@keyframes archIconPop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.18) rotate(-4deg); }
+  100% { transform: scale(1.04) rotate(0deg); }
 }
 @keyframes skillPanelIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
+}
+@keyframes skillCardRise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.skill-pillar.is-entering .skill-node,
+.skill-pillar.is-entering .skill-step,
+.skill-pillar.is-entering .skill-matrix-table tbody tr {
+  animation: skillCardRise .36s var(--ease) both;
+  animation-delay: var(--stagger, 0ms);
 }
 
 .skill-toolbar {
@@ -2191,3 +2280,86 @@ tbody tr:last-child td { border-bottom: 0; }
   .notes-visual-grid, .about-band { grid-template-columns: 1fr; }
   .note-visual-card { padding: 16px; }
 }
+
+/* 原版鼠标拖尾与点击粒子迸发（保留原生指针） */
+.cur-trail {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+}
+.cur-trail-item {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 8px;
+  padding: 4px;
+  background: rgba(253, 252, 249, .88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 24px -10px rgba(21, 23, 20, .28);
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  animation: trail-pop .8s cubic-bezier(.25, .6, .3, 1) forwards;
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+@keyframes trail-pop {
+  0%   { opacity: 0;   transform: scale(1.35) rotate(var(--r, 0deg)) translateY(0); }
+  8%   { opacity: .72; transform: scale(1.35) rotate(var(--r, 0deg)) translateY(0); }
+  22%  { opacity: .62; transform: scale(1)    rotate(var(--r, 0deg)) translateY(0); }
+  55%  { opacity: .4;  transform: scale(.7)   rotate(var(--r, 0deg)) translateY(-3px); }
+  100% { opacity: 0;   transform: scale(.32)  rotate(var(--r, 0deg)) translateY(-10px); }
+}
+
+.cur-burst {
+  position: fixed;
+  inset: 0;
+  z-index: 9995;
+  pointer-events: none;
+}
+.cur-burst-ring {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(27, 77, 56, .48);
+  animation: burst-ring .55s var(--ease) forwards;
+  will-change: transform, opacity;
+}
+@keyframes burst-ring {
+  0%   { opacity: .85; transform: scale(.25); }
+  100% { opacity: 0;   transform: scale(1.75); }
+}
+.cur-burst-item {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 8px;
+  padding: 4px;
+  background: rgba(253, 252, 249, .92);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px -10px rgba(21, 23, 20, .28);
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  animation: burst-pop .95s cubic-bezier(.18, .85, .25, 1) forwards;
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+@keyframes burst-pop {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.3) rotate(0deg); }
+  18%  { opacity: 1; transform: translate(calc(var(--dx, 0px) * .45), calc(var(--dy, 0px) * .45)) scale(1) rotate(calc(var(--r, 0deg) * .4)); }
+  65%  { opacity: 1; transform: translate(var(--dx, 0px), var(--dy, 0px)) scale(1) rotate(var(--r, 0deg)); }
+  100% { opacity: 0; transform: translate(calc(var(--dx, 0px) * 1.12), calc(var(--dy, 0px) * 1.12 + 10px)) scale(.82) rotate(var(--r, 0deg)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cur-trail, .cur-burst, .arch-fx-canvas { display: none !important; }
+}
+
