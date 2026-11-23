@@ -1238,6 +1238,7 @@ tbody tr:last-child td { border-bottom: 0; }
   min-width:0;
   transition:background .18s ease;
 }
+.skill-node.span-2 { grid-column:1 / -1; }
 .skill-node:hover { background:#212924; }
 .skill-node h4 {
   font-size:1rem;
