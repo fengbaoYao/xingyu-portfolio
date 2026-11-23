@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>rstack — 自进化 AI 编程工作流 — 星宇</title>
-<meta content="Claude 主管负责想清楚与写七栏契约，Codex 执行者负责侦察与施工；配合 weekly-retro 每周扫描会话、拐点归因、三层分诊与反事实重放，把踩过的坑沉淀成持续自进化的环境资产。" name="description"/>
+<title>rstack 双 AI 协同与每周错题复盘系统 — 星宇</title>
+<meta content="星宇为个人全栈开发搭建的双 AI 协同与自进化研发流水线：先讲清楚怎么用「技术主管 + 施工队」分工解决单窗口上下文爆炸，再拆解每周自动扫描对话日志、给环境打补丁并用历史错题回放验收的四期真实账本。" name="description"/>
 <link href="../../assets/img/favicon.png" rel="icon"/>
 <link href="../../assets/styles.css" rel="stylesheet"/>
 <script defer="" src="../../assets/site.js"></script>
@@ -13,196 +12,363 @@
 <body>
 <a class="skip" href="#main">跳到正文</a>
 <div aria-live="polite" class="sr-only" id="live-status"></div>
+
 <header class="site-head">
-<div class="wrap">
-<a class="brand" href="../../index.html"><i aria-hidden="true"></i>xingyu</a>
-<nav aria-label="案例翻页" class="pager">
-<span class="mono">04 / 05</span>
-<a aria-label="上一个：Court Diary" href="../court-diary.html">← <span class="lbl">Court Diary</span></a>
-<a aria-label="下一个：Media to Notes" href="../media-to-notes.html"><span class="lbl">Media to Notes</span> →</a>
-</nav>
-</div>
+  <div class="wrap">
+    <a class="brand" href="../../index.html"><i aria-hidden="true"></i>xingyu</a>
+    <nav aria-label="案例翻页" class="pager">
+      <span class="mono">04 / 05</span>
+      <a aria-label="上一个：Court Diary" href="../court-diary.html">← <span class="lbl">Court Diary</span></a>
+      <a aria-label="下一个：Media to Notes" href="../media-to-notes.html"><span class="lbl">Media to Notes</span> →</a>
+    </nav>
+  </div>
 </header>
 <div class="case-bar">
-<div class="wrap">
-<a class="back" href="../../index.html#work">← 返回全部作品</a>
-<span class="mono muted">04 · 双 Agent 工作流 · 自进化复盘闭环</span>
+  <div class="wrap">
+    <a class="back" href="../../index.html#work">← 返回全部作品</a>
+    <span class="mono muted">04 · 双 AI 协同与自进化开发流 · 个人日用工程底座</span>
+  </div>
 </div>
-</div>
+
 <main id="main">
 <div class="wrap">
-<section aria-labelledby="t" class="case-hero">
-<div class="case-hero-top">
-<span class="eyebrow">04 / AGENT WORKFLOW · 个人工程环境</span>
-<span class="status st-ship">日用自进化环境 · 连续 4 期追踪（W45–W47）</span>
-</div>
-<h1 id="t">rstack — 把 AI 编程环境做成自进化系统</h1>
-<p class="case-sub">通过分工、复核和定期回看，减少 AI 编程中重复查工具和反复纠错。</p>
-<div aria-label="核心实测指标" class="metric-row four">
-<div class="metric-box">
-<span class="m-val">↓ 55%</span>
-<span class="m-lbl">查 <code>--help</code> / 千次调用（36.4 → 16.2）</span>
-</div>
-<div class="metric-box">
-<span class="m-val">↓ 78%</span>
-<span class="m-lbl">权限/安全被拦 / 千次调用（3.2 → 0.7）</span>
-</div>
-<div class="metric-box">
-<span class="m-val">3 / 3</span>
-<span class="m-lbl">W47 补丁反事实重放验收全部通过</span>
-</div>
-<div class="metric-box is-warn">
-<span class="m-val">≤ 5 条/期</span>
-<span class="m-lbl">补丁逐条人拍板 · 同一任务 2 轮返工熔断</span>
-</div>
-</div>
-<dl class="facts">
-<div><dt>双 Agent 分工</dt><dd><b>Claude（主管）</b>拍板、写七栏契约、做对外写操作；<b>Codex（gpt-6.1-sol）</b>侦察、施工与 E2E</dd></div>
-<div><dt>复盘三层节奏</dt><dd>需求级 <code>wrapup</code> · 周度主力 <code>weekly-retro</code>（八步闭环）· 每 2 期元调优 <code>retro-tune</code></dd></div>
-<div><dt>核心组件</dt><dd><code>claude-lead</code> + <code>weekly-retro</code> 技能、2 枚 Claude Code hook、Python/Bash 台账与回放脚本</dd></div>
-<div><dt>设计信条</dt><dd>主上下文最贵，只用来思考决策；怪环境不怪模型，动态补丁优先于静态文档</dd></div>
-</dl>
-</section>
-<figure class="case-figure">
-<div aria-label="点击放大查看 rstack 全局视角架构图" class="fig-zoom" role="button" tabindex="0">
-<img alt="rstack 全局视角架构图：日常任务、本机全量数据来源、weekly-retro 八步循环与动态优先环境资产沉淀" height="1182" src="../../assets/img/rstack/rstack-overview.webp" width="1330"/>
-<span class="zoom-pill">点击放大原图</span>
-</div>
-<figcaption>
-<span>图 1 · 全局视角：日常任务 → 数据来源 → <code>weekly-retro</code> 八步闭环 → 动态优先沉淀环境资产。</span>
-<span class="mono">FIG 01 // OVERVIEW</span>
-</figcaption>
-</figure>
-<div class="case-layout">
-<aside aria-label="本页目录" class="toc">
-<span class="toc-title">本页目录</span>
-<ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol>
-</aside>
-<div class="prose"><details class="toc-mobile"><summary>展开本页目录</summary><ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol></details><section class="chapter" id="problem"><span class="eyebrow">01 / 项目背景 &amp; 业务目标</span><h2>项目背景 &amp; 业务目标</h2><p>AI 编程时，主会话越长，反复读取上下文的开销越高；一次口头纠错也常在下个任务重新发生。目标是减少重复查工具和权限拦截，让经验在后续任务中发挥作用。</p><p>这是个人独立设计和维护的 AI 编程工作流与本地环境。</p></section><section class="chapter" id="analysis"><span class="eyebrow">02 / 问题分析 &amp; 需求挖掘</span><h2>问题分析 &amp; 需求挖掘</h2><p>查看个人会话账单后，发现缓存读取约占等效开销的 80%，而读代码、只读查询和构建测试占据大量工作；问题不只是模型回答速度。</p><p>单次增加提示词不能保证下次生效，因此优先处理可重复出现的操作与错误，而不是不断扩大主会话。</p></section><section class="chapter" id="decisions"><span class="eyebrow">03 / 方案设计 &amp; 核心权衡</span><h2>方案设计 &amp; 核心权衡</h2><p>将决策与复核留在主会话，把大量代码调查和实施交给另一工具；每周回看会话，把重复问题变成脚本、检查或使用指引。</p><p>分工能控制主会话负担，但会引入交接成本，因此先写清范围和约束，再审核结果；对高风险操作保留人工决策，并限制反复返工。</p><figure class="fig">
-<div aria-label="点击放大查看日常执行双 Agent 泳道图" class="fig-zoom is-portrait" role="button" tabindex="0">
-<img alt="双 Agent 分工泳道图：Claude 接需求、拍板、写契约、复核、对外写操作与记账；codex 侦察、施工、端到端验证" height="1419" loading="lazy" src="../../assets/img/rstack/claude-lead-flow.webp" width="1108"/>
-<span class="zoom-pill">点击放大原图</span>
-</div>
-<figcaption>
-<span>图 2 · 日常分工泳道：虚线表示续派同一会话（<code>RESUME</code>）或沿用任务 ID 返工（<code>TASK</code>），两轮不达标立即熔断。</span>
-<span class="mono">FIG 02 // CLAUDE-LEAD</span>
-</figcaption>
-</figure><figure class="fig">
-<div aria-label="点击放大查看每周复盘机制全景图" class="fig-zoom" role="button" tabindex="0">
-<img alt="weekly-retro 完整机制图：输入数据源、八步循环、5 类失败点、拐点四问卡、三层分诊与 12 项观测指标" height="1200" loading="lazy" src="../../assets/img/rstack/weekly-retro-detail.webp" width="1311"/>
-<span class="zoom-pill">点击放大原图</span>
-</div>
-<figcaption>
-<span>图 3 · <code>weekly-retro</code> 八步闭环：回填旧账 → 扫会话 → 捞 5 类失败点 → 拐点四问卡 → 三层分诊 → 人拍板 → 反事实重放 → 记账。</span>
-<span class="mono">FIG 03 // WEEKLY-RETRO</span>
-</figcaption>
-</figure><figure class="fig">
-<div aria-label="点击放大查看 W45–W47 观测指标趋势图" class="fig-zoom" role="button" tabindex="0">
-<img alt="W45-W47 七项观测指标趋势图" height="848" loading="lazy" src="../../assets/img/rstack/metrics-trend.webp" width="1855"/>
-<span class="zoom-pill">点击放大原图</span>
-</div>
-<figcaption>
-<span>图 4 · 4 期趋势（越低越好）：空心点为早期正则预标注（漏标偏低），实心点为人工判读或脚本精确统计。</span>
-<span class="mono">FIG 04 // METRICS W45–W47</span>
-</figcaption>
-</figure></section><section class="chapter" id="delivery"><span class="eyebrow">04 / 落地推进 &amp; 风险处理</span><h2>落地推进 &amp; 风险处理</h2><p>从个人真实会话和工具日志中找问题，按周整理，逐项决定是否修改；对采纳的改动用新的只读会话重新验证。</p><p>早期部分人工介入指标依赖正则预标注，容易漏判，后续改为人工通读；工具错误率也必须持续观察，不能只展示改善的指标。</p></section><section class="chapter" id="retro"><span class="eyebrow">05 / 结果数据 + 复盘</span><h2>结果数据 + 复盘</h2><p>W45 至 W47 的四期记录中，每千次工具调用查帮助的次数从 36.4 降至 16.2（约 55%），权限或安全拦截从 3.2 降至 0.7（约 78%）；W47 的 3 个回放题通过。</p><p>同期工具报错从每千次 11.2 上升至 20.2，且任务内容、统计方式有变化，不能把趋势直接归因为某一项改动。复盘的价值在于持续验证，下一步应改善报错和统计口径。</p></section><details class="chapter"><summary>附录：安装与参考资料</summary><section class="chapter" id="setup">
-<span class="eyebrow">05 / SETUP &amp; COMMANDS</span>
-<h2>目录结构、安装与日常命令速查。</h2>
-<div class="code-block">
-<div class="code-head">
-<span>bash · 一键安装技能与可选 hook</span>
-<button class="btn-copy" data-copy="#code-install" type="button">复制</button>
-</div>
-<pre id="code-install"><code># 软链安装技能到 ~/.claude/skills 和 ~/.codex/skills（已有同名自动跳过）
-bash install.sh
+  <section aria-labelledby="t" class="case-hero">
+    <div class="case-hero-top">
+      <span class="eyebrow">04 / AGENT WORKFLOW · 个人全栈提效底座</span>
+      <span class="status st-ship">日用自进化环境 · 连续 4 期真实账本追踪</span>
+    </div>
+    <h1 id="t">rstack — 把 AI 编程从「单窗口硬聊」变成「双人分工 + 每周错题复盘」</h1>
+    <p class="case-sub"><strong>先说这是干什么的：</strong>这是我为了在业余时间一个人高效开发多个全栈项目，给自己搭的一套「AI 研发团队管理系统」。很多人用 AI 写代码，习惯在一个聊天窗口里从头聊到尾——结果翻几十个文件后窗口越来越卡、开销越来越贵，而且今天刚骂过它的错误，明天新开个窗口它照样犯。所以我用带团队的思路改造了我的开发环境：<strong>让 Claude 当「技术主管」只管和我定方案、写派工单，把翻代码和改文件的重活全派给后台的 Codex「施工队」；每周五晚上再用脚本自动扫一遍全周对话记录，把 AI 老犯的错封成顺手小工具，让开发环境每周自己进化一点点。</strong></p>
 
-# 可选：幂等合并 PreToolUse 守卫与委派提醒 hook（修改前自动备份）
-bash install.sh --hooks</code></pre>
-</div>
-<div class="code-block">
-<div class="code-head">
-<span>claude-lead · 派发、续派、记账与分析</span>
-<button class="btn-copy" data-copy="#code-lead" type="button">复制</button>
-</div>
-<pre id="code-lead"><code># 新派任务（后台运行等通知，不轮询）
+    <div aria-label="核心实测指标" class="metric-row four">
+      <div class="metric-box">
+        <span class="m-val">↓ 55%</span>
+        <span class="m-lbl">AI 因为不会用工具而查帮助（<code>--help</code>）的频次大幅下降</span>
+      </div>
+      <div class="metric-box">
+        <span class="m-val">↓ 78%</span>
+        <span class="m-lbl">AI 越界执行高危命令被拦截的次数降到极低水位</span>
+      </div>
+      <div class="metric-box">
+        <span class="m-val">3 / 3 全过</span>
+        <span class="m-lbl">用当周真翻过车的 3 道历史原题重跑验收，100% 治好</span>
+      </div>
+      <div class="metric-box is-warn">
+        <span class="m-val">2 轮熔断</span>
+        <span class="m-lbl">施工 AI 连续返工 2 次没搞定立刻停手，防死循环乱改</span>
+      </div>
+    </div>
+
+    <dl class="facts">
+      <div><dt>我的角色</dt><dd>个人独立设计与日用实践（把产品经理的「流程管控与复盘机制」落地到自己的 AI 编程环境里）</dd></div>
+      <div><dt>双 AI 怎么分工</dt><dd><b>Claude（主管）</b>负责聊需求、定方案、写十几行派工单并验收；<b>Codex（施工队）</b>负责查代码库、改文件与跑测试</dd></div>
+      <div><dt>每周怎么进化</dt><dd>每周五跑自动化脚本扫描全周会话 → 揪出高频卡壳点 → 优先做成傻瓜短命令或拦截器 → 历史错题重跑验效</dd></div>
+      <div><dt>核心设计信条</dt><dd>主窗口的注意力最贵，只用来做决策；AI 老犯错「先怪环境不怪模型」，少写没人看的长篇提示词规矩</dd></div>
+    </dl>
+  </section>
+
+  <figure class="case-figure">
+    <div aria-label="点击放大查看 rstack 全局视角架构图" class="fig-zoom" role="button" tabindex="0">
+      <img alt="rstack 全局视角架构图：日常双 AI 分工执行、本机全量会话日志扫描、每周复盘闭环与环境工具沉淀" height="1182" src="../../assets/img/rstack/rstack-overview.webp" width="1330"/>
+      <span class="zoom-pill">点击放大原图</span>
+    </div>
+    <figcaption>
+      <span>图 1 · rstack 全局运作图：平时用「主管 + 施工队」写代码攒下真实日志 → 每周五自动扫描找痛点 → 给环境打补丁并用历史错题重跑验证。</span>
+      <span class="mono">FIG 01 // OVERVIEW</span>
+    </figcaption>
+  </figure>
+
+  <div class="case-layout">
+    <aside aria-label="本页目录" class="toc">
+      <span class="toc-title">本页目录</span>
+      <ol>
+        <li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li>
+        <li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li>
+        <li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li>
+        <li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li>
+        <li><a href="#retro">05 · 结果数据 + 复盘</a></li>
+      </ol>
+    </aside>
+
+    <div class="prose">
+      <details class="toc-mobile">
+        <summary>展开本页目录</summary>
+        <ol>
+          <li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li>
+          <li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li>
+          <li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li>
+          <li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li>
+          <li><a href="#retro">05 · 结果数据 + 复盘</a></li>
+        </ol>
+      </details>
+
+      <!-- 01 项目背景 & 业务目标 -->
+      <section class="chapter" id="problem">
+        <span class="eyebrow">01 / 项目背景 &amp; 业务目标</span>
+        <h2>一个人业余写好几个全栈项目，如果只会「跟单个 AI 窗口死磕」，精力很快就被耗光了。</h2>
+        <p>过去这一年，我在白天忙完公司金融科技条线的工作之余，晚上和周末一个人把 FinDesk 四代投研工作台、Court Diary 手机手表应用和几个工具全写了出来。之所以能有这个产出密度，重度依赖 Claude Code 和 Codex 这类 AI 编程助手。</p>
+        <p>但用得越深，我越发现大家平时默认的「开一个 AI 窗口，让它从看代码、想方案到改文件一肩挑」的用法，在稍微复杂一点的真实项目里会遇到两个极其搞心态的瓶颈：</p>
+        <ul>
+          <li><b>第一，主窗口像滚雪球一样越用越蠢：</b>让同一个会话去翻十几个源码文件、跑几屏报错日志后，上下文瞬间塞满几万字。到了下半场，AI 已经记不清我们最开始定的产品边界了，顾头不顾尾。</li>
+          <li><b>第二，口头调教的经验完全留不下来：</b>今天花十分钟教它「调我们内部接口要先带哪个参数」「别直接改线上配置」，它在这个窗口里听懂了；明天新开一个窗口做新需求，它立刻恢复出厂设置，一模一样的坑再踩一遍。</li>
+        </ul>
+        <p>所以我决定把这套日常开发环境当成一个真正的<strong>「内部提效产品」</strong>来重构。目标很直接：① 护住主决策窗口的清醒度，别让查代码和跑测试的脏数据撑爆上下文；② 建立一套能用数据衡量的「每周错题改造机制」，让 AI 摸索工具命令（查 <code>--help</code>）、越界犯错和让我中途插手纠偏的频率实打实降下来。</p>
+      </section>
+
+      <!-- 02 问题分析 & 需求挖掘 -->
+      <section class="chapter" id="analysis">
+        <span class="eyebrow">02 / 问题分析 &amp; 需求挖掘</span>
+        <h2>拉出我自己的真实 Token 账单才发现：80% 的钱和算力，居然都花在「反复重读废话」上！</h2>
+        <p>为了搞清楚单窗口模式到底亏在哪，我写了个小脚本，把自己本机存下来的历史 AI 对话账单和工具调用日志全拉出来做了一次体检，发现了两个很有意思的事实：</p>
+
+        <div class="card-grid">
+          <div class="sub-card">
+            <span class="sc-tag">账单真相 01 · 80% 开销在重读历史</span>
+            <h4>真正写代码只占个位数，全在搬运日志</h4>
+            <p>算下来，主窗口大约 <b>80%</b> 的等效开销根本不是 AI 输出新代码，而是每次发消息时反复读取被撑大的历史上下文（缓存读）——其中翻找旧代码占了约 40%，查状态占 15%，跑构建测试日志占 20%，真正动手改文件只有个位数。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">账单真相 02 · 静态文档没人看</span>
+            <h4>往规则文件里塞 100 条叮嘱，AI 照样忘</h4>
+            <p>我试过每次踩坑后往全局说明文档（比如 CLAUDE.md）里加一条「注意不要做 XX」。结果文档越写越长，不仅每次开局白占上下文，而且到了具体执行命令的那一秒，模型根本不会去翻前面的长篇戒律。</p>
+          </div>
+        </div>
+
+        <p>这两个发现让我彻底打消了「靠写一份超级提示词解决所有问题」的念头：<strong>想让主窗口聪明又省钱，就必须把「翻代码跑测试的苦力活」物理剥离出去；想让 AI 不重蹈覆辙，就不能只写静态文档，必须把高频卡点改造成它调用时必经的「顺手工具」或「当场拦截器」。</strong></p>
+      </section>
+
+      <!-- 03 方案设计 & 核心权衡 -->
+      <section class="chapter" id="decisions">
+        <span class="eyebrow">03 / 方案设计 &amp; 核心权衡</span>
+        <h2>平时靠「主管 + 施工队」双人分工，周末靠「扫日志 + 错题重跑」自动进化。</h2>
+        <p>整个 rstack 的设计完全脱胎于我在公司带研发团队的习惯，核心就两块：<strong>日常怎么派活（claude-lead）</strong>，以及<strong>周末怎么复盘改工具（weekly-retro）</strong>。里面有三个最关键的权衡取舍：</p>
+
+        <div class="decision">
+          <span class="eyebrow">权衡 01 · 日常怎么分工：为什么让 Claude 当「技术主管」，让 Codex 当「施工队」？</span>
+          <p class="dq">两个顶流编程 AI 放在一起，怎么配合才不会互相打架或者传话失真？</p>
+          <ul class="opts">
+            <li><b>混乱做法 · 想到哪用哪个，或者让主窗口带着几万字聊天记录去改代码</b>上下文一长就丢三落四，而且让后台 Agent 直接随便发版或改线上配置极容易闯祸。</li>
+            <li class="chosen"><b>我的方案 · 主管写「十几行派工契约」，施工队在独立沙箱干脏活 + 2 轮不过立停 ✓</b>在我的工作流里，<b>Claude（主管）</b>严禁自己去翻几十个文件——当它连续只读查看超过阈值时，系统会自动弹窗提醒它「该派活给施工队了」。主管只负责跟我敲定方案，然后写一份只有十几行的<strong>清晰派工单（写明背景、要改什么、绝对别碰什么、怎么算验收通过）</strong>发给后台的 <b>Codex（施工队）</b>。施工队翻完百来个文件、跑通测试后，只把精简的改动摘要和证据交回给主管复核；涉及发版、改外部配置等高风险动作，一律收归主管在台前执行。如果同一项任务施工队返工 <b>2 轮</b> 还没达标，立刻熔断停手，由我介入改方案，绝不让它们在后台无限烧钱打转。</li>
+          </ul>
+        </div>
+
+        <figure class="fig">
+          <div aria-label="点击放大查看日常执行双 Agent 泳道图" class="fig-zoom is-portrait" role="button" tabindex="0">
+            <img alt="双 Agent 分工泳道图：Claude 接需求、拍板、写契约、复核、对外写操作与记账；codex 侦察、施工、端到端验证" height="1419" loading="lazy" src="../../assets/img/rstack/claude-lead-flow.webp" width="1108"/>
+            <span class="zoom-pill">点击放大原图</span>
+          </div>
+          <figcaption>
+            <span>图 2 · 日常「主管 + 施工队」分工泳道：把翻代码库和跑测试的长日志全隔离在施工队那边，主管窗口永远干干净净。</span>
+            <span class="mono">FIG 02 // DUAL-AGENT FLOW</span>
+          </figcaption>
+        </figure>
+
+        <div class="decision">
+          <span class="eyebrow">权衡 02 · 踩了坑怎么改：为什么坚持「动态工具优先，静态文档兜底」？</span>
+          <p class="dq">每周五扫出 AI 老犯的毛病后，怎么改才能保证它下周真不犯了？</p>
+          <ul class="opts">
+            <li><b>偷懒做法 · 每次复盘完往提示词文档里追加几条「注意事项」</b>写起来最快，但文档越积越厚，AI 该忘还是忘。</li>
+            <li class="chosen"><b>我的方案 · 按「没看清 / 不会用 / 走错了」三层分诊，能写成脚本和拦截器的绝不写空话 ✓</b>我把 AI 犯的错分成三类来治：① 如果是<b>「工具太繁琐老不会用」</b>（表现为反复查 <code>--help</code>），我就把原本要敲五步的复杂命令封装成一个傻瓜短命令，它一下就能调对；② 如果是<b>「容易手滑做危险操作」</b>，我就写进前置拦截钩子（Hook），它刚要执行的瞬间当场拦下并把正确命令塞回给它；③ 只有实在没法写成代码的经验，才精简成两句话放进速查手册。同时规定<strong>每周最多只打 5 条补丁，且每一条都得我亲自点头</strong>，绝不让 AI 自己乱改我的开发环境。</li>
+          </ul>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">权衡 03 · 怎么确认补丁真管用：把历史翻车现场「时光倒流」重跑一遍（反事实重放）</span>
+          <p class="dq">打完补丁后，怎么知道是真的治好了，还是自我感觉良好？</p>
+          <ul class="opts">
+            <li><b>凭感觉验收 · 改完脚本或文档就宣布复盘结束</b>很多时候补丁写的触发条件根本没对上，下周遇到同样场景照样挂。</li>
+            <li class="chosen"><b>我的方案 · 抽出当周真翻过车的历史原题，在无头沙箱里做「补丁前 vs 补丁后」重放对比 ✓</b>每次复盘最后一步，我会把这周真栽过跟头的 3 个典型问题抽出来做成测试题：先确认没打补丁前确实会失败，再挂上新补丁开一个全新的干净会话重跑一遍——只有亲眼看到它直接走通、不再查帮助或撞墙，这条补丁才算验收过关。</li>
+          </ul>
+        </div>
+
+        <figure class="fig">
+          <div aria-label="点击放大查看 weekly-retro 八步复盘与重放流程图" class="fig-zoom" role="button" tabindex="0">
+            <img alt="weekly-retro 八步复盘流程图：扫描会话、定位摩擦拐点、三层分诊打补丁与反事实重放验收" height="1044" loading="lazy" src="../../assets/img/rstack/weekly-retro-detail.webp" width="1446"/>
+            <span class="zoom-pill">点击放大原图</span>
+          </div>
+          <figcaption>
+            <span>图 3 · 每周五晚上的自动化复盘流水线：从扫描本机对话日志、揪出卡壳拐点，到打补丁并用历史错题重跑验收。</span>
+            <span class="mono">FIG 03 // WEEKLY RETRO LOOP</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- 04 落地推进 & 风险处理 -->
+      <section class="chapter" id="delivery">
+        <span class="eyebrow">04 / 落地推进 &amp; 风险处理</span>
+        <h2>不仅每周给环境「做加法」，还要定期清理没用的死规矩「做减法」。</h2>
+        <p>这套系统从 2026 年 11 月初开始在我的主力开发机上实战运行，连续追踪了 4 个周期（W45 → W46 → W46b → W47）。在推进过程中，我发现并处理了两个很容易被忽视的风险：</p>
+        <ul>
+          <li><b>第一个风险：早期用正则表达式自动统计「我纠正了 AI 几次」，结果漏标了一大半。</b>最开始两期我图省事，用脚本搜「不对 / 错了 / 停」等关键词来算我的介入率，数字看着很美；后来我抽查原始对话才发现，很多时候我是换个委婉说法让它重做，正则根本抓不到。从第三期（W46b）开始，我果断把「用户纠正与空确认」改成由复盘模型逐条通读上下文人工复核，宁可数字难看一点，也要保证账本真实。</li>
+          <li><b>第二个风险：补丁越打越多，环境自己又变成新的负担。</b>为了防止规矩越攒越臃肿，我定了一条「新陈代谢规矩」——凡是连续 3 期一次都没触发过的拦截钩子，自动提议删掉；连续几期 100% 稳过的历史回放题自动降频；记忆索引文件一旦快涨到上限就强制瘦身。</li>
+        </ul>
+      </section>
+
+      <!-- 05 结果数据 + 复盘 -->
+      <section class="chapter" id="retro">
+        <span class="eyebrow">05 / 结果数据 + 复盘</span>
+        <h2>连续四期真实账本：工具摸索降了 55%，越界被拦降了 78%，涨了的坏指标也老实记在账上。</h2>
+        <p>因为每周写代码的工作量忽高忽低，看绝对次数没有意义，所以我全部折算成<strong>「每千次工具调用」或「每百条对话消息」的比率</strong>（全部越低越好）。连续跑了四期之后，账本上的变化非常扎实：</p>
+
+        <figure class="fig">
+          <div aria-label="点击放大查看 W45–W47 观测指标趋势图" class="fig-zoom" role="button" tabindex="0">
+            <img alt="W45-W47 七项观测指标趋势图" height="848" loading="lazy" src="../../assets/img/rstack/metrics-trend.webp" width="1855"/>
+            <span class="zoom-pill">点击放大原图</span>
+          </div>
+          <figcaption>
+            <span>图 4 · 连续四期（W45–W47）核心摩擦指标走势（越低代表越顺畅）：查命令帮助与越界被拦双双大幅下降。</span>
+            <span class="mono">FIG 04 // 4-PERIOD METRICS</span>
+          </figcaption>
+        </figure>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>我盯的核心痛点指标</th>
+                <th>统计口径</th>
+                <th>四期真实走势（W45 → W46 → W46b → W47）</th>
+                <th>变化结果</th>
+                <th>背后的大白话原因</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>AI 不会用命令去查 <code>--help</code></b></td>
+                <td>每千次工具调用</td>
+                <td><code>36.4 → 20.1 → 24.8 → 16.2</code></td>
+                <td><span class="trend good">↓ 55%</span></td>
+                <td>把常错的多步繁琐命令封成了傻瓜短脚本与速查小抄（第四期单周被调用 351 次），AI 不用再现猜参数</td>
+              </tr>
+              <tr>
+                <td><b>AI 越界操作被安全规则拦下</b></td>
+                <td>每千次工具调用</td>
+                <td><code>3.2 → 0.7 → 0.4 → 0.7</code></td>
+                <td><span class="trend good">↓ 78%</span></td>
+                <td>明确了主管与施工队的权限边界，配合前置守卫钩子，越界操作稳在极低水位</td>
+              </tr>
+              <tr>
+                <td><b>AI 没必要的「空确认」停下问我</b></td>
+                <td>每百条对话消息</td>
+                <td><code>1.4 → 6.0 → 1.2 → 1.3</code></td>
+                <td><span class="trend good">稳住低位</span></td>
+                <td>第二期一度飙到 6.0，及时明确了「什么情况直接干、什么情况才停下问」后立刻回落</td>
+              </tr>
+              <tr>
+                <td><b>我因为卡顿或没动静去追问进度</b></td>
+                <td>每百条对话消息</td>
+                <td><code>0.7 → 2.4 → 1.8 → 1.1</code></td>
+                <td><span class="trend flat">冲高回落</span></td>
+                <td>把后台施工改造成「主动汇报里程碑、不沉默干等」后，追问明显减少</td>
+              </tr>
+              <tr>
+                <td><b>当期历史翻车原题重跑验收</b></td>
+                <td>第四期（W47）抽测</td>
+                <td>补丁前 <code>0 / 3</code> → 补丁后 <code>3 / 3</code></td>
+                <td><span class="trend good">100% 治好</span></td>
+                <td>证明打下去的补丁在全新无头环境里真能一次跑通，不是心理安慰</td>
+              </tr>
+              <tr>
+                <td><b>工具调用本身的运行报错率</b></td>
+                <td>每千次工具调用</td>
+                <td><code>11.2 → 10.0 → 12.0 → 20.2</code></td>
+                <td><span class="trend bad">第四期上升</span></td>
+                <td>诚实记账：第四期在密集联调飞书通道等新外部接口，外部报错多，尚未被现有补丁覆盖</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="retro-grid">
+          <div class="retro-col">
+            <h4>这套实践给我最大的启发</h4>
+            <ul>
+              <li><b>管 AI 跟管研发团队一模一样：</b>不能既让一个人当架构师又让他去搬砖抄表。把昂贵的主窗口留给思考和拍板，把重活派给施工队，效率立刻翻倍。</li>
+              <li><b>用工程小工具代替口头碎碎念：</b>AI 老在同一个地方摔跤，90% 是因为我们给的工具不够顺手。封一个短命令脚本，比写一千字提示词管用十倍。</li>
+            </ul>
+          </div>
+          <div class="retro-col is-limit">
+            <h4>坦诚的局限与下一步</h4>
+            <ul>
+              <li><b>工具报错率在啃新项目时还会反弹：</b>像第四期（W47）工具报错升到了 20.2/千次，说明这套复盘机制对「已经踩过一次的套路问题」治理极好，但遇到全新外部系统联调时，还缺少更聪明的前置探路脚本。</li>
+              <li><b>评估口径还在继续抠准：</b>目前像「AI 自我更正」这类指标里还混着少量关键词误判（比如把代码里的普通单词当成了道歉更正），下一步正在用更准的上下文判读替换掉早期的粗糙规则。</li>
+            </ul>
+          </div>
+        </div>
+
+        <details class="chapter" id="setup">
+          <summary>附录：如果你也用 Claude Code / Codex，点这里看我的脚本命令与组件速查表</summary>
+          <section class="chapter" id="setup-detail">
+            <span class="eyebrow">06 / APPENDIX · COMMANDS &amp; GLOSSARY</span>
+            <h2>日常派活、每周复盘命令与内部组件速查。</h2>
+            <p>下面是我本机日常跑这套流程的实际脚本命令和组件说明，留给同样喜欢折腾 AI 工程环境的朋友参考：</p>
+            <div class="code-block">
+              <div class="code-head">
+                <span>claude-lead · 给 Codex 施工队派活、续派与复核记账</span>
+                <button class="btn-copy" data-copy="#code-lead" type="button">复制</button>
+              </div>
+              <pre id="code-lead"><code># 新派任务给后台 Codex（后台运行等通知，不污染主窗口）
 "$DG/dispatch.sh" &lt;workdir&gt; &lt;brief.md&gt; &lt;结论|代码&gt; &lt;标签&gt;
 
-# 续派同一 codex 会话（只写增量）
+# 续派同一个 Codex 会话追问增量
 RESUME=&lt;task_id|run目录&gt; "$DG/dispatch.sh" - &lt;brief.md&gt;
 
-# 复核记账（手修过必加 --hand-fixed）
+# 主管复核后记账（若自己顺手修过代码必加 --hand-fixed）
 "$DG/ledger.py" note &lt;run目录&gt; --verdict &lt;pass|partial|fail|stop&gt; \
   [--cause &lt;原因&gt;] [--gap &lt;契约缺口&gt;] [--hand-fixed] --level &lt;低|中|高&gt; \
   --task "&lt;任务简述&gt;" --comment "&lt;复核结论&gt;"
 
-# 查看统计、效率与委派阈值回放
+# 查看历史派发通过率与时机阈值分析
 "$DG/ledger.py" stats --since &lt;YYYY-MM-DD&gt;
 "$DG/timing.py" --since &lt;YYYY-MM-DD&gt;</code></pre>
-</div>
-<div class="code-block">
-<div class="code-head">
-<span>weekly-retro · 扫描、查拐点与反事实重放</span>
-<button class="btn-copy" data-copy="#code-retro" type="button">复制</button>
-</div>
-<pre id="code-retro"><code>python3 -I "$WR/scripts/tune_due.py"
+            </div>
+            <div class="code-block">
+              <div class="code-head">
+                <span>weekly-retro · 每周五扫描会话、查卡壳拐点与错题重放</span>
+                <button class="btn-copy" data-copy="#code-retro" type="button">复制</button>
+              </div>
+              <pre id="code-retro"><code>python3 -I "$WR/scripts/tune_due.py"
 python3 -I "$WR/scripts/scan.py" --since &lt;起点&gt; --until &lt;终点&gt;
 python3 -I "$WR/scripts/turn.py" '&lt;会话标识&gt;|&lt;月-日 时:分&gt;|&lt;关键词&gt;'
 python3 -I "$WR/scripts/replay.py" --out &lt;本期目录&gt; --only &lt;题号&gt;</code></pre>
+            </div>
+
+            <div class="glossary-bar" style="margin-top:24px">
+              <input aria-label="过滤专有名词" class="glossary-search" id="glossary-search" placeholder="输入关键词过滤内部组件：dispatch、hook、replay…" type="search"/>
+              <span class="mono muted" id="glossary-count">8 / 8</span>
+            </div>
+            <dl class="glossary-grid">
+              <div class="g-item"><dt>rstack</dt><dd>我本机的 AI 研发环境资产仓库，汇总了双 AI 派工脚本、每周复盘脚本、速查小抄和拦截钩子。</dd></div>
+              <div class="g-item"><dt>claude-lead（主管模式）</dt><dd>日常分工规矩：Claude 负责想方案、写十几行派工单、复核代码与执行高风险上线操作；Codex 负责侦察与施工。</dd></div>
+              <div class="g-item"><dt>weekly-retro（每周复盘）</dt><dd>每周五晚上的八步复盘脚本：扫全周对话出指标、找卡壳拐点、打补丁并用历史错题重跑验证。</dd></div>
+              <div class="g-item"><dt>dispatch.sh / ledger.py</dt><dd>负责把工作区状态和派工单打包发给后台 Codex，并把每次派工的成败原因记入本地台账。</dd></div>
+              <div class="g-item"><dt>scan.py / replay.py</dt><dd>分别用来扫描本机所有 AI 会话日志统计摩擦比率，以及在无头沙箱里重跑历史翻车原题。</dd></div>
+              <div class="g-item"><dt>pretool_guard.py</dt><dd>挂在工具调用前的安全守卫钩子：遇到高危或易错命令当场拦下，并把正确写法塞回给 AI。</dd></div>
+              <div class="g-item"><dt>posttool_delegate_nudge.py</dt><dd>防主窗口臃肿钩子：当主管 Claude 连续只读翻文件超过 25 次时，自动提醒它把侦察活派给 Codex。</dd></div>
+              <div class="g-item"><dt>短命令封装（如 xapi / ops-cli）</dt><dd>把平时需要拼五六个参数的繁琐内部命令封成一条短命令或速查表，直接把 AI 查 <code>--help</code> 的次数砍掉一半以上。</dd></div>
+            </dl>
+          </section>
+        </details>
+      </section>
+    </div>
+  </div>
 </div>
-<div class="retro-grid">
-<div class="retro-col">
-<h4>数据与隐私边界</h4>
-<ul>
-<li>复盘报告、<code>metrics.jsonl</code> 与 <code>replays/*.json</code> 落在本地 <code>$RETRO_DIR</code>（默认 <code>~/notes/retro</code>），写回放题前先脱敏凭证。</li>
-<li>派发产物落 <code>~/.local/share/agent-delegate/runs/</code>；hook 日志仅记规则名、决策与会话 ID，不保存命令原文。</li>
-</ul>
-</div>
-<div class="retro-col is-limit">
-<h4>三条实践护栏</h4>
-<ul>
-<li>每期补丁上限 5 条且逐条人拍板；只改个人环境，团队仓库规则只提建议。</li>
-<li>持续做减法：零命中 3 期的 hook 删、长期 100% 通过的回放题降频、记忆定期瘦身。</li>
-<li>别把我的阈值当教条，按自己的 <code>timing.py</code> 与 <code>metrics.jsonl</code> 调校。</li>
-</ul>
-</div>
-</div>
-</section><section class="chapter" id="glossary">
-<span class="eyebrow">06 / GLOSSARY</span>
-<h2>专有名词速查表</h2>
-<div class="glossary-bar">
-<input aria-label="过滤专有名词" class="glossary-search" id="glossary-search" placeholder="输入关键词过滤：rstack、TCC、hook、xapi、replay…" type="search"/>
-<span class="mono muted" id="glossary-count">11 / 11</span>
-</div>
-<dl class="glossary-grid">
-<div class="g-item"><dt>rstack</dt><dd>个人本地 AI 工程环境资产仓，汇总 <code>claude-lead</code>、<code>weekly-retro</code> 技能、脚本、全局约定与 hook。</dd></div>
-<div class="g-item"><dt>Claude / Codex（gpt-6.1-sol）</dt><dd>双 Agent 组合：前者负责判断、写契约、复核与对外写操作，后者负责侦察、施工与单测/E2E。</dd></div>
-<div class="g-item"><dt>claude-lead / weekly-retro / wrapup / retro-tune</dt><dd>四块协作流程，覆盖日常委派、每周五晚复盘、需求收尾与每两期一次的复盘元评估。</dd></div>
-<div class="g-item"><dt>dispatch.sh / ledger.py / timing.py</dt><dd><code>claude-lead</code> 配套脚本：拼装信封并后台派发、记录台账、分析派发时机与提醒阈值。</dd></div>
-<div class="g-item"><dt>scan.py / turn.py / replay.py / tune_due.py</dt><dd><code>weekly-retro</code> 脚本：扫描会话出指标与 <code>turns.tsv</code>、回看拐点、无头反事实重放与元评估计时。</dd></div>
-<div class="g-item"><dt>pretool_guard.py / posttool_delegate_nudge.py</dt><dd>两枚 Claude Code hook：高风险命令拦截守卫（支持 <code># retro-selftest</code>）与连续只读委派提醒。</dd></div>
-<div class="g-item"><dt>xapi / lane_wait</dt><dd>动作层动态补丁代表：把高频多步命令压成一条短命令，显著降低查 <code>--help</code> 频次。</dd></div>
-<div class="g-item"><dt>xagent-ops-cli（ops-cli）</dt><dd>动作层静态速查技能，沉淀已验证操作写法，W47 以 351 次调用居技能榜首。</dd></div>
-<div class="g-item"><dt>e2e-record</dt><dd>端到端验证规范，指导 Codex 在部署后调接口、查库、看页面并留存验收证据。</dd></div>
-<div class="g-item"><dt>TCC</dt><dd>外部配置中心；改配置与部署发版同属高风险对外写操作，约定由主管执行。</dd></div>
-<div class="g-item"><dt>T3 线程 / antigravity / t3code / lark-channel</dt><dd>本机多工具线程来源与日常开发项（<code>t3code</code>、<code>lark-channel</code> 为 W47 密集开发项目）。</dd></div>
-</dl>
-</section></details></div>
-</div>
-</div>
+
 <a class="next-case" href="../media-to-notes.html">
-<div class="wrap">
-<span class="eyebrow">下一个项目 · 05 / 05</span>
-<h2>Media to Notes — 长音视频图文笔记插件 →</h2>
-<p>按笔记类型整理音视频：34 分钟课程样例配有 32 张板书截图。</p>
-</div>
+  <div class="wrap">
+    <span class="eyebrow">下一个项目 · 05 / 05</span>
+    <h2>Media to Notes — 带关键板书截图、不乱编待办的音视频笔记插件 →</h2>
+    <p>最后一个小而美的开源作品：看我怎么治好通用 AI 视频总结「把公式推导洗成干瘪大纲、满屏截老师大头照、还瞎编会议负责人」的毛病。</p>
+  </div>
 </a>
 </main>
+
 <footer class="site-foot">
-<div class="wrap">
-<span class="mono">© <span data-year="">2026</span> 星宇 · 深圳</span>
-<span><a href="../../index.html#work">返回全部作品 ↑</a></span>
-<button class="to-top" type="button">↑ 回到顶部</button>
-</div>
+  <div class="wrap">
+    <span class="mono">© <span data-year="">2026</span> 星宇 · 深圳</span>
+    <span><a href="../../index.html#work">返回全部作品 ↑</a></span>
+    <button class="to-top" type="button">↑ 回到顶部</button>
+  </div>
 </footer>
 </body>
 </html>

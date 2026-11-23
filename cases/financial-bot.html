@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>FinDesk（含评测底座 FinSearch-X） — 星宇</title>
-<meta content="从 120 题三层隔离财报评测集出发，通过确定性计算、回答契约与前置路由压零未授权数字幻觉并省去 50% 调用，落地覆盖美股、港股、A 股的可溯源投研工作台与 v4 公开研究笔记本。" name="description"/>
+<title>FinDesk 股票投研工作台（含 FinSearch-X 评测底座） — 星宇</title>
+<meta content="星宇个人独立全栈开发的跨市场股票研究工作台：先讲明白怎么解决 AI 查财报瞎编数字、核对费劲的痛点，再拆解 120 题真实年报评测、2,000 条微调叫停决策与四代产品演进。" name="description"/>
 <link href="../assets/img/favicon.png" rel="icon"/>
 <link href="../assets/styles.css" rel="stylesheet"/>
 <script defer="" src="../assets/site.js"></script>
@@ -13,104 +12,380 @@
 <body>
 <a class="skip" href="#main">跳到正文</a>
 <div aria-live="polite" class="sr-only" id="live-status"></div>
+
 <header class="site-head">
-<div class="wrap">
-<a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
-<nav aria-label="案例翻页" class="pager">
-<span class="mono">01 / 05</span>
-<a aria-label="上一个：Media to Notes" href="media-to-notes.html">← <span class="lbl">Media to Notes</span></a>
-<a aria-label="下一个：理赔影像智能分流" href="image-routing.html"><span class="lbl">理赔影像分流</span> →</a>
-</nav>
-</div>
+  <div class="wrap">
+    <a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
+    <nav aria-label="案例翻页" class="pager">
+      <span class="mono">01 / 05</span>
+      <a aria-label="上一个：Media to Notes" href="media-to-notes.html">← <span class="lbl">Media to Notes</span></a>
+      <a aria-label="下一个：理赔影像智能分流" href="image-routing.html"><span class="lbl">理赔影像分流</span> →</a>
+    </nav>
+  </div>
 </header>
 <div class="case-bar">
-<div class="wrap">
-<a class="back" href="../index.html#work">← 返回全部作品</a>
-<span class="mono muted">01 · 旗舰案例 · 跨市场投研 Agent</span>
+  <div class="wrap">
+    <a class="back" href="../index.html#work">← 返回全部作品</a>
+    <span class="mono muted">01 · 旗舰案例 · 跨市场股票投研工作台</span>
+  </div>
 </div>
-</div>
+
 <main id="main">
 <div class="wrap">
-<div class="callout is-notice" hidden="" id="from-fsx" style="margin-top:20px">FinSearch-X 是 FinDesk 的财报评测基础。下方介绍评测、产品决策与线上体验入口。</div>
-<!-- ============ CASE HERO ============ -->
-<section aria-labelledby="t" class="case-hero">
-<div class="case-hero-top">
-<span class="eyebrow">01 / FLAGSHIP · 个人独立全栈</span>
-<span class="status st-live">线上公开可体验 · 已迭代至 v4</span>
+  <div class="callout is-notice" hidden="" id="from-fsx" style="margin-top:20px">
+    你从 FinSearch-X 的链接跳转而来——FinSearch-X 是我为 FinDesk 搭建的底层财报评测题库与实验底座，下面会完整讲清楚我是怎么从这套评测一步步做出线上投研工作台的。
+  </div>
+
+  <!-- ============ CASE HERO ============ -->
+  <section aria-labelledby="t" class="case-hero">
+    <div class="case-hero-top">
+      <span class="eyebrow">01 / FLAGSHIP · 个人独立全栈产品</span>
+      <span class="status st-live">线上公开可玩 · 已迭代至 v4 研究笔记本</span>
+    </div>
+    <h1 id="t">FinDesk — 每个数字都能点开原表核对的股票投研工作台</h1>
+    <p class="case-sub"><strong>先说这是干什么的：</strong>这是一个帮投资人查财报、看估值、整理研究笔记的线上工作台（支持美股、港股和 A 股）。平时大家用通用大模型问股票，最头疼的是它「语气特别专业地胡编数字」——AI 两秒钟生成完，你还得花十分钟去翻几百页的财报 PDF 核对真假。所以我从头做了一套<strong>「AI 只管解释、所有算术交给代码算、每个数字点一下就能对照原始财报和 K 线」</strong>的工作台，把瞎编数字的比例彻底压到了 0%。</p>
+
+    <div aria-label="核心指标" class="metric-row four">
+      <div class="metric-box">
+        <span class="m-val">26.67% → 0%</span>
+        <span class="m-lbl">把模型「无出处瞎编数字」彻底清零</span>
+      </div>
+      <div class="metric-box">
+        <span class="m-val">-50%</span>
+        <span class="m-lbl">简单查数直接走快通道，省掉一半大模型调用</span>
+      </div>
+      <div class="metric-box">
+        <span class="m-val">3.36s → 2.36s</span>
+        <span class="m-lbl">平均回答速度提升 1 秒，且准确率不打折</span>
+      </div>
+      <div class="metric-box is-warn">
+        <span class="m-val">2,000 条叫停</span>
+        <span class="m-lbl">亲手跑通微调发现真实考题不涨分，果断砍掉</span>
+      </div>
+    </div>
+
+    <dl class="facts">
+      <div><dt>我的角色</dt><dd>个人独立全栈（从产品设计、120 题财报题库、前后端开发到香港服务器部署一人闭环）</dd></div>
+      <div><dt>覆盖市场</dt><dd>A 股（同花顺实时行情与 5 年市盈率分位）· 港股（含腾讯控股等）· 美股（SEC 财报与行情）</dd></div>
+      <div><dt>验证题库</dt><dd>自建 120 道真实年报测试题（覆盖 9 家上市公司、27 份年报，分平时调参、验证、封存盲测三组）</dd></div>
+      <div><dt>线上体验</dt><dd>已部署在公网 HTTPS 节点，免注册登录，点开就能直接试玩最新的 v4 研究笔记本和 v3 工作台</dd></div>
+    </dl>
+
+    <div class="cta-row">
+      <a class="btn" href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">直接试玩 v4 公开研究笔记本 ↗</a>
+      <a class="btn btn-ghost" href="#try">查看全部四个线上体验入口 ↓</a>
+    </div>
+  </section>
+
+  <figure class="case-figure">
+    <div aria-label="点击放大查看 FinDesk 三栏工作台" class="fig-zoom" role="button" tabindex="0">
+      <img alt="FinDesk 主视觉：左看上下文、中看对话、右看财报原表与 K 线图表的三栏工作台" height="822" src="../assets/img/financial-bot-hero-wide.webp" width="1913"/>
+      <span class="zoom-pill">点击放大</span>
+    </div>
+    <figcaption>FinDesk 的三栏同屏设计：左边锁定你在查哪家公司哪个年份，中间看 AI 回答，右边直接点开原始财报表格和 K 线核对。</figcaption>
+  </figure>
+
+  <!-- ============ BODY ============ -->
+  <div class="case-layout">
+    <aside aria-label="本页目录" class="toc">
+      <span class="toc-title">本页目录</span>
+      <ol>
+        <li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li>
+        <li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li>
+        <li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li>
+        <li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li>
+        <li><a href="#retro">05 · 结果数据 + 复盘</a></li>
+      </ol>
+    </aside>
+
+    <div class="prose">
+      <details class="toc-mobile">
+        <summary>展开本页目录</summary>
+        <ol>
+          <li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li>
+          <li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li>
+          <li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li>
+          <li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li>
+          <li><a href="#retro">05 · 结果数据 + 复盘</a></li>
+        </ol>
+      </details>
+
+      <!-- 01 项目背景 & 业务目标 -->
+      <section class="chapter" id="problem">
+        <span class="eyebrow">01 / 项目背景 &amp; 业务目标</span>
+        <h2>用 AI 看股票财报，最怕的不是它答不上来，而是它「一本正经地胡说八道」。</h2>
+        <p>我自己平时也看股票、读财报。现在市面上有很多 AI 投研助手，你把一份上百页的年报扔给它，或者直接问它某家公司的毛利率和估值，它两秒钟就能吐出一大段像模像样的分析。但只要你真拿它做过一次投资参考，就会发现一个致命问题：<strong>你根本不敢直接信它给的数字。</strong></p>
+        <p>为了确认 AI 说的「营收同比增长 18.4%」到底对不对，你得自己去打开行情软件、翻出当年年报 PDF、核对它用的是不是最新一期、有没有把单季度和全年混在一起。<strong>生成答案只要 2 秒，核对真假却要花 10 分钟——一旦核对的功夫比自己查表还慢，这个产品在真实投研里就是个摆设。</strong></p>
+
+        <div class="card-grid three">
+          <div class="sub-card">
+            <span class="sc-tag">痛点 01 · 口径乱串</span>
+            <h4>单季、全年傻傻分不清</h4>
+            <p>通用大模型经常拿今年的全年营收去跟去年的前三季度比，或者在对比港股、美股时把人民币、港币和美元直接混着算。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">痛点 02 · 顺口瞎编</span>
+            <h4>四分之一回答在自己心算</h4>
+            <p>在我早期的无约束测试里，模型有 <b>26.67%</b> 的回答会凭记忆瞎编原表里根本没有的数字，或者自己心算一个错的增长率。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">痛点 03 · 核对太累</span>
+            <h4>聊天框里找不到原表出处</h4>
+            <p>只有一个干巴巴的聊天窗口，想看某个数字来自财报哪一页、对应哪天的股价，还得切出去开三四个软件来回找。</p>
+          </div>
+        </div>
+
+        <blockquote class="quote-block">
+          「干了十年金融系统，我对金融产品的底线很明确：不怕系统老老实实告诉我『这条数据暂时没接进来』，最怕它用流利的金融黑话给我一个算错的数字。」
+          <cite>我给 FinDesk 定的第一目标：把用户的「核对成本」降到最低</cite>
+        </blockquote>
+
+        <p>所以我以<strong>个人独立全栈 PM 兼开发者</strong>的身份立项做了 FinDesk，给自己定了三个必须量化的硬指标：① 在真实财报测试集上，把模型<strong>「无出处瞎编数字」的比例压到 0%</strong>；② 把不需要深度推理的简单查数请求分流出去，<strong>砍掉一半的大模型调用和等待时间</strong>；③ 做成普通人点开网页就能同屏核对原表和 K 线的线上产品。</p>
+      </section>
+
+      <!-- 02 问题分析 & 需求挖掘 -->
+      <section class="chapter" id="analysis">
+        <span class="eyebrow">02 / 问题分析 &amp; 需求挖掘</span>
+        <h2>30 道题挂了 27 道——扒开日志才发现，六成冤案根本不是大模型的锅。</h2>
+        <p>很多人在做 AI 产品时，一看到回答不准，第一反应就是去改提示词（Prompt），或者琢磨着「是不是该微调一个金融专属模型」。为了不凭感觉瞎折腾，我开工第一件事是先建了一套<strong>「防作弊考卷」（也就是底层评测引擎 FinSearch-X）</strong>：挑了美股、港股、A 股 9 家代表性上市公司的 27 份真实年报，设计了 120 道涵盖查数、同比计算、跨期对比和信息缺失拒答的测试题，并且严格拆成「平时调参组（Dev）、交叉验证组（Val）和封存盲测组（Blind）」。</p>
+        <p>刚跑第一轮开发集测试时，结果非常扎心：<strong>30 道题里直接错了 27 道，全对率只有 6.67%。</strong>但我没有急着去调提示词，而是耐着性子把这 27 道错题的底层调用日志一条条扒出来看，结果发现了两个颠覆直觉的真相：</p>
+
+        <div class="decision">
+          <span class="eyebrow">发现 01 · 扒开 27 道错题的真实根因</span>
+          <p class="dq">为什么模型老答错财报数字？真是大模型推理能力不行吗？</p>
+          <ul class="opts">
+            <li><b>表象误区 · 以为是 Prompt 没写好或模型太笨</b>如果顺着这个惯性去堆几千字提示词，哪怕把模型逼得战战兢兢，给进去的底表数据是错的，算出来照样是错的。</li>
+            <li class="chosen"><b>真实根因 · 27 道错题里有 17 道（63%）死在「年报解析与单位换算」 ✓</b>逐题排查发现，一大半错误是因为解析原始年报表格时，把「百万元」和「千元」单位搞混了，或者把母公司报表和合并报表的同名科目串了。</li>
+          </ul>
+          <p class="d-note"><b>我的判断：</b>喂给模型的菜本身就是烂的，怎么换厨师都没用。必须先停下花哨的生成调优，老老实实先把底层的财报结构化数据目录洗干净。</p>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">发现 02 · 亲手跑通 2,000 条微调（SFT），为什么最后被我亲手砍掉？</span>
+          <p class="dq">当时市面上都在吹「垂直领域微调」，我用 Qwen3-4B 小模型真跑了 2,000 条财报问答微调，到底该不该上生产？</p>
+          <ul class="opts">
+            <li><b>诱人的假象 · 合成测试题上准确率从 75.5% 飙到 100%</b>如果只看微调训练集同分布的测试，模型学得极快，输出格式漂亮得像教科书，拿去写汇报材料非常唬人。</li>
+            <li class="chosen"><b>残酷的真账 · 放到 60 道真实跨公司考题上，总成功率一分没涨 ✓</b>一换到没见过的新公司年报附注，微调过的模型反而更危险——它学会了极其工整的金融回答句式，却在拿不到数据时用更逼真的语气胡编数字。</li>
+          </ul>
+          <p class="d-note"><b>我的判断：</b>投研问答的瓶颈根本不在「模型会不会说金融腔」，而在「外部数据给得准不准、算术能不能别让模型心算」。看清这一点后，我当场叫停了微调路线，把精力全收回到工具与规则底座上。</p>
+        </div>
+      </section>
+
+      <!-- 03 方案设计 & 核心权衡 -->
+      <section class="chapter" id="decisions">
+        <span class="eyebrow">03 / 方案设计 &amp; 核心权衡</span>
+        <h2>核心方案就一句话：查表和算术归代码，解释归模型，证据摆在同屏右手边。</h2>
+        <p>想明白根因之后，我没有把 FinDesk 做成一个「什么都让大模型包办」的黑盒聊天框，而是做成了<strong>「前面有分流、中间有铁律、右边有原表」</strong>的透明工作台。这中间我做了三个最关键的产品取舍：</p>
+
+        <div class="decision">
+          <span class="eyebrow">权衡 01 · 回答铁律（Answer Contract）：宁可承认不知道，绝不心算和脑补</span>
+          <p class="dq">怎么从机制上彻底杜绝大模型「顺口瞎编数字」？</p>
+          <ul class="opts">
+            <li><b>方案 A · 在提示词里反复叮嘱「请勿编造数字」</b>大模型对软性叮嘱经常左耳进右耳出，一旦遇到复杂的同比增长率或毛利率差值，还是会忍不住自己心算。</li>
+            <li class="chosen"><b>方案 B · 剥离全部算术 + 强制绑定出处 ID + 缺数据显式报白 ✓</b>规定所有加减乘除、同比环比、市盈率分位 100% 由后台 Python 代码算好再喂给模型；模型输出的每一个数字必须带上数据源编号；最后加一道代码拦截器，只要发现没挂出处的裸数字，当场拦下重来。</li>
+          </ul>
+          <p class="d-note"><b>落地效果：</b>在测试集上，未经授权的瞎编数字直接从 <code>26.67%</code> 降到了 <code>0%</code>。遇到数据源本身没给够的情况（比如同花顺接口在查港股历史市盈率时返回空序列），页面会清清楚楚提示「该项历史数据暂缺」，绝不硬猜。</p>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">权衡 02 · 前置分流路由：别拿大炮打蚊子</span>
+          <p class="dq">用户问「腾讯今天股价多少」「茅台 2024 年营收是多少」，有必要每次都唤醒大模型走全套推理吗？</p>
+          <ul class="opts">
+            <li><b>方案 A · 所有问题一律进大模型 Agent 循环</b>架构最省事，但简单查个数也要等三四秒，白白消耗一半算力。</li>
+            <li class="chosen"><b>方案 B · 在最前面加一层轻量意图分流（Query Router） ✓</b>把问题分成「简单直查」和「复杂对比分析」：查股价、查单一财报科目直接走数据库和行情接口秒回；只有需要跨期归因、多源综合的问题才唤醒大模型。</li>
+          </ul>
+          <p class="d-note"><b>落地效果：</b>直接省去了约 <code>50%</code> 的大模型调用，平均等待时间从 <code>3.36 秒</code> 缩短到 <code>2.36 秒</code>，而且答题准确率没有任何损失。</p>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">权衡 03 · 界面形态：为什么放弃单栏聊天框，改成「左中右三栏」工作台？</span>
+          <p class="dq">数字算准了，怎么让用户不用花十分钟翻 PDF 就能立刻信你？</p>
+          <ul class="opts">
+            <li><b>方案 A · 沿用类似 ChatGPT 的单栏对话框，在句尾挂个脚注链接</b>点开链接还是要跳去新标签页翻长文档，看两眼就忘了刚才聊到哪。</li>
+            <li class="chosen"><b>方案 B · 「左看研究范围 | 中间对话 | 右看原表证据」三栏同屏 ✓</b>左边固定住当前看的是哪只股票、哪个财报期（防止聊着聊着串了公司）；中间回答里的每个数字都能点；一点数字，右边立刻展开对应的财务三表明细、估值分位图或 20 日 K 线。</li>
+          </ul>
+          <p class="d-note"><b>落地效果：</b>把原本「翻十分钟 PDF 核对一个数」的过程，变成了一次同屏点击。</p>
+        </div>
+
+        <figure class="fig">
+          <div aria-label="点击放大查看 FinDesk 个股研究工作台" class="fig-zoom" role="button" tabindex="0">
+            <img alt="FinDesk 个股深度工作台界面" height="1040" loading="lazy" src="../assets/img/fb-work-zh-cropped.webp" width="1293"/>
+            <span class="zoom-pill">点击放大</span>
+          </div>
+          <figcaption>FinDesk 个股深度工作台（Work 视图）：同一屏幕里直接对照财务三表、估值分位与 K 线走势，也能随时切回对话追问。</figcaption>
+        </figure>
+      </section>
+
+      <!-- 04 落地推进 & 风险处理 -->
+      <section class="chapter" id="delivery">
+        <span class="eyebrow">04 / 落地推进 &amp; 风险处理</span>
+        <h2>从一套离线评测脚本，一步步长成四代线上产品。</h2>
+        <p>因为这是一个人全栈推进的项目，最大的风险就是「摊子铺太大、烂尾在半路」，或者「本地跑通了 Demo、放到公网上别人根本用不了」。我的推进策略很实在：<strong>每一代只解决当时最卡脖子的那一个痛点，先跑通闭环再长新肉。</strong></p>
+
+        <div id="evolution"></div>
+        <ol class="phases">
+          <li>
+            <span class="phase-tag">第一阶段 · 先立考卷（FinSearch-X 评测底座）</span>
+            <b class="phase-title">忍住不画界面，先把 120 道财报盲测题和消融账本跑通</b>
+            <p>最开始我连前端都没写，先把 9 家公司 27 份年报洗出来，用单变量对照实验验证了「修数据 → 代码算术 → 回答铁律 → 前置分流」每一步的真实收益，顺带证伪了 2,000 条微调，把技术底盘彻底锁死。</p>
+          </li>
+          <li>
+            <span class="phase-tag">第二阶段 · v1 &amp; v2 拆开「我看」与「我问」</span>
+            <b class="phase-title">解决跨市场数据源卡顿，消除首屏 8 秒白屏</b>
+            <p>第一版把行情看板和 Agent 问答塞在同一个重页面里，拉取美股、港股、A 股多源行情时经常让用户干等 8 秒白屏。到 v2 我果断把「看图表（Work）」和「问问题（Bot）」拆成两个独立轻入口，让实时价格先秒出，复杂的财报取证通过流式时间线一步步推给用户。</p>
+          </li>
+          <li>
+            <span class="phase-tag">第三阶段 · v3 固化三栏工作台与离线防崩兜底</span>
+            <b class="phase-title">万一外部免费财经接口抽风，面试官点进来还能看什么？</b>
+            <p>跨市场行情最怕第三方接口限流或偶发超时。为了保证任何人随时点进来都能完整体验，我在 v3 里除了接通实时数据，还专门内置了腾讯控股（00700.HK）等代表标的的完整快照兜底——哪怕外部接口临时抖动，核心的「点数字核对原表」体验也绝对不会挂。</p>
+          </li>
+          <li>
+            <span class="phase-tag">第四阶段 · v4 升级为「公开研究笔记本」（最新上线）</span>
+            <b class="phase-title">不再局限于固定股票库，随手丢一篇网页、研报 PDF 就能建笔记本</b>
+            <p>很多时候我们看公司不止看年报，还要看新闻、访谈和行业研报。所以最近我把架构升级到了 v4（类似 NotebookLM 的「来源 | 问答 | 成果 Studio」三栏）：你可以直接贴任何网页链接、上传 PDF 或联网搜索，勾选哪几份资料就只基于哪几份资料回答，还能一键生成研究简报、对比表和思维导图。</p>
+          </li>
+        </ol>
+
+        <figure class="fig">
+          <div aria-label="点击放大查看 FinSearch-X 评测与架构全景图" class="fig-zoom" role="button" tabindex="0">
+            <img alt="FinSearch-X 评测与架构演进全景图" height="1067" loading="lazy" src="../assets/img/finsearch-overview.webp" width="1600"/>
+            <span class="zoom-pill">点击放大</span>
+          </div>
+          <figcaption>从底层 120 题评测引擎（FinSearch-X）到跨市场投研工作台（FinDesk）的完整技术与产品脉络。</figcaption>
+        </figure>
+
+        <div class="callout" id="try">
+          <b>四个线上实测入口（全部公网 HTTPS 直连，免登录直接玩）</b>
+          <p style="margin-top:8px">建议先点第一个试试我最新做的 <b>v4 公开研究笔记本</b>，也可以对比看看 v3 的对话助手和个股工作台：</p>
+        </div>
+
+        <div class="card-grid">
+          <div class="sub-card is-featured">
+            <span class="sc-tag">v4 · 最新主力 · 免登录</span>
+            <h4>Notebook 公开研究笔记本</h4>
+            <p>「资料来源 | 对话问答 | 报告生成」三栏同屏：支持贴网页链接、传 PDF、联网搜资料，点引用直接高亮原文，还能一键生成简报和导图。</p>
+            <div class="sc-act">
+              <a class="btn btn-sm" href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">打开 v4 公开笔记本 ↗</a>
+            </div>
+          </div>
+
+          <div class="sub-card">
+            <span class="sc-tag">v3 · 查财报问数</span>
+            <h4>Bot 股票研究助手</h4>
+            <p>直观体验「简单查价走快通道」和「事实 / 代码计算 / 缺失说明」分层展示，回答里的每个数字都能点开看出处。</p>
+            <div class="sc-act">
+              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/bot?mode=use&amp;lang=zh" rel="noopener" target="_blank">打开 Bot 研究助手 ↗</a>
+            </div>
+          </div>
+
+          <div class="sub-card">
+            <span class="sc-tag">v3 · 看行情与三表</span>
+            <h4>Work 个股深度工作台</h4>
+            <p>直接查看美股、港股、A 股代表公司的实时报价、20 日 K 线/技术指标、5 年市盈率分位和结构化财务三表。</p>
+            <div class="sc-act">
+              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/work?lang=zh" rel="noopener" target="_blank">打开 Work 工作台 ↗</a>
+            </div>
+          </div>
+
+          <div class="sub-card">
+            <span class="sc-tag">v3 · 全景介绍</span>
+            <h4>Landing 产品首页</h4>
+            <p>一眼看清美股、港股、A 股三大市场的数据源接入状态、三栏核对机制说明与代表股票快速入口。</p>
+            <div class="sc-act">
+              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/landing?lang=zh" rel="noopener" target="_blank">进入产品首页 ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 结果数据 + 复盘 -->
+      <section class="chapter" id="retro">
+        <span class="eyebrow">05 / 结果数据 + 复盘</span>
+        <h2>每一分提升都有实验账本可查，也把还没解决的短板摊在桌面上。</h2>
+        <p>做这个项目最大的收获，是用一套硬桥硬马的对照实验证明了：<strong>哪怕底子只是一个 4B 参数的轻量小模型（Qwen3-4B），只要把数据洗干净、把算术交给代码、把规矩立死，在严肃财报问答上的表现完全可以脱胎换骨。</strong></p>
+
+        <div id="eval"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>我做的一步步改造</th>
+                <th>测试考卷范围</th>
+                <th>核心结果变化</th>
+                <th>这一步教会我的产品结论</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>1. 排查 27 道错题并重洗年报数据底座</b></td>
+                <td>开发集 30 道真实财报题</td>
+                <td>揪出 <b>17 / 27 题（63%）</b> 是表格解析与单位换算错误</td>
+                <td>回答不准先查数据源，盲目改提示词只是在掩盖脏数据</td>
+              </tr>
+              <tr>
+                <td><b>2. 把算术剥离给代码 + 加上「无出处就拦截」铁律</b></td>
+                <td>120 题真实年报题库</td>
+                <td>模型无出处瞎编数字从 <b><code>26.67% → 0%</code></b></td>
+                <td>金融场景必须靠代码护栏兜底，不能靠模型自觉</td>
+              </tr>
+              <tr>
+                <td><b>3. 前面加上简单查数分流（Query Router）</b></td>
+                <td>同上测试集</td>
+                <td>大模型调用量 <b><code>-50%</code></b>，平均耗时 <b><code>3.36s → 2.36s</code></b></td>
+                <td>一半的日常问数根本不需要大模型推理，分流既省钱又快</td>
+              </tr>
+              <tr>
+                <td><b>4. 整套架构改造前后的端到端总对比</b><br/><span class="muted">（在 Qwen3-4B 小模型「数字、单位、出处全对才算对」的严苛标准下）</span></td>
+                <td>120 题隔离考卷</td>
+                <td>开发集全对率 <b><code>6.67% → 43.33%</code></b><br/>验证集全对率 <b><code>6.67% → 13.33%</code></b></td>
+                <td>用极小模型验证了「干净数据 + 代码工具 + 严格校验」能带来成倍提升</td>
+              </tr>
+              <tr>
+                <td><b>5. 2,000 条微调（SFT）对照实验</b></td>
+                <td>同类合成题 vs 60 道真实跨公司题</td>
+                <td>合成题 <b><code>75.5% → 100%</code></b>，但真实跨公司题<b>没涨分</b></td>
+                <td>微调只学会了表面句式，没解决跨公司查表，果断砍掉不上生产</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="retro-grid">
+          <div class="retro-col">
+            <h4>回头看做对了什么</h4>
+            <ul>
+              <li><b>先立考卷再写产品：</b>如果没有提前封存那 120 道真实年报题，我很容易被 2,000 条微调在合成题上的「100% 满分」骗过去，白白浪费大量时间维护微调管线。</li>
+              <li><b>站在用户核对的视角做界面：</b>把「翻 PDF 核对」变成同屏右手边的点击，让技术上的「可溯源」真正变成了用户感知得到的安心感。</li>
+            </ul>
+          </div>
+          <div class="retro-col is-limit">
+            <h4>坦诚的不足与下一步改进</h4>
+            <ul>
+              <li><b>跨公司「非标科目名称」还没对齐好（最大短板）：</b>你看上面表里，开发集全对率到了 <code>43.33%</code>，但换到另一组没调过的验证集公司就掉到 <code>13.33%</code>。原因很实在：不同上市公司在年报附注里给同一个指标起的名字千奇百怪（比如有的叫「履约成本」，有的拆在「营业成本明细」里），我的代码字典目前还没覆盖全。重来一次的话，我会更早引入「同义会计科目归并层」。</li>
+              <li><b>港股历史市盈率缺口：</b>目前免费/现有接口拉港股历史 PE 会返回空数据，系统虽然做到了老实报错不瞎编，但下一步我准备用历史市值除以滚动净利润自己回算补齐。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 </div>
-<h1 id="t">FinDesk（含评测底座 FinSearch-X）</h1>
-<p class="case-sub">让投研回答更容易核对：先修财报数据，再把计算交给程序，并将答案与来源放在同一页面。</p>
-<div aria-label="核心指标" class="metric-row four">
-<div class="metric-box">
-<span class="m-val">26.67% → 0%</span>
-<span class="m-lbl">未授权数字输出清零（回答契约校验）</span>
-</div>
-<div class="metric-box">
-<span class="m-val">-50%</span>
-<span class="m-lbl">前置路由省去一半大模型调用（延迟 3.36s → 2.36s）</span>
-</div>
-<div class="metric-box">
-<span class="m-val">6.67% → 43.33%</span>
-<span class="m-lbl">Qwen3-4B 严苛口径下 Dev 严格成功率</span>
-</div>
-<div class="metric-box is-warn">
-<span class="m-val">2,000 条叫停</span>
-<span class="m-lbl">合成域 100% 但端到端不涨，果断放弃 SFT</span>
-</div>
-</div>
-<dl class="facts">
-<div><dt>角色</dt><dd>个人独立全栈：产品定义、评测基准、后端接口与前端工作台</dd></div>
-<div><dt>覆盖市场</dt><dd>A 股（同花顺 iFinD 行情与 PE 分位）· 港股（AkShare / iFinD）· 美股（SEC / Finnhub / yfinance）</dd></div>
-<div><dt>评测底座</dt><dd>120 题三层隔离集（9 家上市公司 · 27 份年报 · 6 类任务 · Dev / Val / Blind）</dd></div>
-<div><dt>线上状态</dt><dd>独立部署于香港节点，全部 HTTPS，免登录即可体验 v4 公开笔记本与 v3 工作台</dd></div>
-</dl>
-<div class="cta-row">
-<a class="btn" href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">体验 v4 公开研究笔记本 ↗</a>
-<a class="btn btn-ghost" href="#try">查看四代入口与演进路线 ↓</a>
-</div>
-</section>
-<figure class="case-figure">
-<div aria-label="点击放大查看 FinDesk 三栏工作台" class="fig-zoom" role="button" tabindex="0">
-<img alt="FinDesk 主视觉：三栏证据链研究工作台、图表与来源卡片" height="822" src="../assets/img/financial-bot-hero-wide.webp" width="1913"/>
-<span class="zoom-pill">点击放大</span>
-</div>
-<figcaption>FinDesk 三栏架构：研究上下文（Context）、流式问答（Thread）与原始依据（Evidence）同屏核对。</figcaption>
-</figure>
-<!-- ============ BODY ============ -->
-<div class="case-layout">
-<aside aria-label="本页目录" class="toc">
-<span class="toc-title">本页目录</span>
-<ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol>
-</aside>
-<div class="prose"><details class="toc-mobile"><summary>展开本页目录</summary><ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol></details><section class="chapter" id="problem"><span class="eyebrow">01 / 项目背景 &amp; 业务目标</span><h2>项目背景 &amp; 业务目标</h2><p>投研答案生成很快，核对数字却要在财报和行情之间反复切换。目标是在测试中消除来源未支持的数字，并减少简单查询的大模型调用。</p><p>个人独立完成产品定义、评测、前后端开发和部署。</p></section><section class="chapter" id="analysis"><span class="eyebrow">02 / 问题分析 &amp; 需求挖掘</span><h2>问题分析 &amp; 需求挖掘</h2><p>开发集 30 题中有 27 题失败；逐题排查发现其中 17 题来自年报解析与单位换算，而非单纯的模型推理。先修数据，比继续堆提示词更有价值。</p><p>2,000 条数据的微调在合成测试中得分很好，但真实跨公司端到端评测没有同步改善，因此没有把微调作为主路线。</p></section><section class="chapter" id="decisions"><span class="eyebrow">03 / 方案设计 &amp; 核心权衡</span><h2>方案设计 &amp; 核心权衡</h2><p>把查数和计算交给程序，复杂解释交给模型，并在回答旁展示来源；缺数据时明确说明。</p><p>简单查询直接取数，减少等待和模型调用；复杂问题保留解释能力，但必须核对数字与来源。三栏工作台让用户在同一页面核对上下文、答案和依据。</p><figure class="fig">
-<div aria-label="点击放大查看 FinDesk 个股研究工作台" class="fig-zoom" role="button" tabindex="0">
-<img alt="FinDesk 个股深度工作台界面" height="1040" loading="lazy" src="../assets/img/fb-work-zh-cropped.webp" width="1293"/>
-<span class="zoom-pill">点击放大</span>
-</div>
-<figcaption>围绕同一标的对照财报明细、估值图表与来源依据，支持与对话助手无缝切换。</figcaption>
-</figure><figure class="fig">
-<div aria-label="点击放大查看 FinSearch-X 评测与架构全景图" class="fig-zoom" role="button" tabindex="0">
-<img alt="FinSearch-X 评测与架构演进全景图" height="1067" loading="lazy" src="../assets/img/finsearch-overview.webp" width="1600"/>
-<span class="zoom-pill">点击放大</span>
-</div>
-<figcaption>从 FinSearch-X 底层评测与消融引擎，演进为 FinDesk 跨市场投研工作台的完整脉络。</figcaption>
-</figure></section><section class="chapter" id="delivery"><span class="eyebrow">04 / 落地推进 &amp; 风险处理</span><h2>落地推进 &amp; 风险处理</h2><p>先建立覆盖 9 家公司、27 份年报的 120 题评测集，分开开发、验证和盲测；再逐步修数据、拆出计算、校验回答并迭代工作台。</p><p>对于港股历史市盈率数据缺口，页面明确提示缺失，不让模型猜测。产品从财报评测工具演进到 v4 研究笔记本。</p><div id="evolution"></div><div id="eval"></div><div class="callout" id="try"><b>线上体验入口</b><p><a href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">v4 公开研究笔记本 ↗</a> · <a href="https://47.243.118.32.nip.io/bot?mode=use&amp;lang=zh" rel="noopener" target="_blank">Bot 研究助手 ↗</a> · <a href="https://47.243.118.32.nip.io/work?lang=zh" rel="noopener" target="_blank">Work 工作台 ↗</a> · <a href="https://47.243.118.32.nip.io/landing?lang=zh" rel="noopener" target="_blank">产品首页 ↗</a></p></div></section><section class="chapter" id="retro"><span class="eyebrow">05 / 结果数据 + 复盘</span><h2>结果数据 + 复盘</h2><p>在原有评测口径下，未授权数字输出从 26.67% 降至 0%；简单查询分流使大模型调用减少约 50%，延迟从 3.36 秒降至 2.36 秒。结果是测试集表现，并非对所有问题的保证。</p><p>先查数据根因、再选技术路线是有效的；但跨公司非标准科目仍较弱：开发集严格成功率 43.33%，验证集 13.33%。下一步需补充不同公司科目名称的对应关系。</p></section></div>
-</div>
-</div>
+
 <a class="next-case" href="image-routing.html">
-<div class="wrap">
-<span class="eyebrow">下一个项目 · 02 / 05</span>
-<h2>金融单据与理赔影像智能分流 →</h2>
-<p>公司生产已上线：90 类收敛至 23 类并解耦路由配置表，压降约 25% 视觉大模型调用量，1,650 张线上盲抽零漏检。</p>
-</div>
+  <div class="wrap">
+    <span class="eyebrow">下一个项目 · 02 / 05</span>
+    <h2>金融单据与理赔影像智能分流 →</h2>
+    <p>公司生产已上线的实战硬仗：怎么在绝不漏掉一张医疗收费单的前提下，替公司砍掉 25% 的视觉大模型无效算力。</p>
+  </div>
 </a>
 </main>
+
 <footer class="site-foot">
-<div class="wrap">
-<span class="mono">© <span data-year="">2026</span> 星宇 · 深圳</span>
-<span><a href="../index.html#work">返回全部作品 ↑</a></span>
-<button class="to-top" type="button">↑ 回到顶部</button>
-</div>
+  <div class="wrap">
+    <span class="mono">© <span data-year="">2026</span> 星宇 · 深圳</span>
+    <span><a href="../index.html#work">返回全部作品 ↑</a></span>
+    <button class="to-top" type="button">↑ 回到顶部</button>
+  </div>
 </footer>
 </body>
 </html>

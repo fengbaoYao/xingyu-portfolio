@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Court Diary — 星宇</title>
-<meta content="iOS + Apple Watch 网球场盲操打标与赛后高光自动剪辑（TestFlight 实测中）。自训声纹识别网络滤掉 85%+ 捡球时长，每秒切片驱动后训练 GridTrackNet 与运动学平滑。" name="description"/>
+<title>Court Diary 网球盲操记录与 AI 剪辑 — 星宇</title>
+<meta content="星宇为自己和球友独立开发的 iOS + Apple Watch 网球录球与自动剪辑应用（TestFlight 实测中）：场上流汗不看屏幕盲按记好球，赛后先用自训声纹模型几秒滤掉 85%+ 捡球时间，再按需画球路轨迹，点三次直发朋友圈。" name="description"/>
 <link href="../assets/img/favicon.png" rel="icon"/>
 <link href="../assets/styles.css" rel="stylesheet"/>
 <script defer="" src="../assets/site.js"></script>
@@ -13,138 +12,284 @@
 <body>
 <a class="skip" href="#main">跳到正文</a>
 <div aria-live="polite" class="sr-only" id="live-status"></div>
+
 <header class="site-head">
-<div class="wrap">
-<a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
-<nav aria-label="案例翻页" class="pager">
-<span class="mono">03 / 05</span>
-<a aria-label="上一个：理赔影像分流" href="image-routing.html">← <span class="lbl">理赔影像分流</span></a>
-<a aria-label="下一个：rstack" href="rstack-guide/index.html"><span class="lbl">rstack</span> →</a>
-</nav>
-</div>
+  <div class="wrap">
+    <a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
+    <nav aria-label="案例翻页" class="pager">
+      <span class="mono">03 / 05</span>
+      <a aria-label="上一个：理赔影像分流" href="image-routing.html">← <span class="lbl">理赔影像分流</span></a>
+      <a aria-label="下一个：rstack" href="rstack-guide/index.html"><span class="lbl">rstack</span> →</a>
+    </nav>
+  </div>
 </header>
 <div class="case-bar">
-<div class="wrap">
-<a class="back" href="../index.html#work">← 返回全部作品</a>
-<span class="mono muted">03 · 端侧模型与盲操交互 · iOS + Watch</span>
+  <div class="wrap">
+    <a class="back" href="../index.html#work">← 返回全部作品</a>
+    <span class="mono muted">03 · 端侧模型与盲操交互 · iOS + Apple Watch</span>
+  </div>
 </div>
-</div>
+
 <main id="main">
 <div class="wrap">
-<section aria-labelledby="t" class="case-hero">
-<div class="case-hero-top">
-<span class="eyebrow">03 / EDGE AI &amp; MOBILE · 个人独立全栈</span>
-<span class="status st-beta">TestFlight 真机球友实测中</span>
+  <section aria-labelledby="t" class="case-hero">
+    <div class="case-hero-top">
+      <span class="eyebrow">03 / EDGE AI &amp; MOBILE · 个人独立全栈</span>
+      <span class="status st-beta">TestFlight 真机球友实测中</span>
+    </div>
+    <h1 id="t">Court Diary — 网球场盲操记好球与赛后 AI 快剪</h1>
+    <p class="case-sub"><strong>先说这是干什么的：</strong>这是一个我给自己和网球球友做的 iOS + Apple Watch 录球与自动剪辑 App。平时打场网球录两个小时，其实 <strong>85% 以上的时间都在走动、擦汗和捡球</strong>；在场上满手是汗没法看手机记时间，回家对着十几 G 的长视频拖进度条找那十几个好球又太折磨人。所以我做了这套<strong>「场上不看屏幕盲按手表或喊口令记好球、下场后先用声音几秒滤掉捡球废片、再给精彩回合画上网球飞行弧线」</strong>的工具，收工后点三次屏幕就能直接发微信朋友圈。</p>
+
+    <div aria-label="核心指标" class="metric-row four">
+      <div class="metric-box">
+        <span class="m-val">85%+</span>
+        <span class="m-lbl">先靠声音粗筛，几秒钟砍掉八成以上捡球垃圾时长</span>
+      </div>
+      <div class="metric-box">
+        <span class="m-val">≤ 3 次点击</span>
+        <span class="m-lbl">从按住收工到挑完好球发进微信朋友圈</span>
+      </div>
+      <div class="metric-box">
+        <span class="m-val">1 秒切片</span>
+        <span class="m-lbl">只对精彩片段按每秒切片跑视觉模型，手机不发烫不闪退</span>
+      </div>
+      <div class="metric-box">
+        <span class="m-val">100% 保底</span>
+        <span class="m-lbl">哪怕关掉所有 AI 开关，靠手动盲标照样丝滑出片</span>
+      </div>
+    </div>
+
+    <dl class="facts">
+      <div><dt>我的角色</dt><dd>个人独立全栈（从球场盲操交互设计、iOS/Watch 原生开发，到采集球场噪声训声纹与球轨迹模型）</dd></div>
+      <div><dt>产品形态</dt><dd>iPhone 录制与快剪 + Apple Watch 抬腕盲操协同（目前已上架 TestFlight 供球友真机实测）</dd></div>
+      <div><dt>第一步 · 听声粗筛</dt><dd>自己训练的轻量声纹识别模型（专门针对运动喘息、球场回音和隔壁喊声做了抗干扰训练）</dd></div>
+      <div><dt>第二步 · 看图画轨</dt><dd>针对业余球场平视机位微调的网球追踪模型（GridTrackNet），外加物理抛物线平滑算法</dd></div>
+    </dl>
+  </section>
+
+  <figure class="case-figure">
+    <div aria-label="点击放大查看 Court Diary 产品主图" class="fig-zoom" role="button" tabindex="0">
+      <img alt="Court Diary 网球记录产品主图：手机与 Apple Watch 协同界面" height="887" src="../assets/img/court-diary-hero-v2.webp" width="1774"/>
+      <span class="zoom-pill">点击放大</span>
+    </div>
+    <figcaption>Court Diary 全景：场上手机挂在底线铁丝网黑屏省电录制，打完好球抬手腕盲按 Apple Watch 震动确认，下场后左滑右滑几秒挑完发朋友圈。</figcaption>
+  </figure>
+
+  <div class="case-layout">
+    <aside aria-label="本页目录" class="toc">
+      <span class="toc-title">本页目录</span>
+      <ol>
+        <li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li>
+        <li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li>
+        <li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li>
+        <li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li>
+        <li><a href="#retro">05 · 结果数据 + 复盘</a></li>
+      </ol>
+    </aside>
+
+    <div class="prose">
+      <details class="toc-mobile">
+        <summary>展开本页目录</summary>
+        <ol>
+          <li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li>
+          <li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li>
+          <li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li>
+          <li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li>
+          <li><a href="#retro">05 · 结果数据 + 复盘</a></li>
+        </ol>
+      </details>
+
+      <!-- 01 项目背景 & 业务目标 -->
+      <section class="chapter" id="problem">
+        <span class="eyebrow">01 / 项目背景 &amp; 业务目标</span>
+        <h2>每次满怀期待架手机录完两小时网球，回家看着十几 G 的原片就想删掉。</h2>
+        <p>我自己是个重度网球爱好者，平时每周都约球友打球。业余球友录球都有一个共同的痛：大家兴冲冲地买支架把手机挂在底线围网上，一录就是 90 到 120 分钟。但打完球回到家，真正能把视频剪出来发朋友圈的人不到十分之一，绝大多数学球视频都在相册里吃灰，直到手机提示空间不足被一把删掉。</p>
+        <p>为什么「录了等于白录」？因为在真实的网球场上，同时卡着两个死结：</p>
+
+        <div class="card-grid">
+          <div class="sub-card">
+            <span class="sc-tag">死结 01 · 场上根本没法操作手机</span>
+            <h4>满手是汗、大太阳反光、手机还在五米外</h4>
+            <p>刚跑完一个 20 拍的多拍回合，心率飙到 160、手心里全是汗，加上正午太阳刺眼，你根本不可能走到底线铁丝网前去解锁手机、看清屏幕上的小按钮记下时间点。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">死结 02 · 赛后两小时视频里 85% 都在捡球</span>
+            <h4>30 万帧画面里大海捞针太折磨人</h4>
+            <p>一场两小时的 1080p/60 帧录像有超过 30 万帧画面，其实八成以上时间都是在低头捡球、擦汗和走位。让人下班回家在几寸的手机屏幕上拖进度条找十几个好球，实在太反人性了。</p>
+          </div>
+        </div>
+
+        <p>所以我决定自己动手做 Court Diary，立项时给自己定了两条死规矩（也是我的量化产品目标）：① <strong>场上零视线交互</strong>——眼睛完全不用看屏幕就能标记好球，靠手腕震动或声音立刻知道记没记上；② <strong>赛后 3 次点击内出片</strong>——先把 <strong>85% 以上的捡球无效时长自动滤掉</strong>，从按住收工到合成一条 60 秒微信朋友圈合集，核心点击不超过 3 次。整个项目由我一个人包揽交互设计、iOS/Watch 开发以及背后的声音与视觉模型训练。</p>
+      </section>
+
+      <!-- 02 问题分析 & 需求挖掘 -->
+      <section class="chapter" id="analysis">
+        <span class="eyebrow">02 / 问题分析 &amp; 需求挖掘</span>
+        <h2>为什么市面上「全靠视觉 AI 自动剪球」的方案，一到夏天户外球场就崩溃？</h2>
+        <p>立项之初我也想过偷懒：既然现在有开源的网球视觉追踪模型（比如 TrackNet），干脆场上啥也别记，直接让手机边录边跑视觉模型，或者打完球把两小时视频全塞进视觉模型里找回合，不就完事了吗？</p>
+        <p>结果我拿真机到深圳夏天的户外球场一试，发现这条看似高大上的「纯视觉全自动路线」在物理规律面前根本走不通：</p>
+        <ul>
+          <li><b>第一，手机热预算和算力根本扛不住：</b>深圳夏天球场温度动辄 35°C，手机挂在太阳底下录 1080p/60fps 高清视频本就快到发热红线了；如果同时跑视觉深度学习模型，不到 15 分钟就会因为过热被 iOS 强行降频甚至黑屏杀后台，连录像本身都保不住。就算留到赛后全量跑，对着 30 万帧画面逐帧找球，用户在球场边喝完一瓶水都算不完，还会把手机内存撑爆（OOM 闪退）。</li>
+          <li><b>第二，业余球场的机位跟电视转播完全是两码事：</b>网上的开源网球模型大多是用职业比赛的高空俯视转播画面训出来的；而我们业余球友把手机挂在底线铁丝网上，只有 1.5 米高，是个平视广角。球一飞到对面底线，在画面里就缩成了 <code>3×3 像素</code> 的小白点，模型经常把场地的白线、球网白带、甚至对面球友的白球鞋当成网球，画出来的轨迹满屏幕乱跳。</li>
+        </ul>
+        <p>把这两个真问题摸透之后，我果断放弃了「全量硬跑视觉模型」的幻想，确立了<strong>「人机协同盲标保底 + 先听声音秒级粗筛、再对高光画面切片精修」</strong>的真实需求路径。</p>
+      </section>
+
+      <!-- 03 方案设计 & 核心权衡 -->
+      <section class="chapter" id="decisions">
+        <span class="eyebrow">03 / 方案设计 &amp; 核心权衡</span>
+        <h2>场上靠「盲操状态机」，场下靠「先听声、后看图」，而且永远给用户留一条不靠 AI 的保底路。</h2>
+        <p>为了让这个工具在大太阳、满手汗的真实球场上百分之百可靠，我在交互、算法架构和降级保底上做了三个核心权衡：</p>
+
+        <div class="decision">
+          <span class="eyebrow">权衡 01 · 场上怎么记好球：放弃复杂菜单，做成「闭着眼都不会按错」的盲操热区</span>
+          <p class="dq">打完一个精彩好球，球友最省力的标记动作是什么？怎么防止擦汗时误触把录像关了？</p>
+          <ul class="opts">
+            <li><b>常规做法 · 屏幕上放「记好球 / 暂停 / 结束」三个普通按钮</b>在室外反光和运动喘息状态下，根本瞄不准小按钮，极易误点「结束」毁掉整场录制。</li>
+            <li class="chosen"><b>我的设计 · 半屏巨型热区 + Apple Watch 震动确认 + 防黑屏细节 ✓</b>我把整个屏幕右半边做成一整块巨型好球热区：随手轻点一下是「好球」，按住 <code>0.6 秒</code> 或 <code>3 秒</code> 内激动连点两下自动合并成「超级好球」（防止连点切出两条重复片段）；戴手表的话抬腕盲点一下，手腕「两短震」就代表落盘成功；而结束录制必须死死按住 <code>1.5 秒</code>。</li>
+          </ul>
+          <p class="d-note"><b>真机测出来的魔鬼细节：</b>为了省电防烫，录制 <code>8 秒</code> 无操作屏幕会自动变黑；但我自己上场测第一次就发现——点完「开始录制」后，人要往后退半步歪头看一眼取景框正不正，要是这时候黑屏，人人都会以为死机了。所以我专门加了「开录前 8 秒强制亮屏保护期」，小改动却救活了开局体验。</p>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">权衡 02 · 赛后怎么毫秒级挑球：为什么用「声纹模型 + 1 秒视觉切片」两步走？</span>
+          <p class="dq">怎么在不把手机跑发烫、不闪退的前提下，从两小时录像里揪出精彩回合还能画上球路弧线？</p>
+          <ul class="opts">
+            <li><b>方案 A · 全程交给视觉模型逐帧找网球</b>算力消耗大十倍，等待时间长，且捡球时的乱拍球也会被误画满碎轨迹。</li>
+            <li class="chosen"><b>方案 B · 第一步先用「自训声纹模型」秒滤 85% 废片 → 第二步只对高光窗「按 1 秒切片」跑球轨迹模型 ✓</b>声音的数据量比高清画面小几个数量级！我先用自己训练的轻量声纹识别模型扫一遍音轨（几秒钟就能扫完两小时），认出我本人喊的口令和密集击球声，瞬间砍掉 <code>85%+</code> 的捡球垃圾时间；接着只把挑出来的那十几段高光视频，按<strong>每秒钟一小段</strong>切开送进微调后的 <code>GridTrackNet</code> 视觉模型追踪球路，内存占用被死死锁在安全线内。</li>
+          </ul>
+          <p class="d-note"><b>怎么精准切出回合头尾：</b>人总是打赢那一分之后才喊好球或按手表。如果死板地「往前固定切 8 秒」，发球局一拍得分会塞进一堆准备废片，20 拍长多拍又会被腰斩。所以我把触发点当成「回合结束锚点」，让程序顺着音轨往前回溯连续的「砰、砰」击球声脉冲，自动把起点伸缩到「发球前 1 秒 → 得分欢呼后 1.5 秒」。</p>
+        </div>
+
+        <figure class="fig">
+          <svg aria-labelledby="pipe-title" class="diagram-svg" role="img" viewBox="0 0 880 278">
+            <title id="pipe-title">Court Diary 先听声音粗筛、再看画面精修的两步架构图</title>
+            <rect fill="#f6f4ef" height="278" rx="10" width="880"></rect>
+            <g transform="translate(24,26)">
+              <rect fill="#fdfcf9" height="226" rx="8" stroke="rgba(21,23,20,.18)" width="184"></rect>
+              <text fill="#676b62" font-family="ui-monospace,Menlo,monospace" font-size="11" x="16" y="28">INPUT · 2 小时原片</text>
+              <text fill="#151714" font-family="-apple-system,PingFang SC,sans-serif" font-size="15" font-weight="600" x="16" y="54">90–120 分钟录像</text>
+              <text fill="#676b62" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="16" y="78">1080p/60fps · 逾 30 万帧</text>
+              <text fill="#676b62" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="16" y="98">85% 以上都在走动捡球</text>
+              <text fill="#676b62" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="16" y="118">夹杂风声、喘息与隔壁喊声</text>
+              <rect fill="#fdfcf9" height="48" rx="6" stroke="rgba(21,23,20,.12)" width="152" x="16" y="158"></rect>
+              <text fill="#1b4d38" font-family="ui-monospace,Menlo,monospace" font-size="10" x="26" y="178">100% 保底通道</text>
+              <text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="11" x="26" y="195">手表/屏幕盲按 + 击球音量峰值</text>
+            </g>
+            <path d="M210 139 H238" stroke="#676b62" stroke-width="1.5"></path>
+            <polygon fill="#676b62" points="238,139 230,134 230,144"></polygon>
+            <g transform="translate(242,26)">
+              <rect fill="#fdfcf9" height="226" rx="8" stroke="#1b4d38" stroke-width="1.5" width="286"></rect>
+              <text fill="#1b4d38" font-family="ui-monospace,Menlo,monospace" font-size="11" x="18" y="28">第一步 · 先听声音（几秒扫完）</text>
+              <text fill="#151714" font-family="-apple-system,PingFang SC,sans-serif" font-size="15" font-weight="600" x="18" y="54">自训抗噪声纹识别模型</text>
+              <text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="84">• 混入球场回音与跑动喘息声专门训练</text>
+              <text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="106">• 同时核对「本人音色 + 离手机近场音量」</text>
+              <text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="128">• 自动屏蔽隔壁球场喊「好球」的误触发</text>
+              <text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="150">• 顺着连续击球声自动往前找准发球起点</text>
+              <text fill="#1b4d38" font-family="ui-monospace,Menlo,monospace" font-size="11" font-weight="600" x="18" y="196">→ 瞬间砍掉 85%+ 捡球垃圾时长</text>
+            </g>
+            <path d="M532 139 H560" stroke="#1b4d38" stroke-width="1.5"></path>
+            <polygon fill="#1b4d38" points="560,139 552,134 552,144"></polygon>
+            <g transform="translate(564,26)">
+              <rect fill="#fdfcf9" height="226" rx="8" stroke="rgba(21,23,20,.25)" width="294"></rect>
+              <text fill="#676b62" font-family="ui-monospace,Menlo,monospace" font-size="11" x="18" y="28">第二步 · 再看画面（只跑高光片段）</text>
+              <text fill="#151714" font-family="-apple-system,PingFang SC,sans-serif" font-size="15" font-weight="600" x="18" y="54">微调球轨迹模型 + 物理平滑</text>
+              <text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="84">• 只对挑出的好球按 1 秒切片，锁住内存不崩</text>
+              <text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="106">• 补齐底线平视远端 3×3 像素小球与白鞋区分</text>
+              <text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="128">• 锁定 60 帧短快门，解决夜场灯光拉出残影</text>
+              <text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="150">• 用重力抛物线规律剔除乱跳噪点、补齐遮挡</text>
+              <text fill="#1b4d38" font-family="ui-monospace,Menlo,monospace" font-size="11" font-weight="600" x="18" y="196">→ 画出干净顺滑的网球飞行弧线</text>
+            </g>
+          </svg>
+          <figcaption>先用算力极省的声音模型把 2 小时缩小十倍，再只对留下的高光片段跑视觉追踪——端侧 AI 只有算过这笔工程账才能真正在手机上跑起来。</figcaption>
+        </figure>
+
+        <div class="decision">
+          <span class="eyebrow">权衡 03 · 降级保底铁律：AI 只能锦上添花，绝不能卡住用户发朋友圈的主路</span>
+          <p class="dq">万一球场太吵声纹没听清，或者傍晚逆光把网球轨迹跟丢了，难道就不让人出片了吗？</p>
+          <ul class="opts">
+            <li><b>脆弱做法 · 强依赖 AI 模型输出，识别失败就弹窗报错或导出断断续续的烂轨迹</b>用户辛辛苦苦打完球，看到满屏乱飞的错乱线条只会直接卸载。</li>
+            <li class="chosen"><b>我的设计 · 三层优雅降级（手动盲标 &gt; 声纹/音量峰值 &gt; 闭合轨迹才渲染） ✓</b>第一优先级永远是用户手动盲按记下的好球（哪怕在设置里把 AI 全关了，点 3 次发朋友圈的主流程也 100% 能走通）；声纹没注册或拿不准时，自动退回按「连续击球音量最高峰」推荐热闹回合；而视觉轨迹如果在逆光下没能拟合成一条合理的物理抛物线，系统会自动隐藏轨迹图层，老老实实导出干净清爽的原视频。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 04 落地推进 & 风险处理 -->
+      <section class="chapter" id="delivery">
+        <span class="eyebrow">04 / 落地推进 &amp; 风险处理</span>
+        <h2>实验室里跑通的模型一上真球场就翻车——我是怎么挨个填平三个现场深坑的？</h2>
+        <p>自己写代码兼训模型最过瘾的地方，就是能看到实验室模型在真实物理世界里有多脆弱，然后再亲手把它改结实。在把 Court Diary 推上 TestFlight 让球友真机实测的过程中，我重点解决了三个最棘手的现场风险：</p>
+
+        <div class="card-grid three">
+          <div class="sub-card">
+            <span class="sc-tag">现场坑 01 · 喘息与串场</span>
+            <h4>隔壁场喊「好球」也跟着瞎记？</h4>
+            <p><b>怎么解的：</b>安静房间录的声音模型一上场，跑喘了认不出自己，隔壁场喊一声反而误触发。我专门录了球场回音、风声和自己跑动喘气时的口令重新混音训练，并在判断时加上<strong>「既要音色像我、又要是离手机近的大音量」</strong>双道门槛，彻底挡住隔壁场串音。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">现场坑 02 · 白鞋当成网球</span>
+            <h4>轨迹老往球友脚上「瞬移」？</h4>
+            <p><b>怎么解的：</b>平视机位下，对面球友的白球鞋和场地白线老被模型误认成球。我专门把这些容易认错的画面截出来当「反面教材（困难负样本）」喂给模型重训，又在后面加了一层<strong>初中物理常识（网球不可能一帧飞出 200 公里时速）</strong>，把瞬移假点直接滤掉并用抛物线连顺。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">现场坑 03 · 盛夏发烫与断录</span>
+            <h4>打到一半来电话或手机烫了？</h4>
+            <p><b>怎么解的：</b>录制期间做到「零视觉运算」，只记声音和时间点；收工后第 1 秒先基于时间点出粗剪卡片供你左滑右滑挑球，你挑完哪几段，后台才对哪几段画轨迹。同时把来电打断自动续存、空间不足预警全做成了保底标配。</p>
+          </div>
+        </div>
+
+        <figure class="fig">
+          <div aria-label="点击放大查看赛后高光与轨迹可视化视图" class="fig-zoom" role="button" tabindex="0">
+            <img alt="Court Diary 赛后高光剪辑与轨迹可视化视图" height="1067" loading="lazy" src="../assets/img/court-ai-concept.webp" width="1600"/>
+            <span class="zoom-pill">点击放大</span>
+          </div>
+          <figcaption>赛后挑选与轨迹增强界面：顶部有「微信朋友圈 60 秒容量槽」，左滑扔掉废球、右滑留下好球，后台自动为留下的片段补上平滑飞行弧线。</figcaption>
+        </figure>
+      </section>
+
+      <!-- 05 结果数据 + 复盘 -->
+      <section class="chapter" id="retro">
+        <span class="eyebrow">05 / 结果数据 + 复盘</span>
+        <h2>目前已在 TestFlight 真机实测，说清楚已经跑通的，也坦白还在啃的硬骨头。</h2>
+        <p>目前 Court Diary 已经打包上架 <strong>iOS TestFlight</strong>，由我自己和身边的网球球友在深圳的室外硬地和夜场灯光球场持续真机实测。根据实测日志记录，第一步声音粗筛可以稳定滤掉每场 <strong>85% 以上</strong> 的捡球与死球垃圾时长；从长按收工、滑卡挑够 60 秒到一键导出发朋友圈，<strong>3 次核心点击</strong>的交互闭环已经完全跑通。</p>
+
+        <div class="retro-grid">
+          <div class="retro-col">
+            <h4>做对了哪几步</h4>
+            <ul>
+              <li><b>真机上场自己当第一个小白鼠：</b>像「开录前 8 秒不能黑屏」「3 秒内激动连点两次要合并成一条」这种细节，坐在空调房里画原型永远想不到，只有满手汗上场打两盘才能抓出来。</li>
+              <li><b>先用声音把问题缩小十倍：</b>不跟手机发热硬碰硬，用极轻的音频模型给昂贵的视觉模型当守门员，让端侧 AI 真正能用起来。</li>
+              <li><b>用物理规律给深度学习兜底：</b>神经网络加一层简单的刚体抛物线物理常识，比盲目换十倍大的模型管用得多。</li>
+            </ul>
+          </div>
+          <div class="retro-col is-limit">
+            <h4>坦诚的局限与下一步迭代</h4>
+            <ul>
+              <li><b>这是小范围球友真机实测，还不是百万级公开发行数据：</b>我必须诚实说明，「滤掉 85%+ 捡球时长」和「≤ 3 次点击」来自我和球友团的 TestFlight 实测记录与交互设计指标，尚未经过大规模公网冷启动用户的检验。</li>
+              <li><b>双打场景与花色场地还在补课：</b>目前的声纹模型主要认手机主人一个人的声音，但网球双打时四个球友都在喊，下一步我正做「开打前搭档两人各喊一句快捷绑声纹」；另外在红土场、室内深蓝地胶和傍晚大逆光下，远端小球的追踪还会偶尔断线，正在继续攒这些特殊场地的实拍样本。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 </div>
-<h1 id="t">Court Diary</h1>
-<p class="case-sub">场上不必盯屏标记好球，赛后先筛选候选片段，再按需增强球轨迹。</p>
-<div aria-label="核心指标" class="metric-row four">
-<div class="metric-box">
-<span class="m-val">85%+</span>
-<span class="m-lbl">Stage 1 声纹粗剪滤掉捡球垃圾时长</span>
-</div>
-<div class="metric-box">
-<span class="m-val">≤ 3 次</span>
-<span class="m-lbl">从按住收工到发微信朋友圈的核心点击</span>
-</div>
-<div class="metric-box">
-<span class="m-val">1s 切片</span>
-<span class="m-lbl">高光窗每秒切片跑 GridTrackNet 防 OOM</span>
-</div>
-<div class="metric-box">
-<span class="m-val">可关闭 AI</span>
-<span class="m-lbl">关闭所有 AI 开关，盲操出片主路径依然完整</span>
-</div>
-</div>
-<dl class="facts">
-<div><dt>角色</dt><dd>个人独立全栈：产品交互、iOS / Watch 开发及声音与视觉模型训练</dd></div>
-<div><dt>应用形态</dt><dd>iOS + Apple Watch 协同应用（TestFlight 实测中）</dd></div>
-<div><dt>Stage 1 声纹粗剪</dt><dd>自训声纹网络（混响 + 喘息抗噪增强 + 近场能量双门控）</dd></div>
-<div><dt>Stage 2 轨迹精修</dt><dd>每秒切片 + 后训练 GridTrackNet + 刚体运动学抛物线平滑</dd></div>
-</dl>
-</section>
-<figure class="case-figure">
-<div aria-label="点击放大查看 Court Diary 产品主图" class="fig-zoom" role="button" tabindex="0">
-<img alt="Court Diary 网球记录产品主图：手机与 Apple Watch 协同界面" height="887" src="../assets/img/court-diary-hero-v2.webp" width="1774"/>
-<span class="zoom-pill">点击放大</span>
-</div>
-<figcaption>场上盲操录制、Apple Watch 震动确认与赛后高光快剪全景。</figcaption>
-</figure>
-<div class="case-layout">
-<aside aria-label="本页目录" class="toc">
-<span class="toc-title">本页目录</span>
-<ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol>
-</aside>
-<div class="prose"><details class="toc-mobile"><summary>展开本页目录</summary><ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol></details><section class="chapter" id="problem"><span class="eyebrow">01 / 项目背景 &amp; 业务目标</span><h2>项目背景 &amp; 业务目标</h2><p>打球时手湿、强光下难看屏幕；赛后从 90–120 分钟录像里寻找好球又很费时间。目标是场上不用盯屏标记，赛后以不超过 3 次核心点击分享片段。</p><p>这是个人独立产品与开发项目，负责 iOS / Apple Watch 交互、开发及声纹和视觉模型训练；目前处于 TestFlight 实测。</p></section><section class="chapter" id="analysis"><span class="eyebrow">02 / 问题分析 &amp; 需求挖掘</span><h2>问题分析 &amp; 需求挖掘</h2><p>问题不只是剪辑按钮太多：现场无法精确操作，而长录像里大量是捡球等非比赛时间。</p><p>若对整场视频逐帧做球轨迹识别，手机发热和内存压力过高。因此先缩小需要处理的视频范围，再精修选中的片段。</p></section><section class="chapter" id="decisions"><span class="eyebrow">03 / 方案设计 &amp; 核心权衡</span><h2>方案设计 &amp; 核心权衡</h2><p>场上用大面积操作区、手表触觉反馈和声音辅助标记；赛后先用声音寻找候选片段，再对保留片段识别球轨迹。</p><p>录制期间不运行视觉识别，优先保证录制稳定；赛后先给用户粗剪结果，轨迹增强在后台处理。模型提供候选，用户仍可选择，关闭 AI 后保留基本出片路径。</p><figure class="fig">
-<div aria-label="点击放大查看场上盲操录制界面" class="fig-zoom" role="button" tabindex="0">
-<img alt="场上盲操录制界面：大号计时、电量与存储状态，右侧巨型好球热区" height="739" loading="lazy" src="../assets/img/court-design.webp" width="1600"/>
-<span class="zoom-pill">点击放大</span>
-</div>
-<figcaption>右半屏巨型「好球 +1」热区与高对比度计时、电量、剩余存储，站在数米外强光下也能一眼看清。</figcaption>
-</figure><figure class="fig">
-<div aria-label="点击放大查看赛后高光与轨迹可视化视图" class="fig-zoom" role="button" tabindex="0">
-<img alt="Court Diary 赛后高光剪辑与轨迹可视化视图" height="1067" loading="lazy" src="../assets/img/court-ai-concept.webp" width="1600"/>
-<span class="zoom-pill">点击放大</span>
-</div>
-<figcaption>赛后高光快剪与轨迹增强视图：先出高光候选，再叠加平滑飞行弧线与落点。</figcaption>
-</figure><figure aria-label="双阶段声纹粗剪与 GridTrackNet 管线图" class="fig">
-<svg aria-labelledby="cd-pipe-title" role="img" viewbox="0 0 880 280">
-<title id="cd-pipe-title">Court Diary 双阶段管线：原始 2 小时录像 → Stage 1 声纹粗剪 → Stage 2 每秒切片 GridTrackNet + 运动学平滑</title>
-<rect fill="#fdfcf9" height="278" rx="12" stroke="rgba(21,23,20,.12)" width="878" x="1" y="1"></rect>
-<g transform="translate(22,26)">
-<rect fill="#f6f4ef" height="226" rx="8" stroke="rgba(21,23,20,.12)" width="184"></rect>
-<text fill="#676b62" font-family="ui-monospace,Menlo,monospace" font-size="11" x="16" y="28">RAW · 90–120 MIN</text>
-<text fill="#151714" font-family="-apple-system,PingFang SC,sans-serif" font-size="15" font-weight="600" x="16" y="54">2 小时原始音视频</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="16" y="84">• 1080p/60fps 逾 30 万帧</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="16" y="106">• 85%+ 为捡球与死球</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="16" y="128">• 混杂混响、风噪与喘息</text>
-<rect fill="#fdfcf9" height="48" rx="6" stroke="rgba(21,23,20,.12)" width="152" x="16" y="158"></rect>
-<text fill="#1b4d38" font-family="ui-monospace,Menlo,monospace" font-size="10" x="26" y="178">FALLBACK</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="11" x="26" y="195">手动盲标 + 能量峰值保底</text>
-</g>
-<path d="M210 139 H238" stroke="#676b62" stroke-width="1.5"></path>
-<polygon fill="#676b62" points="238,139 230,134 230,144"></polygon>
-<g transform="translate(242,26)">
-<rect fill="#fdfcf9" height="226" rx="8" stroke="#1b4d38" stroke-width="1.5" width="286"></rect>
-<text fill="#1b4d38" font-family="ui-monospace,Menlo,monospace" font-size="11" x="18" y="28">STAGE 1 · AUDIO GATING</text>
-<text fill="#151714" font-family="-apple-system,PingFang SC,sans-serif" font-size="15" font-weight="600" x="18" y="54">独立声纹识别神经网络</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="84">• 混响 RIR + 喘息态多 SNR 混音增强</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="106">• 声纹余弦相似度 + 近场能量双门控</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="128">• 屏蔽隔壁球场远场喊声串扰</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="150">• 联合击球瞬态脉冲动态伸缩起点</text>
-<text fill="#1b4d38" font-family="ui-monospace,Menlo,monospace" font-size="11" font-weight="600" x="18" y="196">→ 秒级滤掉 85%+ 捡球垃圾时长</text>
-</g>
-<path d="M532 139 H560" stroke="#1b4d38" stroke-width="1.5"></path>
-<polygon fill="#1b4d38" points="560,139 552,134 552,144"></polygon>
-<g transform="translate(564,26)">
-<rect fill="#fdfcf9" height="226" rx="8" stroke="rgba(21,23,20,.25)" width="294"></rect>
-<text fill="#676b62" font-family="ui-monospace,Menlo,monospace" font-size="11" x="18" y="28">STAGE 2 · 1-SEC SLICED VISION</text>
-<text fill="#151714" font-family="-apple-system,PingFang SC,sans-serif" font-size="15" font-weight="600" x="18" y="54">后训练 GridTrackNet + 物理平滑</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="84">• 仅对高光窗按 1s 切片，锁死内存峰值</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="106">• 困难负样本微调：远端 3×3 像素 / 白鞋</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="128">• 锁定 60fps 短快门 + 定向运动模糊增广</text>
-<text fill="#3f433b" font-family="-apple-system,PingFang SC,sans-serif" font-size="12" x="18" y="150">• 刚体速度/加速度滤波 + 抛物线样条插值</text>
-<text fill="#1b4d38" font-family="ui-monospace,Menlo,monospace" font-size="11" font-weight="600" x="18" y="196">→ 精确回合起止与顺滑飞行弧线</text>
-</g>
-</svg>
-<figcaption>双阶段异构级联：音频门控将问题规模缩小一个数量级，让端侧视觉精修真正可行。</figcaption>
-</figure></section><section class="chapter" id="delivery"><span class="eyebrow">04 / 落地推进 &amp; 风险处理</span><h2>落地推进 &amp; 风险处理</h2><p>先验证场上记录，再训练声音筛选和轨迹识别，逐步放到 TestFlight 真机体验。</p><p>干净环境训练的声音模型会受球场噪声和隔壁口令干扰，因此补充球场噪声与喘息样本；原有轨迹模型面对底线视角的小球和白线容易误判，于是补充困难样本并用运动规律过滤异常轨迹。</p></section><section class="chapter" id="retro"><span class="eyebrow">05 / 结果数据 + 复盘</span><h2>结果数据 + 复盘</h2><p>现有项目记录显示声音粗剪可滤掉 85% 以上捡球等时长，核心分享流程设计为不超过 3 次点击；这些不是大规模用户效果数据。</p><p>分阶段处理让端侧计算更可行，先保证录制和人工选择也降低了模型失效的影响。双打多声纹和不同场地、光照下的识别仍需继续验证。</p></section></div>
-</div>
-</div>
+
 <a class="next-case" href="rstack-guide/index.html">
-<div class="wrap">
-<span class="eyebrow">下一个项目 · 04 / 05</span>
-<h2>rstack — 自进化 AI 编程工作流 →</h2>
-<p>Claude 负责决策与契约、Codex 负责侦察与施工；配合每周复盘与反事实重放，连续四期追踪 W45–W47。</p>
-</div>
+  <div class="wrap">
+    <span class="eyebrow">下一个项目 · 04 / 05</span>
+    <h2>rstack — 让两个 AI 分工写代码、每周自动复盘错题 →</h2>
+    <p>你看我一个人能在业余时间同时维护投研工作台和 iOS 应用，靠的就是下面这套我给自己搭的「双 AI 协同 + 每周自动错题复盘」工作流。</p>
+  </div>
 </a>
 </main>
+
 <footer class="site-foot">
-<div class="wrap">
-<span class="mono">© <span data-year="">2026</span> 星宇 · 深圳</span>
-<span><a href="../index.html#work">返回全部作品 ↑</a></span>
-<button class="to-top" type="button">↑ 回到顶部</button>
-</div>
+  <div class="wrap">
+    <span class="mono">© <span data-year="">2026</span> 星宇 · 深圳</span>
+    <span><a href="../index.html#work">返回全部作品 ↑</a></span>
+    <button class="to-top" type="button">↑ 回到顶部</button>
+  </div>
 </footer>
 </body>
 </html>
