@@ -30,42 +30,99 @@
         </figcaption>
       </figure></div></div></section>
 
-<section class="sec sec-night" id="skills"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">01 / SKILLS</span><h2>核心能力与做事方式</h2></div><p class="sec-sub">AI / Agent 产品：相较于追逐新概念与模型参数，我更关注场景真伪、工程受控、成本结构与异常兜底。</p></div>
+<section class="sec sec-skills" id="skills"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">01 / SKILLS</span><h2>核心能力与做事方式</h2></div><p class="sec-sub">AI / Agent 产品：相较于追逐新概念与模型参数，我更关注场景真伪、工程受控、成本结构与异常兜底。</p></div>
 
-<div class="skill-arch" aria-label="AI / Agent 生产落地五维闭环图">
+<div class="skill-arch" data-active-node="01" aria-label="AI / Agent 生产落地五维闭环图">
   <div class="skill-arch-bar">
-    <span class="eyebrow">PRODUCTION LOOP · 点击节点切换对应维度</span>
-    <span class="arch-loop-pill">↺ 闭环回流：线上异常 → 基准评测集 &amp; 指令迭代</span>
+    <span class="eyebrow"><i class="arch-live-dot" aria-hidden="true"></i>PRODUCTION LOOP · 生产闭环架构</span>
+    <span class="arch-hint">点击任意模块切换对应维度与实证</span>
   </div>
+
+  <div class="arch-feedback-arc" aria-hidden="true">
+    <svg viewBox="0 0 960 44" preserveAspectRatio="none">
+      <path class="arc-track" d="M 840 40 C 840 8, 120 8, 120 40" />
+      <path class="arc-pulse" d="M 840 40 C 840 8, 120 8, 120 40" />
+      <polygon class="arc-arrow" points="115,34 120,43 125,34" />
+    </svg>
+    <span class="arch-loop-pill">↺ 闭环回流：线上错例 → 基准评测集 &amp; 指令迭代</span>
+  </div>
+
   <div class="arch-flow" role="group" aria-label="主链路能力节点">
     <button class="arch-node is-active" type="button" data-skill-target="01" aria-pressed="true">
-      <span class="arch-idx">01 · 入口控制</span>
+      <div class="arch-node-top">
+        <span class="arch-idx">01 · 入口控制</span>
+        <span class="arch-ico" aria-hidden="true"><svg viewBox="0 0 20 20" width="16" height="16"><path d="M10 2.5 16.5 5.2v4.6c0 4.1-2.8 7-6.5 8.2-3.7-1.2-6.5-4.1-6.5-8.2V5.2L10 2.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m7.3 10.1 1.9 1.9 3.6-3.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
       <strong>场景判断与系统受控</strong>
-      <span>方案边界 · 熔断 · 权限 · 记忆 · 指令</span>
+      <span class="arch-tags"><i>方案边界</i><i>熔断</i><i>权限</i><i>记忆</i><i>指令</i></span>
     </button>
-    <span class="arch-arrow" aria-hidden="true"><svg viewBox="0 0 24 16" width="24" height="16"><path d="M2 8h18m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+
+    <span class="arch-arrow" aria-hidden="true">
+      <svg viewBox="0 0 40 16" width="36" height="16">
+        <line class="flow-track" x1="2" y1="8" x2="31" y2="8"/>
+        <line class="flow-pulse" x1="2" y1="8" x2="31" y2="8"/>
+        <path class="flow-head" d="M27 3.5 34.5 8 27 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+
     <button class="arch-node" type="button" data-skill-target="02" aria-pressed="false">
-      <span class="arch-idx">02 · 质量底线</span>
+      <div class="arch-node-top">
+        <span class="arch-idx">02 · 质量底线</span>
+        <span class="arch-ico" aria-hidden="true"><svg viewBox="0 0 20 20" width="16" height="16"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.5v2.5M10 16v2.5M1.5 10H4M16 10h2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </div>
       <strong>真实评测与风险控制</strong>
-      <span>隔离评测 · 非对称代价 · 溯源 · 止损</span>
+      <span class="arch-tags"><i>隔离评测</i><i>非对称代价</i><i>溯源</i><i>止损</i></span>
     </button>
-    <span class="arch-arrow" aria-hidden="true"><svg viewBox="0 0 24 16" width="24" height="16"><path d="M2 8h18m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+
+    <span class="arch-arrow" aria-hidden="true">
+      <svg viewBox="0 0 40 16" width="36" height="16">
+        <line class="flow-track" x1="2" y1="8" x2="31" y2="8"/>
+        <line class="flow-pulse" x1="2" y1="8" x2="31" y2="8"/>
+        <path class="flow-head" d="M27 3.5 34.5 8 27 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+
     <button class="arch-node" type="button" data-skill-target="03" aria-pressed="false">
-      <span class="arch-idx">03 · 工程权衡</span>
+      <div class="arch-node-top">
+        <span class="arch-idx">03 · 工程权衡</span>
+        <span class="arch-ico" aria-hidden="true"><svg viewBox="0 0 20 20" width="16" height="16"><path d="M10 3v14M5 17h10M4 7l6-2 6 2M4 7l-1.5 4.5a2.2 2.2 0 0 0 3 0L4 7Zm12 0-1.5 4.5a2.2 2.2 0 0 0 3 0L16 7Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
       <strong>业务理解与现实取舍</strong>
-      <span>契约转译 · 降级 · 预期 · 业务结果</span>
+      <span class="arch-tags"><i>契约转译</i><i>降级</i><i>预期</i><i>业务结果</i></span>
     </button>
-    <span class="arch-arrow" aria-hidden="true"><svg viewBox="0 0 24 16" width="24" height="16"><path d="M2 8h18m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+
+    <span class="arch-arrow" aria-hidden="true">
+      <svg viewBox="0 0 40 16" width="36" height="16">
+        <line class="flow-track" x1="2" y1="8" x2="31" y2="8"/>
+        <line class="flow-pulse" x1="2" y1="8" x2="31" y2="8"/>
+        <path class="flow-head" d="M27 3.5 34.5 8 27 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+
     <button class="arch-node" type="button" data-skill-target="05" aria-pressed="false">
-      <span class="arch-idx">05 · 交付闭环</span>
+      <div class="arch-node-top">
+        <span class="arch-idx">05 · 交付闭环</span>
+        <span class="arch-ico" aria-hidden="true"><svg viewBox="0 0 20 20" width="16" height="16"><path d="M16.5 9.5a6.5 6.5 0 1 1-1.9-4.6M16.5 3.5v3.8h-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
       <strong>推进落地与团队协同</strong>
-      <span>标准前置 · 只读灰度 · 观测 · 回流</span>
+      <span class="arch-tags"><i>标准前置</i><i>只读灰度</i><i>观测</i><i>回流</i></span>
     </button>
   </div>
+
+  <div class="arch-bus" aria-hidden="true">
+    <svg viewBox="0 0 960 28" preserveAspectRatio="none">
+      <path class="bus-track" d="M 110 2 V 14 M 365 2 V 14 M 615 2 V 14 M 860 2 V 14 M 110 14 H 860 M 480 14 V 26" />
+      <path class="bus-pulse" d="M 480 26 V 14 H 110 V 2 M 480 14 H 860 V 2" />
+    </svg>
+  </div>
+
   <button class="arch-base" type="button" data-skill-target="04" aria-pressed="false">
-    <span class="arch-idx">04 · 全链路支撑</span>
-    <strong>技术理解与实践能力</strong>
-    <span>LLM 原理边界 · RAG 链路诊断 · Agent 运行机制 · 系统原型验证 · 日志追踪定位</span>
+    <div class="arch-base-left">
+      <span class="arch-ico" aria-hidden="true"><svg viewBox="0 0 20 20" width="16" height="16"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m6.5 8 2.5 2-2.5 2M10.5 12h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="arch-idx">04 · 全链路支撑底座</span>
+      <strong>技术理解与实践能力</strong>
+    </div>
+    <span class="arch-tags"><i>LLM 原理边界</i><i>RAG 链路诊断</i><i>Agent 运行机制</i><i>系统原型验证</i><i>日志追踪定位</i></span>
   </button>
 </div>
 
@@ -96,9 +153,9 @@
         <table class="skill-mini-table">
           <thead><tr><th>技术路径</th><th>适用场景</th><th>系统特性</th><th>工程策略（附实证）</th></tr></thead>
           <tbody>
-            <tr><td data-label="技术路径"><b>固定规则代码</b></td><td data-label="适用场景">逻辑固定、输入输出明确</td><td data-label="系统特性">强确定性 · 低延迟</td><td data-label="工程策略">优先使用传统代码，不额外引入大模型（FinDesk 前置路由拦截约 <code>50%</code> 简单查数，响应 <code>3.36s → 2.36s</code>）</td></tr>
-            <tr><td data-label="技术路径"><b>检索增强（RAG）</b></td><td data-label="适用场景">普通知识问答、资料查证</td><td data-label="系统特性">依赖切片与召回</td><td data-label="工程策略">做好文本分块、语义召回与原文锚点溯源即可，不拉长推理链路</td></tr>
-            <tr><td data-label="技术路径"><b>多智能体（Agent）</b></td><td data-label="适用场景">目标复杂、多步骤、依赖外部工具且路径动态变化</td><td data-label="系统特性">存在推理不确定性</td><td data-label="工程策略">必须配套轮次上限、熔断开关与权限隔离，仅在必要环节启用</td></tr>
+            <tr><td data-label="技术路径"><span class="path-badge is-rule">确定性优先</span><b>固定规则代码</b></td><td data-label="适用场景">逻辑固定、输入输出明确</td><td data-label="系统特性"><span class="meter-row"><i class="meter-bar" style="--m:96%"></i><span>强确定性 · 低延迟</span></span></td><td data-label="工程策略">优先使用传统代码，不额外引入大模型（FinDesk 前置路由拦截约 <code>50%</code> 简单查数，响应 <code>3.36s → 2.36s</code>）</td></tr>
+            <tr><td data-label="技术路径"><span class="path-badge is-rag">检索查证</span><b>检索增强（RAG）</b></td><td data-label="适用场景">普通知识问答、资料查证</td><td data-label="系统特性"><span class="meter-row"><i class="meter-bar is-mid" style="--m:64%"></i><span>依赖切片与召回</span></span></td><td data-label="工程策略">做好文本分块、语义召回与原文锚点溯源即可，不拉长推理链路</td></tr>
+            <tr><td data-label="技术路径"><span class="path-badge is-agent">动态规划</span><b>多智能体（Agent）</b></td><td data-label="适用场景">目标复杂、多步骤、依赖外部工具且路径动态变化</td><td data-label="系统特性"><span class="meter-row"><i class="meter-bar is-var" style="--m:38%"></i><span>存在推理不确定性</span></span></td><td data-label="工程策略">必须配套轮次上限、熔断开关与权限隔离，仅在必要环节启用</td></tr>
           </tbody>
         </table>
       </div>
@@ -136,10 +193,10 @@
       <h4>评测集物理隔离与四层归因</h4>
       <p>保持测试集与训练环境严格隔离。建立清晰的错误排查链路，遇到异常时能够准确区分问题源头，而非笼统归因于模型本身。</p>
       <div class="skill-attr-strip" aria-label="四层错因排查链路">
-        <span><b>① 知识检索不全</b>切片破损 / 召回漏检 / 重排偏差</span>
-        <span><b>② 任务规划偏差</b>子任务拆解或工具选择错误</span>
-        <span><b>③ 外部工具报错</b>接口契约异常 / 底表解析与单位换算</span>
-        <span><b>④ 模型推理缺陷</b>边界理解偏差 / 上下文注意力衰减</span>
+        <span><em class="attr-step">LAYER 01</em><b>① 知识检索不全</b><small>切片破损 / 召回漏检 / 重排偏差</small></span>
+        <span><em class="attr-step">LAYER 02</em><b>② 任务规划偏差</b><small>子任务拆解或工具选择错误</small></span>
+        <span><em class="attr-step">LAYER 03</em><b>③ 外部工具报错</b><small>接口契约异常 / 底表解析与单位换算</small></span>
+        <span><em class="attr-step">LAYER 04</em><b>④ 模型推理缺陷</b><small>边界理解偏差 / 上下文注意力衰减</small></span>
       </div>
       <span class="skill-proof">Dev / Val / Blind 物理隔离 · FinDesk 27 道错题归因 63% 源于底表解析与单位换算</span>
     </div>
