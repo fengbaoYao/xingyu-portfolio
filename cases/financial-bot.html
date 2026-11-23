@@ -293,28 +293,63 @@
       <!-- ============ 07 试用 ============ -->
       <section id="try" class="chapter">
         <span class="eyebrow">07 / <span class="zh">在线体验</span></span>
-        <h2><span class="zh">三个线上入口，按你想验证的路径直接试用。</span></h2>
-        <p><span class="zh">FinDesk 线上站点独立部署在香港服务器上，均在新窗口打开。你可以在对话助手里提问并查看引用来源，也可以一键切入同一标的的个股深度工作台。</span></p>
-        <div class="cards three try-cards">
+        <h2><span class="zh">四代线上入口，从最新一代开始体验。</span></h2>
+        <p><span class="zh">FinDesk 线上站点独立部署在香港服务器上，全部 HTTPS，在新窗口打开。推荐从最新一代 <b>v4 公开研究笔记本</b>开始——导入任意一手资料即可体验「来源 | 问答 | Studio」三栏研究流；再回头看 v2/v3 的股票研究三栏工作台，能直观感受这条产品线怎么长出来的。</span></p>
+        <div class="cards four try-cards">
           <div class="card">
-            <span class="n"><span class="zh">产品首页 · Landing</span></span>
-            <h4><span class="zh">了解整体架构与数据源覆盖</span></h4>
-            <p><span class="zh">查看跨市场数据源接入状态、三栏证据链设计说明与快速示例入口。</span></p>
-            <p class="try-act"><a class="btn btn-sm btn-accent" href="https://47.243.118.32.nip.io/landing?lang=zh" target="_blank" rel="noopener"><span class="zh">进入产品首页</span> <span aria-hidden="true">↗</span></a></p>
+            <span class="n"><span class="zh">v4 · Notebook 公开笔记本 <b>（最新）</b></span></span>
+            <h4><span class="zh">围绕任意一手资料的 NotebookLM 式研究</span></h4>
+            <p><span class="zh">免登录。导入 URL / PDF / 文本，勾选来源后流式问答、引用编号点出原文高亮、存笔记反哺检索，Studio 一键生成简报、提纲、深度报告、思维导图等 10 种产物。</span></p>
+            <p class="try-act"><a class="btn btn-sm btn-accent" href="https://47.243.118.32.nip.io/v4/notebook/public" target="_blank" rel="noopener"><span class="zh">打开 v4 公开笔记本</span> <span aria-hidden="true">↗</span></a></p>
           </div>
           <div class="card">
-            <span class="n">Work · 深度工作台</span>
+            <span class="n">v3 · Bot 研究助手</span>
+            <h4><span class="zh">带回答契约与来源引用的投研问答</span></h4>
+            <p><span class="zh">体验前置查询路由与事实、计算、信息缺口分层呈现的对话式股票研究流程——每个数字都可点开来源。</span></p>
+            <p class="try-act"><a class="btn btn-sm" href="https://47.243.118.32.nip.io/bot?mode=use&amp;lang=zh" target="_blank" rel="noopener"><span class="zh">打开 Bot 研究助手</span> <span aria-hidden="true">↗</span></a></p>
+          </div>
+          <div class="card">
+            <span class="n">v3 · Work 深度工作台</span>
             <h4><span class="zh">个股财务三表、估值分位与 K 线</span></h4>
             <p><span class="zh">围绕美股、港股、A 股标的查看实时行情、20 日 K 线/RSI/MA、估值指标与财报结构化数据。</span></p>
             <p class="try-act"><a class="btn btn-sm" href="https://47.243.118.32.nip.io/work?lang=zh" target="_blank" rel="noopener"><span class="zh">打开 Work 工作台</span> <span aria-hidden="true">↗</span></a></p>
           </div>
           <div class="card">
-            <span class="n">Bot · 研究助手</span>
-            <h4><span class="zh">带回答契约与来源引用的投研问答</span></h4>
-            <p><span class="zh">体验前置查询路由与事实、计算、信息缺口分层呈现的对话式股票研究流程。</span></p>
-            <p class="try-act"><a class="btn btn-sm" href="https://47.243.118.32.nip.io/bot?mode=use&amp;lang=zh" target="_blank" rel="noopener"><span class="zh">打开 Bot 研究助手</span> <span aria-hidden="true">↗</span></a></p>
+            <span class="n"><span class="zh">v3 · Landing 产品首页</span></span>
+            <h4><span class="zh">了解整体架构与数据源覆盖</span></h4>
+            <p><span class="zh">查看跨市场数据源接入状态、三栏证据链设计说明与快速示例入口。</span></p>
+            <p class="try-act"><a class="btn btn-sm" href="https://47.243.118.32.nip.io/landing?lang=zh" target="_blank" rel="noopener"><span class="zh">进入产品首页</span> <span aria-hidden="true">↗</span></a></p>
           </div>
         </div>
+
+        <h3 style="margin-top:32px"><span class="zh">演进路线：FinSearch-X → FinDesk v1 → v2/v3 → v4</span></h3>
+        <ol class="phases">
+          <li>
+            <span class="when">2026-09 · FinSearch-X 方向定调</span>
+            <b><span class="zh">评测消融底座：不做预测涨跌，做证据门控研究 Agent</span></b>
+            <p><span class="zh">跑完消融并把 SFT-500 门禁锁住后，定下「检索找材料 + 确定性计算 + 证据门控」的公司研究 Agent 路线——不是预测股价，而是把研究员核验数字的成本降到一次点击。</span></p>
+          </li>
+          <li>
+            <span class="when">v1 · financial-work / financial-bot</span>
+            <b><span class="zh">第一代双壳：/work 行情面板 + /bot 硬核任务引擎</span></b>
+            <p><span class="zh">基于 OpenAshare 长出的第一版线上形态。/work 侧重行情、K 线、热点与持仓面板；/bot 把后端任务引擎做得很硬核（冻结授权快照、真实步骤时间线、waiting_user 三态等待、dropped 终态、用户确认才入库的提案记忆），但两个入口功能打架、右栏塞了屏幕镜像，前端单体文件五六千行。</span></p>
+          </li>
+          <li>
+            <span class="when">v2 · 彻底切分「我看」与「我问」</span>
+            <b><span class="zh">/v2/work 与 /v2/bot 分离，暖纸深墨绿研报级排版</span></b>
+            <p><span class="zh">砍掉右栏噪音，把每次问答拆成步骤时间线 → SSE 流式答案 → 取证记录卡 → 数据缺口；按市场补齐 A 股 iFinD 5 年 PE 分位、港股报价和美股 yfinance 估值，靠价格先行干掉 8 秒首屏白屏。</span></p>
+          </li>
+          <li>
+            <span class="when">v3 · 补齐产品叙事</span>
+            <b><span class="zh">双语 Signal 落地页 /landing + 研究日志 /journal/*</span></b>
+            <p><span class="zh">工作区收成「上下文栏 | 对话线程 | 证据弹窗」极简三栏，带 ?demo=1 腾讯 00700.HK 离线快照，不连后端也能完整走通引用核对与跳 Work 看图。</span></p>
+          </li>
+          <li>
+            <span class="when">v4 · 范式跃迁到研究笔记本</span>
+            <b><span class="zh">从「查单只股票」到「围绕任意一手资料的 NotebookLM 式笔记本」</span></b>
+            <p><span class="zh">拆出受邀私有工作台 /v4/notebook 和免登录公开版 /v4/notebook/public（来源 | 问答 | Studio 三栏）：联网发现、URL/PDF/文本导入、按问次隔离勾选、流式引用悬停预览与原文高亮、存笔记反哺检索，外加 Studio 10 种产物生成。</span></p>
+          </li>
+        </ol>
       </section>
     </div>
   </div>
