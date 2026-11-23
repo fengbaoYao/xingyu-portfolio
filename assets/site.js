@@ -317,24 +317,19 @@
     if (note) note.hidden = false;
   }
 
-  // 12. 首页核心能力五维闭环图 + 点击触发流转与粒子动效 + 标签切换 + 展开全部
+  // 12. 首页核心能力五维闭环图 + 一表总览粒子巡检特效 + 标签切换 + 展开全部
   var skillSection = document.getElementById('skills');
   if (skillSection) {
     var sArch = skillSection.querySelector('.skill-arch');
     var sCanvas = skillSection.querySelector('.arch-fx-canvas');
     var sLiveDot = skillSection.querySelector('.arch-live-dot');
-    var sFeedbackArc = skillSection.querySelector('.arch-feedback-arc');
-    var sBus = skillSection.querySelector('.arch-bus');
-    var sArrows = Array.prototype.slice.call(skillSection.querySelectorAll('.arch-arrow[data-arrow-idx]'));
     var sTabs = Array.prototype.slice.call(skillSection.querySelectorAll('[data-skill-tab]'));
     var sPanels = Array.prototype.slice.call(skillSection.querySelectorAll('[data-skill-panel]'));
     var sArchNodes = Array.prototype.slice.call(skillSection.querySelectorAll('.skill-arch [data-skill-target]'));
     var sJumps = Array.prototype.slice.call(skillSection.querySelectorAll('.matrix-jump[data-skill-target]'));
     var sExpandBtn = skillSection.querySelector('[data-skill-expand]');
-    var sToolbar = skillSection.querySelector('.skill-toolbar');
     var activeSkillId = '01';
     var allExpanded = false;
-    var MAIN_ORDER = ['01', '02', '03', '05'];
     var PALETTE = ['#1b4d38', '#1f8a5b', '#4eb889', '#c79345'];
 
     var nodeById = {};
@@ -342,7 +337,7 @@
       nodeById[n.getAttribute('data-skill-target')] = n;
     });
 
-    // ---- 轻量 Canvas 粒子与能量流轨迹引擎（仅在点击切换时运行，结束后自动停帧） ----
+    // ---- 轻量 Canvas 巡检特效引擎（仅在切换至「一表总览」时运行，结束后自动停帧） ----
     var fxCtx = sCanvas && sCanvas.getContext ? sCanvas.getContext('2d') : null;
     var fxParticles = [];
     var fxRings = [];
@@ -356,15 +351,24 @@
       clearTimers.push(t);
     };
 
-    var resetTransientClasses = function () {
+    var stopAllFx = function () {
       clearTimers.forEach(clearTimeout);
       clearTimers = [];
+      fxParticles = [];
+      fxRings = [];
+      fxComets = [];
+      if (fxRaf) {
+        cancelAnimationFrame(fxRaf);
+        fxRaf = 0;
+      }
+      fxLastTs = 0;
+      if (fxCtx && sCanvas && sArch) {
+        var r = sArch.getBoundingClientRect();
+        fxCtx.clearRect(0, 0, r.width, r.height);
+      }
       if (sLiveDot) sLiveDot.classList.remove('is-pinging');
-      if (sFeedbackArc) sFeedbackArc.classList.remove('is-flowing');
-      if (sBus) sBus.classList.remove('is-flowing');
-      sArrows.forEach(function (a) { a.classList.remove('is-flowing'); });
       sArchNodes.forEach(function (n) {
-        n.classList.remove('is-arriving', 'is-passing');
+        n.classList.remove('is-passing');
       });
     };
 
@@ -421,41 +425,6 @@
       fxRings.push({ x: x, y: y, r: 8, maxR: 38, life: 0.46, maxLife: 0.46 });
     };
 
-    var samplePolyline = function (pts, t) {
-      if (pts.length === 1) return pts[0];
-      var segs = [];
-      var total = 0;
-      for (var i = 0; i < pts.length - 1; i++) {
-        var dx = pts[i + 1].x - pts[i].x;
-        var dy = pts[i + 1].y - pts[i].y;
-        var len = Math.hypot(dx, dy) || 1;
-        segs.push({ a: pts[i], b: pts[i + 1], len: len });
-        total += len;
-      }
-      var targetDist = Math.max(0, Math.min(1, t)) * total;
-      var acc = 0;
-      for (var j = 0; j < segs.length; j++) {
-        var s = segs[j];
-        if (acc + s.len >= targetDist || j === segs.length - 1) {
-          var localT = (targetDist - acc) / s.len;
-          return {
-            x: s.a.x + (s.b.x - s.a.x) * localT,
-            y: s.a.y + (s.b.y - s.a.y) * localT
-          };
-        }
-        acc += s.len;
-      }
-      return pts[pts.length - 1];
-    };
-
-    var sampleCubic = function (p0, p1, p2, p3, t) {
-      var u = 1 - t;
-      return {
-        x: u * u * u * p0.x + 3 * u * u * t * p1.x + 3 * u * t * t * p2.x + t * t * t * p3.x,
-        y: u * u * u * p0.y + 3 * u * u * t * p1.y + 3 * u * t * t * p2.y + t * t * t * p3.y
-      };
-    };
-
     var easeInOutCubic = function (t) {
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     };
@@ -469,7 +438,6 @@
       var rect = sArch.getBoundingClientRect();
       fxCtx.clearRect(0, 0, rect.width, rect.height);
 
-      // 更新彗星能量包并沿途播撒微粒子
       for (var i = fxComets.length - 1; i >= 0; i--) {
         var c = fxComets[i];
         c.elapsed += dt;
@@ -477,47 +445,43 @@
         var eT = easeInOutCubic(rawT);
         var pos = c.sampler(eT);
         c.trail.push(pos);
-        if (c.trail.length > 16) c.trail.shift();
+        if (c.trail.length > 14) c.trail.shift();
 
-        // 尾迹粒子
-        var emitCount = c.trailDensity || 2;
-        for (var k = 0; k < emitCount; k++) {
-          if (Math.random() < 0.78) {
-            spawnParticle(
-              pos.x + (Math.random() * 6 - 3),
-              pos.y + (Math.random() * 6 - 3),
-              (Math.random() * 36 - 18),
-              (Math.random() * 36 - 18) - 8,
-              1.3 + Math.random() * 1.8,
-              0.30 + Math.random() * 0.28,
-              PALETTE[Math.floor(Math.random() * PALETTE.length)]
-            );
-          }
+        if (rawT >= 0 && Math.random() < 0.72) {
+          spawnParticle(
+            pos.x + (Math.random() * 6 - 3),
+            pos.y + (Math.random() * 6 - 3),
+            (Math.random() * 32 - 16),
+            (Math.random() * 32 - 16) - 6,
+            1.3 + Math.random() * 1.7,
+            0.28 + Math.random() * 0.25,
+            PALETTE[Math.floor(Math.random() * PALETTE.length)]
+          );
         }
 
-        // 绘制拖尾光带
         if (c.trail.length > 1) {
           for (var j = 1; j < c.trail.length; j++) {
             var frac = j / c.trail.length;
             fxCtx.beginPath();
             fxCtx.moveTo(c.trail[j - 1].x, c.trail[j - 1].y);
             fxCtx.lineTo(c.trail[j].x, c.trail[j].y);
-            fxCtx.strokeStyle = 'rgba(31, 138, 91, ' + (frac * 0.55).toFixed(3) + ')';
-            fxCtx.lineWidth = 1.4 + frac * 2.6;
+            fxCtx.strokeStyle = 'rgba(31, 138, 91, ' + (frac * 0.5).toFixed(3) + ')';
+            fxCtx.lineWidth = 1.3 + frac * 2.2;
             fxCtx.lineCap = 'round';
             fxCtx.stroke();
           }
         }
 
-        // 彗星头部光晕
-        var grad = fxCtx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, 13);
-        grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
-        grad.addColorStop(0.35, 'rgba(78, 184, 137, 0.85)');
-        grad.addColorStop(1, 'rgba(27, 77, 56, 0)');
-        fxCtx.fillStyle = grad;
-        fxCtx.beginPath();
-        fxCtx.arc(pos.x, pos.y, 13, 0, Math.PI * 2);
-        fxCtx.fill();
+        if (rawT >= 0) {
+          var grad = fxCtx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, 11);
+          grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+          grad.addColorStop(0.35, 'rgba(78, 184, 137, 0.85)');
+          grad.addColorStop(1, 'rgba(27, 77, 56, 0)');
+          fxCtx.fillStyle = grad;
+          fxCtx.beginPath();
+          fxCtx.arc(pos.x, pos.y, 11, 0, Math.PI * 2);
+          fxCtx.fill();
+        }
 
         if (rawT >= 1) {
           if (c.onArrive) c.onArrive(pos);
@@ -525,7 +489,6 @@
         }
       }
 
-      // 更新粒子
       for (var p = fxParticles.length - 1; p >= 0; p--) {
         var pt = fxParticles[p];
         pt.life -= dt;
@@ -546,7 +509,6 @@
       }
       fxCtx.globalAlpha = 1;
 
-      // 更新到达扩散环
       for (var r = fxRings.length - 1; r >= 0; r--) {
         var rg = fxRings[r];
         rg.life -= dt;
@@ -572,18 +534,10 @@
       }
     };
 
-    var ensureFxLoop = function () {
-      if (!fxRaf && fxCtx) {
-        fxLastTs = 0;
-        fxRaf = requestAnimationFrame(stepFx);
-      }
-    };
-
-    var triggerTransitionFx = function (fromId, toId) {
+    var triggerMatrixFx = function (fromId) {
       if (reduceMotion) return;
-      resetTransientClasses();
+      stopAllFx();
 
-      // 强制 reflow 以重放一次性的 CSS 脉冲动画
       void sArch.offsetWidth;
       if (sLiveDot) {
         sLiveDot.classList.add('is-pinging');
@@ -593,160 +547,42 @@
       var baseRect = syncCanvasSize();
       if (!baseRect || !fxCtx) return;
 
-      var toNode = nodeById[toId];
       var fromNode = nodeById[fromId];
+      var srcPt = fromNode ? getNodePoint(fromNode, baseRect, true) : { x: baseRect.width / 2, y: baseRect.height / 2 };
+      spawnBurst(srcPt.x, srcPt.y, 12, 85);
 
-      // 切到一表总览：全链路星散巡检波
-      if (toId === 'matrix') {
-        var srcPt = fromNode ? getNodePoint(fromNode, baseRect, true) : { x: baseRect.width / 2, y: baseRect.height / 2 };
-        spawnBurst(srcPt.x, srcPt.y, 12, 85);
-        sArchNodes.forEach(function (n, idx) {
-          var dst = getNodePoint(n, baseRect, true);
-          fxComets.push({
-            elapsed: -idx * 0.04,
-            duration: 0.44,
-            trail: [],
-            trailDensity: 1,
-            sampler: function (t) {
-              var clamped = Math.max(0, t);
-              return {
-                x: srcPt.x + (dst.x - srcPt.x) * clamped,
-                y: srcPt.y + (dst.y - srcPt.y) * clamped - Math.sin(clamped * Math.PI) * 18
-              };
-            },
-            onArrive: function (pos) {
-              spawnBurst(pos.x, pos.y, 8, 60);
-              n.classList.add('is-passing');
-              scheduleClear(function () { n.classList.remove('is-passing'); }, 340);
-            }
-          });
+      sArchNodes.forEach(function (n, idx) {
+        var dst = getNodePoint(n, baseRect, true);
+        fxComets.push({
+          elapsed: -idx * 0.04,
+          duration: 0.44,
+          trail: [],
+          sampler: function (t) {
+            var clamped = Math.max(0, t);
+            return {
+              x: srcPt.x + (dst.x - srcPt.x) * clamped,
+              y: srcPt.y + (dst.y - srcPt.y) * clamped - Math.sin(clamped * Math.PI) * 18
+            };
+          },
+          onArrive: function (pos) {
+            spawnBurst(pos.x, pos.y, 8, 60);
+            n.classList.add('is-passing');
+            scheduleClear(function () { n.classList.remove('is-passing'); }, 340);
+          }
         });
-        ensureFxLoop();
-        return;
-      }
-
-      if (!toNode) return;
-      var toPt = getNodePoint(toNode, baseRect, true);
-
-      // 原地再点同一节点：局部脉冲 + 粒子环
-      if (!fromNode || fromId === toId) {
-        spawnBurst(toPt.x, toPt.y, 14, 78);
-        toNode.classList.add('is-arriving');
-        scheduleClear(function () { toNode.classList.remove('is-arriving'); }, 660);
-        ensureFxLoop();
-        return;
-      }
-
-      var fromPt = getNodePoint(fromNode, baseRect, true);
-      var fromIdx = MAIN_ORDER.indexOf(fromId);
-      var toIdx = MAIN_ORDER.indexOf(toId);
-      var sampler = null;
-      var duration = 0.52;
-
-      spawnBurst(fromPt.x, fromPt.y, 8, 56);
-
-      // 情形 1：往返涉及 04（支撑底座总线）—— 严格贴合下方 T 型支撑总线走线
-      if (fromId === '04' || toId === '04') {
-        if (sBus) {
-          sBus.classList.add('is-flowing');
-          scheduleClear(function () { sBus.classList.remove('is-flowing'); }, 740);
-        }
-        var busRect = sBus ? sBus.getBoundingClientRect() : null;
-        if (busRect && busRect.height) {
-          var busY = busRect.top - baseRect.top + busRect.height * 0.5;
-          var busCenterX = busRect.left - baseRect.left + busRect.width * 0.5;
-          if (toId === '04') {
-            var fromCol = getNodePoint(fromNode, baseRect, false);
-            var startEdge = { x: fromCol.x, y: fromNode.getBoundingClientRect().bottom - baseRect.top };
-            var dropEnd = { x: busCenterX, y: toNode.getBoundingClientRect().top - baseRect.top + 8 };
-            sampler = function (t) {
-              return samplePolyline([startEdge, { x: fromCol.x, y: busY }, { x: busCenterX, y: busY }, dropEnd, toPt], t);
-            };
-          } else {
-            var toCol = getNodePoint(toNode, baseRect, false);
-            var liftStart = { x: busCenterX, y: fromNode.getBoundingClientRect().top - baseRect.top };
-            var endEdge = { x: toCol.x, y: toNode.getBoundingClientRect().bottom - baseRect.top - 8 };
-            sampler = function (t) {
-              return samplePolyline([fromPt, liftStart, { x: busCenterX, y: busY }, { x: toCol.x, y: busY }, endEdge, toPt], t);
-            };
-          }
-        } else {
-          sampler = function (t) { return samplePolyline([fromPt, toPt], t); };
-        }
-        duration = 0.56;
-      }
-      // 情形 2：主链路向后回流（例如 05 → 01 或 03 → 01），走上方闭环回流弧线
-      else if (fromIdx !== -1 && toIdx !== -1 && toIdx < fromIdx) {
-        if (sFeedbackArc) {
-          sFeedbackArc.classList.add('is-flowing');
-          scheduleClear(function () { sFeedbackArc.classList.remove('is-flowing'); }, 880);
-        }
-        var arcTopY = sFeedbackArc && sFeedbackArc.getBoundingClientRect().height
-          ? (sFeedbackArc.getBoundingClientRect().top - baseRect.top + 8)
-          : Math.max(12, Math.min(fromPt.y, toPt.y) - 62);
-        var ctrl1 = { x: fromPt.x, y: arcTopY };
-        var ctrl2 = { x: toPt.x, y: arcTopY };
-        sampler = function (t) { return sampleCubic(fromPt, ctrl1, ctrl2, toPt, t); };
-        duration = 0.62;
-      }
-      // 情形 3：主链路顺向流转（例如 01 → 02 / 01 → 05），沿箭头中轴穿过并汇入目标图标
-      else if (fromIdx !== -1 && toIdx !== -1 && toIdx > fromIdx) {
-        var waypoints = [fromPt];
-        for (var step = fromIdx; step < toIdx; step++) {
-          var arrEl = sArrows[step];
-          var nextNode = nodeById[MAIN_ORDER[step + 1]];
-          if (arrEl && arrEl.getBoundingClientRect().width) {
-            var arrPt = getNodePoint(arrEl, baseRect, false);
-            waypoints.push(arrPt);
-          } else if (nextNode) {
-            waypoints.push(getNodePoint(nextNode, baseRect, true));
-          }
-        }
-        if (waypoints[waypoints.length - 1] !== toPt) waypoints.push(toPt);
-
-        for (var a = fromIdx; a < toIdx; a++) {
-          (function (arrowEl, delay) {
-            if (!arrowEl) return;
-            scheduleClear(function () { arrowEl.classList.add('is-flowing'); }, delay);
-            scheduleClear(function () { arrowEl.classList.remove('is-flowing'); }, delay + 560);
-          })(sArrows[a], (a - fromIdx) * 110);
-        }
-        for (var mid = fromIdx + 1; mid < toIdx; mid++) {
-          (function (midNode, delay) {
-            if (!midNode) return;
-            scheduleClear(function () { midNode.classList.add('is-passing'); }, delay);
-            scheduleClear(function () { midNode.classList.remove('is-passing'); }, delay + 280);
-          })(nodeById[MAIN_ORDER[mid]], Math.round((mid - fromIdx) / (toIdx - fromIdx) * 340));
-        }
-        sampler = function (t) { return samplePolyline(waypoints, t); };
-        duration = 0.42 + (toIdx - fromIdx) * 0.08;
-      } else {
-        sampler = function (t) { return samplePolyline([fromPt, toPt], t); };
-      }
-
-      fxComets.push({
-        elapsed: 0,
-        duration: duration,
-        trail: [],
-        trailDensity: 2,
-        sampler: sampler,
-        onArrive: function (pos) {
-          spawnBurst(pos.x, pos.y, 16, 96);
-          toNode.classList.add('is-arriving');
-          scheduleClear(function () { toNode.classList.remove('is-arriving'); }, 660);
-        }
       });
 
-      ensureFxLoop();
+      fxLastTs = 0;
+      fxRaf = requestAnimationFrame(stepFx);
     };
 
-    var animatePanelCards = function (panel) {
+    var animateMatrixRows = function (panel) {
       if (reduceMotion || !panel || panel.hidden) return;
       panel.classList.remove('is-entering');
       void panel.offsetWidth;
-      var items = panel.querySelectorAll('.skill-node, .skill-step, .skill-matrix-table tbody tr');
-      for (var i = 0; i < items.length; i++) {
-        items[i].style.setProperty('--stagger', Math.min(i * 42, 210) + 'ms');
+      var rows = panel.querySelectorAll('.skill-matrix-table tbody tr');
+      for (var i = 0; i < rows.length; i++) {
+        rows[i].style.setProperty('--stagger', Math.min(i * 42, 210) + 'ms');
       }
       panel.classList.add('is-entering');
     };
@@ -780,15 +616,16 @@
       sPanels.forEach(function (panel) {
         var pid = panel.getAttribute('data-skill-panel');
         var show = allExpanded ? pid !== 'matrix' : pid === activeSkillId;
-        var wasHidden = panel.hidden;
         panel.hidden = !show;
-        if (show && (wasHidden || withFx)) {
-          animatePanelCards(panel);
+        if (show && pid === 'matrix') {
+          animateMatrixRows(panel);
         }
       });
 
-      if (withFx && !allExpanded) {
-        triggerTransitionFx(prevId, activeSkillId);
+      if (withFx && !allExpanded && activeSkillId === 'matrix') {
+        triggerMatrixFx(prevId);
+      } else {
+        stopAllFx();
       }
     };
 
