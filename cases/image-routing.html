@@ -1,262 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>金融单据与理赔影像智能分流 — 星宇</title>
-<meta name="description" content="公司生产已上线：将近 90 种理赔业务单证按外观收敛为 23 个视觉类并与路由配置解耦，在 99.63% 需 OCR 召回率（1,650 张盲抽 0 漏检）下压降约 25% 视觉大模型调用量。">
-<link rel="icon" href="../assets/img/favicon.png">
-<link rel="stylesheet" href="../assets/styles.css">
-<script defer src="../assets/site.js"></script>
+<meta content="公司生产已上线：将近 90 种理赔业务单证按外观收敛为 23 个视觉类并与路由配置解耦，在 99.63% 需 OCR 召回率（1,650 张盲抽 0 漏检）下压降约 25% 视觉大模型调用量。" name="description"/>
+<link href="../assets/img/favicon.png" rel="icon"/>
+<link href="../assets/styles.css" rel="stylesheet"/>
+<script defer="" src="../assets/site.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
-<div id="live-status" class="sr-only" aria-live="polite"></div>
-
+<div aria-live="polite" class="sr-only" id="live-status"></div>
 <header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
-    <nav class="pager" aria-label="案例翻页">
-      <span class="mono">02 / 05</span>
-      <a href="financial-bot.html" aria-label="上一个：FinDesk">← <span class="lbl">FinDesk</span></a>
-      <a href="court-diary.html" aria-label="下一个：Court Diary"><span class="lbl">Court Diary</span> →</a>
-    </nav>
-  </div>
+<div class="wrap">
+<a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
+<nav aria-label="案例翻页" class="pager">
+<span class="mono">02 / 05</span>
+<a aria-label="上一个：FinDesk" href="financial-bot.html">← <span class="lbl">FinDesk</span></a>
+<a aria-label="下一个：Court Diary" href="court-diary.html"><span class="lbl">Court Diary</span> →</a>
+</nav>
+</div>
 </header>
 <div class="case-bar">
-  <div class="wrap">
-    <a class="back" href="../index.html#work">← 返回全部作品</a>
-    <span class="mono muted">02 · 企业级生产落地 · 多模态分流</span>
-  </div>
+<div class="wrap">
+<a class="back" href="../index.html#work">← 返回全部作品</a>
+<span class="mono muted">02 · 企业级生产落地 · 多模态分流</span>
 </div>
-
+</div>
 <main id="main">
 <div class="wrap">
-  <section class="case-hero" aria-labelledby="t">
-    <div class="case-hero-top">
-      <span class="eyebrow">02 / ENTERPRISE AI · 公司生产已上线</span>
-      <span class="status st-live">产品负责人 · 已全量投产</span>
-    </div>
-    <h1 id="t">金融单据与理赔影像智能分流</h1>
-    <p class="case-sub">理赔案件里混着大量无字现场照和医疗/修理单据。把近 90 种单证按外观合并成 23 类，再与业务路由配置表解耦，在守住零漏检的前提下砍掉约 25% 视觉大模型无效调用。</p>
-
-    <div class="metric-row four" aria-label="核心指标">
-      <div class="metric-box">
-        <span class="m-val">-25%</span>
-        <span class="m-lbl">生产视觉大模型（VL）调用次数压降</span>
-      </div>
-      <div class="metric-box">
-        <span class="m-val">99.63%</span>
-        <span class="m-lbl">2,464 张独立测试集需 OCR 召回率</span>
-      </div>
-      <div class="metric-box">
-        <span class="m-val">0 漏检</span>
-        <span class="m-lbl">1,650 张线上跳过样本随机人工盲抽</span>
-      </div>
-      <div class="metric-box">
-        <span class="m-val">90 → 23</span>
-        <span class="m-lbl">业务细类收敛为 23 个视觉类并解耦路由</span>
-      </div>
-    </div>
-
-    <dl class="facts">
-      <div><dt>角色</dt><dd>需求发起与产品负责人（协同 AI 算法、后端研发与理赔运营）</dd></div>
-      <div><dt>业务场景</dt><dd>头部财险理赔核赔影像流，覆盖非标长尾单据与现场照片</dd></div>
-      <div><dt>离线验证</dt><dd>2,464 张独立测试集 4 套策略择优 · 漏检率 0.37% · 总准确率 99.07%</dd></div>
-      <div><dt>口径说明</dt><dd>下降约 25% 为严格的 VL 请求调用次数口径，不混同财务总账单</dd></div>
-    </dl>
-  </section>
-
-  <figure class="case-figure">
-    <div class="fig-zoom" role="button" tabindex="0" aria-label="点击放大查看理赔影像分流示意图">
-      <img src="../assets/img/claims-image-routing-hero-light-v1.webp" width="1774" height="887" alt="理赔影像分流示意：标准件走高速 OCR，长尾件经 23 类视觉门控与独立路由表分流">
-      <span class="zoom-pill">点击放大</span>
-    </div>
-    <figcaption>标准件走既有专用 OCR，长尾非标影像过「23 类视觉门控 + 独立路由配置表」后再决定是否进视觉大模型。</figcaption>
-  </figure>
-
-  <div class="case-layout">
-    <aside class="toc" aria-label="本页目录">
-      <span class="toc-title">本页目录</span>
-      <ol>
-        <li><a href="#problem">01 · 问题定义</a></li>
-        <li><a href="#cost">02 · 非对称错误代价</a></li>
-        <li><a href="#decisions">03 · 三个关键决策</a></li>
-        <li><a href="#workflow">04 · 生产流转架构</a></li>
-        <li><a href="#retro">05 · 口径纪律与复盘</a></li>
-      </ol>
-    </aside>
-
-    <div class="prose">
-      <details class="toc-mobile">
-        <summary>展开本页目录</summary>
-        <ol>
-          <li><a href="#problem">01 · 问题定义</a></li>
-          <li><a href="#cost">02 · 非对称错误代价</a></li>
-          <li><a href="#decisions">03 · 三个关键决策</a></li>
-          <li><a href="#workflow">04 · 生产流转架构</a></li>
-          <li><a href="#retro">05 · 口径纪律与复盘</a></li>
-        </ol>
-      </details>
-
-      <!-- 01 问题 -->
-      <section id="problem" class="chapter">
-        <span class="eyebrow">01 / PROBLEM</span>
-        <h2>算力浪费与漏检风险并存，不能简单加个分类器一刀切。</h2>
-        <p>在日常理赔核赔中，身份证、银行卡、标准税务发票已有成熟的专用 OCR 管道；但其余海量长尾影像——从事故现场、物损特写，到手写医疗单据与维修报价单——此前全部无差别送进视觉大模型（VL）。大量根本没字的现场照白白占用了昂贵算力。</p>
-        <div class="callout">
-          立项第一天定下的唯一命题：<b>如何在拦掉无效照片、压降视觉大模型调用的同时，从指标和架构上锁死「真正需要读字的单据绝不被漏掉」？</b>
-        </div>
-      </section>
-
-      <!-- 02 非对称错误代价 -->
-      <section id="cost" class="chapter">
-        <span class="eyebrow">02 / METRIC DESIGN</span>
-        <h2>用非对称错误代价矩阵，取代笼统的整体准确率。</h2>
-        <p>和算法团队对齐评价标准时，我拒绝了把 Overall Accuracy 当第一指标。在现场照占比很高的真实分布里，整体准确率就算做到 95%，只要那 5% 的错落在带金额的非标单据上，就是核赔事故。</p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>错误类型</th>
-                <th>业务表现</th>
-                <th>业务后果</th>
-                <th>代价评级</th>
-                <th>策略倾向</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><b>假阳性（FP）</b><br><span class="muted">无字照被判为需 OCR</span></td>
-                <td>一张纯事故现场照被放行进了 VL</td>
-                <td>多消耗一次模型调用，不影响下游核赔正确性</td>
-                <td><span class="trend flat">低代价</span></td>
-                <td>可容忍一定比例放行</td>
-              </tr>
-              <tr>
-                <td><b>假阴性（FN / 漏检）</b><br><span class="muted">需读字单据被跳过</span></td>
-                <td>带金额或诊断结论的非标单据直接被跳过</td>
-                <td>关键风控字段缺失，造成人工返工或核决金额差错</td>
-                <td><span class="trend bad">极高代价</span></td>
-                <td><b>零容忍倾向，作为第一准入线</b></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p><b>拍板结论：</b>把<b>「需 OCR 影像召回率」</b>钉死为唯一主指标；拿不准的低置信度边界样本宁可放行读字，绝不静默跳过。</p>
-      </section>
-
-      <!-- 03 三个决策 -->
-      <section id="decisions" class="chapter">
-        <span class="eyebrow">03 / KEY DECISIONS</span>
-        <h2>分类收敛、路由解耦、跳过侧大样本盲抽。</h2>
-
-        <div class="decision">
-          <span class="eyebrow">决策 01 · 分类粒度收敛（90 → 23）</span>
-          <p class="dq">业务字典有近 90 个细类，视觉模型该照单全收，还是按视觉外观重构？</p>
-          <ul class="opts">
-            <li><b>A · 直接按近 90 个业务细类训练</b>和业务表一一对应，但不同险种的同类收据、现场照外观高度重合，分类熵极高。</li>
-            <li class="chosen"><b>B · 剥离行政属性，收敛为 23 个正交视觉类 ✓</b>按版面与文字承载特征归并为 17 类需 OCR + 6 类不需 OCR，模型边界清晰度大幅提升。</li>
-          </ul>
-          <p class="d-note"><b>原因</b>模型擅长分辨「长什么样」，不擅长猜「这张纸在行政上归哪个险种」。</p>
-        </div>
-
-        <div class="decision">
-          <span class="eyebrow">决策 02 · 分类与路由配置物理分离</span>
-          <p class="dq">模型直接输出「读 / 不读」二分类，还是输出 23 类后再查路由配置表？</p>
-          <ul class="opts">
-            <li><b>A · 端到端二分类输出</b>接口最简单，但业务规则被硬编码进权重，每次调整口径都要重新标数据、重训发版。</li>
-            <li class="chosen"><b>B · 视觉分类 + 独立业务路由配置表解耦 ✓</b>模型只输出类别与置信度，哪个类走 OCR、哪个置信度阈值兜底放行，全部放在配置表里。</li>
-          </ul>
-          <p class="d-note"><b>收益</b>运营或某条业务线需要收紧某类单据审查时，改配置表秒级生效，无需算法团队重训模型。</p>
-        </div>
-
-        <div class="decision">
-          <span class="eyebrow">决策 03 · 2,464 张离线四策略对比 + 1,650 张线上盲抽</span>
-          <p class="dq">怎么定阈值，又怎么在上线后证明「被跳过的那批图真的没漏」？</p>
-          <ul class="opts">
-            <li><b>A · 看完离线单次报告直接全量上线</b>推进快，但静默跳过通道没有真实线上验收，业务方不敢放心。</li>
-            <li class="chosen"><b>B · 4 套策略横向择优 + 跳过侧 1,650 张人工盲抽 ✓</b>离线选定需 OCR 召回 <code>99.63%</code>（漏检 <code>0.37%</code>）、总准确率 <code>99.07%</code> 策略；上线后随机抽检 <code>1,650</code> 张被跳过影像，确认 <code>0</code> 错误跳过。</li>
-          </ul>
-          <p class="d-note"><b>原因</b>放行进 VL 的图有错下游还能看见；唯独被直接跳过的图是静默通道，必须专门盲抽闭环。</p>
-        </div>
-      </section>
-
-      <!-- 04 流转架构 -->
-      <section id="workflow" class="chapter">
-        <span class="eyebrow">04 / PRODUCTION FLOW</span>
-        <h2>线上流转路径与生产实测表现。</h2>
-        <div class="flow" aria-label="理赔影像分流流程">
-          <div class="flow-node">
-            <b>1. 多渠道异构理赔影像进入</b>
-            <span>报案与核赔环节上传的各类单证与现场照片。</span>
-          </div>
-          <div class="flow-arrow" aria-hidden="true">↓</div>
-          <div class="flow-node">
-            <b>2. 规则标准件分流</b>
-            <span>身份证、银行卡、标准发票直接走既有专用高速 OCR；非标长尾影像进入前置视觉门控。</span>
-          </div>
-          <div class="flow-arrow" aria-hidden="true">↓</div>
-          <div class="flow-node">
-            <b>3. 轻量视觉门控（23 类）+ 独立路由配置表</b>
-            <span>输出视觉类别与置信度，查询解耦配置表（17 类需读字 / 6 类无字 + 置信度护栏）。</span>
-          </div>
-          <div class="flow-arrow" aria-hidden="true">↓</div>
-          <div class="flow-split">
-            <div class="flow-node is-yes">
-              <b>17 类需读字，或低置信度拿不准</b>
-              <span>放行进入视觉大模型（VL）深度提取文字。离线需 OCR 召回率 <code>99.63%</code>。</span>
-            </div>
-            <div class="flow-node is-no">
-              <b>高置信度判定为 6 类无字现场/物损照</b>
-              <span>直接归档跳过。生产 VL 调用量降约 <code>25%</code>；线上抽检 <code>1,650 张</code> 0 错误跳过。</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 05 复盘与口径 -->
-      <section id="retro" class="chapter">
-        <span class="eyebrow">05 / RETROSPECTIVE</span>
-        <h2>做对的方法论，以及不夸大的统计口径。</h2>
-        <div class="retro-grid">
-          <div class="retro-col">
-            <h4>做对的核心</h4>
-            <ul>
-              <li><b>把风控语言翻译成算法目标：</b>不顺着惯性看平均准确率，用非对称代价矩阵把需 OCR 召回率钉死为上线门槛。</li>
-              <li><b>分类与路由分离：</b>既降低了视觉模型训练复杂度，又把分流规则的秒级调整权交给了业务与运营。</li>
-              <li><b>闭环静默通道：</b>对跳过侧做 1,650 张人工盲抽，用 0 漏检建立跨团队信任。</li>
-            </ul>
-          </div>
-          <div class="retro-col is-limit">
-            <h4>严守指标口径边界</h4>
-            <ul>
-              <li><b>严格区分「调用量下降」与「总费用下降」：</b>所有汇报中均明确标注「约 25%」是 <b>VL 请求调用次数口径（Call Volume）</b>，不粗暴包装为「总成本同比省 25%」——因为不同分辨率图像的 Token 消耗、算力固定成本与阶梯计费各不相同。</li>
-              <li>在金融与策略团队里，主动界定口径边界、不夸大关联收益，是长期信任的前提。</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+<section aria-labelledby="t" class="case-hero">
+<div class="case-hero-top">
+<span class="eyebrow">02 / ENTERPRISE AI · 公司生产已上线</span>
+<span class="status st-live">产品负责人 · 已全量投产</span>
 </div>
-
+<h1 id="t">金融单据与理赔影像智能分流</h1>
+<p class="case-sub">识别需要读字的理赔影像，减少无字照片带来的模型调用；上线后对跳过的影像进行人工抽检。</p>
+<div aria-label="核心指标" class="metric-row four">
+<div class="metric-box">
+<span class="m-val">-25%</span>
+<span class="m-lbl">生产视觉大模型（VL）调用次数压降</span>
+</div>
+<div class="metric-box">
+<span class="m-val">99.63%</span>
+<span class="m-lbl">2,464 张独立测试集需 OCR 召回率</span>
+</div>
+<div class="metric-box">
+<span class="m-val">0 漏检</span>
+<span class="m-lbl">1,650 张线上跳过样本随机人工盲抽</span>
+</div>
+<div class="metric-box">
+<span class="m-val">90 → 23</span>
+<span class="m-lbl">业务细类收敛为 23 个视觉类并解耦路由</span>
+</div>
+</div>
+<dl class="facts">
+<div><dt>角色</dt><dd>需求发起与产品负责人（协同 AI 算法、后端研发与理赔运营）</dd></div>
+<div><dt>业务场景</dt><dd>头部财险理赔核赔影像流，覆盖非标长尾单据与现场照片</dd></div>
+<div><dt>离线验证</dt><dd>2,464 张独立测试集 4 套策略择优 · 漏检率 0.37% · 总准确率 99.07%</dd></div>
+<div><dt>口径说明</dt><dd>下降约 25% 为严格的 VL 请求调用次数口径，不混同财务总账单</dd></div>
+</dl>
+</section>
+<figure class="case-figure">
+<div aria-label="点击放大查看理赔影像分流示意图" class="fig-zoom" role="button" tabindex="0">
+<img alt="理赔影像分流示意：标准件走高速 OCR，长尾件经 23 类视觉门控与独立路由表分流" height="887" src="../assets/img/claims-image-routing-hero-light-v1.webp" width="1774"/>
+<span class="zoom-pill">点击放大</span>
+</div>
+<figcaption>标准件走既有专用 OCR，长尾非标影像过「23 类视觉门控 + 独立路由配置表」后再决定是否进视觉大模型。</figcaption>
+</figure>
+<div class="case-layout">
+<aside aria-label="本页目录" class="toc">
+<span class="toc-title">本页目录</span>
+<ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol>
+</aside>
+<div class="prose"><details class="toc-mobile"><summary>展开本页目录</summary><ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol></details><section class="chapter" id="problem"><span class="eyebrow">01 / 项目背景 &amp; 业务目标</span><h2>项目背景 &amp; 业务目标</h2><p>理赔影像中既有需要读字的单据，也有大量无字现场照；长尾影像全部送视觉大模型，产生不必要的调用。目标是减少调用，同时尽量避免漏掉需识别的单据。</p><p>我作为需求发起人和产品负责人，负责需求、方案、指标与验收，协同算法、后端和理赔运营推进生产落地。</p></section><section class="chapter" id="analysis"><span class="eyebrow">02 / 问题分析 &amp; 需求挖掘</span><h2>问题分析 &amp; 需求挖掘</h2><p>单看整体准确率会掩盖漏读单据的风险：多识别一张照片增加调用，漏掉一张带字单据可能影响核赔。</p><p>因此优先关注“需读字的影像有多少被找出来”，而非只追求总准确率；不确定的影像宁可继续送去识别。</p><span id="cost"></span></section><section class="chapter" id="decisions"><span class="eyebrow">03 / 方案设计 &amp; 核心权衡</span><h2>方案设计 &amp; 核心权衡</h2><p>先按影像外观分类，再通过独立的业务规则决定是否识别。近 90 个业务细类归并为 23 个视觉类别，其中 17 类需识别、6 类不需识别。</p><p>没有让模型直接决定最终业务规则：分类与路由分开后，业务调整规则无需重新训练模型。业务对漏检的顾虑通过保守阈值和上线后的跳过样本抽检来回应。</p></section><section class="chapter" id="delivery"><span class="eyebrow">04 / 落地推进 &amp; 风险处理</span><h2>落地推进 &amp; 风险处理</h2><p>与算法团队比较 4 套策略，在 2,464 张独立测试集上选择方案；与后端和理赔运营配合接入生产流程。</p><p>被跳过的影像不会经过后续识别，错误可能静默发生，因此上线后对这部分随机抽取 1,650 张，交由人工检查。</p></section><section class="chapter" id="retro"><span class="eyebrow">05 / 结果数据 + 复盘</span><h2>结果数据 + 复盘</h2><p>生产环境视觉大模型调用次数下降约 25%；测试集中需识别影像召回率为 99.63%，即仍有 0.37% 漏检。线上 1,650 张跳过样本抽检未发现错误跳过。</p><p>把漏检风险变成具体指标，并检查被跳过的样本，是推进共识的关键。抽样零漏检不代表线上绝对零漏检；调用次数下降也不等于总费用下降 25%。</p></section></div>
+</div>
+</div>
 <a class="next-case" href="court-diary.html">
-  <div class="wrap">
-    <span class="eyebrow">下一个项目 · 03 / 05</span>
-    <h2>Court Diary — 网球盲操记录与高光剪辑 →</h2>
-    <p>iOS + Apple Watch（TestFlight 实测中）：自训声纹粗剪网络滤掉 85%+ 捡球时长，后训练 GridTrackNet 追踪球轨迹。</p>
-  </div>
+<div class="wrap">
+<span class="eyebrow">下一个项目 · 03 / 05</span>
+<h2>Court Diary — 网球盲操记录与高光剪辑 →</h2>
+<p>iOS + Apple Watch（TestFlight 实测中）：自训声纹粗剪网络滤掉 85%+ 捡球时长，后训练 GridTrackNet 追踪球轨迹。</p>
+</div>
 </a>
 </main>
-
 <footer class="site-foot">
-  <div class="wrap">
-    <span class="mono">© <span data-year>2026</span> 星宇 · 深圳</span>
-    <span><a href="../index.html#work">返回全部作品 ↑</a></span>
-    <button class="to-top" type="button">↑ 回到顶部</button>
-  </div>
+<div class="wrap">
+<span class="mono">© <span data-year="">2026</span> 星宇 · 深圳</span>
+<span><a href="../index.html#work">返回全部作品 ↑</a></span>
+<button class="to-top" type="button">↑ 回到顶部</button>
+</div>
 </footer>
 </body>
 </html>

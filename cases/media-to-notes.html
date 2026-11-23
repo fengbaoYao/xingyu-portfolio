@@ -1,294 +1,134 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Media to Notes — 星宇</title>
-<meta name="description" content="装进 Claude Code / Codex / Alma 的开源 Agent Skill：前置类型契约、六步受控状态机、关键帧板书精选与缺口显式留白，附 34 分钟 Transformer 课程 32 张板书截图样例。">
-<link rel="icon" href="../assets/img/favicon.png">
-<link rel="stylesheet" href="../assets/styles.css">
-<script defer src="../assets/site.js"></script>
+<meta content="按不同需求整理音视频，保留关键画面，明确未知信息；包含课程笔记样例。" name="description"/>
+<link href="../assets/img/favicon.png" rel="icon"/>
+<link href="../assets/styles.css" rel="stylesheet"/>
+<script defer="" src="../assets/site.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
-<div id="live-status" class="sr-only" aria-live="polite"></div>
-
+<div aria-live="polite" class="sr-only" id="live-status"></div>
 <header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
-    <nav class="pager" aria-label="案例翻页">
-      <span class="mono">05 / 05</span>
-      <a href="rstack-guide/index.html" aria-label="上一个：rstack">← <span class="lbl">rstack</span></a>
-      <a href="financial-bot.html" aria-label="下一个：FinDesk"><span class="lbl">FinDesk</span> →</a>
-    </nav>
-  </div>
+<div class="wrap">
+<a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
+<nav aria-label="案例翻页" class="pager">
+<span class="mono">05 / 05</span>
+<a aria-label="上一个：rstack" href="rstack-guide/index.html">← <span class="lbl">rstack</span></a>
+<a aria-label="下一个：FinDesk" href="financial-bot.html"><span class="lbl">FinDesk</span> →</a>
+</nav>
+</div>
 </header>
 <div class="case-bar">
-  <div class="wrap">
-    <a class="back" href="../index.html#work">← 返回全部作品</a>
-    <span class="mono muted">05 · 开源 Agent Skill · 六步受控状态机</span>
-  </div>
+<div class="wrap">
+<a class="back" href="../index.html#work">← 返回全部作品</a>
+<span class="mono muted">05 · 音视频笔记工具</span>
 </div>
-
+</div>
 <main id="main">
 <div class="wrap">
-  <section class="case-hero" aria-labelledby="t">
-    <div class="case-hero-top">
-      <span class="eyebrow">05 / AGENT SKILL · 个人开源交付</span>
-      <span class="status st-ship">已开源 GitHub · 附 32 张板书实测样例</span>
-    </div>
-    <h1 id="t">Media to Notes</h1>
-    <p class="case-sub">直接装进 Claude Code / Codex / Alma 的开源技能插件：先确认要笔记还是纯逐字稿，再按板书与公式转折精准截图，原片没提的人名和待办强制留白不乱编。</p>
-
-    <div class="metric-row four" aria-label="核心指标">
-      <div class="metric-box">
-        <span class="m-val">6 步</span>
-        <span class="m-lbl">前置契约 + 受控状态机，含硬中断与自检</span>
-      </div>
-      <div class="metric-box">
-        <span class="m-val">32 张</span>
-        <span class="m-lbl">34 分钟 Transformer 课程板书逐句对齐截图</span>
-      </div>
-      <div class="metric-box">
-        <span class="m-val">100% 本地</span>
-        <span class="m-lbl">借用本地 Agent 环境，私有录音无需上第三方云</span>
-      </div>
-      <div class="metric-box">
-        <span class="m-val">8 KB</span>
-        <span class="m-lbl">纯规范与参考目录，一句提示词装进本地技能库</span>
-      </div>
-    </div>
-
-    <dl class="facts">
-      <div><dt>角色</dt><dd>个人独立设计、状态机工作流编排与开源交付</dd></div>
-      <div><dt>核心机制</dt><dd>前置需求契约 → 核对转写（要逐字稿即停）→ 按转折截图 → 外部补充隔离</dd></div>
-      <div><dt>支持输入</dt><dd>在线链接（含抖音 / 小宇宙 / 小红书）· 本地音视频 · 已有字幕或逐字稿</dd></div>
-      <div><dt>实测产物</dt><dd>34 分钟 Transformer 课（第 27/35 集）：17 小节推导 + 32 张板书截图</dd></div>
-    </dl>
-
-    <div class="cta-row">
-      <a class="btn" href="#install">一键安装到我的 Agent ↓</a>
-      <a class="btn btn-ghost" href="https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes" target="_blank" rel="noopener">GitHub 查看源码 ↗</a>
-    </div>
-  </section>
-
-  <figure class="case-figure">
-    <div class="video-box">
-      <video controls preload="none" playsinline poster="../assets/img/media-to-notes-demo-poster.jpg" width="960" height="828" aria-describedby="vcap">
-        <source src="../assets/img/media-to-notes-demo.mp4" type="video/mp4">
-      </video>
-    </div>
-    <figcaption id="vcap">使用 Media to Notes 整理技术课程时的知识结构化与关键帧锚定实录（点击播放，不自动播放）。</figcaption>
-  </figure>
-
-  <div class="case-layout">
-    <aside class="toc" aria-label="本页目录">
-      <span class="toc-title">本页目录</span>
-      <ol>
-        <li><a href="#problem">01 · 问题定义</a></li>
-        <li><a href="#workflow">02 · 六步受控状态机</a></li>
-        <li><a href="#decisions">03 · 三个关键取舍</a></li>
-        <li><a href="#sample">04 · 32 帧实测样例</a></li>
-        <li><a href="#install">05 · 一键安装</a></li>
-        <li><a href="#retro">06 · 边界与复盘</a></li>
-      </ol>
-    </aside>
-
-    <div class="prose">
-      <details class="toc-mobile">
-        <summary>展开本页目录</summary>
-        <ol>
-          <li><a href="#problem">01 · 问题定义</a></li>
-          <li><a href="#workflow">02 · 六步受控状态机</a></li>
-          <li><a href="#decisions">03 · 三个关键取舍</a></li>
-          <li><a href="#sample">04 · 32 帧实测样例</a></li>
-          <li><a href="#install">05 · 一键安装</a></li>
-          <li><a href="#retro">06 · 边界与复盘</a></li>
-        </ol>
-      </details>
-
-      <!-- 01 问题 -->
-      <section id="problem" class="chapter">
-        <span class="eyebrow">01 / PROBLEM</span>
-        <h2>为什么市面上的一键视频总结，在深度学习和严肃办公里不好用？</h2>
-        <div class="card-grid three">
-          <div class="sub-card">
-            <span class="sc-tag">01 · 形态一刀切</span>
-            <h4>把推导洗成了干瘪大纲</h4>
-            <p>有时需要保留公式推导的详细笔记，有时只要会议待办或纯逐字稿；一刀切浓缩会洗掉最有价值的推理过程。</p>
-          </div>
-          <div class="sub-card">
-            <span class="sc-tag">02 · 图文割裂</span>
-            <h4>没板书，或者满屏大头照</h4>
-            <p>技术课少了板书公式没法读；按固定每 30 秒机械抽一帧，又会塞满讲师正脸和空白过渡画面。</p>
-          </div>
-          <div class="sub-card">
-            <span class="sc-tag">03 · 脑补混杂</span>
-            <h4>看似完整的假会议纪要</h4>
-            <p>录音没提负责人和截止日，模型为了表格好看随手编一个；AI 补充的背景和讲师原话混在一起无法分辨。</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 02 六步状态机 -->
-      <section id="workflow" class="chapter">
-        <span class="eyebrow">02 / STATE MACHINE</span>
-        <h2>不靠单次超长 Prompt 硬赌，拆成前置契约 + 六步受控状态机。</h2>
-        <div class="callout">
-          <b>Step 0 · 前置契约确认：</b>未指定类型时先问一次（<code>详细整理</code> / <code>重点摘要</code> / <code>专题整理</code> / <code>会议纪要</code> / <code>纯逐字稿</code> / <code>自定义</code>），并确认是否允许联网检索及云端 ASR（须提前告知内容与大致费用）。
-        </div>
-        <ol class="phases">
-          <li>
-            <span class="phase-tag">STEP 01 · Acquire 多源获取</span>
-            <p>接收在线链接（内置抖音 / 小宇宙 / 小红书规范，严守合规不绕过访问控制）、本地音视频或逐字稿；下载受阻时说明原因并引导本地文件。</p>
-          </li>
-          <li>
-            <span class="phase-tag">STEP 02 · Verify 转写核对（纯逐字稿硬中断）</span>
-            <p>优先复用可靠字幕或本地转写，回听校对专有名词；若用户只要纯逐字稿，在 Step 2 直接交付并停机。</p>
-          </li>
-          <li>
-            <span class="phase-tag">STEP 03 · Structure 事实 / 观点 / 推断隔离</span>
-            <p>按 Step 0 契约组织正文，保留推导与边界，显式区分客观事实、讲者观点与延伸推论。</p>
-          </li>
-          <li>
-            <span class="phase-tag">STEP 04 · Visual Anchoring 关键帧锚定</span>
-            <p>仅在出现图表、公式、代码或实操转折时抽帧，回看画面确认有效后紧贴对应句子插入；无看图能力时如实降级声明。</p>
-          </li>
-          <li>
-            <span class="phase-tag">STEP 05 · Grounded Lookup 受控外部查证</span>
-            <p>外部补充必须独立成块并标注「外部资料补充」与来源链接，严禁混入原片内容。</p>
-          </li>
-          <li>
-            <span class="phase-tag">STEP 06 · Delivery Audit 交付结构自检</span>
-            <p>核对时间码、本地图片路径与链接有效性，并强制声明「已完成结构完整性检查，不等于逐句人工精校」。</p>
-          </li>
-        </ol>
-      </section>
-
-      <!-- 03 三个取舍 -->
-      <section id="decisions" class="chapter">
-        <span class="eyebrow">03 / KEY DECISIONS</span>
-        <h2>放弃「全自动万能感」，换取可预期和零脑补。</h2>
-
-        <div class="decision">
-          <span class="eyebrow">取舍 01 · 交付形态</span>
-          <p class="dq">做成上传音视频的在线网站，还是装进使用者本地 Agent 的 Skill？</p>
-          <ul class="opts">
-            <li><b>A · 在线 SaaS 网站</b>试用门槛最低，但私人会议录音要上传第三方服务器，长视频多模态算力成本也高。</li>
-            <li class="chosen"><b>B · 标准化本地 Agent Skill ✓</b>直接装进用户已在用的 Claude Code / Codex / Alma，转写与看图全在本地受控环境完成。</li>
-          </ul>
-        </div>
-
-        <div class="decision">
-          <span class="eyebrow">取舍 02 · 视觉截图策略</span>
-          <p class="dq">每 30 秒机械抽帧，还是按讲解转折回看精选？</p>
-          <ul class="opts">
-            <li><b>A · 固定时间间隔抽帧</b>速度快、不依赖视觉模型，但漏关键公式又塞满讲师正脸。</li>
-            <li class="chosen"><b>B · 按转折定位时间窗 + 多模态回看精选 ✓</b>张数完全由信息密度决定，每张图都替旁边那段话降低理解成本。</li>
-          </ul>
-        </div>
-
-        <div class="decision">
-          <span class="eyebrow">取舍 03 · 未知归属与缺口</span>
-          <p class="dq">录音没说清说话人、负责人和截止日期时，推测补全还是留白？</p>
-          <ul class="opts">
-            <li><b>A · 按上下文推测补齐表格</b>表面整齐，却会把未经确认的猜测写进正式纪要。</li>
-            <li class="chosen"><b>B · 强制留白标「未明确」✓</b>未指明负责人与期限一律写〔未明确〕，宁可留空绝不编造。</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- 04 实测样例 -->
-      <section id="sample" class="chapter">
-        <span class="eyebrow">04 / REAL SAMPLE</span>
-        <h2>34 分钟 Transformer 课程实测：17 小节推导 + 32 张板书对齐。</h2>
-        <p>随仓库公开的完整样例是一集 34 分钟 Transformer 原理课（第 27 / 35 集），按「详细整理」契约运行，保留三种注意力机制的分工与矩阵推导，并将 32 张板书截图按精确时间码锚定在讲解下方。</p>
-
-        <article class="note-sample" aria-label="样例笔记片段">
-          <h4>27 Transformer 注意力究竟在做什么（实测产物节选）</h4>
-          <blockquote>这集把三种注意力拆开：编码器看输入，解码器看已经生成的前缀，两边再对照一次。笔记按讲解顺序写，板书和公式截在对应的话旁边。<br>时长：34 分钟 · 系列进度：27 / 35 · 关键帧配图：32 张</blockquote>
-          <p style="font-size:.9375rem"><b>1. 三种注意力在 Transformer 中的分工</b><br>Transformer 常见三种注意力：Encoder 的 self-attention、Decoder 的 masked self-attention 和 Encoder–Decoder cross-attention。它们各自的 Query / Key / Value 来源与掩码约束决定了信息流动的边界。</p>
-          <figure>
-            <div class="fig-zoom" role="button" tabindex="0" aria-label="点击放大查看 @00:00 板书截图">
-              <img src="../assets/img/m2n-sample-27_0000.webp" width="900" loading="lazy" alt="原视频截图 @00:00：编码器、解码器与两者之间的三种注意力">
-              <span class="zoom-pill">点击放大</span>
-            </div>
-            <figcaption>图 1：三种注意力各管一段 · 锚定时间码 @00:00</figcaption>
-          </figure>
-          <figure>
-            <div class="fig-zoom" role="button" tabindex="0" aria-label="点击放大查看 @04:36 板书截图">
-              <img src="../assets/img/m2n-sample-27_0436.webp" width="900" loading="lazy" alt="原视频截图 @04:36：注意力权重与特征聚合板书">
-              <span class="zoom-pill">点击放大</span>
-            </div>
-            <figcaption>图 2：注意力权重与特征聚合板书 · 锚定时间码 @04:36</figcaption>
-          </figure>
-        </article>
-      </section>
-
-      <!-- 05 一键安装 -->
-      <section id="install" class="chapter">
-        <span class="eyebrow">05 / INSTALL</span>
-        <h2>复制一段话，装进你的 Claude Code / Codex / Alma。</h2>
-        <p>把下方提示词发给你的 Agent，它会自动拉取完整的 <code>media-to-notes</code> 目录（含 <code>SKILL.md</code> 与 <code>references/</code>）并安装到技能目录：</p>
-        <div class="prompt-box">
-          <div class="code-head">
-            <span>Agent 安装提示词</span>
-            <button class="btn-copy" type="button" data-copy="#prompt-zh">复制提示词</button>
-          </div>
-          <div id="prompt-zh" class="prompt-text">请帮我安装 Media to Notes 这个 Agent Skill。
+<section aria-labelledby="t" class="case-hero">
+<div class="case-hero-top">
+<span class="eyebrow">05 / AGENT SKILL · 个人开源交付</span>
+<span class="status st-ship">已开源 GitHub · 附 32 张板书实测样例</span>
+</div>
+<h1 id="t">Media to Notes</h1>
+<p class="case-sub">按照课程、会议或逐字稿的不同需求整理音视频，保留关键画面，并让未知信息保持空白。</p>
+<div aria-label="核心指标" class="metric-row four">
+<div class="metric-box">
+<span class="m-val">6 步</span>
+<span class="m-lbl">按获取、转写、整理与检查分步处理</span>
+</div>
+<div class="metric-box">
+<span class="m-val">32 张</span>
+<span class="m-lbl">34 分钟 Transformer 课程板书逐句对齐截图</span>
+</div>
+<div class="metric-box">
+<span class="m-val">可本地</span>
+<span class="m-lbl">是否使用云端转写或联网检索由用户决定</span>
+</div>
+<div class="metric-box">
+<span class="m-val">8 KB</span>
+<span class="m-lbl">纯规范与参考目录，一句提示词装进本地技能库</span>
+</div>
+</div>
+<dl class="facts">
+<div><dt>角色</dt><dd>个人独立设计、开发与开源交付</dd></div>
+<div><dt>核心机制</dt><dd>前置需求契约 → 核对转写（要逐字稿即停）→ 按转折截图 → 外部补充隔离</dd></div>
+<div><dt>支持输入</dt><dd>在线链接（含抖音 / 小宇宙 / 小红书）· 本地音视频 · 已有字幕或逐字稿</dd></div>
+<div><dt>实测产物</dt><dd>34 分钟 Transformer 课（第 27/35 集）：17 小节推导 + 32 张板书截图</dd></div>
+</dl>
+<div class="cta-row">
+<a class="btn" href="#install">查看安装说明 ↓</a>
+<a class="btn btn-ghost" href="https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes" rel="noopener" target="_blank">GitHub 查看源码 ↗</a>
+</div>
+</section>
+<figure class="case-figure">
+<div class="video-box">
+<video aria-describedby="vcap" controls="" height="828" playsinline="" poster="../assets/img/media-to-notes-demo-poster.jpg" preload="none" width="960">
+<source src="../assets/img/media-to-notes-demo.mp4" type="video/mp4"/>
+</video>
+</div>
+<figcaption id="vcap">使用 Media to Notes 整理技术课程时的知识结构化与关键帧锚定实录（点击播放，不自动播放）。</figcaption>
+</figure>
+<div class="case-layout">
+<aside aria-label="本页目录" class="toc">
+<span class="toc-title">本页目录</span>
+<ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol>
+</aside>
+<div class="prose"><details class="toc-mobile"><summary>展开本页目录</summary><ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol></details><section class="chapter" id="problem"><span class="eyebrow">01 / 项目背景 &amp; 业务目标</span><h2>项目背景 &amp; 业务目标</h2><p>长课程、会议和逐字稿需要不同的整理方式：统一摘要可能丢掉公式，也可能把未说明的负责人写成事实。目标是保留关键内容与画面，并明确未知信息。</p><p>这是个人独立设计、开发和开源的 Agent Skill，负责工作流程、规则与样例交付。</p></section><section class="chapter" id="analysis"><span class="eyebrow">02 / 问题分析 &amp; 需求挖掘</span><h2>问题分析 &amp; 需求挖掘</h2><p>课程笔记需要解释过程和板书，会议纪要关注决定与待办，纯逐字稿则不需要额外改写。</p><p>固定间隔截图容易漏掉关键公式，也会收进无用画面；未明确的人名、责任人和期限不能靠上下文猜测。</p></section><section class="chapter" id="decisions"><span class="eyebrow">03 / 方案设计 &amp; 核心权衡</span><h2>方案设计 &amp; 核心权衡</h2><p>先确认所需笔记类型，再获取和转写内容、回看关键画面，最后检查交付文件；外部补充与原始内容分开。</p><p>选择安装在已有 Agent 环境中，而非另建上传网站；按内容转折选图，未知信息留空。是否使用联网检索或云端转写需要事先确认，本地运行也取决于宿主工具能力。</p><figure>
+<div aria-label="点击放大查看 @00:00 板书截图" class="fig-zoom" role="button" tabindex="0">
+<img alt="原视频截图 @00:00：编码器、解码器与两者之间的三种注意力" loading="lazy" src="../assets/img/m2n-sample-27_0000.webp" width="900"/>
+<span class="zoom-pill">点击放大</span>
+</div>
+<figcaption>图 1：三种注意力各管一段 · 锚定时间码 @00:00</figcaption>
+</figure><figure>
+<div aria-label="点击放大查看 @04:36 板书截图" class="fig-zoom" role="button" tabindex="0">
+<img alt="原视频截图 @04:36：注意力权重与特征聚合板书" loading="lazy" src="../assets/img/m2n-sample-27_0436.webp" width="900"/>
+<span class="zoom-pill">点击放大</span>
+</div>
+<figcaption>图 2：注意力权重与特征聚合板书 · 锚定时间码 @04:36</figcaption>
+</figure></section><section class="chapter" id="delivery"><span class="eyebrow">04 / 落地推进 &amp; 风险处理</span><h2>落地推进 &amp; 风险处理</h2><p>按获取、转写、理解、截图、撰写和检查分步处理；纯逐字稿在转写核对后结束。公开样例采用 34 分钟 Transformer 课程，按讲解位置整理截图。</p><p>链接获取受阻时提示原因并使用本地文件；缺少看图能力或本地工具时说明降级。结构检查与逐句人工精校分开说明。</p></section><section class="chapter" id="retro"><span class="eyebrow">05 / 结果数据 + 复盘</span><h2>结果数据 + 复盘</h2><p>公开样例整理为 17 个小节并配有 32 张板书截图；这是单个课程样例，不代表所有素材都达到相同质量。</p><p>先明确交付类型、把不确定信息留白，可以减少错误归属；长课的章节划分仍有改进空间，截图质量也依赖宿主看图能力和实际复核。</p></section><details class="chapter" id="install"><summary>附录：安装与参考资料</summary><section class="chapter" id="install-guide">
+<span class="eyebrow">05 / INSTALL</span>
+<h2>复制一段话，装进你的 Claude Code / Codex / Alma。</h2>
+<p>把下方提示词发给你的 Agent，它会自动拉取完整的 <code>media-to-notes</code> 目录（含 <code>SKILL.md</code> 与 <code>references/</code>）并安装到技能目录：</p>
+<div class="prompt-box">
+<div class="code-head">
+<span>Agent 安装提示词</span>
+<button class="btn-copy" data-copy="#prompt-zh" type="button">复制提示词</button>
+</div>
+<div class="prompt-text" id="prompt-zh">请帮我安装 Media to Notes 这个 Agent Skill。
 
 源码：https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes
 压缩包：https://fengbaoyao.github.io/xingyu-portfolio/portfolio-assets/media-to-notes-skill.zip
 
 请下载整个 media-to-notes 目录（保留 SKILL.md 与 references/ 结构），安装到当前 Agent 的 skills 目录（Codex 常见路径：~/.codex/skills/；Claude Code：~/.claude/skills/；其他 Agent 按各自约定），然后刷新或重启技能列表。安装完成后，用它把我给出的视频、音频、播客、会议录音或已有逐字稿，整理成可阅读的 Markdown 笔记。</div>
-        </div>
-        <div class="cta-row">
-          <a class="btn btn-sm" href="https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes" target="_blank" rel="noopener">在 GitHub 查看源码 ↗</a>
-          <a class="btn btn-sm btn-ghost" href="../assets/img/media-to-notes-skill.zip" download>下载 Skill 压缩包（8 KB）</a>
-        </div>
-      </section>
-
-      <!-- 06 复盘 -->
-      <section id="retro" class="chapter">
-        <span class="eyebrow">06 / RETROSPECTIVE</span>
-        <h2>说清楚 Agent 做到了哪一步，也交代哪一步仍需人把关。</h2>
-        <div class="retro-grid">
-          <div class="retro-col">
-            <h4>做对的设计</h4>
-            <ul>
-              <li><b>前置契约问一次，省去全篇返工：</b>课程笔记和会议纪要目标完全不同，Step 0 把返工率压到最低。</li>
-              <li><b>用结构化规则替代祈使句 Prompt：</b>未指明负责人写〔未明确〕、外部补充独立成块、纯逐字稿在 Step 2 停机。</li>
-              <li><b>诚实区分自动化自检与人工精校：</b>不诱导使用者盲信 AI 输出。</li>
-            </ul>
-          </div>
-          <div class="retro-col is-limit">
-            <h4>已知局限与迭代</h4>
-            <ul>
-              <li><b>依赖宿主多模态与本地工具：</b>精选截图需要宿主看图能力及 ffmpeg / yt-dlp；纯文本环境会显式降级提示。</li>
-              <li><b>语义章节切分优化：</b>均匀语速长课的时间戳切分偏固定时长，下一步强化基于话题转换点的动态聚合。</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
 </div>
-
+<div class="cta-row">
+<a class="btn btn-sm" href="https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes" rel="noopener" target="_blank">在 GitHub 查看源码 ↗</a>
+<a class="btn btn-sm btn-ghost" download="" href="../assets/img/media-to-notes-skill.zip">下载 Skill 压缩包（8 KB）</a>
+</div>
+</section></details></div>
+</div>
+</div>
 <a class="next-case" href="financial-bot.html">
-  <div class="wrap">
-    <span class="eyebrow">回到旗舰项目 · 01 / 05</span>
-    <h2>FinDesk（含评测底座 FinSearch-X） →</h2>
-    <p>120 题冻结财报盲测集、未授权数字幻觉清零、四代演进至 v4 公开研究笔记本。</p>
-  </div>
+<div class="wrap">
+<span class="eyebrow">回到旗舰项目 · 01 / 05</span>
+<h2>FinDesk（含评测底座 FinSearch-X） →</h2>
+<p>120 题财报评测集与可核对来源的投研工作台。</p>
+</div>
 </a>
 </main>
-
 <footer class="site-foot">
-  <div class="wrap">
-    <span class="mono">© <span data-year>2026</span> 星宇 · 深圳</span>
-    <span><a href="../index.html#work">返回全部作品 ↑</a></span>
-    <button class="to-top" type="button">↑ 回到顶部</button>
-  </div>
+<div class="wrap">
+<span class="mono">© <span data-year="">2026</span> 星宇 · 深圳</span>
+<span><a href="../index.html#work">返回全部作品 ↑</a></span>
+<button class="to-top" type="button">↑ 回到顶部</button>
+</div>
 </footer>
 </body>
 </html>

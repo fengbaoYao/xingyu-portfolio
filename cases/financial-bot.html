@@ -1,395 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>FinDesk（含评测底座 FinSearch-X） — 星宇</title>
-<meta name="description" content="从 120 题三层隔离财报评测集出发，通过确定性计算、回答契约与前置路由压零未授权数字幻觉并省去 50% 调用，落地覆盖美股、港股、A 股的可溯源投研工作台与 v4 公开研究笔记本。">
-<link rel="icon" href="../assets/img/favicon.png">
-<link rel="stylesheet" href="../assets/styles.css">
-<script defer src="../assets/site.js"></script>
+<meta content="从 120 题三层隔离财报评测集出发，通过确定性计算、回答契约与前置路由压零未授权数字幻觉并省去 50% 调用，落地覆盖美股、港股、A 股的可溯源投研工作台与 v4 公开研究笔记本。" name="description"/>
+<link href="../assets/img/favicon.png" rel="icon"/>
+<link href="../assets/styles.css" rel="stylesheet"/>
+<script defer="" src="../assets/site.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
-<div id="live-status" class="sr-only" aria-live="polite"></div>
-
+<div aria-live="polite" class="sr-only" id="live-status"></div>
 <header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
-    <nav class="pager" aria-label="案例翻页">
-      <span class="mono">01 / 05</span>
-      <a href="media-to-notes.html" aria-label="上一个：Media to Notes">← <span class="lbl">Media to Notes</span></a>
-      <a href="image-routing.html" aria-label="下一个：理赔影像智能分流"><span class="lbl">理赔影像分流</span> →</a>
-    </nav>
-  </div>
+<div class="wrap">
+<a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
+<nav aria-label="案例翻页" class="pager">
+<span class="mono">01 / 05</span>
+<a aria-label="上一个：Media to Notes" href="media-to-notes.html">← <span class="lbl">Media to Notes</span></a>
+<a aria-label="下一个：理赔影像智能分流" href="image-routing.html"><span class="lbl">理赔影像分流</span> →</a>
+</nav>
+</div>
 </header>
 <div class="case-bar">
-  <div class="wrap">
-    <a class="back" href="../index.html#work">← 返回全部作品</a>
-    <span class="mono muted">01 · 旗舰案例 · 跨市场投研 Agent</span>
-  </div>
+<div class="wrap">
+<a class="back" href="../index.html#work">← 返回全部作品</a>
+<span class="mono muted">01 · 旗舰案例 · 跨市场投研 Agent</span>
 </div>
-
+</div>
 <main id="main">
 <div class="wrap">
-  <div id="from-fsx" class="callout is-notice" hidden style="margin-top:20px">
-    你从 FinSearch-X 的链接跳转而来。FinSearch-X 是 FinDesk 的底层财报评测与消融引擎，完整演进与账本见下方 <a href="#evolution">两阶段演进</a> 与 <a href="#eval">消融与 SFT 账本</a>。
-  </div>
-
-  <!-- ============ CASE HERO ============ -->
-  <section class="case-hero" aria-labelledby="t">
-    <div class="case-hero-top">
-      <span class="eyebrow">01 / FLAGSHIP · 个人独立全栈</span>
-      <span class="status st-live">线上公开可体验 · 已迭代至 v4</span>
-    </div>
-    <h1 id="t">FinDesk（含评测底座 FinSearch-X）</h1>
-    <p class="case-sub">先用 120 题防泄漏财报评测集把未授权数字幻觉降到 0%，再做成覆盖美股、港股、A 股的三栏可溯源投研工作台与研究笔记本——每个数字都能一键点开原表与 K 线核对。</p>
-
-    <div class="metric-row four" aria-label="核心指标">
-      <div class="metric-box">
-        <span class="m-val">26.67% → 0%</span>
-        <span class="m-lbl">未授权数字输出清零（回答契约校验）</span>
-      </div>
-      <div class="metric-box">
-        <span class="m-val">-50%</span>
-        <span class="m-lbl">前置路由省去一半大模型调用（延迟 3.36s → 2.36s）</span>
-      </div>
-      <div class="metric-box">
-        <span class="m-val">6.67% → 43.33%</span>
-        <span class="m-lbl">Qwen3-4B 严苛口径下 Dev 严格成功率</span>
-      </div>
-      <div class="metric-box is-warn">
-        <span class="m-val">2,000 条叫停</span>
-        <span class="m-lbl">合成域 100% 但端到端不涨，果断放弃 SFT</span>
-      </div>
-    </div>
-
-    <dl class="facts">
-      <div><dt>角色</dt><dd>个人独立全栈：产品定义、评测基准、后端接口与前端工作台</dd></div>
-      <div><dt>覆盖市场</dt><dd>A 股（同花顺 iFinD 行情与 PE 分位）· 港股（AkShare / iFinD）· 美股（SEC / Finnhub / yfinance）</dd></div>
-      <div><dt>评测底座</dt><dd>120 题三层隔离集（9 家上市公司 · 27 份年报 · 6 类任务 · Dev / Val / Blind）</dd></div>
-      <div><dt>线上状态</dt><dd>独立部署于香港节点，全部 HTTPS，免登录即可体验 v4 公开笔记本与 v3 工作台</dd></div>
-    </dl>
-
-    <div class="cta-row">
-      <a class="btn" href="https://47.243.118.32.nip.io/v4/notebook/public" target="_blank" rel="noopener">体验 v4 公开研究笔记本 ↗</a>
-      <a class="btn btn-ghost" href="#try">查看四代入口与演进路线 ↓</a>
-    </div>
-  </section>
-
-  <figure class="case-figure">
-    <div class="fig-zoom" role="button" tabindex="0" aria-label="点击放大查看 FinDesk 三栏工作台">
-      <img src="../assets/img/financial-bot-hero-wide.webp" width="1913" height="822" alt="FinDesk 主视觉：三栏证据链研究工作台、图表与来源卡片">
-      <span class="zoom-pill">点击放大</span>
-    </div>
-    <figcaption>FinDesk 三栏架构：研究上下文（Context）、流式问答（Thread）与原始依据（Evidence）同屏核对。</figcaption>
-  </figure>
-
-  <!-- ============ BODY ============ -->
-  <div class="case-layout">
-    <aside class="toc" aria-label="本页目录">
-      <span class="toc-title">本页目录</span>
-      <ol>
-        <li><a href="#problem">01 · 问题定义</a></li>
-        <li><a href="#decisions">02 · 关键架构决策</a></li>
-        <li><a href="#eval">03 · 消融与 SFT 账本</a></li>
-        <li><a href="#evolution">04 · 产品演进路线</a></li>
-        <li><a href="#try">05 · 在线体验入口</a></li>
-        <li><a href="#retro">06 · 局限与复盘</a></li>
-      </ol>
-    </aside>
-
-    <div class="prose">
-      <details class="toc-mobile">
-        <summary>展开本页目录</summary>
-        <ol>
-          <li><a href="#problem">01 · 问题定义</a></li>
-          <li><a href="#decisions">02 · 关键架构决策</a></li>
-          <li><a href="#eval">03 · 消融与 SFT 账本</a></li>
-          <li><a href="#evolution">04 · 产品演进路线</a></li>
-          <li><a href="#try">05 · 在线体验入口</a></li>
-          <li><a href="#retro">06 · 局限与复盘</a></li>
-        </ol>
-      </details>
-
-      <!-- 01 问题 -->
-      <section id="problem" class="chapter">
-        <span class="eyebrow">01 / PROBLEM</span>
-        <h2>投研的瓶颈不是生成速度，而是核验成本。</h2>
-        <p>把财报 PDF 或行情数据直接喂给通用对话模型，生成一段看起来很专业的分析只需两秒；但研究员为了确认「这个数来自哪张表、是不是 TTM 口径、同比有没有算错」，往往要花十分钟翻原表。一旦核验时间超过自己查表的时间，产品就不可用。</p>
-        <div class="card-grid three">
-          <div class="sub-card">
-            <span class="sc-tag">01 · 口径错位</span>
-            <h4>单季、全年与 TTM 混用</h4>
-            <p>容易把单季营收和滚动十二个月混在一起比较，或在跨市场对比时混淆币种与会计期间。</p>
-          </div>
-          <div class="sub-card">
-            <span class="sc-tag">02 · 概率心算</span>
-            <h4>26.67% 未授权数字</h4>
-            <p>未加契约约束的 Qwen3-4B 基线测试里，超过四分之一回答会凭上下文编造源材料里没有的数字。</p>
-          </div>
-          <div class="sub-card">
-            <span class="sc-tag">03 · 证据割裂</span>
-            <h4>单栏对话无法就地核对</h4>
-            <p>结论和来源拆在聊天框、行情软件与 PDF 之间，每核一个数都要跳出当前上下文。</p>
-          </div>
-        </div>
-        <blockquote class="quote-block">
-          「在严肃金融场景里，不怕 AI 明说当前数据源未覆盖，最怕它用流利的金融腔给出一个算错口径的数字。」
-          <cite>立项原则：把降低核验成本（Cost of Verification）作为第一产品目标</cite>
-        </blockquote>
-      </section>
-
-      <!-- 02 关键决策 -->
-      <section id="decisions" class="chapter">
-        <span class="eyebrow">02 / KEY DECISIONS</span>
-        <h2>四个决策：先修数据、叫停微调、前置路由、三栏同屏。</h2>
-
-        <div class="decision">
-          <span class="eyebrow">决策 01 · 失败归因先行</span>
-          <p class="dq">Dev 集 30 题有 27 题失败时，先改 Prompt 还是先查数据底座？</p>
-          <ul class="opts">
-            <li><b>A · 继续堆 System Prompt 和重试</b>改得快，但无法修复源数据里本身就错的科目和单位。</li>
-            <li class="chosen"><b>B · 逐条做错题根因分类，先修事实目录 ✓</b>归因发现 27 道错题里 17 题（63%）源于年报解析与单位换算错误，而非模型推理。</li>
-          </ul>
-          <p class="d-note"><b>结论</b>确立迭代顺序：先修结构化事实底座 → 再剥离确定性计算 → 最后加生成端回答契约。</p>
-        </div>
-
-        <div class="decision">
-          <span class="eyebrow">决策 02 · SFT 微调证伪</span>
-          <p class="dq">4B 小模型垂类问答不够准，要不要攒数据上 SFT 微调？</p>
-          <ul class="opts">
-            <li><b>A · 看合成测试集达标后上线 SFT</b>2,000 条数据在同分布合成集上 Exact Match 从 75.5% 飙到 100%，账面极其漂亮。</li>
-            <li class="chosen"><b>B · 以 60 题真实跨公司端到端评测为准，果断叫停 ✓</b>端到端严格成功率并未同步提升，在陌生附注科目上反而诱发了格式工整的数字幻觉。</li>
-          </ul>
-          <p class="d-note"><b>结论</b>瓶颈在事实供给与计算契约，不在模型参数。直接砍掉 SFT 产线，把精力全投到数据底座与工作台。</p>
-        </div>
-
-        <div class="decision">
-          <span class="eyebrow">决策 03 · 前置查询路由 + 回答契约</span>
-          <p class="dq">所有请求都走大模型，还是按问题确定性分层处理？</p>
-          <ul class="opts">
-            <li><b>A · 统一交给大模型调工具再生成</b>架构最简单，但查单个价格或固定期间科目也要等三秒多，既慢又费算力。</li>
-            <li class="chosen"><b>B · 前置路由分流 + 强制事实源绑定校验 ✓</b>确定性查数直通结构化通道，砍掉约 50% LLM 调用，延迟从 3.36s 降至 2.36s；复杂推理强制绑定源 ID 与报告期，未授权数字降至 0%。</li>
-          </ul>
-        </div>
-
-        <div class="accordion" aria-label="回答契约四层结构">
-          <div class="accordion-head">
-            <h4>回答契约（Answer Contract）四层分工</h4>
-            <span class="mono muted">点击展开每层规则</span>
-          </div>
-          <details open>
-            <summary><b>01 · 事实层</b><span>每个数值必须绑定数据源 ID 与报告期，禁止孤立数字</span></summary>
-            <div class="acc-body">美股拉取 SEC / Finnhub / yfinance 原始科目，A 股接入同花顺 iFinD 行情与 <code>ths_pe_ttm_stock</code> 序列；回答里的数字一键定位到右栏原始表项。</div>
-          </details>
-          <details>
-            <summary><b>02 · 计算层</b><span>同比、环比、毛利率变动、PE 分位全由确定性代码算出</span></summary>
-            <div class="acc-body">LLM 只负责意图拆解与参数调用，具体运算由后端函数执行并回填，彻底剥离模型心算。</div>
-          </details>
-          <details class="is-warn">
-            <summary><b>03 · 信息缺口</b><span>源数据缺失时显式拒答（如港股 00700.HK 历史 PE 分位）</span></summary>
-            <div class="acc-body">实测中 iFinD 港股历史 PE 序列返回 <code>empty_series</code>，前端严格标明数据暂缺，不让模型凭记忆补全估值区间。</div>
-          </details>
-          <details>
-            <summary><b>04 · 路由分流</b><span>固定科目直查在路由层返回，约 50% 请求不触发大模型</span></summary>
-            <div class="acc-body">在 <code>/api/agent/query</code> 前置轻量路由器，平均延迟从 <code>3.36s</code> 压到 <code>2.36s</code>，评测准确率无损。</div>
-          </details>
-        </div>
-
-        <h3>决策 04 · 三栏同屏核验（Context | Thread | Evidence）</h3>
-        <p>左栏锁定标的代码与会计期间，防止多轮追问漂移；中栏 SSE 流式输出分层答案与信息缺口；点击任意引用编号，右栏即刻展开财报切片、PE 分位或 20 日 K 线/RSI/MA，并可一键带上下文切入个股深度工作台。</p>
-
-        <figure class="fig">
-          <div class="fig-zoom" role="button" tabindex="0" aria-label="点击放大查看 FinDesk 个股研究工作台">
-            <img src="../assets/img/fb-work-zh-cropped.webp" width="1293" height="1040" loading="lazy" alt="FinDesk 个股深度工作台界面">
-            <span class="zoom-pill">点击放大</span>
-          </div>
-          <figcaption>围绕同一标的对照财报明细、估值图表与来源依据，支持与对话助手无缝切换。</figcaption>
-        </figure>
-      </section>
-
-      <!-- 03 消融账本 -->
-      <section id="eval" class="chapter">
-        <span class="eyebrow">03 / EVALUATION LEDGER</span>
-        <h2>120 题三层隔离基准的单变量消融实录。</h2>
-        <p>先冻结覆盖 A/H/美股 9 家代表性上市公司、27 份年报的 120 题评测集（6 类任务，严格切分 <code>Dev / Validation / Blind</code> 防泄漏），再基于 Qwen3-4B 单变量推进每一层架构改动。</p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>实验分组</th>
-                <th>基准口径</th>
-                <th>核心数据变化</th>
-                <th>产品结论</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><b>1. 闭卷基线 → 全链路架构</b><br><span class="muted">Qwen3-4B 严苛全对口径</span></td>
-                <td>120 题三层隔离集<br>（9 家公司 · 27 份年报）</td>
-                <td>Dev 严格成功率 <b><code>6.67% → 43.33%</code></b><br>Val 严格成功率 <b><code>6.67% → 13.33%</code></b></td>
-                <td>仅 4B 小模型下，事实底座 + 工具计算 + 契约带来成倍提升</td>
-              </tr>
-              <tr>
-                <td><b>2. 加入回答契约</b><br><span class="muted">Answer Contract</span></td>
-                <td>Dev 集</td>
-                <td>未授权数字输出 <b><code>26.67% → 0%</code></b></td>
-                <td>消灭模型心算与脑补，无源必报缺口</td>
-              </tr>
-              <tr>
-                <td><b>3. 加入前置查询路由</b><br><span class="muted">Query Routing</span></td>
-                <td>Dev 集</td>
-                <td>LLM 调用量 <b><code>-50%</code></b><br>平均延迟 <b><code>3.36s → 2.36s</code></b></td>
-                <td>得分无损的前提下砍半算力、提速 1 秒</td>
-              </tr>
-              <tr>
-                <td><b>4. 失败根因拆解</b><br><span class="muted">Error Attribution</span></td>
-                <td>某轮 Dev 30 题<br>（27 题失败样本）</td>
-                <td><b><code>17 / 27（63%）</code></b> 源于事实目录解析错误</td>
-                <td>先修源数据底座，不靠 Prompt 硬调</td>
-              </tr>
-              <tr>
-                <td><b>5. 2,000 条 SFT 对照</b><br><span class="muted">BASE / SFT-500 / SFT-1000</span></td>
-                <td>合成域 vs 60 题真实端到端</td>
-                <td>合成域 Exact <b><code>75.5% → 100%</code></b><br>60 题端到端 <b>未同步提升</b></td>
-                <td>识别合成域过拟合，果断叫停 SFT 产线</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <figure class="fig">
-          <div class="fig-zoom" role="button" tabindex="0" aria-label="点击放大查看 FinSearch-X 评测与架构全景图">
-            <img src="../assets/img/finsearch-overview.webp" width="1600" height="1067" loading="lazy" alt="FinSearch-X 评测与架构演进全景图">
-            <span class="zoom-pill">点击放大</span>
-          </div>
-          <figcaption>从 FinSearch-X 底层评测与消融引擎，演进为 FinDesk 跨市场投研工作台的完整脉络。</figcaption>
-        </figure>
-      </section>
-
-      <!-- 04 演进路线 -->
-      <section id="evolution" class="chapter">
-        <span class="eyebrow">04 / EVOLUTION</span>
-        <h2>五步演进：FinSearch-X → FinDesk v1 → v2 → v3 → v4。</h2>
-        <p>整个产品线不是一次画完的，而是从底层评测底座出发，跟着真实使用痛点一路迭代到了围绕任意一手资料的研究笔记本。</p>
-
-        <ol class="phases">
-          <li>
-            <span class="phase-tag">2026-09 · FinSearch-X</span>
-            <b class="phase-title">评测消融底座：不做股价预测，做证据门控研究 Agent</b>
-            <p>跑完单变量消融并锁住 SFT-500 门禁后，确定「检索找材料 + 确定性计算 + 证据门控」路线，把目标锚定在降低研究员核验成本。</p>
-          </li>
-          <li>
-            <span class="phase-tag">v1 · financial-work / financial-bot</span>
-            <b class="phase-title">第一代双壳：/work 行情面板 + /bot 硬核任务引擎</b>
-            <p>基于 OpenAshare 长出第一版线上形态：/bot 跑通了冻结快照、真实步骤时间线、waiting_user 等待态和用户确认才入库的记忆机制，但两个入口功能重叠、前端单体文件过重。</p>
-          </li>
-          <li>
-            <span class="phase-tag">v2 · 拆分「我看」与「我问」</span>
-            <b class="phase-title">/v2/work 与 /v2/bot 物理分离，价格先行消除 8 秒白屏</b>
-            <p>把每次问答拆成步骤时间线 → SSE 流式答案 → 取证记录卡 → 数据缺口；按市场补齐 A 股 iFinD 5 年 PE 分位、港股报价和美股 yfinance 估值。</p>
-          </li>
-          <li>
-            <span class="phase-tag">v3 · 补齐产品叙事与离线 Demo</span>
-            <b class="phase-title">双语 Signal 落地页 /landing + 极简三栏工作区</b>
-            <p>收拢成「上下文 | 对话 | 证据弹窗」三栏，内置 <code>?demo=1</code> 腾讯 00700.HK 离线快照，不连后端也能完整体验引用核对与跳 Work 看图。</p>
-          </li>
-          <li>
-            <span class="phase-tag">v4 · 范式跃迁（最新）</span>
-            <b class="phase-title">从「查单只股票」扩展到 NotebookLM 式一手资料研究笔记本</b>
-            <p>拆出私有工作台 <code>/v4/notebook</code> 和免登录公开版 <code>/v4/notebook/public</code>（来源 | 问答 | Studio 三栏）：支持联网发现、URL/PDF/文本导入、按问次勾选隔离、引用悬停高亮、存笔记反哺检索及 Studio 10 种产物生成。</p>
-          </li>
-        </ol>
-      </section>
-
-      <!-- 05 在线体验 -->
-      <section id="try" class="chapter">
-        <span class="eyebrow">05 / LIVE DEMO</span>
-        <h2>四个线上入口，建议从最新的 v4 公开笔记本开始。</h2>
-        <p>全部 HTTPS 直连，新窗口打开。可以先在 v4 导一份研报或网页体验三栏研究流，再回头看 v3 的个股工作台，直观感受四代演进。</p>
-
-        <div class="card-grid">
-          <div class="sub-card is-featured">
-            <span class="sc-tag">v4 · 最新 · 免登录</span>
-            <h4>Notebook 公开研究笔记本</h4>
-            <p>「来源 | 问答 | Studio」三栏：支持 URL / PDF / 文本导入、按问次勾选隔离、流式引用原文高亮，以及简报、深度报告、思维导图等 10 种产物生成。</p>
-            <div class="sc-act">
-              <a class="btn btn-sm" href="https://47.243.118.32.nip.io/v4/notebook/public" target="_blank" rel="noopener">打开 v4 公开笔记本 ↗</a>
-            </div>
-          </div>
-
-          <div class="sub-card">
-            <span class="sc-tag">v3 · 对话问数</span>
-            <h4>Bot 研究助手</h4>
-            <p>体验前置查询路由与「事实 / 计算 / 信息缺口」分层呈现的股票研究问答，每个数字均可展开来源。</p>
-            <div class="sc-act">
-              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/bot?mode=use&amp;lang=zh" target="_blank" rel="noopener">打开 Bot 研究助手 ↗</a>
-            </div>
-          </div>
-
-          <div class="sub-card">
-            <span class="sc-tag">v3 · 个股深研</span>
-            <h4>Work 深度工作台</h4>
-            <p>查看美股、港股、A 股实时行情、20 日 K 线/RSI/MA、估值指标与结构化财务三表。</p>
-            <div class="sc-act">
-              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/work?lang=zh" target="_blank" rel="noopener">打开 Work 工作台 ↗</a>
-            </div>
-          </div>
-
-          <div class="sub-card">
-            <span class="sc-tag">v3 · 产品总览</span>
-            <h4>Landing 产品首页</h4>
-            <p>查看跨市场数据源接入状态、三栏证据链说明与示例标的入口。</p>
-            <div class="sc-act">
-              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/landing?lang=zh" target="_blank" rel="noopener">进入产品首页 ↗</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 06 局限与复盘 -->
-      <section id="retro" class="chapter">
-        <span class="eyebrow">06 / RETROSPECTIVE</span>
-        <h2>做对的事，以及诚实摆在台面上的局限。</h2>
-        <div class="retro-grid">
-          <div class="retro-col">
-            <h4>坚持做对的</h4>
-            <ul>
-              <li><b>评测先于架构：</b>冻结 120 题三层隔离集，让工具剥离、回答契约和路由分流都有单变量账本，避开了 2,000 条 SFT 的合成域假象。</li>
-              <li><b>算术彻底移出 LLM：</b>同比、环比、毛利率变动、PE 分位全走确定性函数，配合校验实现 <code>0%</code> 未授权数字。</li>
-              <li><b>把核验放到同屏：</b>三栏布局把「翻十分钟 PDF」压缩成一次点击。</li>
-            </ul>
-          </div>
-          <div class="retro-col is-limit">
-            <h4>已知局限与下一步</h4>
-            <ul>
-              <li><b>跨公司非标科目泛化（Dev 43.33% vs Val 13.33%）：</b>不同公司在年报附注里的口径命名差异很大，下一步重点补强同义科目归并字典。</li>
-              <li><b>港股历史 PE 序列缺口：</b>目前 iFinD 港股历史 PE 返回 <code>empty_series</code>，前端严格报缺口，后续计划用自建历史市值与滚动净利润表回算补齐。</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+<div class="callout is-notice" hidden="" id="from-fsx" style="margin-top:20px">FinSearch-X 是 FinDesk 的财报评测基础。下方介绍评测、产品决策与线上体验入口。</div>
+<!-- ============ CASE HERO ============ -->
+<section aria-labelledby="t" class="case-hero">
+<div class="case-hero-top">
+<span class="eyebrow">01 / FLAGSHIP · 个人独立全栈</span>
+<span class="status st-live">线上公开可体验 · 已迭代至 v4</span>
 </div>
-
+<h1 id="t">FinDesk（含评测底座 FinSearch-X）</h1>
+<p class="case-sub">让投研回答更容易核对：先修财报数据，再把计算交给程序，并将答案与来源放在同一页面。</p>
+<div aria-label="核心指标" class="metric-row four">
+<div class="metric-box">
+<span class="m-val">26.67% → 0%</span>
+<span class="m-lbl">未授权数字输出清零（回答契约校验）</span>
+</div>
+<div class="metric-box">
+<span class="m-val">-50%</span>
+<span class="m-lbl">前置路由省去一半大模型调用（延迟 3.36s → 2.36s）</span>
+</div>
+<div class="metric-box">
+<span class="m-val">6.67% → 43.33%</span>
+<span class="m-lbl">Qwen3-4B 严苛口径下 Dev 严格成功率</span>
+</div>
+<div class="metric-box is-warn">
+<span class="m-val">2,000 条叫停</span>
+<span class="m-lbl">合成域 100% 但端到端不涨，果断放弃 SFT</span>
+</div>
+</div>
+<dl class="facts">
+<div><dt>角色</dt><dd>个人独立全栈：产品定义、评测基准、后端接口与前端工作台</dd></div>
+<div><dt>覆盖市场</dt><dd>A 股（同花顺 iFinD 行情与 PE 分位）· 港股（AkShare / iFinD）· 美股（SEC / Finnhub / yfinance）</dd></div>
+<div><dt>评测底座</dt><dd>120 题三层隔离集（9 家上市公司 · 27 份年报 · 6 类任务 · Dev / Val / Blind）</dd></div>
+<div><dt>线上状态</dt><dd>独立部署于香港节点，全部 HTTPS，免登录即可体验 v4 公开笔记本与 v3 工作台</dd></div>
+</dl>
+<div class="cta-row">
+<a class="btn" href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">体验 v4 公开研究笔记本 ↗</a>
+<a class="btn btn-ghost" href="#try">查看四代入口与演进路线 ↓</a>
+</div>
+</section>
+<figure class="case-figure">
+<div aria-label="点击放大查看 FinDesk 三栏工作台" class="fig-zoom" role="button" tabindex="0">
+<img alt="FinDesk 主视觉：三栏证据链研究工作台、图表与来源卡片" height="822" src="../assets/img/financial-bot-hero-wide.webp" width="1913"/>
+<span class="zoom-pill">点击放大</span>
+</div>
+<figcaption>FinDesk 三栏架构：研究上下文（Context）、流式问答（Thread）与原始依据（Evidence）同屏核对。</figcaption>
+</figure>
+<!-- ============ BODY ============ -->
+<div class="case-layout">
+<aside aria-label="本页目录" class="toc">
+<span class="toc-title">本页目录</span>
+<ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol>
+</aside>
+<div class="prose"><details class="toc-mobile"><summary>展开本页目录</summary><ol><li><a href="#problem">01 · 项目背景 &amp; 业务目标</a></li><li><a href="#analysis">02 · 问题分析 &amp; 需求挖掘</a></li><li><a href="#decisions">03 · 方案设计 &amp; 核心权衡</a></li><li><a href="#delivery">04 · 落地推进 &amp; 风险处理</a></li><li><a href="#retro">05 · 结果数据 + 复盘</a></li></ol></details><section class="chapter" id="problem"><span class="eyebrow">01 / 项目背景 &amp; 业务目标</span><h2>项目背景 &amp; 业务目标</h2><p>投研答案生成很快，核对数字却要在财报和行情之间反复切换。目标是在测试中消除来源未支持的数字，并减少简单查询的大模型调用。</p><p>个人独立完成产品定义、评测、前后端开发和部署。</p></section><section class="chapter" id="analysis"><span class="eyebrow">02 / 问题分析 &amp; 需求挖掘</span><h2>问题分析 &amp; 需求挖掘</h2><p>开发集 30 题中有 27 题失败；逐题排查发现其中 17 题来自年报解析与单位换算，而非单纯的模型推理。先修数据，比继续堆提示词更有价值。</p><p>2,000 条数据的微调在合成测试中得分很好，但真实跨公司端到端评测没有同步改善，因此没有把微调作为主路线。</p></section><section class="chapter" id="decisions"><span class="eyebrow">03 / 方案设计 &amp; 核心权衡</span><h2>方案设计 &amp; 核心权衡</h2><p>把查数和计算交给程序，复杂解释交给模型，并在回答旁展示来源；缺数据时明确说明。</p><p>简单查询直接取数，减少等待和模型调用；复杂问题保留解释能力，但必须核对数字与来源。三栏工作台让用户在同一页面核对上下文、答案和依据。</p><figure class="fig">
+<div aria-label="点击放大查看 FinDesk 个股研究工作台" class="fig-zoom" role="button" tabindex="0">
+<img alt="FinDesk 个股深度工作台界面" height="1040" loading="lazy" src="../assets/img/fb-work-zh-cropped.webp" width="1293"/>
+<span class="zoom-pill">点击放大</span>
+</div>
+<figcaption>围绕同一标的对照财报明细、估值图表与来源依据，支持与对话助手无缝切换。</figcaption>
+</figure><figure class="fig">
+<div aria-label="点击放大查看 FinSearch-X 评测与架构全景图" class="fig-zoom" role="button" tabindex="0">
+<img alt="FinSearch-X 评测与架构演进全景图" height="1067" loading="lazy" src="../assets/img/finsearch-overview.webp" width="1600"/>
+<span class="zoom-pill">点击放大</span>
+</div>
+<figcaption>从 FinSearch-X 底层评测与消融引擎，演进为 FinDesk 跨市场投研工作台的完整脉络。</figcaption>
+</figure></section><section class="chapter" id="delivery"><span class="eyebrow">04 / 落地推进 &amp; 风险处理</span><h2>落地推进 &amp; 风险处理</h2><p>先建立覆盖 9 家公司、27 份年报的 120 题评测集，分开开发、验证和盲测；再逐步修数据、拆出计算、校验回答并迭代工作台。</p><p>对于港股历史市盈率数据缺口，页面明确提示缺失，不让模型猜测。产品从财报评测工具演进到 v4 研究笔记本。</p><div id="evolution"></div><div id="eval"></div><div class="callout" id="try"><b>线上体验入口</b><p><a href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">v4 公开研究笔记本 ↗</a> · <a href="https://47.243.118.32.nip.io/bot?mode=use&amp;lang=zh" rel="noopener" target="_blank">Bot 研究助手 ↗</a> · <a href="https://47.243.118.32.nip.io/work?lang=zh" rel="noopener" target="_blank">Work 工作台 ↗</a> · <a href="https://47.243.118.32.nip.io/landing?lang=zh" rel="noopener" target="_blank">产品首页 ↗</a></p></div></section><section class="chapter" id="retro"><span class="eyebrow">05 / 结果数据 + 复盘</span><h2>结果数据 + 复盘</h2><p>在原有评测口径下，未授权数字输出从 26.67% 降至 0%；简单查询分流使大模型调用减少约 50%，延迟从 3.36 秒降至 2.36 秒。结果是测试集表现，并非对所有问题的保证。</p><p>先查数据根因、再选技术路线是有效的；但跨公司非标准科目仍较弱：开发集严格成功率 43.33%，验证集 13.33%。下一步需补充不同公司科目名称的对应关系。</p></section></div>
+</div>
+</div>
 <a class="next-case" href="image-routing.html">
-  <div class="wrap">
-    <span class="eyebrow">下一个项目 · 02 / 05</span>
-    <h2>金融单据与理赔影像智能分流 →</h2>
-    <p>公司生产已上线：90 类收敛至 23 类并解耦路由配置表，压降约 25% 视觉大模型调用量，1,650 张线上盲抽零漏检。</p>
-  </div>
+<div class="wrap">
+<span class="eyebrow">下一个项目 · 02 / 05</span>
+<h2>金融单据与理赔影像智能分流 →</h2>
+<p>公司生产已上线：90 类收敛至 23 类并解耦路由配置表，压降约 25% 视觉大模型调用量，1,650 张线上盲抽零漏检。</p>
+</div>
 </a>
 </main>
-
 <footer class="site-foot">
-  <div class="wrap">
-    <span class="mono">© <span data-year>2026</span> 星宇 · 深圳</span>
-    <span><a href="../index.html#work">返回全部作品 ↑</a></span>
-    <button class="to-top" type="button">↑ 回到顶部</button>
-  </div>
+<div class="wrap">
+<span class="mono">© <span data-year="">2026</span> 星宇 · 深圳</span>
+<span><a href="../index.html#work">返回全部作品 ↑</a></span>
+<button class="to-top" type="button">↑ 回到顶部</button>
+</div>
 </footer>
 </body>
 </html>
