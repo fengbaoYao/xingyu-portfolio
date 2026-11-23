@@ -316,4 +316,82 @@
     var note = document.getElementById('from-fsx');
     if (note) note.hidden = false;
   }
+
+  // 12. 首页核心能力五维闭环图 + 标签切换 + 展开全部
+  var skillSection = document.getElementById('skills');
+  if (skillSection) {
+    var sTabs = Array.prototype.slice.call(skillSection.querySelectorAll('[data-skill-tab]'));
+    var sPanels = Array.prototype.slice.call(skillSection.querySelectorAll('[data-skill-panel]'));
+    var sArchNodes = Array.prototype.slice.call(skillSection.querySelectorAll('.skill-arch [data-skill-target]'));
+    var sJumps = Array.prototype.slice.call(skillSection.querySelectorAll('.matrix-jump[data-skill-target]'));
+    var sExpandBtn = skillSection.querySelector('[data-skill-expand]');
+    var sToolbar = skillSection.querySelector('.skill-toolbar');
+    var activeSkillId = '01';
+    var allExpanded = false;
+
+    var renderSkills = function (id, expandAll) {
+      allExpanded = !!expandAll;
+      if (id) activeSkillId = id;
+
+      if (sExpandBtn) {
+        sExpandBtn.setAttribute('aria-pressed', String(allExpanded));
+        sExpandBtn.textContent = allExpanded ? '收起为单维视图' : '展开全部 5 维';
+      }
+
+      sTabs.forEach(function (tab) {
+        var tid = tab.getAttribute('data-skill-tab');
+        var on = !allExpanded && tid === activeSkillId;
+        tab.classList.toggle('is-active', on);
+        tab.setAttribute('aria-selected', String(on));
+      });
+
+      sArchNodes.forEach(function (node) {
+        var nid = node.getAttribute('data-skill-target');
+        var on = allExpanded || nid === activeSkillId;
+        node.classList.toggle('is-active', on);
+        node.setAttribute('aria-pressed', String(on));
+      });
+
+      sPanels.forEach(function (panel) {
+        var pid = panel.getAttribute('data-skill-panel');
+        var show = allExpanded ? pid !== 'matrix' : pid === activeSkillId;
+        panel.hidden = !show;
+      });
+    };
+
+    sTabs.forEach(function (tab, idx) {
+      tab.addEventListener('click', function () {
+        renderSkills(tab.getAttribute('data-skill-tab'), false);
+      });
+      tab.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        e.preventDefault();
+        var next = (idx + (e.key === 'ArrowRight' ? 1 : -1) + sTabs.length) % sTabs.length;
+        sTabs[next].focus();
+        renderSkills(sTabs[next].getAttribute('data-skill-tab'), false);
+      });
+    });
+
+    sArchNodes.forEach(function (node) {
+      node.addEventListener('click', function () {
+        renderSkills(node.getAttribute('data-skill-target'), false);
+      });
+    });
+
+    sJumps.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        renderSkills(btn.getAttribute('data-skill-target'), false);
+        if (sToolbar) sToolbar.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+      });
+    });
+
+    if (sExpandBtn) {
+      sExpandBtn.addEventListener('click', function () {
+        if (allExpanded) renderSkills(activeSkillId === 'matrix' ? '01' : activeSkillId, false);
+        else renderSkills(activeSkillId, true);
+      });
+    }
+
+    renderSkills('01', false);
+  }
 })();

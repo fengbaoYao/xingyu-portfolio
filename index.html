@@ -30,17 +30,283 @@
         </figcaption>
       </figure></div></div></section>
 
-<section class="sec sec-night" id="skills"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">01 / SKILLS</span><h2>整体能力框架</h2></div><p class="sec-sub">AI + Agent 能力前置：围绕产品核心判断力、评测与风险治理、业务落地权衡、技术理解力与跨团队推进五维展开。</p></div><div class="skill-stack">
+<section class="sec sec-night" id="skills"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">01 / SKILLS</span><h2>核心能力与做事方式</h2></div><p class="sec-sub">AI / Agent 产品：相较于追逐新概念与模型参数，我更关注场景真伪、工程受控、成本结构与异常兜底。</p></div>
 
-<article class="skill-pillar"><header class="skill-pillar-head"><div><span class="eyebrow">01 · 最核心 · 面试官重点考察</span><h3>一、Agent 产品核心判断力</h3></div><p>先判断要不要上 Agent，再把拆解、工具、记忆与 Prompt 做成可熔断、可灰度、低延迟的受控系统。</p></header><div class="skill-pillar-grid two"><div class="skill-node span-2"><h4>1. 任务判定：判断场景要不要上 Agent</h4><p>明确区分三类方案：固定规则代码、纯 RAG 问答、多轮规划 + 工具调用 Agent——能用简单代码解决绝不硬塞大模型。Agent 适用于目标复杂、多步骤、需外部工具/数据且路径不确定的场景；高风险强决策、步骤固定与低延迟硬约束场景坚决不用。FinDesk 前置意图路由拦截约 50% 简单查数直出，平均响应由 <code>3.36s → 2.36s</code>。</p></div><div class="skill-node"><h4>2. 任务拆解 &amp; 工作流 / 状态机设计</h4><p>把高层业务目标拆成子任务，定义状态流转、分支判断、终止条件、最大调用轮次与失败重试；按规划 / 执行 / 校验多智能体分工，落实主从委派与子会话隔离（FinDesk 与 rstack 设 2 轮返工熔断，Media to Notes 用六步状态机设「纯逐字稿」到站硬停）。</p></div><div class="skill-node"><h4>3. 工具体系设计</h4><p>定义完整工具集、权限边界、入参出参契约与调用白/黑名单，严控越权风险；金融场景严格区分只读查询工具与可变更业务写工具，所有外部取数与状态变更统一收口。</p></div><div class="skill-node"><h4>4. 记忆系统分层设计</h4><p>区分短时上下文记忆、会话记忆、长期业务记忆与全局静态规则；治理记忆污染、过期记忆与跨会话指令留存，压降记忆膨胀带来的 Token 成本（rstack 按 Hook &gt; 常驻约定 &gt; 脚本 &gt; 静态记忆分级，设 3 期零命中退场）。</p></div><div class="skill-node"><h4>5. Prompt 与指令体系产品化</h4><p>不止于写单条 Prompt，而是体系化设计系统 Prompt 策略、Few-shot 样例库、动态上下文注入与路由 Prompt，纳入版本管理、灰度发布与 A/B 对照验证。</p></div></div></article>
+<div class="skill-arch" aria-label="AI / Agent 生产落地五维闭环图">
+  <div class="skill-arch-bar">
+    <span class="eyebrow">PRODUCTION LOOP · 点击节点切换对应维度</span>
+    <span class="arch-loop-pill">↺ 闭环回流：线上异常 → 基准评测集 &amp; 指令迭代</span>
+  </div>
+  <div class="arch-flow" role="group" aria-label="主链路能力节点">
+    <button class="arch-node is-active" type="button" data-skill-target="01" aria-pressed="true">
+      <span class="arch-idx">01 · 入口控制</span>
+      <strong>场景判断与系统受控</strong>
+      <span>方案边界 · 熔断 · 权限 · 记忆 · 指令</span>
+    </button>
+    <span class="arch-arrow" aria-hidden="true"><svg viewBox="0 0 24 16" width="24" height="16"><path d="M2 8h18m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <button class="arch-node" type="button" data-skill-target="02" aria-pressed="false">
+      <span class="arch-idx">02 · 质量底线</span>
+      <strong>真实评测与风险控制</strong>
+      <span>隔离评测 · 非对称代价 · 溯源 · 止损</span>
+    </button>
+    <span class="arch-arrow" aria-hidden="true"><svg viewBox="0 0 24 16" width="24" height="16"><path d="M2 8h18m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <button class="arch-node" type="button" data-skill-target="03" aria-pressed="false">
+      <span class="arch-idx">03 · 工程权衡</span>
+      <strong>业务理解与现实取舍</strong>
+      <span>契约转译 · 降级 · 预期 · 业务结果</span>
+    </button>
+    <span class="arch-arrow" aria-hidden="true"><svg viewBox="0 0 24 16" width="24" height="16"><path d="M2 8h18m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <button class="arch-node" type="button" data-skill-target="05" aria-pressed="false">
+      <span class="arch-idx">05 · 交付闭环</span>
+      <strong>推进落地与团队协同</strong>
+      <span>标准前置 · 只读灰度 · 观测 · 回流</span>
+    </button>
+  </div>
+  <button class="arch-base" type="button" data-skill-target="04" aria-pressed="false">
+    <span class="arch-idx">04 · 全链路支撑</span>
+    <strong>技术理解与实践能力</strong>
+    <span>LLM 原理边界 · RAG 链路诊断 · Agent 运行机制 · 系统原型验证 · 日志追踪定位</span>
+  </button>
+</div>
 
-<article class="skill-pillar"><header class="skill-pillar-head"><div><span class="eyebrow">02 · B 端 / 金融场景最强差异化</span><h3>二、评测、幻觉与风险治理</h3></div><p>用物理隔离评测、非对称代价建模、强溯源契约与实验止损，守住金融与严肃企业生产底线。</p></header><div class="skill-pillar-grid two"><div class="skill-node span-2"><h4>1. Agent 评测体系搭建</h4><p>构建 <code>Dev / Val / Blind</code> 物理隔离评测集，覆盖任务成功率、幻觉率、指令跟随、拒答正确性、工具调用错误率与步骤合规性；通过单变量消融实验定位错误来源（区分召回错、规划错、工具返回错、模型推理错），在 FinDesk 27 道错题中归因出 63% 源于底表解析与单位换算。</p></div><div class="skill-node"><h4>2. 非对称错误代价建模</h4><p>识别「漏报一次代价极高、误报一次代价很低」的业务环节并重设指标权重，不唯整体准确率论：理赔影像宁可多调一次 VL 模型也不漏检带字单据，配套拒答策略、跳过池人工盲抽与降级兜底开关。</p></div><div class="skill-node"><h4>3. 幻觉管控 &amp; 溯源机制</h4><p>输出强制绑定数据源 ID、缺数显式留白（<code>〔未明确〕</code>）、落实结果校验契约，将 FinDesk 未授权编造数字率由 <code>26.67%</code> 清零至 <code>0%</code>；高危决策场景禁止 AI 直接拍板，只做辅助参考。</p></div><div class="skill-node"><h4>4. 成本与路由策略</h4><p>推行模型路由（简单任务轻模型、复杂推理强模型），限制 Token 消耗与调用轮次上限，建成本监控告警与<b>实验止损规则</b>——跑通 <b>Qwen3-4B 2,000 条 SFT</b> 对照实验，识破合成集 <code>100%</code> vs 真实跨公司 <code>0 涨分</code>假象后及时止损。</p></div><div class="skill-node"><h4>5. 安全与权限隔离</h4><p>落实工具权限最小化、输入输出风控与敏感数据防泄露；多 Agent 之间严格上下文隔离防跨会话泄露，全链路保留可追溯审计日志。</p></div></div></article>
+<div class="skill-toolbar">
+  <div class="skill-tabs" role="tablist" aria-label="能力维度切换">
+    <button class="skill-tab is-active" role="tab" type="button" id="stab-01" aria-selected="true" aria-controls="spanel-01" data-skill-tab="01">01 场景与受控</button>
+    <button class="skill-tab" role="tab" type="button" id="stab-02" aria-selected="false" aria-controls="spanel-02" data-skill-tab="02">02 评测与风控</button>
+    <button class="skill-tab" role="tab" type="button" id="stab-03" aria-selected="false" aria-controls="spanel-03" data-skill-tab="03">03 业务与取舍</button>
+    <button class="skill-tab" role="tab" type="button" id="stab-04" aria-selected="false" aria-controls="spanel-04" data-skill-tab="04">04 技术与实践</button>
+    <button class="skill-tab" role="tab" type="button" id="stab-05" aria-selected="false" aria-controls="spanel-05" data-skill-tab="05">05 推进与协同</button>
+    <button class="skill-tab skill-tab-matrix" role="tab" type="button" id="stab-matrix" aria-selected="false" aria-controls="spanel-matrix" data-skill-tab="matrix">一表总览</button>
+  </div>
+  <button class="skill-expand-btn" type="button" data-skill-expand aria-pressed="false">展开全部 5 维</button>
+</div>
 
-<article class="skill-pillar"><header class="skill-pillar-head"><div><span class="eyebrow">03 · 金融背景强项</span><h3>三、业务落地与方案权衡</h3></div><p>十年金融科技业务底盘，把不确定性高的 AI 能力收敛为合规、可控、算得清账的生产方案。</p></header><div class="skill-pillar-grid two"><div class="skill-node"><h4>1. 业务目标翻译</h4><p>把模糊业务诉求转译为 Agent 可执行任务，梳理业务约束、合规、审计与高可用要求：近 160 家机构对接沉淀为 8 类标准契约；近 90 种理赔单证按物理外观归为 23 类并与独立路由配置表解耦。</p></div><div class="skill-node"><h4>2. 方案取舍能力</h4><p>在延迟、成本、准确率与可控性之间做工程权衡，主动收敛 Agent 不确定性：针对深圳 35°C 户外连续视觉 15 分钟降频，改为「声纹粗筛 + 1 秒切片 + 无 AI 仍可导出」三层保底；FinDesk 严守研究辅助不接交易。</p></div><div class="skill-node"><h4>3. 边界管理 &amp; 用户预期管理</h4><p>清晰定义 Agent 能力上限，向用户讲透 AI 能干什么、不能干什么，并明确人工介入与复核节点（如 Media to Notes 前置提示受限场景），防止用户过度信任 AI。</p></div><div class="skill-node"><h4>4. 业务指标设计</h4><p>严格区分业务指标（人力节省、工单下降、98% 线上出单、年服务约 20 万人次、3 名坐席调度 200+ 一线人员）与模型指标（幻觉率、召回率、任务完成率），不拿模型分掩盖业务效果。</p></div></div></article>
+<div class="skill-stack" data-skill-stack>
 
-<article class="skill-pillar"><header class="skill-pillar-head"><div><span class="eyebrow">04 · 技术理解力 · AGENT PM 链路素养</span><h3>四、技术理解力</h3></div><p>定位：能和算法、后端同频对话，识别技术风险，不会被研发忽悠；无需深究底层推导，但必须看得懂全链路。</p></header><div class="skill-pillar-grid two"><div class="skill-node"><h4>1. LLM 基础能力边界</h4><p>理解大模型幻觉产生机制、上下文窗口约束，以及温度（Temperature）、采样参数调整对输出稳定性与业务一致性的影响。</p></div><div class="skill-node"><h4>2. RAG 原理与召回诊断</h4><p>掌握文档切片策略、向量召回与重排机制，能判断答非所问究竟源于切片破损、语义召回漏检还是重排缺失（FinDesk v4 <code>pgvector</code> 原文锚点检索实践）。</p></div><div class="skill-node"><h4>3. Agent 核心链路</h4><p>理解规划器、工具调用、分层记忆、多智能体委派与沙箱执行机制；并亲手做过球场噪音端侧声纹网络自训与 <b>GridTrackNet</b> 困难负样本微调。</p></div><div class="skill-node"><h4>4. API 链路、Token 计费与部署概念</h4><p>看懂基础 API 调用链路、Token 计费结构与延迟瓶颈，理解向量库与容器部署基础概念；独立用 Python / Next.js / FastAPI / Docker / Caddy 搭出可运行原型。</p></div><div class="skill-node span-2"><h4>5. 实验结果与日志归因</h4><p>看得懂消融对照、评测报表与执行日志，能快速定位错误环节到底卡在<b>规划错、工具返回错还是召回错</b>（如 rstack 每周全上下文日志扫描与无头沙箱重放）。</p></div></div><div class="skill-tech-footer"><span class="skill-tech-label">常用技术栈与实验工具</span><div aria-label="常用技术栈与工具" class="skill-pills"><span>Python</span><span>Next.js / FastAPI</span><span>PostgreSQL / pgvector</span><span>Qwen3-4B SFT</span><span>GridTrackNet</span><span>Docker / Caddy</span><span>Claude Code / Codex</span></div></div></article>
+<article class="skill-pillar" id="spanel-01" role="tabpanel" aria-labelledby="stab-01" data-skill-panel="01">
+  <header class="skill-pillar-head">
+    <div><span class="eyebrow">01 · 核心判断 · 系统受控</span><h3>1. 场景判断与系统受控</h3></div>
+    <p>先评估大模型的必要性，再将复杂流程设计为可控系统。</p>
+  </header>
+  <div class="skill-pillar-grid two">
+    <div class="skill-node span-2">
+      <h4>审慎评估方案边界：什么场景才需要上 Agent</h4>
+      <p>区分固定规则、检索增强（RAG）与多智能体（Agent）的适用场景。在低延迟与强确定性要求的环节，主要依靠传统规则或轻量判断模型配合，优先把简单问题留在更确定的链路中解决。</p>
+      <div class="skill-table-wrap">
+        <table class="skill-mini-table">
+          <thead><tr><th>技术路径</th><th>适用场景</th><th>系统特性</th><th>工程策略（附实证）</th></tr></thead>
+          <tbody>
+            <tr><td data-label="技术路径"><b>固定规则代码</b></td><td data-label="适用场景">逻辑固定、输入输出明确</td><td data-label="系统特性">强确定性 · 低延迟</td><td data-label="工程策略">优先使用传统代码，不额外引入大模型（FinDesk 前置路由拦截约 <code>50%</code> 简单查数，响应 <code>3.36s → 2.36s</code>）</td></tr>
+            <tr><td data-label="技术路径"><b>检索增强（RAG）</b></td><td data-label="适用场景">普通知识问答、资料查证</td><td data-label="系统特性">依赖切片与召回</td><td data-label="工程策略">做好文本分块、语义召回与原文锚点溯源即可，不拉长推理链路</td></tr>
+            <tr><td data-label="技术路径"><b>多智能体（Agent）</b></td><td data-label="适用场景">目标复杂、多步骤、依赖外部工具且路径动态变化</td><td data-label="系统特性">存在推理不确定性</td><td data-label="工程策略">必须配套轮次上限、熔断开关与权限隔离，仅在必要环节启用</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="skill-node">
+      <h4>流程拆解与熔断设计</h4>
+      <p>将复杂任务合理拆解，分清规划、执行与校验职责。配置失败重试上限、最大交互轮次以及循环熔断机制，避免模型陷入无序调用与资源浪费。</p>
+      <span class="skill-proof">FinDesk / rstack 均设 2 轮返工熔断 · Media to Notes 纯逐字稿硬停</span>
+    </div>
+    <div class="skill-node">
+      <h4>工具契约与权限隔离</h4>
+      <p>严格定义工具接口的入参和出参校验规范。物理隔离只读查询工具与具有副作用的写入/变更工具，对涉及数据修改或核心资产的操作实施更严格的权限收口与审核。</p>
+      <span class="skill-proof">金融场景读写工具物理隔离 · 外部取数接口统一收口校验</span>
+    </div>
+    <div class="skill-node">
+      <h4>记忆系统分层与淘汰</h4>
+      <p>明确划分单次会话短期上下文、用户长期特征与全局业务规则。建立无用记忆的清理与淘汰机制，合理控制上下文长度，降低 Token 成本并防止历史冗余信息干扰当前判断。</p>
+      <span class="skill-proof">rstack 按 Hook &gt; 常驻约定 &gt; 脚本 &gt; 静态记忆分级，设 3 期零命中淘汰</span>
+    </div>
+    <div class="skill-node">
+      <h4>指令的工程化管理</h4>
+      <p>将 Prompt 纳入软件工程规范管理，维护清晰的版本记录、动态上下文组装逻辑、基准样例库，并在上线前进行充分的 A/B 对比评测。</p>
+      <span class="skill-proof">系统 Prompt / Few-shot / 路由提示词版本化管理与对照组验证</span>
+    </div>
+  </div>
+</article>
 
-<article class="skill-pillar"><header class="skill-pillar-head"><div><span class="eyebrow">05 · 金融科技十年积累</span><h3>五、项目推进与跨团队协同</h3></div><p>四年开发运维 + 六年带队管理，既盯得住技术灰度细节，也推得动多部门合规上线与闭环复盘。</p></header><div class="skill-pillar-grid two"><div class="skill-node"><h4>1. 多方对齐</h4><p>拉通业务、算法、后端、测试与合规多方，在立项期就把模糊需求落成可量化、可签字的验收标准与降级预案。</p></div><div class="skill-node"><h4>2. 迭代策略</h4><p>坚持小范围灰度发布、逐步放开工具权限；金融与严肃场景先上线只读查询 Agent 跑通链路，确认可控后再谨慎开放写操作。</p></div><div class="skill-node"><h4>3. 上线监控</h4><p>搭建全链路观测看板：盯调用量、工具轮次分布、失败类型、Token 消耗、人工复核差评与 P95 响应延迟，异常早告警。</p></div><div class="skill-node"><h4>4. 复盘闭环</h4><p>把线上失败案例与用户纠偏持续沉淀进评测集（如 rstack 连续 4 期账本与口径纠偏），反哺 Prompt、工具契约与知识库持续迭代。</p></div></div></article>
+<article class="skill-pillar" id="spanel-02" role="tabpanel" aria-labelledby="stab-02" data-skill-panel="02" hidden>
+  <header class="skill-pillar-head">
+    <div><span class="eyebrow">02 · 质量底线 · 风险边界</span><h3>2. 真实评测与风险控制</h3></div>
+    <p>比起离线测试的理论高分，更关注生产环境下的风险边界与长尾表现。</p>
+  </header>
+  <div class="skill-pillar-grid two">
+    <div class="skill-node span-2">
+      <h4>评测集物理隔离与四层归因</h4>
+      <p>保持测试集与训练环境严格隔离。建立清晰的错误排查链路，遇到异常时能够准确区分问题源头，而非笼统归因于模型本身。</p>
+      <div class="skill-attr-strip" aria-label="四层错因排查链路">
+        <span><b>① 知识检索不全</b>切片破损 / 召回漏检 / 重排偏差</span>
+        <span><b>② 任务规划偏差</b>子任务拆解或工具选择错误</span>
+        <span><b>③ 外部工具报错</b>接口契约异常 / 底表解析与单位换算</span>
+        <span><b>④ 模型推理缺陷</b>边界理解偏差 / 上下文注意力衰减</span>
+      </div>
+      <span class="skill-proof">Dev / Val / Blind 物理隔离 · FinDesk 27 道错题归因 63% 源于底表解析与单位换算</span>
+    </div>
+    <div class="skill-node">
+      <h4>基于错误代价调整策略</h4>
+      <p>不单纯追求笼统的平均准确率。在漏判代价极高的关键环节，适当放宽召回容忍度；在强调确定性的环节，提高拒答门槛，配合人工复核形成可靠的保底机制。</p>
+      <span class="skill-proof">理赔影像宁可多调一次 VL 模型也不漏检带字单据，配套跳过池人工盲抽</span>
+    </div>
+    <div class="skill-node">
+      <h4>幻觉抑制与溯源机制</h4>
+      <p>要求输出绑定原始数据来源依据；关键信息缺失时明确提示未明确或触发拒答，避免模型无依据推测。在重要决策环节，AI 仅作为辅助参考，保留人工最终确认。</p>
+      <span class="skill-proof">强制绑定数据源 ID 与〔未明确〕留白，FinDesk 编造率 26.67% → 0%</span>
+    </div>
+    <div class="skill-node">
+      <h4>成本控制与实验止损</h4>
+      <p>按任务复杂度分流模型（轻量模型处理常规结构化任务，复杂逻辑交由大模型）。理性看待实验室评测与真实跨场景泛化表现的差距，对投入产出比不明确的实验方向及时止损。</p>
+      <span class="skill-proof">Qwen3-4B 2,000 条 SFT 对照：合成集 100% vs 真实跨公司 0 涨分后及时止损</span>
+    </div>
+    <div class="skill-node">
+      <h4>安全隔离与审计留痕</h4>
+      <p>不同会话与 Agent 间保持严格的上下文隔离，避免数据交叉污染或泄露；保留完整的执行链路与操作日志，确保系统行为可回溯、可审计。</p>
+      <span class="skill-proof">主从上下文物理隔离 · 全链路输入输出与工具调用日志留痕</span>
+    </div>
+  </div>
+</article>
+
+<article class="skill-pillar" id="spanel-03" role="tabpanel" aria-labelledby="stab-03" data-skill-panel="03" hidden>
+  <header class="skill-pillar-head">
+    <div><span class="eyebrow">03 · 工程权衡 · 业务底盘</span><h3>3. 业务理解与现实取舍</h3></div>
+    <p>模型具有概率属性，而业务追求确定性。做产品的核心价值在于二者之间找到平衡。</p>
+  </header>
+  <div class="skill-pillar-grid two">
+    <div class="skill-node">
+      <h4>业务诉求的结构化转译</h4>
+      <p>将业务部门模糊的需求，转化为技术可执行的输入输出契约、约束条件与兜底方案；将复杂的行业场景和单据做标准化归类，降低系统复杂度。</p>
+      <span class="skill-proof">近 160 家机构沉淀为 8 类标准契约 · 近 90 种理赔单证按物理外观归为 23 类</span>
+    </div>
+    <div class="skill-node">
+      <h4>合理的工程取舍与降级</h4>
+      <p>在响应延迟、调用成本、准确率与系统开销间寻求平衡。充分考虑算力波动、网络异常或终端硬件限制，设计分级降级方案，确保即使 AI 链路不可用，核心业务仍能通过传统方式完成。</p>
+      <span class="skill-proof">Court Diary 针对 35°C 户外降频改为「声纹粗筛 + 1s 切片 + 无 AI 仍可导出」</span>
+    </div>
+    <div class="skill-node">
+      <h4>合理管理用户预期</h4>
+      <p>明确告知产品能力的有效范围与局限性，在关键节点设计人机协同与确认机制，避免用户因盲目信任自动化而产生误操作。</p>
+      <span class="skill-proof">Media to Notes 前置提示受限场景 · FinDesk 严守研究辅助不接交易</span>
+    </div>
+    <div class="skill-node">
+      <h4>以业务结果衡量价值</h4>
+      <p>不过度依赖模型层面的中间技术指标（如单纯的召回率），更关注是否真正缩短了业务处理时间、降低了人工介入成本、提升了流程吞吐量。</p>
+      <span class="skill-proof">98% 线上出单 · 年服务约 20 万人次 · 3 名坐席调度 200+ 一线人员</span>
+    </div>
+  </div>
+</article>
+
+<article class="skill-pillar" id="spanel-04" role="tabpanel" aria-labelledby="stab-04" data-skill-panel="04" hidden>
+  <header class="skill-pillar-head">
+    <div><span class="eyebrow">04 · 全链路素养 · 动手验证</span><h3>4. 技术理解与实践能力</h3></div>
+    <p>理解全链路实现逻辑，保持与算法、工程团队的无缝沟通，具备动手验证能力。</p>
+  </header>
+  <div class="skill-pillar-grid two">
+    <div class="skill-node">
+      <h4>理解大模型原理与边界</h4>
+      <p>理解模型幻觉的生成根源、上下文长度对注意力集中的影响，以及采样参数（如 Temperature）对输出确定性与稳定性的具体作用。</p>
+    </div>
+    <div class="skill-node">
+      <h4>RAG 链路定位与排查</h4>
+      <p>在检索问答效果不佳时，能够排查是文档分块（Chunking）不当、语义召回缺失，还是重排（Rerank）策略有偏差，不把问题简单归咎于模型能力。</p>
+      <span class="skill-proof">FinDesk v4 基于 pgvector 实现原文锚点级检索与溯源验证</span>
+    </div>
+    <div class="skill-node">
+      <h4>Agent 运行机制认知</h4>
+      <p>熟悉规划器调度、工具调用链路与沙箱执行环境的运作逻辑，具备参与数据清洗、构造负样本与模型微调验证的实践经验。</p>
+      <span class="skill-proof">自训端侧抗噪声纹网络 · 构造困难负样本微调 GridTrackNet</span>
+    </div>
+    <div class="skill-node">
+      <h4>系统链路与原型验证</h4>
+      <p>理解 API 调用延迟瓶颈、Token 计费结构、向量索引原理与基础容器化部署；能熟练运用 Python、轻量后端框架（如 FastAPI）与前端工具独立构建可运行的功能验证原型。</p>
+    </div>
+    <div class="skill-node span-2">
+      <h4>日志追踪与问题定位</h4>
+      <p>能够直接阅读系统运行日志与调用链路追踪，复现长尾或偶发异常，辅助研发团队定位问题根因。</p>
+      <span class="skill-proof">rstack 每周全上下文日志扫描与无头沙箱重放验收（3 道原题 0/3 → 3/3）</span>
+    </div>
+  </div>
+  <div class="skill-tech-footer"><span class="skill-tech-label">常用工程与实验工具</span><div aria-label="常用技术栈与工具" class="skill-pills"><span>Python</span><span>Next.js / FastAPI</span><span>PostgreSQL / pgvector</span><span>Qwen3-4B SFT</span><span>GridTrackNet</span><span>Docker / Caddy</span><span>Claude Code / Codex</span></div></div>
+</article>
+
+<article class="skill-pillar" id="spanel-05" role="tabpanel" aria-labelledby="stab-05" data-skill-panel="05" hidden>
+  <header class="skill-pillar-head">
+    <div><span class="eyebrow">05 · 交付闭环 · 跨团队协同</span><h3>5. 推进落地与团队协同</h3></div>
+    <p>兼具技术背景与项目管理经验，推动方案在合规与稳定的前提下平稳落地。</p>
+  </header>
+  <div class="skill-stepper">
+    <div class="skill-step">
+      <span class="step-badge">STEP 01 · 立项对齐</span>
+      <h4>跨职能共识与标准前置</h4>
+      <p>在项目立项阶段与业务、算法、研发、合规团队充分对齐，提前确定可量化的验收标准、安全红线与应急处置预案。</p>
+    </div>
+    <div class="skill-step">
+      <span class="step-badge">STEP 02 · 分级放量</span>
+      <h4>循序渐进的发布节奏</h4>
+      <p>推行小范围灰度策略。在严肃或高敏感业务中，优先上线只读类信息查询以验证链路稳定性与安全性，确认可控后再逐步开放写入与操作权限。</p>
+    </div>
+    <div class="skill-step">
+      <span class="step-badge">STEP 03 · 线上观测</span>
+      <h4>系统观测与风险预警</h4>
+      <p>建立包含调用频次、响应延迟、异常分类、Token 消耗以及人工干预/修改频次的指标监控，及时发现长尾异常。</p>
+    </div>
+    <div class="skill-step">
+      <span class="step-badge">STEP 04 · 评测反哺</span>
+      <h4>线上反馈的常态化回流</h4>
+      <p>持续收集生产环境中被用户纠偏或判断失误的异常案例，沉淀至基准评测集，反哺 Prompt、知识库与工具逻辑的迭代。</p>
+    </div>
+  </div>
+</article>
+
+<article class="skill-pillar skill-matrix-panel" id="spanel-matrix" role="tabpanel" aria-labelledby="stab-matrix" data-skill-panel="matrix" hidden>
+  <header class="skill-pillar-head">
+    <div><span class="eyebrow">OVERVIEW · 五维能力速览表</span><h3>一表总览：从场景判定到生产闭环</h3></div>
+    <p>把五个维度的核心原则、工程举措与已验证项目结果压缩进一张对照表。</p>
+  </header>
+  <div class="skill-matrix-wrap">
+    <table class="skill-matrix-table">
+      <thead>
+        <tr>
+          <th>能力维度</th>
+          <th>核心原则</th>
+          <th>关键工程举措</th>
+          <th>项目实证</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="能力维度"><button class="matrix-jump" type="button" data-skill-target="01">01 · 场景判断与系统受控</button></td>
+          <td data-label="核心原则">先评估大模型必要性，再做可控系统</td>
+          <td data-label="关键工程举措">规则 / RAG / Agent 边界分流；任务拆解与循环熔断；读写工具物理隔离；记忆分层与淘汰；Prompt 工程化与 A/B</td>
+          <td data-label="项目实证"><code>FinDesk</code> 前置路由拦截约 50% 查数，响应 3.36s → 2.36s</td>
+        </tr>
+        <tr>
+          <td data-label="能力维度"><button class="matrix-jump" type="button" data-skill-target="02">02 · 真实评测与风险控制</button></td>
+          <td data-label="核心原则">关注生产风险边界与长尾表现</td>
+          <td data-label="关键工程举措">测试与训练物理隔离；四层错因归因；基于错误代价调策略；溯源与拒答留白；模型路由与止损；上下文隔离审计</td>
+          <td data-label="项目实证"><code>FinDesk</code> 编造率 26.67% → 0%；<code>Qwen3-4B</code> 跨公司 0 涨分止损</td>
+        </tr>
+        <tr>
+          <td data-label="能力维度"><button class="matrix-jump" type="button" data-skill-target="03">03 · 业务理解与现实取舍</button></td>
+          <td data-label="核心原则">在概率模型与确定性业务间找平衡</td>
+          <td data-label="关键工程举措">模糊诉求转译契约与单据归类；异常分级降级；管理预期与人工确认节点；以处理时长与人效衡量价值</td>
+          <td data-label="项目实证">~160 家机构沉淀 8 类契约；<code>Court Diary</code> 无 AI 仍可导出</td>
+        </tr>
+        <tr>
+          <td data-label="能力维度"><button class="matrix-jump" type="button" data-skill-target="04">04 · 技术理解与实践能力</button></td>
+          <td data-label="核心原则">理解全链路逻辑并能动手验证</td>
+          <td data-label="关键工程举措">掌握幻觉与采样边界；RAG 分块/召回/重排排查；Agent 调度与负样本微调；Python / FastAPI 原型验证；日志复现</td>
+          <td data-label="项目实证">独立搭 <code>pgvector</code> / FastAPI / Docker 原型与日志重放验收</td>
+        </tr>
+        <tr>
+          <td data-label="能力维度"><button class="matrix-jump" type="button" data-skill-target="05">05 · 推进落地与团队协同</button></td>
+          <td data-label="核心原则">合规与稳定前提下平稳交付闭环</td>
+          <td data-label="关键工程举措">立项对齐量化标准与红线；只读先行小范围灰度；调用/延迟/人工干预监控；线上错例常态化回流评测集</td>
+          <td data-label="项目实证">4 年开发运维 + 6 年带队；<code>rstack</code> 4 期日志巡检闭环</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
 
 </div></div></section>
 
