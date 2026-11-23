@@ -331,6 +331,46 @@
             </div>
           </div>
         </article>
+
+        <!-- 05 rstack 工程工作流 -->
+        <article class="work-tile reveal" aria-labelledby="w5">
+          <a class="tile-media" href="cases/rstack-guide/index.html" tabindex="-1" aria-hidden="true">
+            <span class="tile-badge">05 · AGENT WORKFLOW</span>
+            <img src="assets/img/rstack/rstack-overview.png" srcset="assets/img/rstack/rstack-overview.png 1330w" sizes="(max-width: 1023px) 100vw, 48vw" width="1330" height="1182" loading="lazy" alt="">
+          </a>
+          <div class="tile-body">
+            <div class="tile-top">
+              <span class="work-num"><span class="zh">双 Agent 分工 + 自进化复盘闭环</span></span>
+              <span class="status st-ship"><span class="zh">个人工程实践 · 持续迭代</span></span>
+            </div>
+            <h3 id="w5"><a href="cases/rstack-guide/index.html"><span class="zh">rstack — 把 AI 编程环境做成自进化系统</span></a></h3>
+            <p class="tile-summary"><span class="zh">Claude 主管负责想清楚（写七栏契约、拍板架构取舍、对外写操作），Codex 执行者负责看清楚（多文件侦察、按契约施工、跑通单测）。配合 weekly-retro 每周扫描会话、拐点四问卡、三层分诊与反事实重放，把踩过的坑下沉成下次必经的环境资产。</span></p>
+
+            <div class="kpi-strip" aria-label="rstack 核心数据">
+              <div class="kpi-chip">
+                <strong>-80% 开销</strong>
+                <span>主会话缓存读等效开销压缩</span>
+              </div>
+              <div class="kpi-chip">
+                <strong>4 期追踪</strong>
+                <span>W45–W47 连续跨期比率与资产健康度</span>
+              </div>
+            </div>
+
+            <details class="work-more">
+              <summary><span class="zh">查看真问题、双 Agent 分工与复盘机制</span></summary>
+              <dl class="work-notes">
+                <div><dt>真问题</dt><dd>把最贵的主会话当苦力，上下文越滚越大后缓存读占掉约 80% 等效开销；纠错全靠一次性口头教育，换个窗口同样的坑照踩不误。</dd></div>
+                <div><dt>我做了什么</dt><dd>日常干活用 <code>claude-lead</code> 控节奏——Claude 主管想清楚、写七栏契约、做对外写操作；Codex 执行者做多文件侦察、按契约施工、跑通单测。课后进化用 <code>weekly-retro</code> 扫全量会话、在失败拐点归因分诊、用反事实重放验收补丁。</dd></div>
+                <div><dt>判断与证据</dt><dd><b>模型负责想清楚，代码负责看清楚</b>。连续四期实测数据（W45–W47）追踪 7 项观测指标，包括介入类正则命中数、契约一次通过率、反事实重放覆盖率等。</dd></div>
+              </dl>
+            </details>
+
+            <div class="actions">
+              <a class="btn btn-sm" href="cases/rstack-guide/index.html"><span class="zh">阅读双 Agent 分工与复盘机制</span> <span class="arr" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
