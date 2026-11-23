@@ -1,0 +1,19 @@
+/* Isolated editor controls; normal page typography remains inherited by text leaves. */
+edit-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+html.copy-editing edit-text[contenteditable] { outline: 1px dashed #6d7657; outline-offset: 3px; cursor: text; min-width: .6em; }
+html.copy-editing edit-text[contenteditable]:empty { display: inline-block; min-width: .6em; min-height: 1em; }
+html.copy-editing edit-text[contenteditable]:focus { outline: 2px solid #4b6533; background: #eaf0df; color: inherit; }
+#copy-editor { font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #252b20; position: relative; z-index: 1000; }
+#copy-editor [hidden] { display: none !important; }
+#copy-editor button { font: inherit; color: inherit; background: #fffef9; border: 1px solid #8b957b; border-radius: 7px; padding: 8px 11px; cursor: pointer; min-height: 40px; max-width: 100%; }
+#copy-editor button:hover { background: #edf1e4; }
+#copy-editor button:focus-visible { outline: 3px solid #4b6533; outline-offset: 2px; }
+#copy-editor button:disabled { opacity: .45; cursor: default; }
+#copy-editor .editor-launch { position: fixed; right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); box-shadow: 0 3px 15px #0002; background: #263c23; color: #fff; z-index: 1001; }
+#copy-editor .editor-launch:hover { background: #385532; color: #fff; }
+#copy-editor .editor-panel { box-sizing: border-box; padding: 14px max(16px, calc((100% - 1100px)/2)); width: 100%; border-bottom: 2px solid #778660; background: #f6f7ee; }
+#copy-editor p { margin: 7px 0; max-width: 100%; overflow-wrap: anywhere; font-size: 13px; }
+#copy-editor .editor-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+#copy-editor .editor-pending { border: 1px solid #a98038; padding: 10px; margin: 10px 0; border-radius: 7px; background: #fff7e7; }
+#copy-editor .editor-status { color: #435b2e; }
+@media print { #copy-editor { display: none; } }

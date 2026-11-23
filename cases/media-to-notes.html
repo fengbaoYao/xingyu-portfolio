@@ -1,474 +1,281 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Media to Notes — 星宇的项目案例</title><style>
-:root{color-scheme:light;--bg:#f7f6f1;--fg:#252621;--muted:#777870;--line:#d8d8d0;--accent:#698d63;--surface:#efeee8}*{box-sizing:border-box}html{scroll-behavior:smooth;scrollbar-width:none}html::-webkit-scrollbar{display:none}body{margin:0;background:var(--bg);color:var(--fg);font-family:"PingFang SC","Noto Sans SC",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit}a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}.wrap{width:min(1180px,calc(100% - 80px));margin:auto}.bar{display:flex;justify-content:space-between;align-items:center;height:88px;border-bottom:1px solid var(--line);font:11px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}.brand{text-decoration:none}.brand:before{content:'●';color:var(--accent);margin-right:8px}.back{text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}.hero{padding:95px 0 65px}.eyebrow,.num,.label{font:11px ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}h1,h2,h3,p{margin:0}.hero h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(48px,8vw,96px);font-weight:400;letter-spacing:-.045em;line-height:1.02;margin:30px 0 22px}.hero h1 em{font-weight:400;color:var(--accent)}.lead{font-size:clamp(19px,2.1vw,27px);line-height:1.65;max-width:800px;font-weight:400}.facts{display:flex;flex-wrap:wrap;gap:28px 70px;margin-top:50px}.facts div{display:grid;gap:9px}.facts strong{font-size:13px;font-weight:500}.cover{background:var(--surface);border:1px solid var(--line);padding:clamp(14px,3vw,40px);display:flex;align-items:center;justify-content:center}.cover img{width:100%;max-height:650px;object-fit:contain;display:block}.caption{color:var(--muted);font-size:12px;line-height:1.8;margin-top:12px}.section{border-top:1px solid var(--line);display:grid;grid-template-columns:200px 1fr;gap:36px;padding:65px 0}.section h2{font-family:Georgia,"Songti SC",serif;font-size:clamp(27px,3vw,40px);font-weight:400;line-height:1.3;margin-bottom:22px}.section p{font-size:16px;line-height:2;color:#52534e;max-width:760px}.section p+p{margin-top:18px}.steps,.cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid var(--line);border-left:1px solid var(--line)}.tile{padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.tile h3{font-size:16px;font-weight:500;margin:15px 0 10px}.tile p{font-size:13px;line-height:1.8}.quote{margin:27px 0;padding:22px 26px;border-left:2px solid var(--accent);background:var(--surface);font-size:18px;line-height:1.7}.next{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:45px 0 60px;gap:20px;font-size:13px}.next a{text-decoration:none}.next a:hover{color:var(--accent)}@media(max-width:700px){.wrap{width:calc(100% - 40px)}.bar{height:68px}.hero{padding:65px 0 45px}.hero h1{font-size:50px}.facts{gap:25px 35px;margin-top:35px}.section{grid-template-columns:1fr;gap:20px;padding:45px 0}.steps,.cards{grid-template-columns:1fr}.tile{padding:20px}.section p{font-size:15px}.next{align-items:flex-start;flex-direction:column}}
-.case-disclosure{margin:18px 0 0;padding:12px 14px;border-left:2px solid var(--accent);background:var(--surface);color:#52534e;font-size:14px;line-height:1.7;max-width:760px}
-</style><style>
-.cover{background:transparent;border:0;padding:0;display:block;width:min(100%,960px);margin:4px auto 0}
-.cover video{display:block;width:100%;height:auto;background:transparent;mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 4%,#000 96%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 4%,#000 96%,transparent 100%)}
-.sample-entry{display:flex;align-items:center;gap:28px;width:100%;margin:34px 0 0;padding:26px 2px 22px;border:0;border-top:1px solid var(--line);background:transparent;color:inherit;text-align:left;cursor:pointer;font:inherit}
-.sample-entry .label{flex:none}
-.sample-entry-copy{display:grid;gap:7px;min-width:0}
-.sample-entry-title{font-family:Georgia,"Songti SC",serif;font-size:clamp(30px,3.4vw,42px);font-weight:400;letter-spacing:-.03em;line-height:1.15;color:var(--fg)}
-.sample-entry-sub{font-size:15px;line-height:1.6;color:var(--muted)}
-.section .tile p{font-size:13px;line-height:1.75;max-width:none}
-@media(max-width:1100px){.section .steps,.section .cards{grid-template-columns:1fr 1fr}}
-@media(max-width:700px){.section .steps,.section .cards{grid-template-columns:1fr}}
-.section .tile h3{margin:12px 0 8px}
-.sample-entry-go{flex:none;margin-left:auto;font:12px ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-.sample-entry:hover .sample-entry-title,.sample-entry:focus-visible .sample-entry-title{color:var(--accent)}
-button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-.prompt{max-width:760px;margin-top:26px;border:1px solid var(--line);background:var(--surface)}
-.prompt-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line)}
-#copy-prompt{appearance:none;border:0;background:var(--fg);color:var(--bg);min-height:36px;padding:0 12px;cursor:pointer;font:13px/1 "PingFang SC","Noto Sans SC",sans-serif;letter-spacing:.04em}
-#copy-prompt:hover,#copy-prompt:focus-visible{background:var(--accent)}
-.copy-status{margin:0;padding:0 14px 12px;font-size:13px;line-height:1.6;color:var(--accent);min-height:0}
-.copy-status:empty{display:none}
-.copy-status[data-error="true"]{color:#a8442f}
-.prompt-body{margin:0;padding:16px 14px 18px;white-space:pre-wrap;word-break:break-word;font:13px/1.75 ui-monospace,SFMono-Regular,monospace;color:var(--fg)}
-.section .install-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;max-width:760px}
-.section .install-links a{color:var(--accent);font-size:14px;text-underline-offset:3px}
-.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.backdrop{position:fixed;inset:0;background:rgba(37,38,33,.42);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility 0s linear .28s;z-index:40}
-.backdrop.open{opacity:1;visibility:visible;transition:opacity .28s ease,visibility 0s linear 0s}
-.drawer{position:fixed;top:0;right:0;height:100%;width:min(680px,100%);max-width:100%;background:var(--bg);border-left:1px solid var(--line);z-index:50;display:flex;flex-direction:column;transform:translateX(100%);visibility:hidden;transition:transform .34s cubic-bezier(.2,.75,.2,1),visibility 0s linear .34s;box-shadow:-16px 0 48px rgba(37,38,33,.08)}
-.drawer.open{transform:translateX(0);visibility:visible;transition:transform .34s cubic-bezier(.2,.75,.2,1),visibility 0s linear 0s}
-.drawer-bar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:22px 22px 16px;border-bottom:1px solid var(--line);flex:none;min-width:0;max-width:100%}
-.drawer-bar h2{font-family:Georgia,"Songti SC",serif;font-weight:400;font-size:28px;letter-spacing:-.03em;line-height:1.2;margin:8px 0 0}
-.drawer-close{appearance:none;background:transparent;color:var(--fg);border:1px solid var(--line);min-height:44px;padding:0 14px;cursor:pointer;font:13px/1 "PingFang SC","Noto Sans SC",sans-serif;flex:none}
-.drawer-close:hover{color:var(--accent);border-color:var(--accent)}
-.drawer-body{overflow-x:clip;overflow-y:auto;overscroll-behavior-x:none;overscroll-behavior-y:contain;touch-action:pan-y;min-width:0;max-width:100%;padding:28px 28px 72px;-webkit-overflow-scrolling:touch}
-.note{color:#52534e;font-size:15.5px;line-height:1.85;overflow-wrap:anywhere;min-width:0;max-width:100%}
-.note h1{font-family:Georgia,"Songti SC",serif;font-weight:400;font-size:clamp(26px,4vw,34px);color:var(--fg);letter-spacing:-.03em;line-height:1.25;margin:0 0 16px}
-.note h2{font-family:Georgia,"Songti SC",serif;font-weight:400;font-size:22px;color:var(--fg);line-height:1.35;margin:30px 0 10px}
-.note h3{font-size:16px;font-weight:500;color:var(--fg);margin:22px 0 8px}
-.note p{margin:0 0 14px}
-.note blockquote{margin:0 0 20px;padding:14px 16px;border-left:2px solid var(--accent);background:var(--surface);color:var(--fg)}
-.note blockquote p{margin:0}
-.note ol,.note ul{margin:0 0 16px;padding-left:1.25em}
-.note li{margin:5px 0}
-.note li::marker{color:var(--muted)}
-.note hr{border:0;border-top:1px solid var(--line);margin:26px 0}
-.note a{color:var(--accent);text-underline-offset:3px}
-.note code{font-family:ui-monospace,SFMono-Regular,monospace;font-size:.88em;background:var(--surface);padding:.05em .35em;border:1px solid var(--line)}
-.note pre{margin:0 0 16px;padding:14px;max-width:100%;overflow-x:auto;overflow-y:hidden;background:var(--surface);border:1px solid var(--line)}
-.note pre code{border:0;padding:0;background:transparent}
-.note .math{font-family:Georgia,"Songti SC",serif;font-style:italic;padding:0 .08em}
-.note .math .op{font-style:normal;font-family:"PingFang SC","Noto Sans SC",sans-serif}
-.note strong{color:var(--fg);font-weight:600}
-.note figure{margin:18px 0 22px;max-width:100%}
-.note figure img{display:block;width:100%;max-width:100%;height:auto;border:1px solid var(--line);background:#fff}
-.note figcaption{margin-top:8px;color:var(--muted);font-family:Georgia,"Songti SC",serif;font-size:13px;font-style:italic;line-height:1.65}
-.note-status{color:var(--muted);font-size:14px}
-html.drawer-open,body.drawer-open{overflow:hidden}
-@media (prefers-reduced-motion:reduce){.drawer,.backdrop{transition:none}}
-@media(max-width:700px){html,body{overflow-x:clip;max-width:100%}.drawer{width:100%;border-left:0}.drawer-bar{padding:16px 16px 14px}.drawer-bar h2{font-size:24px}.drawer-body{padding:20px 16px max(48px,env(safe-area-inset-bottom))}.note pre{white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:clip}.prompt-bar{align-items:flex-start}.sample-entry{align-items:flex-start;flex-wrap:wrap;gap:12px 18px;padding:20px 0 16px}.sample-entry-go{margin-left:0}}
-@supports not (overflow-x:clip){.drawer-body{overflow-x:hidden}}
-@media(max-width:700px){@supports not (overflow-x:clip){html,body{overflow-x:hidden}}}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media to Notes（六步受控状态机 Agent Skill） — 星宇的项目案例</title>
+<meta name="description" content="把长音视频工程化为可回溯图文知识的 Agent Skill。通过前置类型契约、六步受控状态机、关键帧视觉锚定与诚实缺口标注，输出经得起检索的图文 Markdown。">
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/editor.css">
+<script defer src="../assets/editor.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main"><span class="zh">跳到正文</span></a>
+<div id="lang-live" class="sr-only" aria-live="polite"></div>
 
-.brief{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:12px;max-width:720px}
-.brief li{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:baseline;font-size:15px;line-height:1.65;color:#52534e}
-.brief b{font:11px ui-monospace,monospace;letter-spacing:.14em;font-weight:400;color:var(--muted)}
-.answer{margin-top:28px;border:1px solid var(--line);background:var(--surface);padding:22px 22px 6px;max-width:760px}
-.answer h3{font-family:Georgia,"Songti SC",serif;font-weight:400;font-size:clamp(22px,2.4vw,30px);line-height:1.35;margin:8px 0 16px;color:var(--fg)}
-.answer dl{margin:0}
-.answer dl>div{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
-.answer dt{font:11px ui-monospace,monospace;letter-spacing:.12em;color:var(--muted);padding-top:4px}
-.answer dd{margin:0;font-size:15px;line-height:1.7;color:#52534e}
-.entries{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-.entries a{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;background:#173e37;color:#fbfaf6;text-decoration:none;font-size:14px}
-.entries a span{font:11px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.72}
-.entries a.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
-.flow{list-style:none;margin:28px 0 0;padding:0;max-width:680px}
-.flow>li{padding:16px 18px;border:1px solid var(--line);background:#fff}
-.flow>li+li{border-top:0}
-.flow b{display:block;font-size:15px;font-weight:500;color:var(--fg)}
-.flow li>span,.flow .split span{display:block;margin-top:4px;font-size:13px;line-height:1.65;color:#52534e;font-weight:400}
-.flow .split{display:grid;grid-template-columns:1fr 1fr;padding:0;background:transparent;border:0}
-.flow .split>div{padding:16px 18px;border:1px solid var(--line);background:var(--surface)}
-.flow .split>div+div{border-left:0}
-.compare{display:grid;grid-template-columns:1fr 1fr;margin-top:22px;border-top:1px solid var(--line);border-left:1px solid var(--line);max-width:760px}
-.compare article{padding:22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.compare h3{font-size:16px;font-weight:500;margin:0 0 12px;color:var(--fg)}
-.compare p{font-size:14px;line-height:1.75;margin:0 0 10px;max-width:none}
-.compare p b{color:var(--fg);font-weight:600}
-.cta-second{margin-top:8px}
-.cta-second a{color:var(--accent);text-underline-offset:3px}
-@media(max-width:700px){
-.brief li,.answer dl>div{grid-template-columns:1fr;gap:4px}
-.flow .split,.compare{grid-template-columns:1fr}
-.flow .split>div+div{border-left:1px solid var(--line);border-top:0}
-}
-</style></head><body><main class="wrap"><nav class="bar" aria-label="导航"><a class="brand" href="../index.html#work">xingyu</a><a class="back" href="../index.html#work">← 返回作品</a></nav><header class="hero"><div class="eyebrow">05 / project case study</div><h1>Media to Notes<br><em>音视频笔记.</em></h1><p class="lead">一条链接、一个音视频，或一份逐字稿，整理成还能回看的笔记。</p><ul class="brief"><li><b>问题</b><span>听完就散。想查某一点，还得重听。</span></li><li><b>取舍</b><span>先问要哪一种笔记，再按这个类型写。</span></li><li><b>凭什么信</b><span>样例是一集课的笔记，截图跟在对应的话旁边。</span></li></ul><div class="facts"><div><span class="label">role / 角色</span><strong>个人项目 · Agent Skill</strong></div><div><span class="label">focus / 方向</span><strong>音视频 · 内容整理</strong></div><div><span class="label">status / 状态</span><strong>Skill 已完成并发布 GitHub</strong></div></div></header><p class="case-disclosure">本页展示 Skill 的产物样例与安装方式，没有在线处理音视频的 Demo；装到你的 Agent 之后才可实际运行。</p><div class="cover"><video id="demo-video" src="../portfolio-assets/media-to-notes-demo.mp4" poster="../portfolio-assets/media-to-notes-demo-poster.jpg" width="960" height="828" muted loop playsinline autoplay preload="auto" aria-label="知识图谱从中心向外展开的工作流演示"></video></div><p class="caption">整理一集课程时录下的过程。知识图谱从中间向外增加，循环播放。</p><button type="button" class="sample-entry" id="open-sample" aria-haspopup="dialog" aria-controls="note-drawer" aria-expanded="false"><span class="label">笔记样例</span><span class="sample-entry-copy"><span class="sample-entry-title">查看笔记样例</span><span class="sample-entry-sub">一集 Transformer 课程笔记，带有原视频截图。</span></span><span class="sample-entry-go">看样例</span></button><p class="caption cta-second"><a href="#install">安装放到 Agent</a></p><noscript><p class="caption"><a href="media-to-notes-sample.md">打开笔记样例 Markdown</a></p></noscript><section class="section" id="case-body"><div class="label">01 / 是什么</div><div><h2>把音视频整理成笔记。</h2><p>它不是网站，也不是 App。把目录放到 Agent 的 skills 目录里，由这个 Agent 执行。</p><div class="cards"><article class="tile"><p>可以提供一条链接、一个音视频文件，或一份已有逐字稿。</p></article><article class="tile"><p>输出是 Markdown。可以指定详细整理、摘要，或只要逐字稿。有用的画面会截进笔记；外部资料要写来源。</p></article><article class="tile"><p>模型和下载方式用你自己的环境。不默认我的 NAS，也不默认某一个 Agent。</p></article></div></div></section><section class="section"><div class="label">02 / 做法</div><div><h2>处理时按这六步。</h2><p>我整理课程和播客时用这个顺序：先核对文字，再写成笔记，截下有用的画面，不懂的概念再查论文和文档。</p><div class="steps"><article class="tile"><div class="num">01</div><h3>获取</h3><p>接收链接、音视频文件或已有逐字稿。下载需要授权，并记录标题、来源和时长。文件无法解码或下载失败时说明原因，改由你提供文件或逐字稿。</p></article><article class="tile"><div class="num">02</div><h3>转写核对</h3><p>已有可靠字幕或逐字稿时先用。否则优先用本地模型转写。需要上传云端时，先说明上传内容和大致费用。人名、数字、术语不确定时回听并标注，不凭猜测修改。</p></article><article class="tile"><div class="num">03</div><h3>理解整理</h3><p>按指定的笔记类型写。保留观点、过程、例子，以及内容讲到哪里为止。事实、发言者的看法和推测分开。不知道说话人是谁时，不写姓名。</p></article><article class="tile"><div class="num">04</div><h3>图文结合</h3><p>处理视频时回看画面。图表、公式、代码或演示，对理解有帮助才截图，放在对应文字旁，并说明画面内容。没有合适画面就不截。</p></article><article class="tile"><div class="num">05</div><h3>查资料</h3><p>课程类内容中不好懂的概念会查资料并补充背景。笔记里区分原片内容和外部资料，并标明来源。无法联网时说明没有查成，不编造出处。</p></article><article class="tile"><div class="num">06</div><h3>交付检查</h3><p>提交前核对关键事实、时间码、图片和链接。写明已完成的部分、未完成的部分和文件位置。检查过结构，不等于逐句做过人工核对。</p></article></div><p>只要逐字稿时，就停在文字，不另写笔记、不配图、不查资料。要求不联网或不配图时，按要求停止。</p></div></section><section class="section"><div class="label">03 / 成果</div><div><h2>先问要哪一种笔记。</h2><p>没说明类型时，会问一次。主推样例是详细整理：上面那份 Transformer 课程笔记就是。按讲解顺序写，截图跟在对应的话旁边。</p><p>也可以要逐字稿、重点摘要、专题整理、会议纪要，或你指定的写法。</p></div></section><section class="section"><div class="label">04 / 边界</div><div><h2>不确定的内容不补写。</h2><p>无法确定发言者时不写姓名。会议纪要里，素材没有的负责人和截止日期标为未明确，不写成事实。</p><p>抖音、小宇宙、小红书的获取方式写在分平台说明里。下载工具、转写模型和运行环境按你的条件选择，不默认我的 NAS，也不默认某一个 Agent。</p><p>转写优先使用合适的本地模型。本地不够时，先说明要上传的内容和大致费用，得到同意后再使用云端。</p></div></section><section class="section"><div class="label">05 / 进展</div><div><h2>Skill 已放在 GitHub。</h2><p>通用流程、笔记类型、视频截图、资料查询，以及抖音、小宇宙、小红书的获取方式，都写在这份 Skill 里。</p><p>安装之后，把视频、音频或逐字稿交给 Agent，按你要的类型写成笔记。</p></div></section><section class="section" id="install"><div class="label">06 / 安装</div><div><h2>安装到你的 Agent。</h2><p>把下面的提示复制给 Agent。它会下载 media-to-notes 目录，放到 skills 目录。安装后，把视频、音频或逐字稿交给它。</p><div class="prompt"><div class="prompt-bar"><span class="label">prompt</span><button type="button" id="copy-prompt">复制</button></div><pre id="install-prompt" class="prompt-body">请帮我安装 Media to Notes 这个 Agent Skill。
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><i aria-hidden="true"></i>xingyu</a>
+    <nav class="pager" aria-label="案例翻页" style="margin-left:auto">
+      <span class="mono">04 / 04</span>
+      <a href="image-routing.html" aria-label="上一个：金融单据与理赔影像智能分流">← <span class="lbl">金融单据与影像分流</span></a>
+      <a href="financial-bot.html" aria-label="下一个：FinDesk"><span class="lbl">FinDesk</span> →</a>
+    </nav>
+  </div>
+</header>
+<div class="case-bar"><div class="wrap">
+  <a class="back" href="../index.html#work"><span class="arr" aria-hidden="true">←</span><span class="zh">返回作品</span></a>
+  <span class="mono muted">开源 Agent Skill 案例 · 04</span>
+</div></div>
+
+<main id="main">
+<div class="wrap">
+  <section class="case-hero" aria-labelledby="t">
+    <span class="eyebrow">04 / 个人全栈实践 · 开源 Agent 插件</span>
+    <h1 id="t">Media to Notes<span class="sub"><span class="zh">把长网课转成带关键帧截图的图文笔记（分步截图防脑补）。</span></span></h1>
+    <p class="lede"><span class="zh">它不是又一个把两小时硬核课程胡乱浓缩成五百字废话的摘要网页，而是一个<b>直接装进 Claude Code / Codex / Alma 的开源 Agent 插件</b>——先问清要笔记还是纯逐字稿，再在出现板书公式时精确截图，没提到的人名和待办强制留空不乱编。</span></p>
+    <div class="state-box">
+      <span class="status st-ship"><span class="zh">个人全栈实践 · 已开源 GitHub · 附 34 分钟课程 32 张板书截图样例</span></span>
+      <p><span class="zh">标准化的本地插件目录（包含主控指令与分类型/转写/配图/查证规则）。借用使用者本地 Agent 与模型环境运行，录音与私有素材无需经过第三方中转服务器。</span></p>
+    </div>
+    <dl class="facts">
+      <div><dt><span class="zh">角色</span></dt><dd><span class="zh">个人独立设计 · 分步防脑补工作流编排 · 开源交付</span></dd></div>
+      <div><dt><span class="zh">核心机制</span></dt><dd><span class="zh">先定需求契约 → 核对转写（要逐字稿即停）→ 按板书转折截图 → 外部补充隔离</span></dd></div>
+      <div><dt><span class="zh">支持输入源</span></dt><dd><span class="zh">在线链接（含抖音/小宇宙/小红书）· 本地音视频 · 既有字幕/逐字稿</span></dd></div>
+      <div><dt><span class="zh">实测公开产物</span></dt><dd><span class="zh">34 分钟 Transformer 课程完整深度笔记（内嵌 <code>32</code> 张逐句对齐板书/公式截图）</span></dd></div>
+    </dl>
+    <div class="cta-row">
+      <a class="btn" href="#install"><span class="zh">安装到我的 Agent</span> <span class="arr" aria-hidden="true">↓</span></a>
+      <a class="btn btn-ghost" href="#sample"><span class="zh">查看 32 张关键帧实测样例</span></a>
+    </div>
+  </section>
+
+  <figure class="case-figure">
+    <div class="video-box">
+      <video controls preload="none" playsinline poster="../assets/img/media-to-notes-demo-poster.jpg" width="960" height="828" aria-describedby="vcap">
+        <source src="../assets/img/media-to-notes-demo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <figcaption id="vcap"><span class="zh">使用 Media to Notes 整理技术课程时的知识结构化与关键帧锚定过程实录。（点击播放，默认静音不自动播放）</span></figcaption>
+  </figure>
+
+  <dl class="tldr">
+    <div><dt><span class="zh">真问题</span></dt><dd><span class="zh">听长播客或看技术网课时听完就散；而市面上的「一键 AI 视频总结」不论遇到什么内容都吐出千篇一律的大纲，丢掉关键推导板书，甚至在会议纪要里擅自编造没提过的负责人。</span></dd></div>
+    <div><dt><span class="zh">硬取舍</span></dt><dd><span class="zh"><b>先定契约再动工，宁可留空绝不脑补。</b> 在 Step 0 强制确认笔记类型与隐私/联网边界；若用户只要逐字稿，跑完 Step 2 立即停机，绝不画蛇添足。</span></dd></div>
+    <div><dt><span class="zh">凭什么信</span></dt><dd><span class="zh">不靠单次超长 Prompt 硬赌，而是拆成 6 个职责单一、每步有准入准出校验的状态节点；仓库直接附上 32 张截图逐句对齐的 Transformer 真实课程笔记供逐行审阅。</span></dd></div>
+  </dl>
+
+  <div class="case-body">
+    <nav class="toc" aria-label="本页目录">
+      <span class="eyebrow"><span class="zh">本页目录</span></span>
+      <ol>
+        <li><a href="#problem"><span class="zh">01 为什么通用视频总结不好用</span></a></li>
+        <li><a href="#workflow"><span class="zh">02 六步受控状态机架构</span></a></li>
+        <li><a href="#decisions"><span class="zh">03 体现克制与边界的三个取舍</span></a></li>
+        <li><a href="#sample"><span class="zh">04 Transformer 课程实测样例</span></a></li>
+        <li><a href="#install"><span class="zh">05 一键安装与开源入口</span></a></li>
+        <li><a href="#retro"><span class="zh">06 交付自检边界与复盘</span></a></li>
+      </ol>
+    </nav>
+    <div>
+      <details class="toc-mobile"><summary><span class="zh">本页目录</span></summary><ol>
+        <li><a href="#problem"><span class="zh">01 为什么通用视频总结不好用</span></a></li>
+        <li><a href="#workflow"><span class="zh">02 六步受控状态机架构</span></a></li>
+        <li><a href="#decisions"><span class="zh">03 体现克制与边界的三个取舍</span></a></li>
+        <li><a href="#sample"><span class="zh">04 Transformer 课程实测样例</span></a></li>
+        <li><a href="#install"><span class="zh">05 一键安装与开源入口</span></a></li>
+        <li><a href="#retro"><span class="zh">06 交付自检边界与复盘</span></a></li>
+      </ol></details>
+
+      <!-- ============ 01 问题定义 ============ -->
+      <section id="problem" class="chapter">
+        <span class="eyebrow">01 / <span class="zh">问题定义</span></span>
+        <h2><span class="zh">为什么通用「一键音视频总结」在深度学习与严肃办公中不好用？</span></h2>
+        <p><span class="zh">在日常复盘技术公开课（如 Transformer 架构推导）、长播客或业务会议录音时，我发现现有的 AI 音视频摘要工具普遍存在三个结构性缺陷：</span></p>
+        <div class="cards three">
+          <div class="card">
+            <span class="n">01 · 一刀切的产物形态</span>
+            <h4><span class="zh">把推导过程洗成了干瘪大纲</span></h4>
+            <p><span class="zh">用户有时需要保留完整公式推导与例子的<b>详细教程笔记</b>，有时需要明确待办与责任人的<b>会议纪要</b>，有时仅仅想要一份<b>干净校对过的纯逐字稿</b>。通用工具不管三七二十一先浓缩成几条 Bullet Points，反而把最有价值的推理脉络洗掉了。</span></p>
+          </div>
+          <div class="card">
+            <span class="n">02 · 图文割裂与机械乱截图</span>
+            <h4><span class="zh">要么没板书，要么满屏讲师大头照</span></h4>
+            <p><span class="zh">技术课里老师说「注意看矩阵这一行的缩放因子」，如果只有文字没有那一秒的板书截图，笔记根本没法读；反之，若按固定每 30 秒机械抽一帧，笔记里又会塞满讲师正脸和毫无信息量的转场帧。</span></p>
+          </div>
+          <div class="card">
+            <span class="n">03 · 事实、观点与脑补混杂</span>
+            <h4><span class="zh">最危险的是「看起来很完整的假纪要」</span></h4>
+            <p><span class="zh">多说话人音频里模型在无法确认身份时乱安名字；会议录音里没说清截止日期的事项，模型为了表格整齐自动编一个「下周五」；原片顺嘴提了一句的术语，模型自由发散一大段，读者根本分不清哪句是原片讲的、哪句是 AI 补的。</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 02 六步受控状态机 ============ -->
+      <section id="workflow" class="chapter">
+        <span class="eyebrow">02 / <span class="zh">工作流架构设计</span></span>
+        <h2><span class="zh">不靠单次超长 Prompt 硬赌，而是拆成「前置契约 + 六步受控状态机」。</span></h2>
+        <p><span class="zh">将整理任务拆成 6 个职责单一的步骤，每一步都有明确的准入条件、硬中断开关与准出校验：</span></p>
+
+        <div class="callout" style="margin-bottom:20px">
+          <p><span class="zh"><b>Step 0 · 前置契约确认（类型 &amp; 隐私/联网门控）：</b><br>
+          用户未指定笔记类型时先问一次（<code>详细整理</code> / <code>重点摘要</code> / <code>专题整理</code> / <code>会议纪要</code> / <code>纯逐字稿</code> / <code>自定义</code>），并确认是否允许联网检索、是否允许在本地转写不足时上传云端 ASR（须提前告知上传内容与大致费用）。</span></p>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <span class="n">Step 01 · 多源授权获取（Acquire）</span>
+            <h4><span class="zh">分平台获取与降级引导</span></h4>
+            <p><span class="zh">接收链接、本地音视频或逐字稿。记录标题、原始来源与时长；内置抖音、小宇宙、小红书分平台获取规范（严守合规边界，绝不绕过付费或访问控制）；下载受阻时显式说明原因并引导提供本地文件。</span></p>
+          </div>
+          <div class="card">
+            <span class="n">Step 02 · 转写与术语回听核对（Verify）</span>
+            <h4><span class="zh">存疑回听 + 纯逐字稿硬中断开关</span></h4>
+            <p><span class="zh">优先复用可靠字幕或本地模型转写；遇到人名、数字、专业术语不确定时回听原音并标注，严禁凭猜测修改。<b>【硬中断开关】：若用户仅需「纯逐字稿」，在此步完成后直接交付并终止，绝不画蛇添足配图或写总结！</b></span></p>
+          </div>
+          <div class="card">
+            <span class="n">Step 03 · 按契约理解与结构化（Structure）</span>
+            <h4><span class="zh">事实、观点与推断三层物理隔离</span></h4>
+            <p><span class="zh">严格按 Step 0 选定的类型模板组织结构；保留核心推导过程、关键案例与原片讨论边界；在行文中显式区分「客观事实」「发言者个人观点」与「延伸推论」。</span></p>
+          </div>
+          <div class="card">
+            <span class="n">Step 04 · 关键帧视觉锚定（Visual Anchoring）</span>
+            <h4><span class="zh">按讲解转折回看画面精选，拒绝定时乱截</span></h4>
+            <p><span class="zh">仅当画面出现有助于理解的图表、公式、代码或实操演示时才抽帧截图；必须回看画面确认信息有效后，紧贴对应讲解句子下方插入并配图注。若当前 Agent 无视觉看图能力，如实声明「仅提取候选帧未经视觉核验」。</span></p>
+          </div>
+          <div class="card">
+            <span class="n">Step 05 · 受控外部查证（Grounded Lookup）</span>
+            <h4><span class="zh">外部背景补充必须独立成块并附出处</span></h4>
+            <p><span class="zh">对原片一笔带过的晦涩概念可查阅论文或文档补充背景，但<b>必须显式标明「外部资料补充」并附来源链接</b>，严禁混入讲师原话；若环境设定不联网或查不到，如实注明。</span></p>
+          </div>
+          <div class="card">
+            <span class="n">Step 06 · 交付前结构自检（Delivery Audit）</span>
+            <h4><span class="zh">已完成/未完成清单与诚实检验边界</span></h4>
+            <p><span class="zh">逐项核对关键事实、时间戳锚点、本地图片路径与外部链接有效性；输出交付清单，并强制声明<b>「已完成结构完整性检查，不等于逐句人工精校」</b>。</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 03 三个关键取舍 ============ -->
+      <section id="decisions" class="chapter">
+        <span class="eyebrow">03 / <span class="zh">关键产品取舍</span></span>
+        <h2><span class="zh">放弃表面的「全自动万能感」，换取每一次交付的可预期与零脑补。</span></h2>
+
+        <div class="decision">
+          <span class="eyebrow">取舍 01 · 产品交付形态</span>
+          <p class="dq"><span class="zh">做成上传音视频的在线网站，还是装进使用者自己 Agent 的 Skill？</span></p>
+          <ul class="opts">
+            <li><b><span class="zh">A · 在线 SaaS 网站（上传文件即出笔记）</span></b><span class="zh">访客试用门槛最低；但用户的私人会议录音要经过第三方服务器，且长音视频转写与多模态看图的算力成本高昂。</span></li>
+            <li class="chosen"><b><span class="zh">B · 标准化 Agent Skill（借用用户本地 Agent 与模型环境）✓</span></b><span class="zh">一个轻量规范目录，直接装进用户已在使用的 Claude Code / Codex / Alma；下载、转写、视觉看图均在用户自己的受控环境中完成。</span></li>
+          </ul>
+          <p class="why"><b>为什么</b><span class="zh">既彻底消除了私人会议录音上云的隐私顾虑，又让重度知识工作者可以自由搭配自己最信任的底层模型与本地工具链。</span></p>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">取舍 02 · 视觉截图策略</span>
+          <p class="dq"><span class="zh">固定每 N 秒机械抽帧，还是按讲解语义转折取候选并回看精选？</span></p>
+          <ul class="opts">
+            <li><b><span class="zh">A · 固定时间间隔抽帧（每 30 秒一帧）</span></b><span class="zh">速度快、不依赖多模态视觉检验；但会漏掉闪过的关键公式板书，同时塞入大量讲师正脸与重复过渡帧。</span></li>
+            <li class="chosen"><b><span class="zh">B · 按讲解转折定位时间窗 + 多模态回看画面精选 ✓</span></b><span class="zh">截图数量完全由内容信息密度决定，不设硬性上下限；禁止用定时抽帧冒充精选配图。</span></li>
+          </ul>
+          <p class="why"><b>为什么</b><span class="zh">笔记里的每一张图都是为了替旁边那段文字降低理解成本（如 Transformer 课程样例中精准保留的 32 张板书与架构图），而不是为了证明「程序跑过了一遍视频」。</span></p>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">取舍 03 · 信息缺口与未知归属</span>
+          <p class="dq"><span class="zh">录音里没说清的说话人姓名、待办负责人与截止期限，让模型按上下文推测补全，还是显式留白？</span></p>
+          <ul class="opts">
+            <li><b><span class="zh">A · 让模型根据上下文智能补全</span></b><span class="zh">生成的会议纪要表格看起来每一格都满满当当，但其中混入的错误指派不会有任何醒目标记。</span></li>
+            <li class="chosen"><b><span class="zh">B · 强制标为「〔未明确〕」，无法确认声道身份时绝不猜姓名 ✓</span></b><span class="zh">把「禁止猜测」写成插件的硬性负向约束。</span></li>
+          </ul>
+          <p class="why"><b>为什么</b><span class="zh">会议纪要与技术笔记的核心价值是事后追责与复盘。<b>一条编造出来的「负责人」比一个显式的「〔未明确〕」危险十倍——写着「未明确」，人会去核实；写着一个像模像样的名字，所有人都会以为已经安排妥了。</b></span></p>
+        </div>
+      </section>
+
+      <!-- ============ 04 实测样例 ============ -->
+      <section id="sample" class="chapter">
+        <span class="eyebrow">04 / <span class="zh">真实复杂样例</span></span>
+        <h2><span class="zh">34 分钟 Transformer 课程全流程实测：17 小节推导 + 32 张板书关键帧逐句锚定。</span></h2>
+        <p><span class="zh">随仓库公开的完整实测样例是一集 34 分钟的 Transformer 原理课（第 27/35 集）。Skill 按「详细整理」契约运行，完整保留了三种注意力机制的分工与矩阵计算推导，并将 <b>32 张原视频板书截图</b>带精确时间码锚定在对应讲解段落下方：</span></p>
+
+        <article class="note-sample" aria-label="样例笔记片段">
+          <h4>27 Transformer 注意力究竟在做什么（实测产物节选）</h4>
+          <blockquote lang="zh-CN">这集把三种注意力拆开：编码器看输入，解码器看已经生成的前缀，两边再对照一次。<br>笔记按讲解顺序写，板书和公式截在对应的话旁边。<br>时长：34 分钟 · 系列进度：27 / 35 · 关键帧配图：32 张</blockquote>
+          <p lang="zh-CN" style="font-size:.95rem"><b>1. 三种注意力在 Transformer 中的分工</b><br>Transformer 常见三种注意力：Encoder 的 self-attention、Decoder 的 masked self-attention 和 Encoder–Decoder cross-attention。它们各自的 Query / Key / Value 来源与掩码约束决定了信息流动的边界。</p>
+          <figure>
+            <img src="../assets/img/m2n-sample-27_0000.webp" width="900" loading="lazy" alt="原视频截图 @00:00：编码器、解码器与两者之间的三种注意力">
+            <figcaption lang="zh-CN">图 1：编码器、解码器、两者之间，三种注意力各管一段 · 锚定时间码 @00:00</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/img/m2n-sample-27_0436.webp" width="900" loading="lazy" alt="原视频截图 @04:36：注意力权重与特征聚合板书">
+            <figcaption lang="zh-CN">图 2：原视频板书关键帧 · 锚定时间码 @04:36</figcaption>
+          </figure>
+        </article>
+      </section>
+
+      <!-- ============ 05 安装 ============ -->
+      <section id="install" class="chapter">
+        <span class="eyebrow">05 / <span class="zh">一键安装与开源仓库</span></span>
+        <h2><span class="zh">复制一段话，直接装进你的 Claude Code / Codex / Alma。</span></h2>
+        <p><span class="zh">把下方提示词直接粘贴给你的 Agent，它会自动下载完整的 <code>media-to-notes</code> 目录（保留 <code>SKILL.md</code> 与 <code>references/</code> 结构）并安装到技能目录中：</span></p>
+        <div class="prompt">
+          <span class="copy"><button class="btn-copy" type="button" data-copy="#prompt-zh"><span class="zh">复制安装提示词</span></button></span>
+          <div id="prompt-zh" class="zh">请帮我安装 Media to Notes 这个 Agent Skill。
 
 源码：https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes
 压缩包：https://fengbaoyao.github.io/xingyu-portfolio/portfolio-assets/media-to-notes-skill.zip
 
-请下载整个 media-to-notes 目录（保留 SKILL.md 与 references/ 结构），安装到当前 Agent 的 skills 目录（Codex 常见路径：~/.codex/skills/；Claude Code：~/.claude/skills/；其他 Agent 按各自约定），然后刷新或重启技能列表。安装完成后，用它把我给出的视频、音频、播客、会议录音或已有逐字稿，整理成可阅读的 Markdown 笔记。</pre></div><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p><p class="install-links"><a href="https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes">在 GitHub 查看源码</a><a href="https://fengbaoyao.github.io/xingyu-portfolio/portfolio-assets/media-to-notes-skill.zip">下载压缩包</a></p></div></section><footer class="next"><a href="../index.html#work">← 返回所有作品</a><span class="label">xingyu · product &amp; interaction</span></footer></main><div class="backdrop" id="note-backdrop" hidden></div><aside id="note-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="note-title" aria-hidden="true" inert tabindex="-1"><header class="drawer-bar"><div><div class="label">note sample</div><h2 id="note-title">笔记样例</h2></div><button type="button" class="drawer-close" id="close-note" aria-label="关闭笔记样例">关闭</button></header><div class="drawer-body" id="note-body" tabindex="0" aria-label="笔记正文"><p class="note-status">正在打开笔记…</p></div></aside><script id="mtn">
-function esc(s) {
-  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-}
-function matchBrace(s, openIdx) {
-  var depth = 0;
-  for (var i = openIdx; i < s.length; i++) {
-    if (s[i] === "{") depth++;
-    else if (s[i] === "}") {
-      depth--;
-      if (depth === 0) return i;
-    }
-  }
-  return s.length - 1;
-}
-function mathHtml(src) {
-  function walk(s) {
-    var parts = [];
-    var buf = "";
-    function pushText(t) { if (t) parts.push(esc(t)); }
-    for (var i = 0; i < s.length; i++) {
-      var c = s[i];
-      if (c === "\\") {
-        var j = i + 1, cmd = "";
-        while (j < s.length && /[A-Za-z]/.test(s[j])) { cmd += s[j]; j++; }
-        if ((cmd === "mathbb" || cmd === "mathrm" || cmd === "text" || cmd === "operatorname" || cmd === "sqrt") && s[j] === "{") {
-          var end = matchBrace(s, j);
-          var inner = s.slice(j + 1, end);
-          pushText(buf); buf = "";
-          if (cmd === "mathbb" && inner === "R") parts.push("ℝ");
-          else if (cmd === "sqrt") parts.push("√(" + walk(inner) + ")");
-          else parts.push(walk(inner));
-          i = end;
-          continue;
-        }
-        if (cmd === "in") { pushText(buf); buf = ""; parts.push('<span class="op">∈</span>'); i = j - 1; continue; }
-        if (cmd === "times") { pushText(buf); buf = ""; parts.push('<span class="op">×</span>'); i = j - 1; continue; }
-        if (cmd === "cdot") { pushText(buf); buf = ""; parts.push('<span class="op">·</span>'); i = j - 1; continue; }
-        buf += cmd;
-        i = j - 1;
-        continue;
-      }
-      if ((c === "^" || c === "_") && s[i + 1] === "{") {
-        var endB = matchBrace(s, i + 1);
-        pushText(buf); buf = "";
-        var tag = c === "^" ? "sup" : "sub";
-        parts.push("<" + tag + ">" + walk(s.slice(i + 2, endB)) + "</" + tag + ">");
-        i = endB;
-        continue;
-      }
-      if ((c === "^" || c === "_") && i + 1 < s.length && /[A-Za-z0-9]/.test(s[i + 1])) {
-        pushText(buf); buf = "";
-        var tag2 = c === "^" ? "sup" : "sub";
-        parts.push("<" + tag2 + ">" + esc(s[i + 1]) + "</" + tag2 + ">");
-        i += 1;
-        continue;
-      }
-      buf += c;
-    }
-    pushText(buf);
-    return parts.join("");
-  }
-  return '<span class="math">' + walk(src) + "</span>";
-}
-function inline(text) {
-  var slots = [];
-  function hold(html) {
-    slots.push(html);
-    return "\u0000" + (slots.length - 1) + "\u0000";
-  }
-  var work = String(text).replace(/`([^`]+)`/g, function (_, c) {
-    return hold("<code>" + esc(c) + "</code>");
-  });
-  work = work.replace(/\$([^$\n]+)\$/g, function (_, m) {
-    return hold(mathHtml(m));
-  });
-  work = esc(work);
-  work = work.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, function (_, label, url) {
-    return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + label + "</a>";
-  });
-  work = work.replace(/(^|[^"'>=])(https?:\/\/[^\s<]+)/g, function (_, pre, url) {
-    var clean = url.replace(/(?:[.,;:!?)>]|[。，、；：）】》])+$/g, "");
-    return pre + '<a href="' + clean + '" target="_blank" rel="noopener noreferrer">' + clean + "</a>" + url.slice(clean.length);
-  });
-  work = work.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-  work = work.replace(/\u0000(\d+)\u0000/g, function (_, n) { return slots[Number(n)]; });
-  return work;
-}
-function isBlock(line) {
-  return /^(#{1,6}\s|```|>\s?|---+$|\*\*\*+$|\d+\.\s|[-*]\s|!\[)/.test(line);
-}
-function safeImgSrc(url) {
-  var u = String(url || "").trim();
-  if (!u || /[\u0000-\u001f\s"'<>]/.test(u) || u.indexOf("\\") !== -1) return "";
-  if (/^[a-z][a-z0-9+.-]*:/i.test(u)) return /^https?:\/\//i.test(u) ? u : "";
-  if (u.indexOf("..") !== -1) return "";
-  if (u.charAt(0) === "/" || u.charAt(0) === "." || /^[A-Za-z0-9_]/.test(u)) return u;
-  return "";
-}
-function renderMarkdown(md) {
-  md = String(md || "").replace(/\r\n/g, "\n");
-  var lines = md.split("\n");
-  var i = 0;
-  var out = [];
-  while (i < lines.length) {
-    var line = lines[i];
-    if (!line.trim()) { i++; continue; }
-    if (/^```/.test(line.trim())) {
-      var fence = [];
-      i++;
-      while (i < lines.length && !/^```/.test(lines[i].trim())) { fence.push(lines[i]); i++; }
-      if (i < lines.length) i++;
-      out.push("<pre><code>" + esc(fence.join("\n")) + "</code></pre>");
-      continue;
-    }
-    if (/^(-{3,}|\*{3,})$/.test(line.trim())) { out.push("<hr>"); i++; continue; }
-    var hm = /^(#{1,6})\s+(.*)$/.exec(line);
-    if (hm) {
-      var level = Math.min(hm[1].length, 6);
-      out.push("<h" + level + ">" + inline(hm[2].trim()) + "</h" + level + ">");
-      i++;
-      continue;
-    }
-    if (/^>/.test(line)) {
-      var quoted = [];
-      while (i < lines.length && /^>/.test(lines[i])) {
-        quoted.push(lines[i].replace(/^>\s?/, ""));
-        i++;
-      }
-      var qhtml = [];
-      var qp = [];
-      function flushQ() {
-        if (!qp.length) return;
-        qhtml.push("<p>" + qp.map(function (part) { return inline(part); }).join("<br>") + "</p>");
-        qp = [];
-      }
-      for (var qi = 0; qi < quoted.length; qi++) {
-        if (!quoted[qi].trim()) flushQ();
-        else qp.push(quoted[qi]);
-      }
-      flushQ();
-      out.push("<blockquote>" + qhtml.join("") + "</blockquote>");
-      continue;
-    }
-    var im = /^!\[([^\]]*)\]\((.*)\)\s*$/.exec(line.trim());
-    if (im) {
-      var src = safeImgSrc(im[2].trim());
-      var cap = "";
-      i++;
-      if (i < lines.length && /^\*(?!\*)([^*]+)\*$/.test(lines[i].trim())) {
-        cap = lines[i].trim().replace(/^\*|\*$/g, "");
-        i++;
-      }
-      if (src) {
-        var fig = '<figure class="note-fig"><img src="' + esc(src) + '" alt="' + esc(im[1]) + '" loading="lazy" decoding="async">';
-        if (cap) fig += "<figcaption>" + inline(cap) + "</figcaption>";
-        out.push(fig + "</figure>");
-      } else if (cap) {
-        out.push("<p><em>" + inline(cap) + "</em></p>");
-      }
-      continue;
-    }
-    if (/^\d+\.\s+/.test(line)) {
-      var items = [];
-      while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
-        items.push(lines[i].replace(/^\d+\.\s+/, ""));
-        i++;
-      }
-      out.push("<ol>" + items.map(function (it) { return "<li>" + inline(it) + "</li>"; }).join("") + "</ol>");
-      continue;
-    }
-    if (/^[-*]\s+/.test(line)) {
-      var bullets = [];
-      while (i < lines.length && /^[-*]\s+/.test(lines[i])) {
-        bullets.push(lines[i].replace(/^[-*]\s+/, ""));
-        i++;
-      }
-      out.push("<ul>" + bullets.map(function (it) { return "<li>" + inline(it) + "</li>"; }).join("") + "</ul>");
-      continue;
-    }
-    var para = [line.trim()];
-    i++;
-    while (i < lines.length && lines[i].trim() && !isBlock(lines[i])) {
-      para.push(lines[i].trim());
-      i++;
-    }
-    out.push("<p>" + inline(para.join(" ")) + "</p>");
-  }
-  return out.join("\n");
-}
-function bootMediaToNotes() {
-  var trigger = document.getElementById("open-sample");
-  var drawer = document.getElementById("note-drawer");
-  var backdrop = document.getElementById("note-backdrop");
-  var closeBtn = document.getElementById("close-note");
-  var noteBody = document.getElementById("note-body");
-  var copyBtn = document.getElementById("copy-prompt");
-  var promptEl = document.getElementById("install-prompt");
-  var copyStatus = document.getElementById("copy-status");
-  var lastFocus = null;
-  var noteHtml = "";
-  var noteState = "idle";
-  var copyTimer = 0;
-  var suppressAuto = false;
+请下载整个 media-to-notes 目录（保留 SKILL.md 与 references/ 结构），安装到当前 Agent 的 skills 目录（Codex 常见路径：~/.codex/skills/；Claude Code：~/.claude/skills/；其他 Agent 按各自约定），然后刷新或重启技能列表。安装完成后，用它把我给出的视频、音频、播客、会议录音或已有逐字稿，整理成可阅读的 Markdown 笔记。</div>
+        </div>
+        <div class="cta-row">
+          <a class="btn" href="https://github.com/fengbaoYao/xingyu-portfolio/tree/main/skills/media-to-notes" target="_blank" rel="noopener"><span class="zh">在 GitHub 查看源码</span> ↗</a>
+          <a class="btn btn-ghost" href="../assets/img/media-to-notes-skill.zip" download><span class="zh">下载 Skill 压缩包</span> <span class="muted" style="font-size:.85em">8 KB</span></a>
+        </div>
+      </section>
 
-  function focusable() {
-    return Array.prototype.filter.call(
-      drawer.querySelectorAll("a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])"),
-      function (el) { return !el.hasAttribute("disabled"); }
-    );
-  }
-  function openNote(opts) {
-    var focusClose = !opts || opts.focus !== false;
-    suppressAuto = true;
-    lastFocus = document.activeElement;
-    var scrollY = window.scrollY;
-    drawer.removeAttribute("inert");
-    drawer.setAttribute("aria-hidden", "false");
-    backdrop.hidden = false;
-    trigger.setAttribute("aria-expanded", "true");
-    document.documentElement.classList.add("drawer-open");
-    document.body.classList.add("drawer-open");
-    if (window.scrollY !== scrollY) window.scrollTo(0, scrollY);
-    document.querySelector("main").setAttribute("aria-hidden", "true");
-    requestAnimationFrame(function () {
-      backdrop.classList.add("open");
-      drawer.classList.add("open");
-      if (focusClose) closeBtn.focus();
-    });
-    ensureNote();
-  }
-  function closeNote() {
-    if (drawer.getAttribute("aria-hidden") === "true") return;
-    suppressAuto = true;
-    drawer.classList.remove("open");
-    backdrop.classList.remove("open");
-    trigger.setAttribute("aria-expanded", "false");
-    document.documentElement.classList.remove("drawer-open");
-    document.body.classList.remove("drawer-open");
-    document.querySelector("main").removeAttribute("aria-hidden");
-    drawer.setAttribute("aria-hidden", "true");
-    drawer.setAttribute("inert", "");
-    window.setTimeout(function () {
-      if (!drawer.classList.contains("open")) backdrop.hidden = true;
-    }, 360);
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-  function ensureNote() {
-    if (noteState === "ready") {
-      noteBody.innerHTML = noteHtml;
-      return;
-    }
-    if (noteState === "loading") return;
-    noteState = "loading";
-    noteBody.innerHTML = '<p class="note-status">正在打开笔记…</p>';
-    fetch("media-to-notes-sample.md")
-      .then(function (res) {
-        if (!res.ok) throw new Error(String(res.status));
-        return res.text();
-      })
-      .then(function (text) {
-        var html = renderMarkdown(text);
-        if (!html.trim()) throw new Error("empty");
-        noteHtml = '<article class="note">' + html + "</article>";
-        noteState = "ready";
-        if (drawer.getAttribute("aria-hidden") === "false") noteBody.innerHTML = noteHtml;
-      })
-      .catch(function () {
-        noteState = "idle";
-        noteBody.innerHTML = '<p class="note-status">笔记样例暂时打不开。可以稍后重试。</p>';
-      });
-  }
-  function copyPrompt() {
-    var text = promptEl.textContent.replace(/^\n/, "").replace(/\n$/, "");
-    var done = function () {
-      copyBtn.textContent = "已复制";
-      delete copyStatus.dataset.error;
-      copyStatus.textContent = "已复制到剪贴板";
-      window.clearTimeout(copyTimer);
-      copyTimer = window.setTimeout(function () {
-        copyBtn.textContent = "复制";
-        copyStatus.textContent = "";
-      }, 1600);
-    };
-    var fail = function () {
-      copyBtn.textContent = "请手动选择";
-      copyStatus.dataset.error = "true";
-      copyStatus.textContent = "没有复制成功，请手动选择提示文字";
-      var range = document.createRange();
-      range.selectNodeContents(promptEl);
-      var sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-    };
-    var legacy = function () {
-      var ta = document.createElement("textarea");
-      ta.value = text;
-      ta.setAttribute("readonly", "");
-      ta.style.position = "fixed";
-      ta.style.left = "-9999px";
-      document.body.appendChild(ta);
-      ta.select();
-      var ok = false;
-      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
-      document.body.removeChild(ta);
-      if (ok) done(); else fail();
-    };
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(done).catch(legacy);
-    } else legacy();
-  }
-  trigger.addEventListener("click", function () { openNote(); });
-  var demo = document.getElementById("demo-video");
-  if (demo) {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      demo.removeAttribute("autoplay");
-      demo.pause();
-    } else {
-      var playAttempt = demo.play();
-      if (playAttempt && playAttempt.catch) playAttempt.catch(function () {});
-    }
-  }
-  var sentinel = document.getElementById("case-body");
-  var scrolled = false;
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 140) scrolled = true;
-  }, { passive: true });
-  if (sentinel && "IntersectionObserver" in window) {
-    var watch = new IntersectionObserver(function (entries) {
-      if (suppressAuto || !scrolled || !entries[0].isIntersecting) return;
-      watch.disconnect();
-      openNote({ focus: false });
-    }, { rootMargin: "0px 0px -30% 0px", threshold: 0 });
-    watch.observe(sentinel);
-  }
-  closeBtn.addEventListener("click", closeNote);
-  backdrop.addEventListener("click", closeNote);
-  copyBtn.addEventListener("click", copyPrompt);
-  document.addEventListener("keydown", function (e) {
-    if (drawer.getAttribute("aria-hidden") === "true") return;
-    if (e.key === "Escape") {
-      e.preventDefault();
-      closeNote();
-      return;
-    }
-    if (e.key !== "Tab") return;
-    var nodes = focusable();
-    if (!nodes.length) {
-      e.preventDefault();
-      drawer.focus();
-      return;
-    }
-    var first = nodes[0];
-    var last = nodes[nodes.length - 1];
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    } else if (nodes.indexOf(document.activeElement) === -1) {
-      e.preventDefault();
-      (e.shiftKey ? last : first).focus();
-    }
-  });
-}
-if (typeof document !== "undefined") {
-  document.addEventListener("DOMContentLoaded", bootMediaToNotes);
-}
-</script></body></html>
+      <!-- ============ 06 复盘 ============ -->
+      <section id="retro" class="chapter">
+        <span class="eyebrow">06 / <span class="zh">检验边界与复盘</span></span>
+        <h2><span class="zh">清楚知道 Agent 做到了哪一步，也诚实交代哪一步仍需人来把关。</span></h2>
+        <div class="retro">
+          <div class="keep">
+            <h4><span class="zh">做对的核心设计</span></h4>
+            <ul>
+              <li><span class="zh"><b>前置契约问一次，省去事后全篇重写：</b>同一份素材，课程学习笔记与行动导向的会议纪要关注点截然不同，Step 0 的轻量确认把返工率降到了最低。</span></li>
+              <li><span class="zh"><b>用结构化规则代替祈使句 Prompt：</b>不写空洞的「请务必准确」，而是明确规定「未指明负责人写〔未明确〕」「外部检索独立成块」「只要逐字稿在 Step 2 停机」。</span></li>
+              <li><span class="zh"><b>诚实的交付自检声明：</b>在 Step 6 明确区分「自动化结构、时间码与图片路径检查」与「逐字逐句人工精校」，不诱导用户盲目迷信 AI 输出。</span></li>
+            </ul>
+          </div>
+          <div class="redo">
+            <h4><span class="zh">已知局限与下一步迭代</span></h4>
+            <ul>
+              <li><span class="zh"><b>宿主 Agent 多模态能力依赖：</b>关键帧精选依赖宿主 Agent 的视觉看图能力与本地音视频工具（如 ffmpeg / yt-dlp）；在纯文本环境里会退化为候选帧提取并显式降级提示。</span></li>
+              <li><span class="zh"><b>按语义话题章节切分优化：</b>目前长课程导览的时间戳切分在部分均匀语速段落仍偏固定时长，下一步将强化基于话题语义转换点的动态章节聚合。</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<a class="next-case" href="../index.html#work">
+  <div class="wrap">
+    <span class="eyebrow"><span class="zh">已浏览完四个代表项目</span></span>
+    <h2><span class="zh">回到个人主页作品总览</span> <span class="arr" aria-hidden="true">→</span></h2>
+    <p><span class="zh">查看 AI 产品方法论、深度思考专栏与完整 10 年金融科技履历。</span></p>
+  </div>
+</a>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span class="mono">© <span data-year>2026</span> 星宇 · 懂模型底层的手感，守严肃金融的边界</span>
+    <span><a href="../index.html#work">返回全部作品 ↑</a></span>
+    <button class="to-top" type="button"><span class="zh">↑ 回到顶部</span></button>
+  </div>
+</footer>
+</body>
+</html>
