@@ -3,343 +3,219 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>rstack：双 Agent 分工与自进化每周复盘工作流 — 星宇的工程笔记</title>
-<meta name="description" content="Claude 主管负责想清楚，Codex 执行者负责看清楚；配合 weekly-retro 每周扫描会话、拐点四问卡、三层分诊与反事实重放，把 AI 编程环境做成持续自进化的工程资产。">
-<link rel="stylesheet" href="styles.css">
-<script defer src="../../assets/page.js"></script>
+<title>rstack — 自进化 AI 编程工作流 — 星宇</title>
+<meta name="description" content="Claude 主管负责想清楚与写七栏契约，Codex 执行者负责侦察与施工；配合 weekly-retro 每周扫描会话、拐点归因、三层分诊与反事实重放，把踩过的坑沉淀成持续自进化的环境资产。">
+<link rel="icon" href="../../assets/img/favicon.png">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script defer src="../../assets/site.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
-<div class="read-progress" aria-hidden="true"><i></i></div>
+<div id="live-status" class="sr-only" aria-live="polite"></div>
 
-<!-- ============ 顶部导航（与个人主页同源） ============ -->
 <header class="site-head">
   <div class="wrap">
-    <a class="brand" href="../../index.html"><i aria-hidden="true"></i>xingyu<span class="brand-sub" aria-hidden="true">AI &amp; FinTech</span></a>
-    <nav class="nav" aria-label="章节快速跳转">
-      <a href="#claude-lead">日常执行</a>
-      <a href="#weekly-retro">每周复盘</a>
-      <a href="#metrics">实测数据</a>
-      <a href="#setup">实操上手</a>
-      <a href="#glossary">专有名词</a>
+    <a class="brand" href="../../index.html"><i aria-hidden="true"></i>xingyu</a>
+    <nav class="pager" aria-label="案例翻页">
+      <span class="mono">04 / 05</span>
+      <a href="../court-diary.html" aria-label="上一个：Court Diary">← <span class="lbl">Court Diary</span></a>
+      <a href="../media-to-notes.html" aria-label="下一个：Media to Notes"><span class="lbl">Media to Notes</span> →</a>
     </nav>
   </div>
 </header>
-
 <div class="case-bar">
   <div class="wrap">
-    <a class="back" href="../../index.html"><span aria-hidden="true">←</span>个人工程工作流 · 使用说明</a>
-    <span class="mono muted">rstack · 本地预览版 · 2026-11</span>
+    <a class="back" href="../../index.html#work">← 返回全部作品</a>
+    <span class="mono muted">04 · 双 Agent 工作流 · 自进化复盘闭环</span>
   </div>
 </div>
 
 <main id="main">
-<span id="top" tabindex="-1"></span>
 <div class="wrap">
-
-  <!-- ============ HERO ============ -->
   <section class="case-hero" aria-labelledby="t">
-    <span class="eyebrow">AI 工程工作流 · 双 AGENT 分工 + 自进化复盘闭环</span>
-    <h1 id="t">
-      rstack：把 AI 编程环境做成自进化系统
-      <span class="sub">Claude 想清楚，Codex 看清楚；每周复盘把踩过的坑下沉成环境资产。</span>
-    </h1>
-    <p class="lede">
-      用 Coding Agent 写代码久了，最痛的两个坑：一是把最贵的主会话当苦力，上下文越滚越大后<b>缓存读占掉约 <code>80%</code> 等效开销</b>；二是纠错全靠一次性口头教育，换个窗口同样的坑照踩不误。于是我从日常个人环境里抽出了这套 <b><code>rstack</code></b> 工作流——日常干活靠 <code>claude-lead</code> 控节奏、记台账，课后进化靠 <code>weekly-retro</code> 扫全量会话、在失败拐点归因分诊、用反事实重放验收补丁。
-    </p>
+    <div class="case-hero-top">
+      <span class="eyebrow">04 / AGENT WORKFLOW · 个人工程环境</span>
+      <span class="status st-ship">日用自进化环境 · 连续 4 期追踪（W45–W47）</span>
+    </div>
+    <h1 id="t">rstack — 把 AI 编程环境做成自进化系统</h1>
+    <p class="case-sub">Claude 想清楚、写契约、做决策；Codex 看清楚、跑侦察、按契约施工。配合每周复盘扫描全量会话与反事实重放，把一次次口头纠错下沉成下次必经的环境资产。</p>
 
-    <div class="state-box">
-      <span class="status st-live">日用自进化环境 · 连续 4 期数据追踪（W45–W47）</span>
-      <p>
-        由两套核心技能（<code>claude-lead</code> + <code>weekly-retro</code>）、两枚 Claude Code hook（<code>pretool_guard.py</code> + <code>posttool_delegate_nudge.py</code>）与一组 Python/Bash 脚本组成。<b>核心信条只有两句</b>：我的上下文最贵，只用来思考和决策；怪环境不怪模型，人插手即失败，动态补丁永远优先于静态文档。
-      </p>
+    <div class="metric-row four" aria-label="核心实测指标">
+      <div class="metric-box">
+        <span class="m-val">↓ 55%</span>
+        <span class="m-lbl">查 <code>--help</code> / 千次调用（36.4 → 16.2）</span>
+      </div>
+      <div class="metric-box">
+        <span class="m-val">↓ 78%</span>
+        <span class="m-lbl">权限/安全被拦 / 千次调用（3.2 → 0.7）</span>
+      </div>
+      <div class="metric-box">
+        <span class="m-val">3 / 3</span>
+        <span class="m-lbl">W47 补丁反事实重放验收全部通过</span>
+      </div>
+      <div class="metric-box is-warn">
+        <span class="m-val">≤ 5 条/期</span>
+        <span class="m-lbl">补丁逐条人拍板 · 同一任务 2 轮返工熔断</span>
+      </div>
     </div>
 
     <dl class="facts">
-      <div>
-        <dt>分工机制</dt>
-        <dd><b>Claude（主管）</b>想清楚、写七栏契约、做对外写操作；<b>Codex（<code>gpt-6.1-sol</code>）</b>看清楚、按契约施工并过单测与 E2E</dd>
-      </div>
-      <div>
-        <dt>复盘三层节奏</dt>
-        <dd>需求级 <code>wrapup</code> · 周度主力 <code>weekly-retro</code>（八步闭环）· 每 2 期元调优 <code>retro-tune</code></dd>
-      </div>
-      <div>
-        <dt>四期实测收益</dt>
-        <dd>查 <code>--help</code> <b>↓ 55%</b>（<code>36.4 → 16.2</code>）· 权限被拦 <b>↓ 78%</b>（<code>3.2 → 0.7</code>）· W47 补丁回放 <b>3/3</b> 通过</dd>
-      </div>
-      <div>
-        <dt>补丁与护栏</dt>
-        <dd>每期补丁 <b>≤ 5 条</b>逐条人拍板 · 同一任务返工 <b>2 轮熔断</b> · 零命中 3 期 hook 自动提议删除</dd>
-      </div>
+      <div><dt>双 Agent 分工</dt><dd><b>Claude（主管）</b>拍板、写七栏契约、做对外写操作；<b>Codex（gpt-6.1-sol）</b>侦察、施工与 E2E</dd></div>
+      <div><dt>复盘三层节奏</dt><dd>需求级 <code>wrapup</code> · 周度主力 <code>weekly-retro</code>（八步闭环）· 每 2 期元调优 <code>retro-tune</code></dd></div>
+      <div><dt>核心组件</dt><dd><code>claude-lead</code> + <code>weekly-retro</code> 技能、2 枚 Claude Code hook、Python/Bash 台账与回放脚本</dd></div>
+      <div><dt>设计信条</dt><dd>主上下文最贵，只用来思考决策；怪环境不怪模型，动态补丁优先于静态文档</dd></div>
     </dl>
   </section>
 
-  <!-- ============ 主视觉：全局视角架构图 ============ -->
   <figure class="case-figure">
-    <div class="fig-frame" role="button" tabindex="0" aria-label="点击放大查看 rstack 全局视角架构图">
-      <img src="../../assets/img/rstack/rstack-overview.png" width="1330" height="1182" alt="rstack 全局视角架构图：日常任务、本机全量数据来源、weekly-retro 每周五晚八步循环、动态优先的环境资产沉淀，以及需求级 wrapup 与每 2~3 期一次的 retro-tune 元调优">
-      <span class="zoom-pill">点击放大查看原图</span>
+    <div class="fig-zoom" role="button" tabindex="0" aria-label="点击放大查看 rstack 全局视角架构图">
+      <img src="../../assets/img/rstack/rstack-overview.webp" width="1330" height="1182" alt="rstack 全局视角架构图：日常任务、本机全量数据来源、weekly-retro 八步循环与动态优先环境资产沉淀">
+      <span class="zoom-pill">点击放大原图</span>
     </div>
-    <figcaption class="fig-meta">
-      <span>图 1 · 全局视角：日常任务 → 数据来源 → <code>weekly-retro</code> 八步闭环 → 动态优先的环境资产沉淀，外加需求级 <code>wrapup</code> 与周期元调优 <code>retro-tune</code>。</span>
+    <figcaption>
+      <span>图 1 · 全局视角：日常任务 → 数据来源 → <code>weekly-retro</code> 八步闭环 → 动态优先沉淀环境资产。</span>
       <span class="mono">FIG 01 // OVERVIEW</span>
     </figcaption>
   </figure>
 
-  <!-- ============ TL;DR 三栏速览 ============ -->
-  <dl class="tldr">
-    <div>
-      <dt>为什么折腾这套系统</dt>
-      <dd>主会话开销的大头不是输出，而是滚大的缓存读（~80%）；只靠口头纠错和堆文档，下周换个会话照样复犯。</dd>
-    </div>
-    <div>
-      <dt>怎么把日常干稳</dt>
-      <dd>侦察 → 拍板 → 七栏契约 → 施工 → 复核 → 记账。对外写操作归主管，同一任务返工两轮不达标立即熔断。</dd>
-    </div>
-    <div>
-      <dt>怎么让环境越用越顺</dt>
-      <dd>每周扫全量会话，按「感知 / 动作 / 反馈」三层分诊，hook / 脚本优先于文档，落地后用无提示新会话反事实重放验收。</dd>
-    </div>
-  </dl>
-
-  <!-- ============ 正文双栏：左侧粘性目录 + 右侧章节 ============ -->
-  <div class="case-body">
-    <aside class="toc" aria-label="正文目录">
-      <span class="eyebrow">目录索引</span>
+  <div class="case-layout">
+    <aside class="toc" aria-label="本页目录">
+      <span class="toc-title">本页目录</span>
       <ol>
-        <li><a href="#claude-lead">01 · 日常执行（claude-lead）</a></li>
-        <li><a href="#weekly-retro">02 · 自进化闭环（weekly-retro）</a></li>
-        <li><a href="#metrics">03 · 连续四期实测数据（W45–W47）</a></li>
-        <li><a href="#setup">04 · 实操上手与命令速查</a></li>
-        <li><a href="#glossary">05 · 专有名词速查表</a></li>
+        <li><a href="#problem">01 · 问题定义</a></li>
+        <li><a href="#claude-lead">02 · 日常分工（claude-lead）</a></li>
+        <li><a href="#weekly-retro">03 · 每周复盘（weekly-retro）</a></li>
+        <li><a href="#metrics">04 · 四期实测账本</a></li>
+        <li><a href="#setup">05 · 目录与命令速查</a></li>
+        <li><a href="#glossary">06 · 专有名词速查</a></li>
       </ol>
-      <div class="toc-meta">
-        点击任意流程图可弹出全屏放大查看细节；所有命令块支持一键复制。
-      </div>
     </aside>
 
-    <div class="content">
+    <div class="prose">
       <details class="toc-mobile">
-        <summary>展开目录索引（5 个章节）</summary>
+        <summary>展开本页目录</summary>
         <ol>
-          <li><a href="#claude-lead">01 · 日常执行（claude-lead）</a></li>
-          <li><a href="#weekly-retro">02 · 自进化闭环（weekly-retro）</a></li>
-          <li><a href="#metrics">03 · 连续四期实测数据（W45–W47）</a></li>
-          <li><a href="#setup">04 · 实操上手与命令速查</a></li>
-          <li><a href="#glossary">05 · 专有名词速查表</a></li>
+          <li><a href="#problem">01 · 问题定义</a></li>
+          <li><a href="#claude-lead">02 · 日常分工（claude-lead）</a></li>
+          <li><a href="#weekly-retro">03 · 每周复盘（weekly-retro）</a></li>
+          <li><a href="#metrics">04 · 四期实测账本</a></li>
+          <li><a href="#setup">05 · 目录与命令速查</a></li>
+          <li><a href="#glossary">06 · 专有名词速查</a></li>
         </ol>
       </details>
 
-      <!-- ==================================================== -->
-      <!-- CHAPTER 01: claude-lead                              -->
-      <!-- ==================================================== -->
+      <!-- 01 问题 -->
+      <section id="problem" class="chapter">
+        <span class="eyebrow">01 / PROBLEM</span>
+        <h2>把主会话当苦力，和靠口头一次性纠错，都会让环境越用越重。</h2>
+        <p>拉完自己的真实会话账单后，发现两个反复发生的结构性痛点：第一，主会话开销的大头不是输出，而是上下文滚大后的<b>缓存读（占等效开销约 80%）</b>——读代码占 ~40%、只读查询 ~15%、构建测试 ~20%，真正改文件只有个位数；第二，窗口里纠错一次只活在那个窗口，换个任务照样踩坑。</p>
+      </section>
+
+      <!-- 02 日常执行 -->
       <section id="claude-lead" class="chapter">
-        <span class="eyebrow">01 / 日常执行 · CLAUDE-LEAD</span>
+        <span class="eyebrow">02 / CLAUDE-LEAD</span>
         <h2>Claude 想清楚，Codex 看清楚：把最贵的主上下文留给决策。</h2>
 
-        <p>
-          以前我习惯在一个主会话里从翻代码、查日志一路干到改逻辑、跑单测。事后拉账才看清真相：<b>主会话开销的大头根本不是输出，而是上下文越滚越大、轮数越来越多后的缓存读（占等效开销约 <code>80%</code>）</b>；按动作拆解，读代码占 ~40%、只读查询占 ~15%、构建测试和端到端占 ~20%，真正改文件只有个位数。
-        </p>
-
-        <div class="cards two">
-          <div class="card">
-            <span class="n">ROLE A · 主管 / 架构师</span>
-            <h4>我（Claude · Tech Lead）</h4>
-            <p>负责判断、和用户拍板、写七栏契约、复核 diff 与测试证据，以及执行高风险对外写操作（部署、发版、改 <code>TCC</code> 配置）。绝不亲自翻几十个文件把主上下文喂胖。</p>
+        <div class="card-grid">
+          <div class="sub-card">
+            <span class="sc-tag">ROLE A · 主管 / 架构师</span>
+            <h4>Claude（Tech Lead）</h4>
+            <p>负责判断、和用户拍板、写七栏契约、复核 diff 与测试证据，以及执行部署、发版、改 <code>TCC</code> 配置等高风险对外写操作。</p>
           </div>
-          <div class="card">
-            <span class="n">ROLE B · 执行者</span>
-            <h4>codex（<code>gpt-6.1-sol</code>）</h4>
-            <p>负责所有大上下文脏活累活——多文件侦察并带证据回简报、按契约施工并跑通单测、部署后按 <code>e2e-record</code> 调接口看页面留存验收证据。</p>
+          <div class="sub-card">
+            <span class="sc-tag">ROLE B · 执行者</span>
+            <h4>Codex（<code>gpt-6.1-sol</code>）</h4>
+            <p>负责所有大上下文重活：多文件侦察并带证据回简报、按契约施工并过单测、部署后按 <code>e2e-record</code> 留存验收证据。</p>
           </div>
         </div>
 
         <figure class="fig">
-          <div class="fig-frame portrait-fig" role="button" tabindex="0" aria-label="点击放大查看日常执行双 Agent 分工与返工熔断流程图">
-            <img src="../../assets/img/rstack/claude-lead-flow.png" width="1108" height="1419" alt="双 Agent 分工泳道图：Claude 负责接需求、拍板、写契约、复核、对外写操作与记账；codex 负责侦察、施工、端到端验证；虚线标注 RESUME/TASK 续派与两轮返工熔断">
-            <span class="zoom-pill">点击放大查看原图</span>
+          <div class="fig-zoom is-portrait" role="button" tabindex="0" aria-label="点击放大查看日常执行双 Agent 泳道图">
+            <img src="../../assets/img/rstack/claude-lead-flow.webp" width="1108" height="1419" loading="lazy" alt="双 Agent 分工泳道图：Claude 接需求、拍板、写契约、复核、对外写操作与记账；codex 侦察、施工、端到端验证">
+            <span class="zoom-pill">点击放大原图</span>
           </div>
-          <figcaption class="fig-meta">
-            <span>图 2 · 日常执行双 Agent 泳道：虚线表示续派同一 codex 会话（<code>RESUME</code>）或沿用原任务 ID 返工（<code>TASK</code>）；两轮返工不达标立即熔断。</span>
+          <figcaption>
+            <span>图 2 · 日常分工泳道：虚线表示续派同一会话（<code>RESUME</code>）或沿用任务 ID 返工（<code>TASK</code>），两轮不达标立即熔断。</span>
             <span class="mono">FIG 02 // CLAUDE-LEAD</span>
           </figcaption>
         </figure>
 
-        <h3>标准六步流水线：侦察 → 拍板 → 契约 → 施工 → 复核 → 记账</h3>
+        <h3>标准六步流水线</h3>
         <ol class="phases">
           <li>
-            <span class="step-tag">STEP 01</span>
-            <h4>接需求与触发判断（盯任务类型，不靠模型估工作量）</h4>
-            <p>实测模型既估不准工作量，也很难感知上下文长度。触发改为盯<b>任务类型</b>（排查、盘点、读长方案、对比分支、跨模块找调用方）和<b>关键时机</b>（接到任务时、方案拍板那一刻、讨论方案开头）。事实简单就跳过侦察直接写契约；万一忘了派发，连续只读达到阈值（默认 <code>25</code> 次）时，<code>posttool_delegate_nudge.py</code> hook 会自动注入一次委派提醒。</p>
+            <span class="phase-tag">STEP 01 · 触发判断</span>
+            <p>盯任务类型（排查、盘点、读长方案、跨模块找调用方）而非让模型估工作量；连续只读达阈值（默认 <code>25</code> 次）时，<code>posttool_delegate_nudge.py</code> 自动注入委派提醒。</p>
           </li>
           <li>
-            <span class="step-tag">STEP 02</span>
-            <h4>① 侦察（交付物：带证据的结论）</h4>
-            <p>独立子问题并行派给 codex。停止条件必须写到<b>要回答的层级</b>（只看到直接报错、没追到具体缺什么不算答完）。如果简报有信息缺口，直接续派同一个 codex 会话追问，绝不污染主会话。</p>
+            <span class="phase-tag">STEP 02 · 侦察</span>
+            <p>独立子问题并行派给 Codex，停止条件写到要回答的层级；有缺口直接续派原会话追问，不污染主会话。</p>
           </li>
           <li>
-            <span class="step-tag">STEP 03</span>
-            <h4>② 拍板与写「七栏契约」</h4>
-            <p>读完侦察简报后，先把涉及产品或架构的取舍和用户拍板，再按固定模板写一份十几行的简短契约——工作区快照、固定约束和汇报格式都由 <code>dispatch.sh</code> 自动拼装，不靠手抄。</p>
+            <span class="phase-tag">STEP 03 · 拍板与七栏契约</span>
+            <p>先和用户敲定取舍，再写十几行简短契约；工作区快照与固定约束由 <code>dispatch.sh</code> 自动拼装。</p>
           </li>
           <li>
-            <span class="step-tag">STEP 04</span>
-            <h4>③ 施工（交付物：代码 + 单测日志）</h4>
-            <p>改、测、修一起包，单测通过才算交差；涉及外部系统（第三方 API、配置中心、测试环境接口）时，验收必须包含一条真实冒烟，不能只靠离线测试。施工前还要求它对照同类接口先查一遍「契约缺口」，并在汇报里单列。</p>
-          </li>
-          <li>
-            <span class="step-tag">STEP 05</span>
-            <h4>复核、对外写边界与端到端验证</h4>
-            <p>复核时先看「契约缺口」，再查<b>越界告警、diff、测试日志、外部事实</b>；测试日志齐全且与 diff 匹配就直接认，不重复跑。<b>对外写操作（部署、发版、改 <code>TCC</code> 等）一律由主管先做</b>，部署完再派 codex 按 <code>e2e-record</code> 调接口、查库、看页面并留证据。</p>
-          </li>
-          <li>
-            <span class="step-tag">STEP 06</span>
-            <h4>两轮返工熔断 &amp; 记账</h4>
-            <p>返工必须通过 <code>RESUME</code> 或 <code>TASK</code> 聚合到同一任务 ID，绝不另起新任务造假「一次通过率」。每轮复核完都用 <code>ledger.py note</code> 记一笔（<code>verdict</code> / <code>cause</code> / <code>gap</code> / <code>--hand-fixed</code>），给周复盘和效率分析留事实源。</p>
+            <span class="phase-tag">STEP 04–06 · 施工、复核与记账</span>
+            <p>Codex 按契约写码并跑单测与 E2E；主管复核 diff 与证据，通过 <code>ledger.py</code> 记台账（手修必加 <code>--hand-fixed</code>）；同一任务两轮返工仍不达标立刻熔断停手。</p>
           </li>
         </ol>
 
-        <div class="callout warn">
-          <p><b>两轮返工熔断红线：</b>同一任务返工两轮仍不达标，立刻停止返工——改为我自己接手，或者退回「侦察」阶段重新拆解。</p>
-          <p>复盘台账反复证明：<b>返工几乎都是契约的锅</b>（最常见的是范围画窄、漏了另一端校验或没核实前提）。</p>
-        </div>
-
-        <h3>七栏契约解剖（点击每一栏展开踩坑经验）</h3>
-        <div class="rcard" aria-label="七栏契约说明">
-          <header>
-            <h4>派发给 codex 的七栏简短契约</h4>
-            <span class="mono muted">由 dispatch.sh 自动拼装信封与约束</span>
-          </header>
+        <div class="accordion" aria-label="七栏契约结构">
+          <div class="accordion-head">
+            <h4>派发给 Codex 的七栏简短契约</h4>
+            <span class="mono muted">由 dispatch.sh 自动拼装信封</span>
+          </div>
           <details open>
-            <summary><b>01 硬不变量</b><span class="brief">业务规则、接口契约、已拍板取舍——对不上必停</span></summary>
-            <div class="more"><b>踩坑红线：</b>没核实过的规则绝不写进这一栏，否则执行者会严格按照错的规则「错得很整齐」，最后全盘返工。</div>
-          </details>
-          <details open>
-            <summary><b>02 行为范围</b><span class="brief">按行为写，不按文件清单写</span></summary>
-            <div class="more">写清「要改变的行为 + 起点」即可。同行为的其他入口、接线、生成物、另一端校验默认都在范围内；只把真正的禁区写进「禁止碰」。</div>
+            <summary><b>01 硬不变量</b><span>业务规则、接口契约、已拍板取舍——对不上必停</span></summary>
+            <div class="acc-body">没核实过的规则绝不写进这一栏，否则执行者会严格按错的规则「错得很整齐」。</div>
           </details>
           <details>
-            <summary><b>03 业务风险</b><span class="brief">只写执行者看不出来的业务红线与放行边界</span></summary>
-            <div class="more">常规安全风险交给执行者自动审批；这一栏只标明它从代码里看不出来的业务红线，以及本次明确放行的写操作对象与范围。</div>
+            <summary><b>02 行为范围</b><span>按行为写，不按文件清单写</span></summary>
+            <div class="acc-body">写清要改变的行为与起点；同行为的入口、接线、生成物与校验默认都在范围内，只把禁区写进「禁止碰」。</div>
           </details>
           <details>
-            <summary><b>04 未决口径</b><span class="brief">还没拍板的取舍点</span></summary>
-            <div class="more">能当场问用户的先问掉；实在依赖现场实现才能暴露的取舍点写在这里，让它遇到就停，不擅自替人拍板。</div>
+            <summary><b>03 业务风险</b><span>只写执行者从代码里看不出来的业务红线</span></summary>
+            <div class="acc-body">常规安全风险交给执行者自审；这里只标明外部业务红线与本次明确放行的写操作范围。</div>
           </details>
           <details>
-            <summary><b>05 待核假设</b><span class="brief">主管没亲手验证过的外部行为或环境规则</span></summary>
-            <div class="more">明确标注为「假设」而非「硬不变量」，要求执行者动手改代码前先做只读核实，假设不成立就回报。</div>
+            <summary><b>04 未决口径</b><span>尚未拍板的取舍点，遇到即停</span></summary>
+            <div class="acc-body">能当场问用户的先问掉；依赖现场实现才暴露的取舍写在这里，防止执行者擅自替人拍板。</div>
           </details>
           <details>
-            <summary><b>06 现场自决</b><span class="brief">迁移编号、命名、文件是否存在等机械事实</span></summary>
-            <div class="more">交给执行者按仓库现状直接定，主管绝不凭记忆猜一个编号写死在契约里。</div>
+            <summary><b>05 待核假设</b><span>主管未亲手验证过的外部行为或环境规则</span></summary>
+            <div class="acc-body">显式标为假设，要求执行者动手改代码前先只读核实，不成立即回报。</div>
           </details>
           <details>
-            <summary><b>07 已知</b><span class="brief">已核实事实、相关 ID、已跑通的工具</span></summary>
-            <div class="more">帮执行者省去重复翻找；若是侦察任务，可以在这一栏列出怀疑方向，并附上优先级和理由。</div>
+            <summary><b>06 现场自决</b><span>迁移编号、命名等机械事实按仓库现状自定</span></summary>
+            <div class="acc-body">主管绝不凭记忆猜编号写死在契约里。</div>
+          </details>
+          <details>
+            <summary><b>07 已知</b><span>已核实事实、相关 ID、已跑通工具与排查方向</span></summary>
+            <div class="acc-body">帮执行者省去重复翻找；侦察任务可附带怀疑方向与优先级。</div>
           </details>
         </div>
       </section>
 
-      <!-- ==================================================== -->
-      <!-- CHAPTER 02: weekly-retro                             -->
-      <!-- ==================================================== -->
+      <!-- 03 每周复盘 -->
       <section id="weekly-retro" class="chapter">
-        <span class="eyebrow">02 / 自进化闭环 · WEEKLY-RETRO</span>
-        <h2>把每一次踩坑，从会话里下沉到下次必经的环境资产里。</h2>
-
-        <p>
-          一次会话里用户纠正了 Agent，那句纠正只活在那个窗口里。我把本机所有项目产生的过程数据——<b>Claude 会话（含各仓库与 worktree）、Codex 会话（含子任务）、T3 线程（按需补 <code>antigravity</code>）、hook 命中日志</b>——接进了三层节奏的维护闭环：
-        </p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>节奏</th>
-                <th>模块</th>
-                <th>触发时机</th>
-                <th>核心职责</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><b>需求级</b></td>
-                <td><code>wrapup</code></td>
-                <td>单个需求结束</td>
-                <td>核实合入 → 清理 worktree → 提炼跨需求经验（人确认后升入长期层）→ 归档需求记忆和笔记 → 清掉失效引用</td>
-              </tr>
-              <tr>
-                <td><b>周度主力</b></td>
-                <td><code>weekly-retro</code></td>
-                <td>每周五晚</td>
-                <td>跑跨期指标、捞失败点、拐点四问卡归因、三层分诊选药、人拍板落补丁、反事实重放验收</td>
-              </tr>
-              <tr>
-                <td><b>元调优</b></td>
-                <td><code>retro-tune</code><br><span class="muted">（<code>references/tune.md</code>）</span></td>
-                <td>每 2 期<br><span class="muted">（<code>tune_due.py</code> 判定）</span></td>
-                <td>审视复盘本身：介入降了没、改动有效率、动静比、hook 误拦率、回放区分度、采纳率、漏报与成本 → <b>改进复盘本身</b></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <span class="eyebrow">03 / WEEKLY-RETRO</span>
+        <h2>把每一次踩坑，从窗口下沉到下次必经的环境资产。</h2>
+        <p>把本机 Claude 会话、Codex 会话、T3 线程（按需补 <code>antigravity</code>）和 hook 命中日志接入三层维护节奏：需求级 <code>wrapup</code>、每周五晚主力 <code>weekly-retro</code>，以及每 2 期一次、专门改进复盘本身的 <code>retro-tune</code>。</p>
 
         <figure class="fig">
-          <div class="fig-frame" role="button" tabindex="0" aria-label="点击放大查看每周复盘完整机制全景图">
-            <img src="../../assets/img/rstack/weekly-retro-detail.png" width="1311" height="1200" alt="weekly-retro 完整机制图：输入数据源、八步循环、03-05 展开（5 类失败点 → 拐点四问卡 → 感知/动作/反馈三层分诊与动态优先补丁）、事实源台账及 12 项观测指标">
-            <span class="zoom-pill">点击放大查看原图</span>
+          <div class="fig-zoom" role="button" tabindex="0" aria-label="点击放大查看每周复盘机制全景图">
+            <img src="../../assets/img/rstack/weekly-retro-detail.webp" width="1311" height="1200" loading="lazy" alt="weekly-retro 完整机制图：输入数据源、八步循环、5 类失败点、拐点四问卡、三层分诊与 12 项观测指标">
+            <span class="zoom-pill">点击放大原图</span>
           </div>
-          <figcaption class="fig-meta">
-            <span>图 3 · <code>weekly-retro</code> 完整机制全景：上层为输入/循环/资产流转，中层展开「失败点 → 拐点四问卡 → 三层分诊」，底层汇总跨期观测指标。</span>
+          <figcaption>
+            <span>图 3 · <code>weekly-retro</code> 八步闭环：回填旧账 → 扫会话 → 捞 5 类失败点 → 拐点四问卡 → 三层分诊 → 人拍板 → 反事实重放 → 记账。</span>
             <span class="mono">FIG 03 // WEEKLY-RETRO</span>
           </figcaption>
         </figure>
 
-        <h3><code>weekly-retro</code> 八步闭环</h3>
-        <ol class="phases">
-          <li>
-            <span class="step-tag">01 回填上期</span>
-            <h4>先翻旧账，再看是否到期元评估</h4>
-            <p>对照上期 <code>ledger/changes.md</code> 里标为「待验证」的补丁，用本周真实指标和回放结果逐条判为「有效 / 无效 / 仍待验证」；同时跑 <code>tune_due.py</code> 判断本期是否顺手做一次 <code>retro-tune</code>。</p>
-          </li>
-          <li>
-            <span class="step-tag">02 收集数据</span>
-            <h4>跑 <code>scan.py</code> 出指标、做记忆体检与 <code>turns.tsv</code></h4>
-            <p>早期踩过一个大坑：介入类正则只标出 1 条纠正，人工通读却读出 10 条。所以现在<b>正则只降级为预标注</b>，真正判读靠通读 <code>turns.tsv</code>，漏掉的说法再反哺进正则。</p>
-          </li>
-          <li>
-            <span class="step-tag">03 找失败点</span>
-            <h4>核心纪律：人插手即失败（拍板、补需求不算）</h4>
-            <p>集中捞 5 类信号：<b>用户纠正</b>（做错了人来改）、<b>追问进度/卡顿</b>（过程看不见）、<b>空确认</b>（不该停却停下来问）、<b>自我更正/震荡</b>（同类调用反复失败），以及<b>高频高成本流程（<code>flows</code>）</b>（没出错也没人纠正，但动辄跑十几步、反复查 <code>--help</code> 或手写 ID）。</p>
-          </li>
-          <li>
-            <span class="step-tag">04 拐点归因</span>
-            <h4>用 <code>turn.py</code> 回看那一回合，填「拐点四问卡」</h4>
-            <p>直接调出第一次偏离最优路径那一刻 Agent 窗口里的上下文——搞清当时是<b>缺信息、脏信息还是假信号</b>，固定写四行：<b>现象</b>（做了 A，期望 B）/ <b>归因</b>（缺了什么、多了什么）/ <b>下沉</b>（哪个组件该喂信号）/ <b>验收</b>（不靠人也能收敛）。</p>
-          </li>
-          <li>
-            <span class="step-tag">05 三层分诊</span>
-            <h4>感知 / 动作 / 反馈三层选药，动态补丁绝对优先</h4>
-            <p>按 Agent 在对的时刻真正用得上的把握排序：<b>命令执行时的 hook ≈ 常驻上下文（全局约定、技能描述） &gt; 技能正文 &gt; 记忆</b>。能拦截或封装成脚本的，绝不只写一句文档约束。</p>
-          </li>
-          <li>
-            <span class="step-tag">06 用户确认</span>
-            <h4>每期 ≤ 5 条补丁，人逐条采纳或驳回</h4>
-            <p>严控变更密度，其余进观察池；被驳回的建议和理由同样写进 <code>retro.md</code>，供后续元调优核查归因是否跑偏。</p>
-          </li>
-          <li>
-            <span class="step-tag">07 落地 + 重放</span>
-            <h4>全新无头只读会话反事实重放验收</h4>
-            <p>每条采纳的发现至少写一道<b>只读回放题</b>放进 <code>$RETRO_DIR/replays/</code>，由 <code>replay.py</code> 新开不给提示的无头 Codex 会话作答、模型裁判判分（纯正则在否定句里极易误判）。<b>回放没通过，直接打回 05 重新分诊。</b></p>
-          </li>
-          <li>
-            <span class="step-tag">08 记账汇报</span>
-            <h4>沉淀事实源，留给下周五回填</h4>
-            <p>指标追加进 <code>metrics.jsonl</code>，补丁记入 <code>ledger/changes.md</code>（标为「待验证」），完整结论写入本期 <code>retro.md</code>。</p>
-          </li>
-        </ol>
+        <div class="callout">
+          <b>核心纪律：</b>人插手即失败（拍板、补需求不算）；正则只做预标注，真正判读靠通读 <code>turns.tsv</code>；每条采纳的补丁必须过 <code>replay.py</code> 全新无头只读会话的反事实重放验收，没过直接打回重分诊。
+        </div>
 
         <h3>三层分诊与动态优先补丁矩阵</h3>
         <div class="table-wrap">
@@ -349,103 +225,76 @@
                 <th>问题分层</th>
                 <th>典型症状</th>
                 <th>动态补丁（优先）</th>
-                <th>静态补丁（做不成动态才兜底）</th>
+                <th>静态补丁（兜底）</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><b>感知层</b></td>
-                <td>不知道规则、找不到入口、被长输出噪音淹没</td>
-                <td><b>前置检查脚本</b>：一次输出关键事实，做好输出截断和过滤</td>
-                <td><b>入口与约定</b>：技能描述、全局约定、入口地图、状态记忆</td>
+                <td>不知规则、找不到入口、被长输出淹没</td>
+                <td>前置检查脚本：一次输出关键事实并截断过滤</td>
+                <td>技能描述、全局约定、入口地图、状态记忆</td>
               </tr>
               <tr>
                 <td><b>动作层</b></td>
-                <td>工具不会用、参数总传错、多步连招繁琐</td>
-                <td><b>封装成脚本</b>：高频多步压成一条命令（如 <code>xapi</code>、<code>lane_wait</code>）</td>
-                <td><b>已验证写法</b>：写进速查技能（如 <code>xagent-ops-cli</code>）</td>
+                <td>工具不会用、参数常错、多步连招繁琐</td>
+                <td>封装短命令脚本（如 <code>xapi</code>、<code>lane_wait</code>）</td>
+                <td>速查技能（如 <code>xagent-ops-cli</code>）</td>
               </tr>
               <tr>
                 <td><b>反馈层</b></td>
-                <td>走错了自己不知道、报错看不懂、最后才爆雷</td>
-                <td><b>hook 拦截</b>：执行前当场拦下，给出报错 + 修复提示</td>
-                <td><b>经验记忆</b>：沉淀为 <code>feedback</code> / <code>reference</code> 记忆</td>
+                <td>走错了不知道、报错看不懂、最后才爆雷</td>
+                <td>hook 当场拦截并给修复提示</td>
+                <td>沉淀为 <code>feedback</code> / <code>reference</code> 记忆</td>
               </tr>
             </tbody>
           </table>
         </div>
-
-        <div class="callout">
-          <p><b>跨 Agent 兼容边界：</b>hook 只对 Claude Code 生效；如果一个问题同时影响 Codex，必须优先做成<b>共享脚本或前置检查脚本</b>，辅以全局约定，避免补丁只在单侧生效。</p>
-        </div>
+        <p class="muted" style="font-size:var(--fs-small)">跨 Agent 边界：hook 只对 Claude Code 生效；同时影响 Codex 的问题必须优先做成共享脚本或前置检查脚本。</p>
       </section>
 
-      <!-- ==================================================== -->
-      <!-- CHAPTER 03: METRICS W45-W47                          -->
-      <!-- ==================================================== -->
+      <!-- 04 四期账本 -->
       <section id="metrics" class="chapter">
-        <span class="eyebrow">03 / 实测账本 · W45–W47</span>
-        <h2>不信「体感变好了」：连续四期跨期比率与资产健康度追踪。</h2>
-
-        <p>
-          从 <code>2026-11-07</code> 起连续记录了 4 期（<code>W45 → W46 → W46b → W47</code>）。因为每周任务量差几倍，<b>所有指标一律按比率对比、不比绝对数</b>（介入类按「每百条用户消息」，工具类按「每千次工具调用」，都是越低越好）。其中 <b>W46b 起介入类从正则预标注升级为人工通读判读</b>——折线图里空心点表示早期正则值（漏标偏低），实心点代表人工判读或脚本精确统计。
-        </p>
-
-        <div class="metrics">
-          <div class="metric">
-            <span class="eyebrow">查 --help / 千次调用</span>
-            <span class="v">↓ 55%</span>
-            <span class="l"><code>36.4 → 16.2</code> · 速查技能与 <code>xapi</code> / <code>lane_wait</code> 封装直接见效</span>
-          </div>
-          <div class="metric">
-            <span class="eyebrow">被拦（权限/安全）</span>
-            <span class="v">↓ 78%</span>
-            <span class="l"><code>3.2 → 0.7</code> · 持续稳定在极低水位</span>
-          </div>
-          <div class="metric terracotta">
-            <span class="eyebrow">W47 反事实回放验收</span>
-            <span class="v">3 / 3</span>
-            <span class="l">补丁前基线全部失败，补丁落地后全新无头会话 100% 通过</span>
-          </div>
-        </div>
+        <span class="eyebrow">04 / METRICS LEDGER · W45–W47</span>
+        <h2>不靠体感：连续四期跨期比率与资产健康度追踪。</h2>
+        <p>从 <code>2026-11-07</code> 起连续追踪 4 期（<code>W45 → W46 → W46b → W47</code>）。因每周任务量差几倍，所有指标一律按比率对比（越低越好）：介入类按每百条用户消息，工具类按每千次工具调用。W46b 起介入类由正则预标注升级为人工通读判读。</p>
 
         <figure class="fig">
-          <div class="fig-frame" role="button" tabindex="0" aria-label="点击放大查看每周复盘 7 个观测指标趋势图">
-            <img src="../../assets/img/rstack/metrics-trend.png" width="1855" height="848" alt="每周复盘 7 个观测指标趋势图（W45-W47）：纠正类介入、追问进度卡顿、空确认、查 --help、被拦、自我更正、工具报错，以及空心点与实心点图例说明">
-            <span class="zoom-pill">点击放大查看原图</span>
+          <div class="fig-zoom" role="button" tabindex="0" aria-label="点击放大查看 W45–W47 观测指标趋势图">
+            <img src="../../assets/img/rstack/metrics-trend.webp" width="1855" height="848" loading="lazy" alt="W45-W47 七项观测指标趋势图">
+            <span class="zoom-pill">点击放大原图</span>
           </div>
-          <figcaption class="fig-meta">
-            <span>图 4 · 2026-11-07 起 4 期趋势：各图纵轴独立，越低越好；空心点为正则预标注（偏低），实心点为人工判读 / 脚本统计。</span>
+          <figcaption>
+            <span>图 4 · 4 期趋势（越低越好）：空心点为早期正则预标注（漏标偏低），实心点为人工判读或脚本精确统计。</span>
             <span class="mono">FIG 04 // METRICS W45–W47</span>
           </figcaption>
         </figure>
 
-        <h3>7 项核心趋势指标明细</h3>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>观测指标</th>
-                <th>统计口径</th>
+                <th>口径</th>
                 <th>W45 → W46 → W46b → W47</th>
                 <th>状态</th>
-                <th>归因与解读</th>
+                <th>归因解读</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><b>纠正类介入</b></td>
-                <td>/ 百条消息</td>
-                <td><code>2.5 → 3.9 → 3.6 → 2.5</code></td>
-                <td><span class="trend flat">持平</span></td>
-                <td>W46b 起改人工判读，前两期正则漏标偏低</td>
+                <td><b>查 <code>--help</code></b></td>
+                <td>/ 千次调用</td>
+                <td><code>36.4 → 20.1 → 24.8 → 16.2</code></td>
+                <td><span class="trend good">↓ 55%</span></td>
+                <td>速查技能 + <code>xapi</code> / <code>lane_wait</code> 封装直接减噪</td>
               </tr>
               <tr>
-                <td><b>追问进度、卡顿</b></td>
-                <td>/ 百条消息</td>
-                <td><code>0.7 → 2.4 → 1.8 → 1.1</code></td>
-                <td><span class="trend flat">回落</span></td>
-                <td>W46 冲高后逐步收敛，过程可见度改善</td>
+                <td><b>被拦（权限/安全）</b></td>
+                <td>/ 千次调用</td>
+                <td><code>3.2 → 0.7 → 0.4 → 0.7</code></td>
+                <td><span class="trend good">↓ 78%</span></td>
+                <td>稳定在极低水位，越界操作大幅减少</td>
               </tr>
               <tr>
                 <td><b>空确认</b></td>
@@ -455,25 +304,25 @@
                 <td>W46 修订「何时停下问」全局约定后稳住</td>
               </tr>
               <tr>
-                <td><b>查 <code>--help</code></b></td>
-                <td>/ 千次调用</td>
-                <td><code>36.4 → 20.1 → 24.8 → 16.2</code></td>
-                <td><span class="trend good">↓ 55%</span></td>
-                <td>速查技能 + <code>xapi</code> / <code>lane_wait</code> 封装明显减噪</td>
+                <td><b>追问进度、卡顿</b></td>
+                <td>/ 百条消息</td>
+                <td><code>0.7 → 2.4 → 1.8 → 1.1</code></td>
+                <td><span class="trend flat">回落</span></td>
+                <td>W46 冲高后收敛，过程可见度改善</td>
               </tr>
               <tr>
-                <td><b>被拦（权限/安全）</b></td>
-                <td>/ 千次调用</td>
-                <td><code>3.2 → 0.7 → 0.4 → 0.7</code></td>
-                <td><span class="trend good">↓ 78%</span></td>
-                <td>持续保持低位，越界操作大幅下降</td>
+                <td><b>纠正类介入</b></td>
+                <td>/ 百条消息</td>
+                <td><code>2.5 → 3.9 → 3.6 → 2.5</code></td>
+                <td><span class="trend flat">持平</span></td>
+                <td>W46b 起改人工判读，前两期正则偏低</td>
               </tr>
               <tr>
                 <td><b>自我更正</b></td>
                 <td>/ 千次调用</td>
                 <td><code>8.0 → 2.6 → 4.4 → 7.7</code></td>
                 <td><span class="trend flat">反弹</span></td>
-                <td>W47 含约 5 条正则误标，归入元调优修口径</td>
+                <td>W47 含约 5 条正则误标，纳入元调优修口径</td>
               </tr>
               <tr>
                 <td><b>工具报错</b></td>
@@ -486,166 +335,60 @@
           </table>
         </div>
 
-        <h3>同步盯紧的 5 项环境资产健康度</h3>
-        <div class="cards">
-          <div class="card">
-            <span class="n">HEALTH 01 · REPLAYS</span>
-            <h4>回放通过率</h4>
-            <p>W47 补丁题 <b>3/3 通过</b>（补丁前基线全失败），证明改动真的改变了行为而非安慰剂；也用来保护「删减旧约定」不回退。</p>
+        <div class="card-grid three">
+          <div class="sub-card">
+            <span class="sc-tag">REPLAYS</span>
+            <h4>回放通过率 3 / 3</h4>
+            <p>W47 补丁前基线全失败，补丁落地后全新无头会话 100% 通过，验证改动真实有效。</p>
           </div>
-          <div class="card">
-            <span class="n">HEALTH 02 · SKILL USAGE</span>
-            <h4>技能与封装采用率</h4>
-            <p>W47 <code>ops-cli</code> 被调用 <b>351 次</b>居首；<code>flows</code> 同步监控专用工具采用率 <code>tool_share</code>，确保封装真的被用起来。</p>
+          <div class="sub-card">
+            <span class="sc-tag">SKILL USAGE</span>
+            <h4>封装真实采用</h4>
+            <p>W47 <code>ops-cli</code> 被调用 <b>351 次</b>居首；同步监控专用工具占比 <code>tool_share</code>。</p>
           </div>
-          <div class="card">
-            <span class="n">HEALTH 03 · HOOK &amp; MEMORY</span>
-            <h4>hook 自测与记忆体检</h4>
-            <p>每条 hook 规则自带 <code># retro-selftest</code> 验证活性，连续 3 期零真实命中提议删；记忆索引 <code>W46b 13979 → W47 15500</code> 字节，已入减法清单。</p>
+          <div class="sub-card">
+            <span class="sc-tag">HYGIENE</span>
+            <h4>主动做减法</h4>
+            <p>连续 3 期零真实命中的 hook 自动提议删除；记忆索引从 <code>13979 → 15500</code> 字节，已入瘦身清单。</p>
           </div>
         </div>
       </section>
 
-      <!-- ==================================================== -->
-      <!-- CHAPTER 04: PRACTICAL SETUP & COMMANDS               -->
-      <!-- ==================================================== -->
+      <!-- 05 实操上手 -->
       <section id="setup" class="chapter">
-        <span class="eyebrow">04 / 实操上手 · SETUP &amp; CLI</span>
-        <h2>目录结构、一键安装、环境变量与日常命令速查。</h2>
-
-        <h3>1. 本地仓库目录结构</h3>
-        <div class="code-block">
-          <div class="code-head">
-            <span>rstack/ 目录树</span>
-            <button class="btn-copy" type="button" data-copy="#code-tree">复制</button>
-          </div>
-          <pre id="code-tree"><code>rstack/
-├── install.sh                         # 一键软链安装技能，--hooks 可选合并 Claude Code hook
-├── global/
-│   └── AGENTS.example.md              # 配合两套技能的全局约定模板（CLAUDE.md / AGENTS.md）
-├── hooks/
-│   ├── pretool_guard.py               # PreToolUse(Bash) 守卫（默认 ask，确定必败才 deny，带自测）
-│   ├── posttool_delegate_nudge.py     # PostToolUse 连续只读 N 次注入委派提醒（不拦截）
-│   └── install_hooks.py               # 幂等合并进 ~/.claude/settings.json（自动先备份）
-├── skills/
-│   ├── claude-lead/
-│   │   ├── SKILL.md                   # 派发判断依据、七栏契约、复核与记账规范
-│   │   ├── DESIGN.md                  # 每条规则背后的台账依据与踩坑笔记
-│   │   ├── references/                # brief-template.md / envelope.md / 汇报模板
-│   │   ├── scripts/
-│   │   │   ├── dispatch.sh            # 拼工作区快照 + 契约 + 固定约束，后台跑 codex 并自动记账
-│   │   │   ├── ledger.py              # 台账：note / stats / efficiency / list
-│   │   │   └── timing.py              # 复算派发时机与结果、调校委派提醒阈值
-│   │   └── ledger/retro.md            # 委派复盘记录模板
-│   └── weekly-retro/
-│       ├── SKILL.md                   # 八步复盘流程
-│       ├── DESIGN.md                  # 方法论与指标口径踩坑记录
-│       ├── config.example.json        # 扫描配置示例（常用 CLI 与流程领域表）
-│       ├── references/tune.md         # 每两期一次的复盘元评估
-│       ├── replays/examples/          # 只读回放题 JSON 示例
-│       ├── ledger/                    # changes.md / tune-log.md 模板
-│       └── scripts/
-│           ├── scan.py                # 扫描全量会话，产出 metrics.json、samples.md、turns.tsv
-│           ├── turn.py                # 批量拉出介入拐点之前那一回合的轨迹
-│           ├── replay.py              # 无头只读 Codex 反事实重放 + 模型裁判
-│           └── tune_due.py            # 判断本期是否到期评估复盘本身
-└── docs/                              # 设计框架图与生成脚本（gen_diagrams.py）</code></pre>
-        </div>
-
-        <h3>2. 环境依赖与安装</h3>
-        <p>
-          前置依赖：Claude Code、已登录的 Codex CLI、Python 3.9+、Bash、Git，以及 GNU coreutils 提供的 <code>timeout</code> / <code>gtimeout</code>（macOS 可执行 <code>brew install coreutils</code>）。
-        </p>
+        <span class="eyebrow">05 / SETUP &amp; COMMANDS</span>
+        <h2>目录结构、安装与日常命令速查。</h2>
 
         <div class="code-block">
           <div class="code-head">
-            <span>bash · 安装技能与可选 hook</span>
+            <span>bash · 一键安装技能与可选 hook</span>
             <button class="btn-copy" type="button" data-copy="#code-install">复制</button>
           </div>
-          <pre id="code-install"><code># 1. 软链安装技能到 ~/.claude/skills 和 ~/.codex/skills（已有同名技能自动跳过）
+          <pre id="code-install"><code># 软链安装技能到 ~/.claude/skills 和 ~/.codex/skills（已有同名自动跳过）
 bash install.sh
 
-# 2. 可选：幂等合并 PreToolUse 守卫和委派提醒 hook 到 ~/.claude/settings.json（改前自动备份）
+# 可选：幂等合并 PreToolUse 守卫与委派提醒 hook（修改前自动备份）
 bash install.sh --hooks</code></pre>
         </div>
 
-        <p>
-          接着完成两步配置：① 把 <code>global/AGENTS.example.md</code> 里需要的约定合进你的全局规则（Claude Code 读 <code>CLAUDE.md</code>，Codex 读 <code>AGENTS.md</code>）；② 扫描开箱可用，如需定制自己的常用 CLI 或流程领域，复制 <code>skills/weekly-retro/config.example.json</code> 到 <code>$RETRO_DIR/config.json</code> 按需修改。
-        </p>
-
-        <h3>3. 常用环境变量</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>环境变量</th>
-                <th>作用</th>
-                <th>默认值</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>MODEL</code> / <code>EFFORT</code> / <code>SERVICE_TIER</code></td>
-                <td><code>dispatch.sh</code> 调用 codex 的模型、推理强度、服务档</td>
-                <td>codex 配置 / <code>medium</code> / 默认</td>
-              </tr>
-              <tr>
-                <td><code>TIMEOUT</code></td>
-                <td>单次派发超时时间（秒）</td>
-                <td><code>1800</code></td>
-              </tr>
-              <tr>
-                <td><code>DELEGATE_WRITABLE</code></td>
-                <td>派发时长期放行的可写目录（如 CLI 登录态、构建缓存）</td>
-                <td>无</td>
-              </tr>
-              <tr>
-                <td><code>NUDGE_THRESHOLD</code></td>
-                <td>委派提醒阈值（连续只读工具调用次数）</td>
-                <td><code>25</code></td>
-              </tr>
-              <tr>
-                <td><code>RETRO_DIR</code></td>
-                <td>个人复盘记录、台账与回放题存放目录</td>
-                <td><code>~/notes/retro</code></td>
-              </tr>
-              <tr>
-                <td><code>RETRO_CONFIG</code></td>
-                <td><code>scan.py</code> 扫描配置文件路径</td>
-                <td><code>$RETRO_DIR/config.json</code></td>
-              </tr>
-              <tr>
-                <td><code>REPLAY_MODEL</code></td>
-                <td>反事实重放与模型裁判使用的模型</td>
-                <td>codex 默认</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>4. 日常派发与每周复盘命令速查</h3>
         <div class="code-block">
           <div class="code-head">
-            <span>claude-lead · 派发、续派、记账与效率分析</span>
+            <span>claude-lead · 派发、续派、记账与分析</span>
             <button class="btn-copy" type="button" data-copy="#code-lead">复制</button>
           </div>
-          <pre id="code-lead"><code># 新派任务（交付物填：结论 或 代码；一律后台运行等通知，不轮询）
+          <pre id="code-lead"><code># 新派任务（后台运行等通知，不轮询）
 "$DG/dispatch.sh" &lt;workdir&gt; &lt;brief.md&gt; &lt;结论|代码&gt; &lt;标签&gt;
 
-# 续派同一 codex 会话（追问或返工，brief 只写增量）
+# 续派同一 codex 会话（只写增量）
 RESUME=&lt;task_id|run目录&gt; "$DG/dispatch.sh" - &lt;brief.md&gt;
 
-# 沿用原任务 ID 开新会话返工（换 worktree 或会话）
-TASK=&lt;原task_id&gt; "$DG/dispatch.sh" &lt;workdir&gt; &lt;brief.md&gt; 代码 &lt;标签&gt;
-
-# 每轮复核后记账（手修过必加 --hand-fixed）
+# 复核记账（手修过必加 --hand-fixed）
 "$DG/ledger.py" note &lt;run目录&gt; --verdict &lt;pass|partial|fail|stop&gt; \
   [--cause &lt;原因&gt;] [--gap &lt;契约缺口&gt;] [--hand-fixed] --level &lt;低|中|高&gt; \
   --task "&lt;任务简述&gt;" --comment "&lt;复核结论&gt;"
 
-# 定期看统计、效率、token 转移比例与 hook 提醒阈值回放
+# 查看统计、效率与委派阈值回放
 "$DG/ledger.py" stats --since &lt;YYYY-MM-DD&gt;
-"$DG/ledger.py" efficiency --since &lt;YYYY-MM-DD&gt;
 "$DG/timing.py" --since &lt;YYYY-MM-DD&gt;</code></pre>
         </div>
 
@@ -654,127 +397,72 @@ TASK=&lt;原task_id&gt; "$DG/dispatch.sh" &lt;workdir&gt; &lt;brief.md&gt; 代�
             <span>weekly-retro · 扫描、查拐点与反事实重放</span>
             <button class="btn-copy" type="button" data-copy="#code-retro">复制</button>
           </div>
-          <pre id="code-retro"><code># 首次验证 Codex 回放链路（使用内置合成例题）
-python3 -I skills/weekly-retro/scripts/replay.py --example --out "$(mktemp -d)"
-
-# 第 1 步：检查本期是否到期做「复盘元评估」
-python3 -I "$WR/scripts/tune_due.py"
-
-# 第 2 步：扫描窗口内会话，输出指标、样本与人工判读表 turns.tsv
+          <pre id="code-retro"><code>python3 -I "$WR/scripts/tune_due.py"
 python3 -I "$WR/scripts/scan.py" --since &lt;起点&gt; --until &lt;终点&gt;
-
-# 第 4 步：批量拉出失败拐点之前那一回合的完整上下文轨迹
 python3 -I "$WR/scripts/turn.py" '&lt;会话标识&gt;|&lt;月-日 时:分&gt;|&lt;关键词&gt;'
-
-# 第 7 步：补丁落地后，开无提示只读新会话做反事实重放验收
 python3 -I "$WR/scripts/replay.py" --out &lt;本期目录&gt; --only &lt;题号&gt;</code></pre>
         </div>
 
-        <h3>5. 本地数据落盘与三条实践护栏</h3>
-        <div class="retro">
-          <div class="keep">
-            <h4>本地数据与隐私边界（不进技能仓）</h4>
+        <div class="retro-grid">
+          <div class="retro-col">
+            <h4>数据与隐私边界</h4>
             <ul>
-              <li><b>复盘资产：</b>报告、<code>metrics.jsonl</code>、<code>ledger/changes.md</code>、<code>tune-log.md</code> 与 <code>replays/*.json</code> 落在 <code>$RETRO_DIR</code>（默认 <code>~/notes/retro</code>），写回放题前先脱敏凭证。</li>
-              <li><b>派发产物：</b>契约、输出和 diff 存于 <code>~/.local/share/agent-delegate/runs/</code>，台账存于 <code>~/.local/state/agent-delegate/</code>。</li>
-              <li><b>hook 日志：</b>命中记录落 <code>~/.local/state/agent-hooks/hits.jsonl</code>（仅记规则名、决策、会话 ID 与是否自测，不保存命令原文和工作目录）。</li>
+              <li>复盘报告、<code>metrics.jsonl</code> 与 <code>replays/*.json</code> 落在本地 <code>$RETRO_DIR</code>（默认 <code>~/notes/retro</code>），写回放题前先脱敏凭证。</li>
+              <li>派发产物落 <code>~/.local/share/agent-delegate/runs/</code>；hook 日志仅记规则名、决策与会话 ID，不保存命令原文。</li>
             </ul>
           </div>
-          <div class="redo">
-            <h4>给想抄作业的人：三条护栏</h4>
+          <div class="retro-col is-limit">
+            <h4>三条实践护栏</h4>
             <ul>
-              <li><b>补丁宁少勿多：</b>每期上限 5 条且必须人逐条拍板；只改个人环境，业务代码与团队仓库规则文件只提建议。</li>
-              <li><b>一定要做减法：</b>连续 3 期零真实命中的 hook 删掉、长期 100% 通过的回放题降频或退役、记忆索引定期瘦身，防止环境资产反噬成感知噪音。</li>
-              <li><b>按自己的台账改：</b>别把我的数字当教条，搬到你的工作流后按 <code>timing.py</code> 与 <code>metrics.jsonl</code> 真实数据动态调校。</li>
+              <li>每期补丁上限 5 条且逐条人拍板；只改个人环境，团队仓库规则只提建议。</li>
+              <li>持续做减法：零命中 3 期的 hook 删、长期 100% 通过的回放题降频、记忆定期瘦身。</li>
+              <li>别把我的阈值当教条，按自己的 <code>timing.py</code> 与 <code>metrics.jsonl</code> 调校。</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- ==================================================== -->
-      <!-- CHAPTER 05: GLOSSARY                                 -->
-      <!-- ==================================================== -->
+      <!-- 06 专有名词 -->
       <section id="glossary" class="chapter">
-        <span class="eyebrow">05 / 名词速查 · GLOSSARY</span>
-        <h2>文中专有名词速查表</h2>
-        <p>涉及自建脚本、内部工具和约定代号，输入关键词即可实时过滤定位：</p>
-
+        <span class="eyebrow">06 / GLOSSARY</span>
+        <h2>专有名词速查表</h2>
         <div class="glossary-bar">
-          <input id="glossary-search" class="glossary-search" type="search" placeholder="输入关键词过滤，例如：rstack、TCC、hook、xapi、replay…" aria-label="过滤专有名词">
+          <input id="glossary-search" class="glossary-search" type="search" placeholder="输入关键词过滤：rstack、TCC、hook、xapi、replay…" aria-label="过滤专有名词">
           <span id="glossary-count" class="mono muted">11 / 11</span>
         </div>
-
         <dl class="glossary-grid">
-          <div class="g-item">
-            <dt>rstack</dt>
-            <dd>我个人维护的本地 AI 工程环境资产仓，汇总了 <code>claude-lead</code>、<code>weekly-retro</code> 两套技能、配套脚本、全局约定和 Claude Code hook。</dd>
-          </div>
-          <div class="g-item">
-            <dt>Claude / Codex（gpt-6.1-sol）</dt>
-            <dd>双 Agent 组合：前者担任主控主管（推理、拍板、写契约、复核、执行对外写操作），后者担任执行者（大上下文侦察、按契约施工、单测与 E2E 验证）。</dd>
-          </div>
-          <div class="g-item">
-            <dt>claude-lead / weekly-retro / wrapup / retro-tune</dt>
-            <dd>四块协作流程，分别负责日常双 Agent 委派、每周五晚八步复盘、单个需求结束收尾、每两期一次的复盘元评估（对应 <code>references/tune.md</code> 与 <code>tune_due.py</code>）。</dd>
-          </div>
-          <div class="g-item">
-            <dt>dispatch.sh / ledger.py / timing.py</dt>
-            <dd><code>claude-lead</code> 配套脚本，分别负责拼装信封并后台派发 codex、记录与统计派发台账、分析派发时机与委派提醒阈值。</dd>
-          </div>
-          <div class="g-item">
-            <dt>scan.py / turn.py / replay.py / tune_due.py</dt>
-            <dd><code>weekly-retro</code> 配套脚本，分别负责扫描会话出指标与 <code>turns.tsv</code>、回看失败拐点轨迹、拉起只读无头会话做反事实重放验收、判断元评估周期。</dd>
-          </div>
-          <div class="g-item">
-            <dt>pretool_guard.py / posttool_delegate_nudge.py</dt>
-            <dd>两枚 Claude Code hook：前者在执行高风险 Bash 命令前拦截或确认（支持 <code># confirmed-by-user</code> 豁免与 <code># retro-selftest</code> 自测），后者在主会话连续只读超阈值时提醒委派。</dd>
-          </div>
-          <div class="g-item">
-            <dt>xapi / lane_wait</dt>
-            <dd>动作层动态补丁代表：把高频多步命令封装成一条短命令，显著压低查 <code>--help</code> 频率和传参出错。</dd>
-          </div>
-          <div class="g-item">
-            <dt>xagent-ops-cli（ops-cli）</dt>
-            <dd>动作层静态兜底代表：把已验证过的运维/操作命令写法沉淀成速查技能，W47 以 351 次调用居技能使用榜首。</dd>
-          </div>
-          <div class="g-item">
-            <dt>e2e-record</dt>
-            <dd>端到端验证规范，指导 codex 在部署后调接口、查库、看页面并留存验收证据供主管复核。</dd>
-          </div>
-          <div class="g-item">
-            <dt>TCC</dt>
-            <dd>外部配置中心；改配置与部署、发版同属高风险对外写操作，约定必须由主管（Claude）先执行。</dd>
-          </div>
-          <div class="g-item">
-            <dt>T3 线程 / antigravity / t3code / lark-channel</dt>
-            <dd>本机涉及的多工具线程来源与日常开发项目（如 <code>t3code</code>、<code>lark-channel</code> 为 W47 密集开发项，也是当期工具报错上升的主要来源）。</dd>
-          </div>
+          <div class="g-item"><dt>rstack</dt><dd>个人本地 AI 工程环境资产仓，汇总 <code>claude-lead</code>、<code>weekly-retro</code> 技能、脚本、全局约定与 hook。</dd></div>
+          <div class="g-item"><dt>Claude / Codex（gpt-6.1-sol）</dt><dd>双 Agent 组合：前者负责判断、写契约、复核与对外写操作，后者负责侦察、施工与单测/E2E。</dd></div>
+          <div class="g-item"><dt>claude-lead / weekly-retro / wrapup / retro-tune</dt><dd>四块协作流程，覆盖日常委派、每周五晚复盘、需求收尾与每两期一次的复盘元评估。</dd></div>
+          <div class="g-item"><dt>dispatch.sh / ledger.py / timing.py</dt><dd><code>claude-lead</code> 配套脚本：拼装信封并后台派发、记录台账、分析派发时机与提醒阈值。</dd></div>
+          <div class="g-item"><dt>scan.py / turn.py / replay.py / tune_due.py</dt><dd><code>weekly-retro</code> 脚本：扫描会话出指标与 <code>turns.tsv</code>、回看拐点、无头反事实重放与元评估计时。</dd></div>
+          <div class="g-item"><dt>pretool_guard.py / posttool_delegate_nudge.py</dt><dd>两枚 Claude Code hook：高风险命令拦截守卫（支持 <code># retro-selftest</code>）与连续只读委派提醒。</dd></div>
+          <div class="g-item"><dt>xapi / lane_wait</dt><dd>动作层动态补丁代表：把高频多步命令压成一条短命令，显著降低查 <code>--help</code> 频次。</dd></div>
+          <div class="g-item"><dt>xagent-ops-cli（ops-cli）</dt><dd>动作层静态速查技能，沉淀已验证操作写法，W47 以 351 次调用居技能榜首。</dd></div>
+          <div class="g-item"><dt>e2e-record</dt><dd>端到端验证规范，指导 Codex 在部署后调接口、查库、看页面并留存验收证据。</dd></div>
+          <div class="g-item"><dt>TCC</dt><dd>外部配置中心；改配置与部署发版同属高风险对外写操作，约定由主管执行。</dd></div>
+          <div class="g-item"><dt>T3 线程 / antigravity / t3code / lark-channel</dt><dd>本机多工具线程来源与日常开发项（<code>t3code</code>、<code>lark-channel</code> 为 W47 密集开发项目）。</dd></div>
         </dl>
       </section>
     </div>
   </div>
 </div>
+
+<a class="next-case" href="../media-to-notes.html">
+  <div class="wrap">
+    <span class="eyebrow">下一个项目 · 05 / 05</span>
+    <h2>Media to Notes — 长音视频图文笔记插件 →</h2>
+    <p>六步受控状态机开源 Agent Skill：按板书转折精选截图，附 34 分钟 Transformer 课程 32 张板书对齐样例。</p>
+  </div>
+</a>
 </main>
 
 <footer class="site-foot">
   <div class="wrap">
-    <span>星宇 · <code>rstack</code> 工程工作流使用说明 · 纯本地零外网依赖预览版</span>
+    <span class="mono">© <span data-year>2026</span> 星宇 · 深圳</span>
+    <span><a href="../../index.html#work">返回全部作品 ↑</a></span>
     <button class="to-top" type="button">↑ 回到顶部</button>
   </div>
 </footer>
-
-<!-- ============ 全屏高清图表 Lightbox ============ -->
-<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="高清图表查看器">
-  <div class="lightbox-bar">
-    <span id="lb-cap" class="lightbox-cap"></span>
-    <div class="lightbox-actions">
-      <button id="lb-zoom" class="lb-btn" type="button">放大 150%</button>
-      <button id="lb-close" class="lb-btn" type="button">关闭 (ESC)</button>
-    </div>
-  </div>
-  <div id="lb-stage" class="lightbox-stage">
-    <img id="lb-img" src="" alt="">
-  </div>
-</div>
 </body>
 </html>
