@@ -91,10 +91,10 @@
       <span class="toc-title">本页目录</span>
       <ol>
         <li><a href="#problem">01 · 背景与目标</a></li>
-        <li><a href="#analysis">02 · 问题排查与微调实验</a></li>
-        <li><a href="#decisions">03 · 架构与交互取舍</a></li>
-        <li><a href="#delivery">04 · 四代演进与线上入口</a></li>
-        <li><a href="#retro">05 · 实验账本与不足</a></li>
+        <li><a href="#analysis">02 · 问题拆解与评估</a></li>
+        <li><a href="#decisions">03 · 架构取舍与约束</a></li>
+        <li><a href="#delivery">04 · 核心产出与线上入口</a></li>
+        <li><a href="#retro">05 · 量化成果与复盘</a></li>
       </ol>
     </aside>
 
@@ -103,10 +103,10 @@
         <summary>展开本页目录</summary>
         <ol>
           <li><a href="#problem">01 · 背景与目标</a></li>
-          <li><a href="#analysis">02 · 问题排查与微调实验</a></li>
-          <li><a href="#decisions">03 · 架构与交互取舍</a></li>
-          <li><a href="#delivery">04 · 四代演进与线上入口</a></li>
-          <li><a href="#retro">05 · 实验账本与不足</a></li>
+          <li><a href="#analysis">02 · 问题拆解与评估</a></li>
+          <li><a href="#decisions">03 · 架构取舍与约束</a></li>
+          <li><a href="#delivery">04 · 核心产出与线上入口</a></li>
+          <li><a href="#retro">05 · 量化成果与复盘</a></li>
         </ol>
       </details>
 
@@ -144,7 +144,7 @@
 
       <!-- 02 问题排查 -->
       <section class="chapter" id="analysis">
-        <span class="eyebrow">02 / 问题排查与微调实验</span>
+        <span class="eyebrow">02 / 问题拆解与评估</span>
         <h2>开发集 30 题错 27 题，翻日志发现六成以上出在底表解析。</h2>
         <p>很多人看到模型答错财报数字，第一反应是改提示词或者微调一个金融小模型。为了避免凭感觉调参，我先建了一套测试题库（也就是底层的评测引擎 FinSearch-X）：挑了美股、港股、A 股 9 家代表性上市公司的 27 份真实年报，设计了 120 道覆盖查数、同比计算、跨期对比和缺数据拒答的题目，严格拆成平时调参的开发集（Dev）、交叉验证集（Val）和封存盲测集（Blind）。</p>
         <p>第一轮跑开发集时，30 道题错了 27 道，全对率只有 6.67%。把这 27 道错题的调用日志一条条翻开看之后，才看清真正的问题在哪里。</p>
@@ -172,7 +172,7 @@
 
       <!-- 03 方案设计与取舍 -->
       <section class="chapter" id="decisions">
-        <span class="eyebrow">03 / 架构与交互取舍</span>
+        <span class="eyebrow">03 / 架构取舍与约束</span>
         <h2>计算归代码，解释归模型，原表放在右手边。</h2>
         <p>找到根因后，我把 FinDesk 拆成了前置分流、代码计算护栏和三栏核对界面三个部分。</p>
 
@@ -216,7 +216,7 @@
 
       <!-- 04 四代演进 -->
       <section class="chapter" id="delivery">
-        <span class="eyebrow">04 / 四代演进与线上入口</span>
+        <span class="eyebrow">04 / 核心产出与线上入口</span>
         <h2>从离线评测脚本，分四步做到现在的公开研究笔记本。</h2>
         <p>一个人业余开发全栈产品，最怕战线拉得太长半途烂尾，或者只在本地能跑、放到公网上动不动挂掉。推进时每一代只解当前最卡的一个问题。</p>
 
@@ -272,7 +272,7 @@
             <h4>Bot 股票研究助手</h4>
             <p>查看简单查价走快通道以及「事实 / 代码计算 / 缺失说明」的分层回答，数字可点开看出处。</p>
             <div class="sc-act">
-              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/bot?mode=use&amp;lang=zh" rel="noopener" target="_blank">打开 Bot 研究助手 ↗</a>
+              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/bot?mode=use&amp;mausbot=1&amp;lang=zh" rel="noopener" target="_blank">打开 Bot 研究助手 ↗</a>
             </div>
           </div>
 
@@ -298,7 +298,7 @@
 
       <!-- 05 实验账本与不足 -->
       <section class="chapter" id="retro">
-        <span class="eyebrow">05 / 实验账本与不足</span>
+        <span class="eyebrow">05 / 量化成果与复盘</span>
         <h2>单步消融实验都有记录，但跨公司科目对齐和港股历史 PE 还没完全补齐。</h2>
         <p>整个实验用 Qwen3-4B 这种 4B 参数小模型做底座，在「数字、单位、出处必须全对」的标准下跑过一轮单步对照。哪怕模型很小，只要底表干净、算术交给代码、规则卡死，结果就会明显往上走。</p>
 
@@ -335,7 +335,7 @@
               <tr>
                 <td><b>4. 整套架构改造前后总对比</b><br/><span class="muted">（Qwen3-4B「数字、单位、出处全对」严苛标准）</span></td>
                 <td>120 题隔离考卷</td>
-                <td>开发集全对率 <b><code>6.67% → 43.33%</code></b><br/>验证集全对率 <b><code>6.67% → 13.33%</code></b></td>
+                <td>开发集全对率（Qwen3-4B 小模型严苛全对口径）<b><code>6.67% → 43.33%</code></b><br/>验证集全对率 <b><code>6.67% → 13.33%</code></b></td>
                 <td>小模型配合干净数据与工具护栏可以成倍提分，但泛化受限</td>
               </tr>
               <tr>
@@ -352,14 +352,14 @@
           <div class="retro-col">
             <h4>做得对的地方</h4>
             <ul>
-              <li>先封存 120 道真实年报测试题再动手改产品，不然很容易被 2,000 条微调在合成题上的满分误导，多维护一套无用的训练流水线。</li>
+              <li>先建立并隔离 120 道真实年报测试题的开发、验证和盲测集再动手改产品，不然很容易被 2,000 条微调在合成题上的满分误导，多维护一套无用的训练流水线。</li>
               <li>把翻 PDF 核对变成同屏点击，让底层可溯源变成前端看得到的操作。</li>
             </ul>
           </div>
           <div class="retro-col is-limit">
             <h4>目前的短板与下一步</h4>
             <ul>
-              <li><b>跨公司非标科目名称对齐不够：</b>开发集全对率到了 <code>43.33%</code>，换到没调过的验证集公司只剩 <code>13.33%</code>。不同上市公司年报附注里同一个指标名字差很多（比如有的叫「履约成本」，有的拆在「营业成本明细」里），代码字典还没覆盖全。下一步要加上一层同义会计科目归并映射。</li>
+              <li><b>跨公司非标科目名称对齐不够：</b>Qwen3-4B 小模型严苛全对口径下开发集全对率到了 <code>43.33%</code>，换到没调过的验证集公司只剩 <code>13.33%</code>。不同上市公司年报附注里同一个指标名字差很多（比如有的叫「履约成本」，有的拆在「营业成本明细」里），代码字典还没覆盖全。下一步要加上一层同义会计科目归并映射。</li>
               <li><b>港股历史市盈率数据缺口：</b>现有免费接口拉港股历史 PE 会返回空序列，页面现在会直接报缺失而不是硬算。后续打算用历史市值除以滚动净利润自己回算补上。</li>
             </ul>
           </div>

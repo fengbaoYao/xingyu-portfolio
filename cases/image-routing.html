@@ -80,10 +80,10 @@
       <span class="toc-title">本页目录</span>
       <ol>
         <li><a href="#problem">01 · 背景与目标</a></li>
-        <li><a href="#analysis">02 · 指标定义</a></li>
-        <li><a href="#decisions">03 · 架构与规则解耦</a></li>
-        <li><a href="#delivery">04 · 盲抽验收</a></li>
-        <li><a href="#retro">05 · 结果与口径边界</a></li>
+        <li><a href="#analysis">02 · 问题拆解与评估</a></li>
+        <li><a href="#decisions">03 · 路由取舍与约束</a></li>
+        <li><a href="#delivery">04 · 核心产出与盲抽验收</a></li>
+        <li><a href="#retro">05 · 量化成果与复盘</a></li>
       </ol>
     </aside>
 
@@ -92,10 +92,10 @@
         <summary>展开本页目录</summary>
         <ol>
           <li><a href="#problem">01 · 背景与目标</a></li>
-          <li><a href="#analysis">02 · 指标定义</a></li>
-          <li><a href="#decisions">03 · 架构与规则解耦</a></li>
-          <li><a href="#delivery">04 · 盲抽验收</a></li>
-          <li><a href="#retro">05 · 结果与口径边界</a></li>
+          <li><a href="#analysis">02 · 问题拆解与评估</a></li>
+          <li><a href="#decisions">03 · 路由取舍与约束</a></li>
+          <li><a href="#delivery">04 · 核心产出与盲抽验收</a></li>
+          <li><a href="#retro">05 · 量化成果与复盘</a></li>
         </ol>
       </details>
 
@@ -110,7 +110,7 @@
 
       <!-- 02 指标定义 -->
       <section class="chapter" id="analysis">
-        <span class="eyebrow">02 / 指标定义</span>
+        <span class="eyebrow">02 / 问题拆解与评估</span>
         <h2>把主指标从「整体准确率」扭成「需认字单据召回率」。</h2>
         <p>刚和算法同学对齐时，大家惯性地想做个分类器，看整体准确率（Overall Accuracy）能不能做到 95% 以上。但在理赔场景里，只看整体准确率很容易埋雷。</p>
         <p>原因很简单：传上来的照片里本来就是纯现场照占大头。即使整体准确率到了 95%，如果犯错的那 5% 刚好把一张几万块的医院手写收据当成废片跳过，下游核赔就会少算金额或出风控差错。反过来，把一张没字的撞车照片误放给大模型，只是多花一次调用费，不会影响赔付结果。</p>
@@ -148,7 +148,7 @@
 
       <!-- 03 架构与规则解耦 -->
       <section class="chapter" id="decisions">
-        <span class="eyebrow">03 / 架构与规则解耦</span>
+        <span class="eyebrow">03 / 路由取舍与约束</span>
         <h2>按照片长相归并 23 类，把分流规则拆到独立配置表。</h2>
         <p>定下指标后，我和算法、业务把方案落到了两个关键的解耦设计上，避免上线后每次业务调整都要重训模型。</p>
 
@@ -203,7 +203,7 @@
 
       <!-- 04 盲抽验收 -->
       <section class="chapter" id="delivery">
-        <span class="eyebrow">04 / 盲抽验收</span>
+        <span class="eyebrow">04 / 核心产出与盲抽验收</span>
         <h2>给「被跳过通道」加了一轮 1,650 张线上盲抽，打消业务方顾虑。</h2>
         <p>推进全量上线时，卡得最紧的不是研发开发，而是理赔运营的心理底线。运营负责人的担心很有道理：放行去大模型的那批照片错了还能看到；被前置层直接跳过的照片后面就没人看了，万一线上偷偷漏了重要单据怎么发现？</p>
         <p>我没有用离线报告硬压业务方签字，而是加了一套离线择优加线上盲抽的验收流程。</p>
@@ -221,7 +221,7 @@
 
       <!-- 05 结果与口径边界 -->
       <section class="chapter" id="retro">
-        <span class="eyebrow">05 / 结果与口径边界</span>
+        <span class="eyebrow">05 / 量化成果与复盘</span>
         <h2>生产调用降了约 25%，汇报时把统计口径界定得很清楚。</h2>
         <p>全量上线后，生产环境视觉大模型（VL）调用次数稳定下降约 <strong>25%</strong>；离线 2,464 张独立测试集需认字单据召回率 <strong>99.63%</strong>，总分流准确率 <strong>99.07%</strong>；线上 1,650 张跳过样本随机盲抽 <strong>0 漏检</strong>。</p>
 
