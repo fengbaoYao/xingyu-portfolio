@@ -2,6 +2,63 @@
 (function () {
   var root = document.documentElement;
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isCasePage = !!document.querySelector('.case-bar');
+  var isHomePage = !isCasePage && !!document.querySelector('[data-case-href]');
+  var HOME_SCROLL_KEY = 'xingyu_home_return';
+  var HOME_RESTORE_KEY = 'xingyu_restore_home';
+
+  var saveHomeScroll = function () {
+    if (!isHomePage) return;
+    try {
+      sessionStorage.setItem(HOME_SCROLL_KEY, JSON.stringify({
+        y: Math.round(window.scrollY || window.pageYOffset || 0),
+        ts: Date.now()
+      }));
+    } catch (e) {}
+  };
+
+  var readHomeScroll = function () {
+    try {
+      var raw = sessionStorage.getItem(HOME_SCROLL_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || typeof data.y !== 'number') return null;
+      if (Date.now() - (data.ts || 0) > 30 * 60 * 1000) return null;
+      return data.y;
+    } catch (e) { return null; }
+  };
+
+  // 从下级页面返回主页时，直接无动效恢复到离开前的位置
+  if (isHomePage) {
+    try {
+      var shouldRestore = sessionStorage.getItem(HOME_RESTORE_KEY) === '1';
+      if (shouldRestore) sessionStorage.removeItem(HOME_RESTORE_KEY);
+      var navEntry = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+      var isBackForward = navEntry && navEntry.type === 'back_forward';
+      var savedY = readHomeScroll();
+      if (typeof savedY === 'number' && (shouldRestore || (isBackForward && !location.hash && window.scrollY === 0 && savedY > 0))) {
+        window.scrollTo({ top: savedY, behavior: 'instant' });
+      }
+    } catch (e) {}
+  }
+
+  // 同页锚点点击保留平滑滚动，避免页面加载或跨页返回时触发整页滚动动画
+  document.addEventListener('click', function (e) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href === '#') return;
+    var id = href.slice(1);
+    var target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    try {
+      if (isCasePage) history.replaceState(null, '', '#' + id);
+      else history.pushState(null, '', '#' + id);
+    } catch (err) {}
+  });
 
   // 1. 清理冗余 ?lang 参数
   try {
@@ -663,5 +720,163 @@
     }
 
     renderSkills('01', false, false);
+  }
+
+  // 13. 首页卡片点击过渡动效 -> 详情页，以及详情页进入动画
+  try {
+    var enterTs = Number(sessionStorage.getItem('xingyu_case_enter') || '0');
+    if (enterTs && Date.now() - enterTs < 5000) {
+      sessionStorage.removeItem('xingyu_case_enter');
+      if (!reduceMotion && document.querySelector('.case-bar')) {
+        root.classList.add('case-entering');
+        setTimeout(function () { root.classList.remove('case-entering'); }, 460);
+      }
+    }
+  } catch (e) {}
+
+  var navigating = false;
+  var cleanupWipe = function () {
+    document.querySelectorAll('.page-wipe-backdrop, .page-wipe-card').forEach(function (el) { el.remove(); });
+    document.querySelectorAll('[data-case-href].is-navigating').forEach(function (el) {
+      var prevTransition = el.style.transition;
+      el.style.transition = 'none';
+      el.classList.remove('is-navigating');
+      void el.offsetWidth;
+      el.style.transition = prevTransition;
+    });
+    navigating = false;
+  };
+  window.addEventListener('pageshow', cleanupWipe);
+  window.addEventListener('pagehide', function () {
+    saveHomeScroll();
+    cleanupWipe();
+  });
+
+  // 下级页面「返回全部作品」：直接无动效回到主页离开时的位置
+  if (isCasePage) {
+    var isHomeReferrer = false;
+    try {
+      if (document.referrer) {
+        var ref = new URL(document.referrer);
+        isHomeReferrer = ref.origin === location.origin &&
+          ref.pathname.indexOf('/cases/') === -1 &&
+          /(?:^|\/)(?:index\.html)?$/.test(ref.pathname);
+      }
+    } catch (e) {}
+
+    document.querySelectorAll('.case-bar .back, .case-foot a[href*="index.html"]').forEach(function (backLink) {
+      backLink.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        var savedY = readHomeScroll();
+        if (isHomeReferrer && window.history.length > 1) {
+          e.preventDefault();
+          try { sessionStorage.setItem(HOME_RESTORE_KEY, '1'); } catch (err) {}
+          history.back();
+          return;
+        }
+        if (typeof savedY === 'number') {
+          e.preventDefault();
+          try { sessionStorage.setItem(HOME_RESTORE_KEY, '1'); } catch (err) {}
+          location.href = backLink.href.split('#')[0];
+        }
+      });
+    });
+  }
+
+  // 详情页顶部融入动图自动播放（尊重减弱动态效果偏好）
+  document.querySelectorAll('.case-hero-media video').forEach(function (v) {
+    v.muted = true;
+    if (reduceMotion) {
+      v.pause();
+      return;
+    }
+    var p = v.play();
+    if (p && typeof p.catch === 'function') p.catch(function () {});
+  });
+
+  var caseCards = Array.prototype.slice.call(document.querySelectorAll('[data-case-href]'));
+  if (caseCards.length) {
+    var navigateWithWipe = function (card, href) {
+      if (!href || navigating) return;
+      saveHomeScroll();
+      if (reduceMotion) {
+        location.href = href;
+        return;
+      }
+      navigating = true;
+      card.classList.add('is-navigating');
+
+      var rect = card.getBoundingClientRect();
+      var titleEl = card.querySelector('h3');
+      var eyebrowEl = card.querySelector('.eyebrow');
+      var titleText = titleEl ? titleEl.textContent.trim() : '';
+      var eyebrowText = eyebrowEl
+        ? eyebrowEl.textContent.trim()
+        : (card.classList.contains('note-visual-card') ? '02 / NOTES · 案例详情' : 'CASE STUDY');
+
+      var backdrop = document.createElement('div');
+      backdrop.className = 'page-wipe-backdrop';
+      backdrop.setAttribute('aria-hidden', 'true');
+
+      var wipe = document.createElement('div');
+      wipe.className = 'page-wipe-card';
+      wipe.setAttribute('aria-hidden', 'true');
+      wipe.style.top = rect.top + 'px';
+      wipe.style.left = rect.left + 'px';
+      wipe.style.width = rect.width + 'px';
+      wipe.style.height = rect.height + 'px';
+
+      var inner = document.createElement('div');
+      inner.className = 'page-wipe-inner';
+      var eb = document.createElement('span');
+      eb.className = 'page-wipe-eyebrow';
+      eb.textContent = eyebrowText;
+      var h = document.createElement('p');
+      h.className = 'page-wipe-title';
+      h.textContent = titleText;
+      var barEl = document.createElement('div');
+      barEl.className = 'page-wipe-bar';
+      barEl.innerHTML = '<i></i>';
+      inner.appendChild(eb);
+      inner.appendChild(h);
+      inner.appendChild(barEl);
+      wipe.appendChild(inner);
+
+      document.body.appendChild(backdrop);
+      document.body.appendChild(wipe);
+      void wipe.offsetWidth;
+
+      requestAnimationFrame(function () {
+        backdrop.classList.add('is-active');
+        wipe.classList.add('is-active');
+      });
+
+      try { sessionStorage.setItem('xingyu_case_enter', String(Date.now())); } catch (e) {}
+      setTimeout(function () {
+        location.href = href;
+      }, 330);
+    };
+
+    caseCards.forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        var sel = window.getSelection ? window.getSelection().toString().trim() : '';
+        if (sel) return;
+
+        var interactive = e.target.closest('a, button');
+        if (interactive) {
+          if (interactive.tagName === 'BUTTON') return;
+          if (interactive.getAttribute('target') === '_blank') return;
+          var linkHref = interactive.getAttribute('href') || '';
+          if (!linkHref || /^(https?:|mailto:|tel:)/.test(linkHref)) return;
+          e.preventDefault();
+          navigateWithWipe(card, linkHref);
+          return;
+        }
+
+        e.preventDefault();
+        navigateWithWipe(card, card.getAttribute('data-case-href'));
+      });
+    });
   }
 })();
