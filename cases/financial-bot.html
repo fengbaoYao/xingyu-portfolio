@@ -30,10 +30,10 @@
   <section aria-labelledby="t" class="case-hero">
     <div class="case-hero-top">
       <span class="eyebrow">01 / FLAGSHIP · 个人独立全栈产品</span>
-      <span class="status st-live">线上公开可试玩 · 已迭代至 v4 研究笔记本</span>
+      <span class="status st-live">线上公开可试玩 · 双产品工作台与 6 阶段深度研报</span>
     </div>
-    <h1 id="t">FinDesk — 每个数字都能点开原表核对的股票投研工作台</h1>
-    <p class="case-sub">一个覆盖美股、港股和 A 股的线上股票研究工作台。平时用通用大模型读财报时，最麻烦的是它经常用很笃定的语气给出错数——答案两秒生成完，自己去翻几百页年报 PDF 核对却要十分钟。我把 FinDesk 做成了三栏结构：AI 只负责解释，所有算术交给后台代码，页面上出现的每个数字点一下就能对照原表和 K 线。在 120 道真实年报测试题里，无出处编造数字的比例从 26.67% 降到了 0。</p>
+    <h1 id="t">FinDesk — 每个数字都能点开原表核对的双产品投研与深度研报工作台</h1>
+    <p class="case-sub">一个覆盖美股、港股和 A 股的线上股票研究工作台。平时用通用大模型读财报时，最麻烦的是它经常用很笃定的语气给出错数——答案两秒生成完，自己去翻几百页年报 PDF 核对却要十分钟。我把 FinDesk 做成了「算术交给后台代码、每个数字绑定出处，并按需分流到 6 阶段全网检索深度研报与隔离沙箱执行」的协同体系。在 120 道真实年报测试题里，无出处编造数字的比例从 26.67% 降到了 0。</p>
 
     <div aria-label="核心指标" class="metric-row four">
       <div class="metric-box">
@@ -58,11 +58,11 @@
       <div><dt>我的角色</dt><dd>独立全栈（产品设计、120 题财报测试集、前后端开发到香港服务器部署）</dd></div>
       <div><dt>覆盖市场</dt><dd>A 股（同花顺实时行情与 5 年市盈率分位）· 港股（含腾讯控股等）· 美股（SEC 财报与行情）</dd></div>
       <div><dt>验证题库</dt><dd>120 道真实年报测试题（覆盖 9 家上市公司、27 份年报，分为开发集、验证集与盲测集）</dd></div>
-      <div><dt>线上体验</dt><dd>公网 HTTPS 直连，免登录即可试玩 v4 公开研究笔记本与 v3 工作台</dd></div>
+      <div><dt>线上体验</dt><dd>公网 HTTPS 直连，免登录试玩 Chat-Bot 极速问答、6 阶段深度研报、Personal-Agent 沙箱与 K 线看板</dd></div>
     </dl>
 
     <div class="cta-row">
-      <a class="btn" href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">打开 v4 公开研究笔记本 ↗</a>
+      <a class="btn" href="https://47.243.118.32.nip.io/landing" rel="noopener" target="_blank">打开 FinDesk 产品首页 ↗</a>
       <a class="btn btn-ghost" href="#try">查看五个线上体验入口 ↓</a>
     </div>
   </section>
@@ -236,9 +236,14 @@
             <p>免费第三方行情接口在高峰期偶发限流或超时。v3 在接通实时数据之外，内置了腾讯控股（00700.HK）等代表标的的完整快照兜底，接口抖动时核对原表和 K 线的核心交互依然可用。</p>
           </li>
           <li>
-            <span class="phase-tag">第四阶段 · v4 公开研究笔记本（最新）</span>
+            <span class="phase-tag">第四阶段 · 公开研究笔记本（v4）</span>
             <b class="phase-title">不再限制固定股票库，随手丢网页链接和 PDF 就能建笔记本</b>
-            <p>看公司除了年报，还要看新闻、访谈和行业研报。v4 改成了「资料来源 | 对话问答 | 成果 Studio」三栏：支持贴网页、传 PDF 或联网搜资料，勾选哪几份就只基于那几份回答，还能直接生成研究简报、对比表和思维导图。</p>
+            <p>看公司除了年报，还要看新闻、访谈和行业研报。v4 构建了「资料来源 | 对话问答 | 成果 Studio」三栏：支持贴网页、传 PDF 或联网搜资料，勾选哪几份就只基于那几份回答，还能直接生成研究简报、对比表和思维导图。</p>
+          </li>
+          <li>
+            <span class="phase-tag">第五阶段 · 双产品协同与 6 阶段深度研报（最新）</span>
+            <b class="phase-title">Chat-Bot 极速问答推行动，深度研报取代旧深度思考，Agent 隔离沙箱闭环执行</b>
+            <p>把主站收敛为三大协同入口：<b>Chat-Bot</b>（<code>/chat</code>）负责毫秒级并行检索与四视角（默认/多头/排雷/风控）切换，答后直接推送可执行动作（设定时盯盘、生成 Studio 简报、派发沙箱跑回测出图、存入知识库），避免重问一遍；<b>深度研报</b>（<code>/research</code>）接入 6 阶段规划-多轮检索-深读-反思-带引用长文引擎，页面明确提示其「非普通单轮深度思考」；<b>Personal-Agent</b>（<code>/agent</code>）在隔离沙箱执行 Python 回测/绘图与后台盯盘，并与<b>K线看板</b>（<code>/chat/desk</code>）共享同一套实时估值口径。</p>
           </li>
         </ol>
 
@@ -247,57 +252,57 @@
             <img alt="FinSearch-X 评测与架构演进全景图" height="1067" loading="lazy" src="../assets/img/finsearch-overview.webp" width="1600"/>
             <span class="zoom-pill">点击放大</span>
           </div>
-          <figcaption>从 120 题底层评测（FinSearch-X）到四代跨市场投研工作台（FinDesk）的演进结构。</figcaption>
+          <figcaption>从 120 题底层评测（FinSearch-X）到双产品与深度研报工作台（FinDesk）的演进结构。</figcaption>
         </figure>
 
         <div class="callout" id="try">
           <b>五个线上体验入口（公网 HTTPS 直连，免登录）</b>
-          <p style="margin-top:8px">可以先试第一个 <b>v4 公开研究笔记本</b>，也可以点下面 <b>v3 新版三栏研究助手</b> 与早期独立入口对比。</p>
+          <p style="margin-top:8px">涵盖 <b>深度研报工作台</b>、<b>Chat-Bot 极速问答</b>、<b>Personal-Agent 沙箱</b>、<b>K 线看板</b> 与 <b>产品全景首页</b>（另保留早期 <a href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">v4 公开研究笔记本 ↗</a>）。</p>
         </div>
 
         <div class="card-grid">
           <div class="sub-card is-featured" style="grid-column: 1 / -1">
-            <span class="sc-tag">v4 · 最新 · 免登录</span>
-            <h4>Notebook 公开研究笔记本</h4>
-            <p>「资料来源 | 对话问答 | 报告生成」三栏同屏：贴网页、传 PDF 或联网检索，点引用高亮原文，支持一键生成简报和导图。</p>
+            <span class="sc-tag">6 阶段全网研究 · 非普通深度思考</span>
+            <h4>深度研报工作台（/research）</h4>
+            <p>明确区别于单轮“深度思考”：通过任务拆解、多轮全网检索、全文抓取、相关性重排、缺口反思与交互式内联引文生成长篇研报，并支持一键存入知识库或转设定时盯盘。</p>
             <div class="sc-act">
-              <a class="btn btn-sm" href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">打开 v4 公开笔记本 ↗</a>
+              <a class="btn btn-sm" href="https://47.243.118.32.nip.io/research" rel="noopener" target="_blank">打开深度研报工作台 ↗</a>
             </div>
           </div>
 
           <div class="sub-card is-featured">
-            <span class="sc-tag">v3 · 并行流式研究助手 · 免登录</span>
-            <h4>FinDesk v3 三栏研究工作台</h4>
-            <p>左栏自选行情与动态检索抽屉、中栏极速/深度双模式流式问答与内联引文悬停、右栏估值指标与证据核对，顶栏支持一键切换 Work 视图。</p>
+            <span class="sc-tag">极速问答与可执行推送 · 免登录</span>
+            <h4>Chat-Bot 研究问答（/chat）</h4>
+            <p>并行实时检索、多视角立场重答与来源证据核对；回答后自动推荐设定时盯盘、生成 Studio 简报、升级深度研报或派发沙箱跑回测出图。</p>
             <div class="sc-act">
-              <a class="btn btn-sm" href="https://47.243.118.32.nip.io/v3/bot" rel="noopener" target="_blank">打开 v3 研究助手 ↗</a>
+              <a class="btn btn-sm" href="https://47.243.118.32.nip.io/chat" rel="noopener" target="_blank">打开 Chat-Bot ↗</a>
             </div>
           </div>
 
           <div class="sub-card">
-            <span class="sc-tag">v2 / 桌面版 · 查财报问数</span>
-            <h4>Bot 股票研究助手</h4>
-            <p>查看简单查价走快通道以及「事实 / 代码计算 / 缺失说明」的分层回答，数字可点开看出处。</p>
+            <span class="sc-tag">隔离沙箱与知识库 · 个人工作台</span>
+            <h4>Personal-Agent 沙箱执行（/agent）</h4>
+            <p>支持在隔离沙箱内跑 Python 回测脚本与图表渲染、沉淀个人研报知识库（PDF 来源导读）、以及接收自动盯盘异动触发的逻辑审计。</p>
             <div class="sc-act">
-              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/bot?mode=use&amp;mausbot=1&amp;lang=zh" rel="noopener" target="_blank">打开 Bot 研究助手 ↗</a>
+              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/agent" rel="noopener" target="_blank">打开 Personal-Agent ↗</a>
             </div>
           </div>
 
           <div class="sub-card">
-            <span class="sc-tag">v2 / 桌面版 · 看行情与三表</span>
-            <h4>Work 个股深度工作台</h4>
-            <p>查看美股、港股、A 股代表公司的实时报价、20 日 K 线/技术指标、5 年市盈率分位和结构化财务三表。</p>
+            <span class="sc-tag">A 股 / 港股 / 美股 · 统一估值口径</span>
+            <h4>跨市场 K 线与估值看板（/chat/desk）</h4>
+            <p>全市场标的搜索切换、蜡烛图与技术指标、PE/PB/PS 估值快照及历史分位，与 Chat-Bot 共用同一套底层计算数据源。</p>
             <div class="sc-act">
-              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/work?lang=zh" rel="noopener" target="_blank">打开 Work 工作台 ↗</a>
+              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/chat/desk" rel="noopener" target="_blank">打开 K 线看板 ↗</a>
             </div>
           </div>
 
           <div class="sub-card">
-            <span class="sc-tag">v2 / 桌面版 · 全景介绍</span>
-            <h4>Landing 产品首页</h4>
-            <p>查看三大市场数据源接入状态、三栏核对说明与代表股票快速入口。</p>
+            <span class="sc-tag">四大核心模块总览 · 新手引导</span>
+            <h4>FinDesk 产品全景首页（/landing）</h4>
+            <p>一屏查看 Chat-Bot、深度研报、Personal-Agent 与 K 线看板分工说明及高频投研示例，直接点击体验。</p>
             <div class="sc-act">
-              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/landing?lang=zh" rel="noopener" target="_blank">进入产品首页 ↗</a>
+              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/landing" rel="noopener" target="_blank">进入产品首页 ↗</a>
             </div>
           </div>
         </div>
