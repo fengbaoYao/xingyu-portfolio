@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>FinDesk 股票投研工作台（含 FinSearch-X 评测底座） — 星宇</title>
-<meta content="星宇独立开发的跨市场股票研究工作台：把计算交给代码、每个数字绑定原表出处，并记录 120 题真实年报评测、2,000 条微调对照实验与四代产品演进。" name="description"/>
+<title>FinDesk 跨市场金融投研 Agent（可信基座 + 双形态架构） — 星宇</title>
+<meta content="星宇独立全栈打造的跨市场股票投研 Agent 系统：围绕一套先治数据与评测的 FinSearch-X 可信基座，落地 Chat-Bot（高频问答与 6 阶段深度研报）与 Personal-Agent（隔离沙箱与长期记忆）两种协同产品形态。" name="description"/>
 <link href="../assets/img/favicon.png" rel="icon"/>
 <link href="../assets/styles.css" rel="stylesheet"/>
 <script defer="" src="../assets/site.js"></script>
@@ -16,63 +16,64 @@
 <div class="case-bar">
   <div class="wrap">
     <a class="back" href="../index.html#work">← 返回全部作品</a>
-    <span class="mono muted">01 · 旗舰案例 · 跨市场股票投研工作台</span>
+    <span class="mono muted">01 · 旗舰案例 · 跨市场金融投研 Agent</span>
   </div>
 </div>
 
 <main id="main">
 <div class="wrap">
   <div class="callout is-notice" hidden="" id="from-fsx" style="margin-top:20px">
-    你从 FinSearch-X 的链接跳转过来。FinSearch-X 是我最初给 FinDesk 搭建的 120 题财报评测底座，下面记录了从那套评测一路迭代出四代线上工作台的过程。
+    你从 FinSearch-X 的链接跳转过来。FinSearch-X 是我为 FinDesk 搭建的 120 题财报评测与数据护栏基座，这套基座之上现已分化为 Chat-Bot 与 Personal-Agent 两种线上协同产品形态。
   </div>
 
   <!-- ============ CASE HERO ============ -->
   <section aria-labelledby="t" class="case-hero">
     <div class="case-hero-top">
-      <span class="eyebrow">01 / FLAGSHIP · 个人独立全栈产品</span>
-      <span class="status st-live">线上公开可试玩 · 双产品工作台与 6 阶段深度研报</span>
+      <span class="eyebrow">01 / FLAGSHIP · AI AGENT 产品全栈实战</span>
+      <span class="status st-live">线上公开可试玩 · 1 套可信基座 + 双产品形态</span>
     </div>
-    <h1 id="t">FinDesk — 每个数字都能点开原表核对的双产品投研与深度研报工作台</h1>
-    <p class="case-sub">一个覆盖美股、港股和 A 股的线上股票研究工作台。平时用通用大模型读财报时，最麻烦的是它经常用很笃定的语气给出错数——答案两秒生成完，自己去翻几百页年报 PDF 核对却要十分钟。我把 FinDesk 做成了「算术交给后台代码、每个数字绑定出处，并按需分流到 6 阶段全网检索深度研报与隔离沙箱执行」的协同体系。在 120 道真实年报测试题里，无出处编造数字的比例从 26.67% 降到了 0。</p>
+    <h1 id="t">FinDesk — 把金融大模型关进「评测、代码算术与溯源」里的双形态投研 Agent</h1>
+    <p class="case-sub">面向个人投资者与研究辅助场景，我构建了一个覆盖 A 股、港股与美股的受控投研系统：先建一套 <b>FinSearch-X 可信基座</b>（「算术归代码、答案绑出处、缺数显式留白」+ 120 题三层隔离评测集），再按用户心智拆出 <b>Chat-Bot</b>（极速并行问答、K 线估值看板与 6 阶段深度研报）与 <b>Personal-Agent</b>（隔离沙箱跑 Python 出图、定时盯盘与论点证伪审计）两种协同形态。在 120 道真实年报测试题上，无出处编造数字的比例从 <b>26.67%</b> 降至 <b>0%</b>。</p>
 
     <div aria-label="核心指标" class="metric-row four">
       <div class="metric-box">
         <span class="m-val">26.67% → 0%</span>
-        <span class="m-lbl">测试集里无出处编造数字清零</span>
+        <span class="m-lbl">120 题测试集无出处编造数字清零</span>
       </div>
       <div class="metric-box">
         <span class="m-val">-50%</span>
-        <span class="m-lbl">简单查数分流后省掉一半大模型调用</span>
+        <span class="m-lbl">前置路由拦截简单查数，省掉一半大模型调用</span>
       </div>
       <div class="metric-box">
         <span class="m-val">3.36s → 2.36s</span>
-        <span class="m-lbl">平均回答耗时缩短 1 秒，准确率未下降</span>
+        <span class="m-lbl">平均回答耗时净降 1 秒，准确率不降反升</span>
       </div>
       <div class="metric-box is-warn">
-        <span class="m-val">2,000 条停掉</span>
-        <span class="m-lbl">跑通微调后发现真实考题不涨分，未上生产</span>
+        <span class="m-val">2,000 条止损</span>
+        <span class="m-lbl">跑通微调后发现真实跨公司题不涨分，果断停训不上生产</span>
       </div>
     </div>
 
     <dl class="facts">
-      <div><dt>我的角色</dt><dd>独立全栈（产品设计、120 题财报测试集、前后端开发到香港服务器部署）</dd></div>
-      <div><dt>覆盖市场</dt><dd>A 股（同花顺实时行情与 5 年市盈率分位）· 港股（含腾讯控股等）· 美股（SEC 财报与行情）</dd></div>
-      <div><dt>验证题库</dt><dd>120 道真实年报测试题（覆盖 9 家上市公司、27 份年报，分为开发集、验证集与盲测集）</dd></div>
-      <div><dt>线上体验</dt><dd>公网 HTTPS 直连，免登录试玩 Chat-Bot 极速问答、6 阶段深度研报、Personal-Agent 沙箱与 K 线看板</dd></div>
+      <div><dt>我的角色</dt><dd>产品与系统全栈负责人（场景拆解、120 题盲测设计、交互边界定义到全栈上线与香港服务器运维）</dd></div>
+      <div><dt>产品架构</dt><dd>1 套可信基座（FinSearch-X）× 2 种协同形态（Chat-Bot 高频研究 + Personal-Agent 长程执行）</dd></div>
+      <div><dt>覆盖市场</dt><dd>A 股 / 港股（同花顺 iFinD 实时行情与分位）· 美股（SEC EDGAR 财报与行情）· 全网检索</dd></div>
+      <div><dt>线上体验</dt><dd>公网 HTTPS 免登录试玩，覆盖极速问答、6 阶段深度研报、K 线看板与沙箱执行</dd></div>
     </dl>
 
     <div class="cta-row">
-      <a class="btn" href="https://47.243.118.32.nip.io/landing" rel="noopener" target="_blank">打开 FinDesk 产品首页 ↗</a>
-      <a class="btn btn-ghost" href="#try">查看五个线上体验入口 ↓</a>
+      <a class="btn" href="https://47.243.118.32.nip.io/chat" rel="noopener" target="_blank">打开 Chat-Bot 极速问答 ↗</a>
+      <a class="btn btn-ghost" href="https://47.243.118.32.nip.io/agent" rel="noopener" target="_blank">打开 Personal-Agent 沙箱 ↗</a>
+      <a class="btn btn-ghost" href="#try">查看全部 4 个线上入口 ↓</a>
     </div>
   </section>
 
   <figure class="case-figure">
-    <div aria-label="点击放大查看 FinDesk v1 到 v4 四层演进主图" class="fig-zoom is-portrait" role="button" tabindex="0">
-      <img alt="FinDesk 跨市场股票投研 Agent v1 到 v4 四层演进与受控底层架构图" height="1261" src="../assets/img/findesk-v1-v4-hero.webp" width="1247"/>
+    <div aria-label="点击放大查看 FinDesk 统一基座与双产品形态架构图" class="fig-zoom" role="button" tabindex="0">
+      <img alt="FinDesk 产品架构全景图：底层 FinSearch-X 统一可信基座支撑上层 Chat-Bot 与 Personal-Agent 双产品形态并通过答后可执行推送联动" height="1040" src="../assets/img/findesk-architecture-hero.webp" width="1600"/>
       <span class="zoom-pill">点击放大</span>
     </div>
-    <figcaption>FinDesk 四层演进与受控底层：从 v1 单页看板、v2 拆分 Work/Bot、v3 三栏核对与离线快照，演进至 v4 公开研究笔记本；底层前置分流省 50% 调用、Python 算术与出处 ID 校验将无出处编造降至 0%。</figcaption>
+    <figcaption>FinDesk 产品总览：先以 FinSearch-X 管住底表口径、代码算术与来源绑定，再分流承载高频轻量问答（Chat-Bot）与长程受控执行（Personal-Agent）。</figcaption>
   </figure>
 
   <!-- ============ BODY ============ -->
@@ -80,11 +81,11 @@
     <aside aria-label="本页目录" class="toc">
       <span class="toc-title">本页目录</span>
       <ol>
-        <li><a href="#problem">01 · 背景与目标</a></li>
-        <li><a href="#analysis">02 · 问题拆解与评估</a></li>
-        <li><a href="#decisions">03 · 架构取舍与约束</a></li>
-        <li><a href="#delivery">04 · 核心产出与线上入口</a></li>
-        <li><a href="#retro">05 · 量化成果与复盘</a></li>
+        <li><a href="#problem">01 · 问题定义与边界</a></li>
+        <li><a href="#analysis">02 · 可信基座与评测</a></li>
+        <li><a href="#decisions">03 · 双形态与交互取舍</a></li>
+        <li><a href="#products">04 · 双产品能力与入口</a></li>
+        <li><a href="#retro">05 · 实验账本与复盘</a></li>
       </ol>
     </aside>
 
@@ -92,227 +93,294 @@
       <details class="toc-mobile">
         <summary>展开本页目录</summary>
         <ol>
-          <li><a href="#problem">01 · 背景与目标</a></li>
-          <li><a href="#analysis">02 · 问题拆解与评估</a></li>
-          <li><a href="#decisions">03 · 架构取舍与约束</a></li>
-          <li><a href="#delivery">04 · 核心产出与线上入口</a></li>
-          <li><a href="#retro">05 · 量化成果与复盘</a></li>
+          <li><a href="#problem">01 · 问题定义与边界</a></li>
+          <li><a href="#analysis">02 · 可信基座与评测</a></li>
+          <li><a href="#decisions">03 · 双形态与交互取舍</a></li>
+          <li><a href="#products">04 · 双产品能力与入口</a></li>
+          <li><a href="#retro">05 · 实验账本与复盘</a></li>
         </ol>
       </details>
 
-      <!-- 01 背景与目标 -->
+      <!-- 01 问题定义与边界 -->
       <section class="chapter" id="problem">
-        <span class="eyebrow">01 / 背景与目标</span>
-        <h2>用通用大模型看财报，生成只要两秒，核对要花十分钟。</h2>
-        <p>我自己平时也看股票、翻财报。市面上不少 AI 投研工具能很快吐出几段像模像样的分析，但真拿到投资决策里参考时，第一关就卡在信任上。为了确认里面一句「营收同比增长 18.4%」到底对不对，你得切去行情软件、找回当年年报 PDF、核对是不是最新一期，以及有没有把单季度和全年混到一起。如果核对耗时比自己直接查表还长，工具就只是个摆设。</p>
+        <span class="eyebrow">01 / 问题定义与边界</span>
+        <h2>通用大模型看财报：2 秒生成看似专业，10 分钟核对发现算错了账。</h2>
+        <p>在严肃投研场景中，用户最先卡住的不是“模型文笔好不好”，而是<b>信任成本与核对成本</b>。一句「营收同比增长 18.4%」，如果要切去行情软件查现价、翻百页年报 PDF 核对报告期、再确认港币还是人民币，工具就已经变成了负资产。</p>
+        <p>进一步复盘我发现，如果把「几秒查清一个问题」和「需要跑脚本/盯异动/记偏好的长程任务」混进同一个聊天框，还会带来第三层混乱：轻量问答被长流程拖慢，长程执行又缺少独立的工作区、等待确认与状态回溯。</p>
 
         <div class="card-grid three">
           <div class="sub-card">
-            <span class="sc-tag">问题 01 · 口径混淆</span>
-            <h4>报告期与币种混算</h4>
-            <p>模型经常拿今年全年营收去跟去年前三季度对比，或者在比较港股、美股时把人民币、港币和美元直接放在一起算。</p>
+            <span class="sc-tag">痛点 01 · 数据与口径错配</span>
+            <h4>报告期、币种与单位混算</h4>
+            <p>跨市场比较时把今年全年和去年前三季度混比，或把「百万元」与「千元」、人民币与港币直接混算。</p>
           </div>
           <div class="sub-card">
-            <span class="sc-tag">问题 02 · 自己心算与编数</span>
-            <h4>四分之一回答含未授权数字</h4>
-            <p>早期无约束测试里，有 <b>26.67%</b> 的回答会凭记忆写出原表里找不到的数字，或者自己心算一个错误的增长率。</p>
+            <span class="sc-tag">痛点 02 · 模型心算编数</span>
+            <h4>26.67% 回答含无出处数字</h4>
+            <p>早期无护栏测试里，超过四分之一回答会凭语言惯性自己心算增长率，或在缺数据时补写出看似合理的数字。</p>
           </div>
           <div class="sub-card">
-            <span class="sc-tag">问题 03 · 核对链路断层</span>
-            <h4>聊天窗口看不到出处</h4>
-            <p>单栏对话框只给文本结论，想验证某个数字来自财报哪一张表、对应哪天股价，还要切出去开几个软件翻找。</p>
+            <span class="sc-tag">痛点 03 · 交互心智耦合</span>
+            <h4>单对话窗承载过载</h4>
+            <p>快速查数被重流程拖慢；写长研报与跑定时盯盘又缺乏真实步骤可见性、人机确认与跨页统一估值口径。</p>
           </div>
         </div>
 
         <blockquote class="quote-block">
-          在金融系统里做了这么多年，宁可系统明确告诉我某条数据暂时没接进来，也不希望它用很顺畅的术语给出一个算错的数。
-          <cite>给 FinDesk 定的第一原则：先压低用户的核对成本</cite>
+          金融产品的第一原则是「宁可明确说某条数据暂缺，也绝不用顺畅的术语输出一个算错的数」——且系统明确只做研究辅助，绝不替代用户下买卖指令。
+          <cite>给 FinDesk 立下的两条产品红线（写死在每次研究结论页脚）</cite>
         </blockquote>
-
-        <p>立项时给自己定了三个可验证的目标：在真实财报测试集上把无出处编造数字压到 0%；把简单查价查数请求分流出去，减半大模型调用和响应延迟；做成一个点开网页就能同屏对照原表和 K 线的线上工作台。</p>
       </section>
 
-      <!-- 02 问题排查 -->
+      <!-- 02 可信基座与评测 -->
       <section class="chapter" id="analysis">
-        <span class="eyebrow">02 / 问题拆解与评估</span>
-        <h2>开发集 30 题错 27 题，翻日志发现六成以上出在底表解析。</h2>
-        <p>很多人看到模型答错财报数字，第一反应是改提示词或者微调一个金融小模型。为了避免凭感觉调参，我先建了一套测试题库（也就是底层的评测引擎 FinSearch-X）：挑了美股、港股、A 股 9 家代表性上市公司的 27 份真实年报，设计了 120 道覆盖查数、同比计算、跨期对比和缺数据拒答的题目，严格拆成平时调参的开发集（Dev）、交叉验证集（Val）和封存盲测集（Blind）。</p>
-        <p>第一轮跑开发集时，30 道题错了 27 道，全对率只有 6.67%。把这 27 道错题的调用日志一条条翻开看之后，才看清真正的问题在哪里。</p>
-
-        <div class="decision">
-          <span class="eyebrow">排查 01 · 27 道错题的根因拆解</span>
-          <p class="dq">财报数字答错，主要是模型推理能力不够吗？</p>
-          <ul class="opts">
-            <li><b>常规猜想 · Prompt 约束不够或模型太小</b>如果顺着这个方向堆几千字提示词，给进去的底表数据本身就是错的，算出来一样不对。</li>
-            <li class="chosen"><b>日志结论 · 27 道错题里有 17 道（63%）是表格解析和单位换算错误 ✓</b>大多数错误是因为解析年报表格时把「百万元」和「千元」搞混，或者把母公司报表与合并报表的同名科目串行了。</li>
-          </ul>
-          <p class="d-note"><b>调整方向：</b>底表结构化数据没洗干净前，调提示词只是掩盖问题。先停掉生成调优，回去重洗财报结构化数据目录。</p>
-        </div>
-
-        <div class="decision">
-          <span class="eyebrow">排查 02 · 2,000 条微调（SFT）对照实验</span>
-          <p class="dq">用 Qwen3-4B 跑了 2,000 条财报问答微调后，到底要不要上生产？</p>
-          <ul class="opts">
-            <li><b>同分布测试 · 合成测试题从 75.5% 升到 100%</b>在和训练集同分布的合成题上，微调模型学得很快，输出格式也很工整。</li>
-            <li class="chosen"><b>真实考卷 · 放到 60 道真实跨公司题上，总成功率没有提升 ✓</b>换到没见过的新公司年报附注时，微调过的模型依然查不对科目，只是用更像金融研报的句式把错数写出来。</li>
-          </ul>
-          <p class="d-note"><b>决策结果：</b>投研问答卡在「数据查得准不准、算术是不是代码算」，不在回答腔调。看到真实考题不涨分后，直接停掉微调路线，省下后续维护训练管线的成本。</p>
-        </div>
-      </section>
-
-      <!-- 03 方案设计与取舍 -->
-      <section class="chapter" id="decisions">
-        <span class="eyebrow">03 / 架构取舍与约束</span>
-        <h2>计算归代码，解释归模型，原表放在右手边。</h2>
-        <p>找到根因后，我把 FinDesk 拆成了前置分流、代码计算护栏和三栏核对界面三个部分。</p>
-
-        <figure class="fig">
-          <div aria-label="点击放大查看 FinDesk 产品演进与受控 Agent 链路图" class="fig-zoom" role="button" tabindex="0">
-            <img alt="FinDesk 产品演进与受控 Agent 链路：底层前置意图路由拦截50%简单查数、多市场底表查询、Python确定性计算与输出校验，上层从 v2 数据看板演进至 v3 主动巡检桌面工作台与 v4 pgvector 研究笔记本" height="682" loading="lazy" src="../assets/img/home/home-findesk-flow.webp" width="1600"/>
-            <span class="zoom-pill">点击放大</span>
-          </div>
-          <figcaption>FinDesk 受控链路与产品演进（v2 → v4）：底层按「算术归代码、理解归模型、答案绑出处」约束幻觉与时延。</figcaption>
-        </figure>
-
-        <div class="decision">
-          <span class="eyebrow">取舍 01 · 回答契约（Answer Contract）</span>
-          <p class="dq">怎么从机制上防止大模型自己心算和补数？</p>
-          <ul class="opts">
-            <li><b>软约束 · 在提示词里叮嘱「不要编造数字」</b>遇到跨期同比或毛利率差值时，模型还是容易自己心算一个数写进去。</li>
-            <li class="chosen"><b>硬护栏 · 剥离全部算术 + 绑定出处 ID + 缺数直接报白 ✓</b>所有加减乘除、同比环比和市盈率分位由后台 Python 代码算好再交给模型；输出的每个数字必须带上数据源 ID；后置代码校验一旦扫到没有挂出处的数字就拦截重写。</li>
-          </ul>
-          <p class="d-note"><b>实际效果：</b>测试集里无出处数字从 <code>26.67%</code> 降到 <code>0%</code>。遇到上游接口没返回的情况（比如同花顺接口查港股历史市盈率返回空序列），页面直接提示数据暂缺。</p>
-        </div>
-
-        <div class="decision">
-          <span class="eyebrow">取舍 02 · 前置意图分流（Query Router）</span>
-          <p class="dq">「腾讯今天股价多少」「茅台去年营收多少」这类简单查数，要不要每次都走大模型？</p>
-          <ul class="opts">
-            <li><b>全走 Agent · 所有请求都进大模型推理循环</b>实现省事，但简单查个数也要等三四秒，浪费大约一半调用量。</li>
-            <li class="chosen"><b>前置分流 · 简单直查走行情和数据库接口，复杂对比才叫大模型 ✓</b>在最前面加一层轻量路由，查实时价、查单一财务科目直接走接口秒回；跨期归因和多源综合才唤醒模型。</li>
-          </ul>
-          <p class="d-note"><b>实际效果：</b>省掉约 <code>50%</code> 大模型调用，平均响应耗时从 <code>3.36 秒</code> 降到 <code>2.36 秒</code>，准确率没有损失。</p>
-        </div>
-
-        <div class="decision">
-          <span class="eyebrow">取舍 03 · 左中右三栏布局</span>
-          <p class="dq">怎么把核对成本压到最低？</p>
-          <ul class="opts">
-            <li><b>单栏对话 + 句尾外链</b>点开链接还是要跳去新标签页翻长文档，看两眼很容易忘了刚才在聊哪一期。</li>
-            <li class="chosen"><b>三栏同屏 · 左边范围 | 中间对话 | 右边原表与图表 ✓</b>左边固定当前研究标的与财报期，防止聊串公司；中间回答里的数字可点击；点击后右边直接定位到对应财务三表明细、估值分位或 20 日 K 线。</li>
-          </ul>
-        </div>
-
-        <figure class="fig">
-          <div aria-label="点击放大查看 FinDesk 个股研究工作台" class="fig-zoom" role="button" tabindex="0">
-            <img alt="FinDesk 个股深度工作台界面" height="1040" loading="lazy" src="../assets/img/fb-work-zh-cropped.webp" width="1293"/>
-            <span class="zoom-pill">点击放大</span>
-          </div>
-          <figcaption>FinDesk 个股深度工作台（Work 视图）：同一屏幕里对照财务三表、估值分位与 K 线走势。</figcaption>
-        </figure>
-      </section>
-
-      <!-- 04 四代演进 -->
-      <section class="chapter" id="delivery">
-        <span class="eyebrow">04 / 核心产出与线上入口</span>
-        <h2>从离线评测脚本，分四步做到现在的公开研究笔记本。</h2>
-        <p>一个人业余开发全栈产品，最怕战线拉得太长半途烂尾，或者只在本地能跑、放到公网上动不动挂掉。推进时每一代只解当前最卡的一个问题。</p>
-
+        <span class="eyebrow">02 / 统一可信基座 · FinSearch-X</span>
         <div id="evolution"></div>
-        <ol class="phases">
-          <li>
-            <span class="phase-tag">第一阶段 · FinSearch-X 评测底座</span>
-            <b class="phase-title">先跑通 120 题测试集和消融实验，不动前端界面</b>
-            <p>先洗出 9 家公司 27 份年报，用单变量对照实验验证了重洗数据、代码计算、回答护栏和前置分流四步改造各自的收益，同时通过对照实验停掉了无效的 2,000 条微调。</p>
-          </li>
-          <li>
-            <span class="phase-tag">第二阶段 · v1 与 v2 拆分入口</span>
-            <b class="phase-title">把看行情和问问题拆开，解决首屏 8 秒白屏</b>
-            <p>第一版把行情看板和对话塞在一个页面里，拉取美股、港股、A 股多源数据时首屏常卡 8 秒白屏。v2 拆成「Work 看图表」和「Bot 问问题」两个轻量入口，行情秒出，复杂财报取证通过流式步骤推送。</p>
-          </li>
-          <li>
-            <span class="phase-tag">第三阶段 · v3 固化工作台与离线快照</span>
-            <b class="phase-title">外部免费财经接口偶尔超时，保证线上体验不挂</b>
-            <p>免费第三方行情接口在高峰期偶发限流或超时。v3 在接通实时数据之外，内置了腾讯控股（00700.HK）等代表标的的完整快照兜底，接口抖动时核对原表和 K 线的核心交互依然可用。</p>
-          </li>
-          <li>
-            <span class="phase-tag">第四阶段 · 公开研究笔记本（v4）</span>
-            <b class="phase-title">不再限制固定股票库，随手丢网页链接和 PDF 就能建笔记本</b>
-            <p>看公司除了年报，还要看新闻、访谈和行业研报。v4 构建了「资料来源 | 对话问答 | 成果 Studio」三栏：支持贴网页、传 PDF 或联网搜资料，勾选哪几份就只基于那几份回答，还能直接生成研究简报、对比表和思维导图。</p>
-          </li>
-          <li>
-            <span class="phase-tag">第五阶段 · 双产品协同与 6 阶段深度研报（最新）</span>
-            <b class="phase-title">Chat-Bot 极速问答推行动，深度研报取代旧深度思考，Agent 隔离沙箱闭环执行</b>
-            <p>把主站收敛为三大协同入口：<b>Chat-Bot</b>（<code>/chat</code>）负责毫秒级并行检索与四视角（默认/多头/排雷/风控）切换，答后直接推送可执行动作（设定时盯盘、生成 Studio 简报、派发沙箱跑回测出图、存入知识库），避免重问一遍；<b>深度研报</b>（<code>/research</code>）接入 6 阶段规划-多轮检索-深读-反思-带引用长文引擎，页面明确提示其「非普通单轮深度思考」；<b>Personal-Agent</b>（<code>/agent</code>）在隔离沙箱执行 Python 回测/绘图与后台盯盘，并与<b>K线看板</b>（<code>/chat/desk</code>）共享同一套实时估值口径。</p>
-          </li>
-        </ol>
+        <h2>先建 120 题隔离评测基座，再把算术、校验与口径收口到底层。</h2>
+        <p>做任何功能迭代前，我先挑了 A 股、港股、美股 9 家代表上市公司的 27 份真实年报，围绕查数、计算、同比趋势、归因和缺数据拒答设计了 120 道题目，严格划分为调参开发集（Dev 30 题）、交叉验证集（Val 30 题）与封存盲测集（Blind 60 题），避免用同一套题自测自夸。</p>
 
         <figure class="fig">
-          <div aria-label="点击放大查看 FinSearch-X 评测与架构全景图" class="fig-zoom" role="button" tabindex="0">
-            <img alt="FinSearch-X 评测与架构演进全景图" height="1067" loading="lazy" src="../assets/img/finsearch-overview.webp" width="1600"/>
+          <div aria-label="点击放大查看 FinSearch-X 120题评测底座全景图" class="fig-zoom" role="button" tabindex="0">
+            <img alt="FinSearch-X 评测底座全景：真实年报事实层 FFL、120 题三层隔离评测、6 类题型与 E0 到 E6 消融实验路径" height="1067" loading="lazy" src="../assets/img/finsearch-overview.webp" width="1600"/>
             <span class="zoom-pill">点击放大</span>
           </div>
-          <figcaption>从 120 题底层评测（FinSearch-X）到双产品与深度研报工作台（FinDesk）的演进结构。</figcaption>
+          <figcaption>FinSearch-X 基座结构：先沉淀标准化金融事实层（FFL），再做单变量消融评测与线上受控约束。</figcaption>
         </figure>
+
+        <div class="decision">
+          <span class="eyebrow">基座诊断 01 · 30 题错 27 题的真实归因</span>
+          <p class="dq">财报数字答不准，根因在模型推理不够强吗？</p>
+          <ul class="opts">
+            <li><b>常见误区 · 盲目堆长 Prompt 或换更大模型</b>底表结构化科目如果本身串行或单位没换算，换再强的模型也只是用更体面的语气算错数。</li>
+            <li class="chosen"><b>日志归因 · 27 道错题中 17 道（63%）出在表格解析与单位换算 ✓</b>高频失败点是把「百万元」当「元」、母公司报表与合并报表串行，以及港美股财报日历错位。</li>
+          </ul>
+          <p class="d-note"><b>落地动作：</b>优先重洗多市场财报事实表并冻结指标口径，再推进 Agent 工具与路由策略。</p>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">基座诊断 02 · 2,000 条微调（SFT）对照与果断止损</span>
+          <p class="dq">用 Qwen3-4B 跑完 2,000 条 SFT 后，合成评测到了 100%，要不要上生产？</p>
+          <ul class="opts">
+            <li><b>同分布假象 · 合成测试集 75.5% → 100%</b>同分布数据上模型格式极其工整，看着像“已经练成了金融专家”。</li>
+            <li class="chosen"><b>盲测止损 · 放到 60 道真实跨公司题上不涨分，立即停训 ✓</b>换到没见过的新公司年报附注时依然找错科目，只是学会了研报腔调，果断停止 SFT 上线，把投入转回检索与代码护栏。</li>
+          </ul>
+        </div>
+
+        <h3>沉淀为可信基座的四项硬工程约束</h3>
+        <div class="card-grid">
+          <div class="sub-card">
+            <span class="sc-tag">基座约束 01 · 前置分流（Query Router）</span>
+            <h4>简单查数走代码直连，省掉 50% 模型调用</h4>
+            <p>「现价多少」「PE 几倍」等单点查询不进 Agent 循环，前置路由直接调行情/数据库接口响应，平均耗时从 <b>3.36s 降至 2.36s</b>。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">基座约束 02 · 算术归代码</span>
+            <h4>剥离模型一切加减乘除与分位心算</h4>
+            <p>涨跌幅、同比环比、52 周分位与历史估值全部由 Python 在底层算出后喂给模型做文字综合，杜绝模型自己算错小数点。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">基座约束 03 · 答案绑出处 ID &amp; 留白</span>
+            <h4>后置校验拦截无出处数字，缺数报错不补数</h4>
+            <p>每个数字强制绑定来源编号；外部数据源限流或暂无历史估值序列时触发熔断与缺口声明，测试集无出处编造从 <b>26.67% → 0%</b>。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">基座约束 04 · 跨产品同源同口径</span>
+            <h4>消除看板、问答与研报之间的数字打架</h4>
+            <p>Chat-Bot、深度研报、K 线看板与沙箱脚本统一读取同一份估值计算模块（<code>unified_valuation</code>）与 250 交易日高点口径，做到多端完全对齐。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 双形态与交互取舍 -->
+      <section class="chapter" id="decisions">
+        <span class="eyebrow">03 / 产品形态与核心交互取舍</span>
+        <h2>为什么要把同一套底座拆成 Chat-Bot 和 Personal-Agent 两种形态？</h2>
+        <p>做产品评审和用户走查时我们发现，把“查实时事实 + 生成深度报告”和“沙箱跑脚本 + 定时盯盘 + 维护个人知识库”强行堆在一个界面，会让操作过载且心智混乱。按照<b>「低延迟研究获取」</b>与<b>「长程受控任务托管」</b>两种使用心智，我把产品拆成了职责清晰、单向流转的双形态：</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>对比维度</th>
+                <th>Chat-Bot（<code>/chat</code> · <code>/research</code> · <code>/chat/desk</code>）</th>
+                <th>Personal-Agent（<code>/agent</code>）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>核心用户心智</b></td>
+                <td>高频、轻量、即查即核对；需要深度专题时升级完整研报</td>
+                <td>长程托管、深度加工与持续跟踪；拥有自己的“数字助理”工作区</td>
+              </tr>
+              <tr>
+                <td><b>交互节奏与延迟</b></td>
+                <td>极速模式并行流式直出；深度研报显式呈现 6 阶段任务拆解</td>
+                <td>可耗时 30~120 秒后台跑脚本，实时播报真实步骤与 <code>waiting_user</code> 确认</td>
+              </tr>
+              <tr>
+                <td><b>核心能力承载</b></td>
+                <td>并行取证、四视角立场重答、K 线估值看板、Studio 简报工坊、6 阶段深度研报</td>
+                <td>隔离沙箱执行 Python/画图、定时盯盘自动派单、PDF 导读知识库与论点证伪审计</td>
+              </tr>
+              <tr>
+                <td><b>防失控/防误导机制</b></td>
+                <td>区分「极速问答 vs 6 阶段深度研报」，严防把单轮思考当研究；异常超长输入保护</td>
+                <td>禁止以 6 周短数据冒充年度回撤结论；记忆采取提案制，由用户确认才长期生效</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">交互决策 01 · 研究深度分层与预期管理</span>
+          <p class="dq">为什么在「极速问答」旁拆出独立的「深度研报（/research）」，而不是叫“深度思考”？</p>
+          <ul class="opts">
+            <li><b>常规做法 · 提供「快答 / 深度思考」开关</b>用户常以为“深度思考”只是慢几秒的 CoT 推理，容易对单次提问期待过高，且长耗时和交互过程在聊天流里极难展示清晰。</li>
+            <li class="chosen"><b>FinDesk 方案 · 明确宣告「不是深度思考，而是 6 阶段深度研报」 ✓</b>全站引导用户区分：复杂专题进入独立的 6 阶段研究工作台（规划 → 多轮检索 → 全文抓取 → 重排 → 缺口反思 → 引文报告），并在产物页直接支持一键存入知识库或转设定时盯盘。</li>
+          </ul>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">交互决策 02 · 跨端协同（防重复提问设计）</span>
+          <p class="dq">用户在 Chat-Bot 查完估值后，「投研信息推送」卡片把信息推到 Personal-Agent 应该做什么？</p>
+          <ul class="opts">
+            <li><b>低效流转 · 带着原问题跳去 Agent 再问一遍</b>既浪费等待时间，又制造重复答案，用户很快觉得“两个页面只是换个皮肤聊同一件事”。</li>
+            <li class="chosen"><b>可执行流转 · 推送直接对应 5 个真实可落地的 Agent 动作 ✓</b>答后推送卡片按当前上下文直接提供：<b>① 设定时盯盘任务</b>（弹窗提炼阈值与轮询间隔）；<b>② 生成 Studio 简报</b>；<b>③ 升级 6 阶段深度研报</b>；<b>④ 派发沙箱跑 Python 回测与 PNG 出图</b>；<b>⑤ 沉淀知识库</b>。</li>
+          </ul>
+        </div>
+
+        <div class="decision">
+          <span class="eyebrow">交互决策 03 · 长程 Agent 的透明度、异常态与数据诚实</span>
+          <p class="dq">Personal-Agent 在沙箱后台跑任务时，怎样让用户敢把重要研究工作交出去？</p>
+          <ul class="opts">
+            <li><b>黑箱进度条 · 转圈展示“已完成 68%”</b>百分比往往是前端写死的假动画；遇到数据缺失时硬凑一年回测结论更是严重误导。</li>
+            <li class="chosen"><b>真实状态机 + 数据口径硬防护 ✓</b>步骤只来自真实动作；明确区分 <code>running / waiting_user / partial / failed / unknown</code>；外部行情只取到近 6 周时禁止模型输出“近一年最大回撤”，强制先亮覆盖不足预警再给有限区间的量化统计。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 04 双产品形态拆解与线上入口 -->
+      <section class="chapter" id="products">
+        <span class="eyebrow">04 / 双产品形态拆解与线上入口</span>
+        <h2>从截图到真实功能：两个形态各自解决什么问题，又如何闭环？</h2>
+
+        <h3>形态一：Chat-Bot（高频问答 · 6 阶段深度研报 · 统一看板）</h3>
+        <p>定位为「高密度的投研第一入口」：首次进入直接加载带可核验引用的真实样式示例，支持免登录立即提问；右栏随时展开指标与出处原文，并可在不同市场看板间无缝跳转。</p>
+
+        <figure class="fig">
+          <div aria-label="点击放大查看 FinDesk Chat-Bot 实机界面" class="fig-zoom" role="button" tabindex="0">
+            <img alt="FinDesk Chat-Bot 研究问答实机界面：左侧市场自选与会话，中间并行检索步骤、内联引用回答、四视角重答与可执行推送，右侧来源与估值指标" height="900" loading="lazy" src="../assets/img/findesk-chatbot-ui.webp" width="1440"/>
+            <span class="zoom-pill">点击放大</span>
+          </div>
+          <figcaption>Chat-Bot 线上实景：顶导清晰区隔双产品及衍生工坊；回答中的每个数字均带绿色出处锚点并可在右栏同屏对照。</figcaption>
+        </figure>
+
+        <div class="card-grid">
+          <div class="sub-card">
+            <span class="sc-tag">01 · 极速并行取证</span>
+            <h4>多源异步并发，实时吐出引文</h4>
+            <p>并行拉取同花顺实时行情、量价技术面、估值分位、财经资讯与全网线索，流式文本自动对超长来源标题做响应式截断与防溢出控制。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">02 · 四视角重答 &amp; Studio 工坊</span>
+            <h4>立场可切换，结论一键出图出表</h4>
+            <p>答案区下方支持一键切换「默认中立 / 买方多头 / 做空排雷 / 宏观风控」重答；可通过 Studio 加工出研究简报、对比矩阵与思维导图。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">03 · DeepSeek 6 阶段深度研报</span>
+            <h4>专治复杂专题，拒绝浅层思考</h4>
+            <p>面向“行业竞争格局对比”“长周期下跌归因”等课题，独立跑 6 阶段检索-抓全文-重排-反思循环，生成带可点击角标引文的长篇研报。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">04 · 跨市场 K 线估值看板</span>
+            <h4>全市场搜索切换与 URL 分享</h4>
+            <p>支持输入股票代码/名称搜索建议下拉与回车即时切换，<code>?symbol=</code> 同步 URL；与 Chat-Bot 共用统一估值快照（PE / PB / PS / 总市值）。</p>
+          </div>
+        </div>
+
+        <h3>形态二：Personal-Agent（隔离沙箱 · 定时盯盘 · 知识库闭环）</h3>
+        <p>定位为「有持久记忆和动手能力的个人投研助理」：具备专属角色预设（如哨兵/量化/研究员）、独立沙箱工作目录，能够承接 Chat-Bot 派发的任务，也能在盯盘触发异常时自动审计用户既有的投资逻辑。</p>
+
+        <figure class="fig">
+          <div aria-label="点击放大查看 FinDesk Personal-Agent 实机界面" class="fig-zoom" role="button" tabindex="0">
+            <img alt="FinDesk Personal-Agent 个人工作台实机界面：左侧任务会话与角色预设，中间沙箱执行与步骤播报，右侧沙箱产物、长期记忆与个人知识库" height="900" loading="lazy" src="../assets/img/findesk-agent-ui.webp" width="1440"/>
+            <span class="zoom-pill">点击放大</span>
+          </div>
+          <figcaption>Personal-Agent 线上实景：顶导统一收敛导航层级；支持沙箱执行、快速问答与升级深度研报三态协同，右侧面板沉淀脚本产物与知识库。</figcaption>
+        </figure>
+
+        <div class="card-grid">
+          <div class="sub-card">
+            <span class="sc-tag">01 · 受控隔离沙箱</span>
+            <h4>独立目录跑 Python + Matplotlib 出图</h4>
+            <p>针对量化回测与长区间分析需求，在受控工作区创建任务目录、拉取历史行情并由 Python 渲染高分辨率图表（PNG）与分析文档。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">02 · 主动定时盯盘与派单</span>
+            <h4>异动触发后台执行，告别死等</h4>
+            <p>设定价格波动或公告阈值后由后台轮询守护，触发通知时可一键自动向指定 Agent 派发复核任务并推送站内提醒。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">03 · 论点强化 / 证伪闭环</span>
+            <h4>拿着你的原话，检验新消息</h4>
+            <p>当监控捕获到财报或突发消息时，系统会自动比对用户知识库里沉淀的既有投资论点，给出强化（STRENGTHEN）或证伪预警（FALSIFY）。</p>
+          </div>
+          <div class="sub-card">
+            <span class="sc-tag">04 · PDF 导读 &amp; 提案制记忆</span>
+            <h4>只基于勾选资料，删除可追溯</h4>
+            <p>支持上传研报/PDF 生成结构化来源导读（关键发现与建议追问）；长期记忆采用确认提案制，避免 AI 把未验证观点私自写入记忆。</p>
+          </div>
+        </div>
 
         <div class="callout" id="try">
-          <b>五个线上体验入口（公网 HTTPS 直连，免登录）</b>
-          <p style="margin-top:8px">涵盖 <b>深度研报工作台</b>、<b>Chat-Bot 极速问答</b>、<b>Personal-Agent 沙箱</b>、<b>K 线看板</b> 与 <b>产品全景首页</b>（另保留早期 <a href="https://47.243.118.32.nip.io/v4/notebook/public" rel="noopener" target="_blank">v4 公开研究笔记本 ↗</a>）。</p>
+          <b>四个线上体验入口（阿里云香港 ECS HTTPS 直连，免登录可试玩）</b>
+          <p style="margin-top:8px">建议从 <b>Chat-Bot</b> 或 <b>深度研报</b> 开始体验答后推送，再切换到 <b>Personal-Agent</b> 查看沙箱与知识库闭环；或先访问 <a href="https://47.243.118.32.nip.io/landing" rel="noopener" target="_blank">FinDesk 产品全景首页（/landing）↗</a>。</p>
         </div>
 
         <div class="card-grid">
-          <div class="sub-card is-featured" style="grid-column: 1 / -1">
-            <span class="sc-tag">6 阶段全网研究 · 非普通深度思考</span>
-            <h4>深度研报工作台（/research）</h4>
-            <p>明确区别于单轮“深度思考”：通过任务拆解、多轮全网检索、全文抓取、相关性重排、缺口反思与交互式内联引文生成长篇研报，并支持一键存入知识库或转设定时盯盘。</p>
-            <div class="sc-act">
-              <a class="btn btn-sm" href="https://47.243.118.32.nip.io/research" rel="noopener" target="_blank">打开深度研报工作台 ↗</a>
-            </div>
-          </div>
-
           <div class="sub-card is-featured">
-            <span class="sc-tag">极速问答与可执行推送 · 免登录</span>
-            <h4>Chat-Bot 研究问答（/chat）</h4>
-            <p>并行实时检索、多视角立场重答与来源证据核对；回答后自动推荐设定时盯盘、生成 Studio 简报、升级深度研报或派发沙箱跑回测出图。</p>
+            <span class="sc-tag">形态一 · 高频研究起点 · 免登录</span>
+            <h4>Chat-Bot 极速问答与可执行推送（/chat）</h4>
+            <p>并行检索行情/估值/资讯，支持默认/多头/排雷/风控四视角重答；答后卡片可直接设盯盘、做简报、跳深度研报或派沙箱出图。</p>
             <div class="sc-act">
               <a class="btn btn-sm" href="https://47.243.118.32.nip.io/chat" rel="noopener" target="_blank">打开 Chat-Bot ↗</a>
             </div>
           </div>
 
+          <div class="sub-card is-featured">
+            <span class="sc-tag">形态一 · 深度研报引擎（非深度思考）</span>
+            <h4>6 阶段全网深度研报工作台（/research）</h4>
+            <p>清晰区别于单轮“深度思考”：完整展示规划、多轮检索、深读、反思与引用成稿过程，并支持一键存入知识库或转设盯盘。</p>
+            <div class="sc-act">
+              <a class="btn btn-sm" href="https://47.243.118.32.nip.io/research" rel="noopener" target="_blank">打开深度研报 ↗</a>
+            </div>
+          </div>
+
           <div class="sub-card">
-            <span class="sc-tag">隔离沙箱与知识库 · 个人工作台</span>
-            <h4>Personal-Agent 沙箱执行（/agent）</h4>
-            <p>支持在隔离沙箱内跑 Python 回测脚本与图表渲染、沉淀个人研报知识库（PDF 来源导读）、以及接收自动盯盘异动触发的逻辑审计。</p>
+            <span class="sc-tag">形态二 · 隔离沙箱与知识库</span>
+            <h4>Personal-Agent 个人工作台（/agent）</h4>
+            <p>独立角色预设、沙箱 Python 回测出图、人机确认状态机（<code>waiting_user</code>）、定时盯盘自动派单与论点证伪审计。</p>
             <div class="sc-act">
               <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/agent" rel="noopener" target="_blank">打开 Personal-Agent ↗</a>
             </div>
           </div>
 
           <div class="sub-card">
-            <span class="sc-tag">A 股 / 港股 / 美股 · 统一估值口径</span>
+            <span class="sc-tag">形态一 · 统一口径行情视图</span>
             <h4>跨市场 K 线与估值看板（/chat/desk）</h4>
-            <p>全市场标的搜索切换、蜡烛图与技术指标、PE/PB/PS 估值快照及历史分位，与 Chat-Bot 共用同一套底层计算数据源。</p>
+            <p>A 股 / 港股 / 美股搜索下拉与回车切换、K 线均线指标、PE/PB/PS 快照与 52 周区间，与 Chat-Bot 共享底层数据与计算口径。</p>
             <div class="sc-act">
               <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/chat/desk" rel="noopener" target="_blank">打开 K 线看板 ↗</a>
-            </div>
-          </div>
-
-          <div class="sub-card">
-            <span class="sc-tag">四大核心模块总览 · 新手引导</span>
-            <h4>FinDesk 产品全景首页（/landing）</h4>
-            <p>一屏查看 Chat-Bot、深度研报、Personal-Agent 与 K 线看板分工说明及高频投研示例，直接点击体验。</p>
-            <div class="sc-act">
-              <a class="btn btn-sm btn-ghost" href="https://47.243.118.32.nip.io/landing" rel="noopener" target="_blank">进入产品首页 ↗</a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 05 实验账本与不足 -->
+      <!-- 05 评测账本与复盘 -->
       <section class="chapter" id="retro">
-        <span class="eyebrow">05 / 量化成果与复盘</span>
-        <h2>单步消融实验都有记录，但跨公司科目对齐和港股历史 PE 还没完全补齐。</h2>
-        <p>整个实验用 Qwen3-4B 这种 4B 参数小模型做底座，在「数字、单位、出处必须全对」的标准下跑过一轮单步对照。哪怕模型很小，只要底表干净、算术交给代码、规则卡死，结果就会明显往上走。</p>
+        <span class="eyebrow">05 / 量化评测账本与边界复盘</span>
+        <h2>单步消融数据全部可追溯，同时坦诚当前产品边界与待补工程项。</h2>
+        <p>整个基座评测围绕 Qwen3-4B 这种 4B 小参数底座在「数字、单位、出处必须全对」的严苛口径下做单步消融对照。结果证明：哪怕基座模型很小，只要底表洗净、算术交代码、护栏卡死，关键可靠性指标就会大幅跃升。</p>
 
         <div id="eval"></div>
         <figure class="fig">
@@ -320,49 +388,49 @@
             <img alt="AI Agent 产品评估四维体系：模型质量、成本与效率、业务与风控、防作弊评测纪律" height="1024" loading="lazy" src="../assets/img/home/home-eval-matrix.webp" width="1536"/>
             <span class="zoom-pill">点击放大</span>
           </div>
-          <figcaption>AI Agent 产品评估四维体系：模型质量、成本效率、业务风控与 Dev / Val / Blind 防作弊评测纪律。</figcaption>
+          <figcaption>评估体系约束：不仅看离线答案质量，还把调用成本、响应时延、拒答诚实度与防作弊隔离写进同一张验收表。</figcaption>
         </figure>
 
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>改造步骤</th>
-                <th>测试集范围</th>
-                <th>数据变化</th>
-                <th>对应结论</th>
+                <th>改造与对照步骤</th>
+                <th>评测集范围</th>
+                <th>可验证数据变化</th>
+                <th>提炼出的产品决策原则</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><b>1. 排查 27 道错题并重洗年报底表</b></td>
-                <td>开发集 30 道真实财报题</td>
-                <td>确认 <b>17 / 27 题（63%）</b> 是表格解析与单位换算错误</td>
-                <td>答不准先查数据源，调提示词掩盖不了脏数据</td>
+                <td><b>1. 错题日志归因 + 重洗年报底表</b></td>
+                <td>Dev 开发集 30 题</td>
+                <td>确认 <b>17 / 27 错题（63%）</b> 源于表格解析与单位换算</td>
+                <td>答不准先查数据源与口径字典，调提示词掩盖不了脏数据</td>
               </tr>
               <tr>
                 <td><b>2. 算术剥离给代码 + 无出处拦截</b></td>
                 <td>120 题真实年报题库</td>
-                <td>无出处编造数字从 <b><code>26.67% → 0%</code></b></td>
-                <td>金融场景靠代码护栏兜底，不能依赖模型自觉</td>
+                <td>无出处编造数字比例 <b><code>26.67% → 0%</code></b></td>
+                <td>金融场景靠代码护栏与后置校验兜底，不依赖大模型“自觉遵守”</td>
               </tr>
               <tr>
-                <td><b>3. 前置简单查数分流（Query Router）</b></td>
-                <td>同上测试集</td>
+                <td><b>3. 前置意图路由分流（Query Router）</b></td>
+                <td>同上 120 题基准</td>
                 <td>大模型调用量 <b><code>-50%</code></b>，平均耗时 <b><code>3.36s → 2.36s</code></b></td>
-                <td>约一半日常问数无需进大模型，省算力也降延迟</td>
+                <td>约一半简单查数请求无需进大模型推理，同时降低成本与首字等待</td>
               </tr>
               <tr>
-                <td><b>4. 整套架构改造前后总对比</b><br/><span class="muted">（Qwen3-4B「数字、单位、出处全对」严苛标准）</span></td>
+                <td><b>4. 整套基座护栏前后对照</b><br/><span class="muted">（4B 小模型数字/单位/出处严苛全对口径）</span></td>
                 <td>120 题隔离考卷</td>
-                <td>开发集全对率（Qwen3-4B 小模型严苛全对口径）<b><code>6.67% → 43.33%</code></b><br/>验证集全对率 <b><code>6.67% → 13.33%</code></b></td>
-                <td>小模型配合干净数据与工具护栏可以成倍提分，但泛化受限</td>
+                <td>Dev 全对率 <b><code>6.67% → 43.33%</code></b><br/>Val 泛化全对率 <b><code>6.67% → 13.33%</code></b></td>
+                <td>护栏配合净表可数倍提效，但跨公司非标科目长尾映射仍受底座能力制约</td>
               </tr>
               <tr>
                 <td><b>5. 2,000 条微调（SFT）对照实验</b></td>
-                <td>同类合成题 vs 60 道真实跨公司题</td>
-                <td>合成题 <b><code>75.5% → 100%</code></b>，真实跨公司题<b>没涨分</b></td>
-                <td>微调只学到了表面句式，没解决跨公司查表，停掉未上生产</td>
+                <td>同分布合成题 vs 60 道真实跨公司题</td>
+                <td>合成题 <b><code>75.5% → 100%</code></b>，真实跨公司题<b>无提升</b></td>
+                <td>果断停训不上生产——SFT 仅学会句式，没解决跨公司附注查表问题</td>
               </tr>
             </tbody>
           </table>
@@ -370,17 +438,19 @@
 
         <div class="retro-grid">
           <div class="retro-col">
-            <h4>做得对的地方</h4>
+            <h4>这套架构做对了哪些关键取舍</h4>
             <ul>
-              <li>先建立并隔离 120 道真实年报测试题的开发、验证和盲测集再动手改产品，不然很容易被 2,000 条微调在合成题上的满分误导，多维护一套无用的训练流水线。</li>
-              <li>把翻 PDF 核对变成同屏点击，让底层可溯源变成前端看得到的操作。</li>
+              <li><b>先立盲测与防作弊纪律，再决定做不做微调：</b>如果没有隔离 Blind 集，2,000 条微调在合成题上的满分很容易误导团队多养一套无效训练管线。</li>
+              <li><b>按心智拆出双形态并用“答后推送”打通闭环：</b>让 Chat-Bot 专心解决“高频问数 + 深度研报”，Personal-Agent 专心解决“沙箱执行 + 盯盘记忆”，避免两边功能相互拖拽。</li>
+              <li><b>把诚实变成产品设计的一部分：</b>明确告知深度研报非深度思考、6 周样本不出年度回撤、接口熔断直报缺口、AI 观点先提案再确认，大幅降低了错判隐蔽性。</li>
             </ul>
           </div>
           <div class="retro-col is-limit">
-            <h4>目前的短板与下一步</h4>
+            <h4>当前仍然存在的短板与上线边界</h4>
             <ul>
-              <li><b>跨公司非标科目名称对齐不够：</b>Qwen3-4B 小模型严苛全对口径下开发集全对率到了 <code>43.33%</code>，换到没调过的验证集公司只剩 <code>13.33%</code>。不同上市公司年报附注里同一个指标名字差很多（比如有的叫「履约成本」，有的拆在「营业成本明细」里），代码字典还没覆盖全。下一步要加上一层同义会计科目归并映射。</li>
-              <li><b>港股历史市盈率数据缺口：</b>现有免费接口拉港股历史 PE 会返回空序列，页面现在会直接报缺失而不是硬算。后续打算用历史市值除以滚动净利润自己回算补上。</li>
+              <li><b>跨公司非标会计科目对齐长尾：</b>4B 严苛口径下 Val 仅 <code>13.33%</code>，不同财报附注里的同义科目（如“履约成本”vs“营业成本明细”）仍需持续扩展会计语义归并词典。</li>
+              <li><b>免费/第三方数据源授权与限流：</b>部分历史估值序列受接口限制或跨境网络超时触发熔断（香港机对 iFinD 已补足超时控制与冷却），面向大规模多租户商用前仍需正式商业行情数据授权。</li>
+              <li><b>删除任务在托管层的边界：</b>记忆删除已在检索层秒级生效，但第三方大模型厂商保留期与数据库冷备份无法在应用层自证物理抹除，产品交互上必须如实提示而非伪装“已完全清除”。</li>
             </ul>
           </div>
         </div>
@@ -393,7 +463,7 @@
   <div class="wrap">
     <span class="eyebrow">下一个项目 · 02 / 05</span>
     <h2>金融单据与理赔影像智能分流 →</h2>
-    <p>公司生产已全量上线的项目：在尽量不漏掉一张带字收费单的前提下，把视觉大模型调用量压降约 25%。</p>
+    <p>公司生产已全量上线的项目：在守住需 OCR 单据召回率 99.63% 的风控红线下，将视觉大模型调用量压降约 25%。</p>
   </div>
 </a>
 </main>
